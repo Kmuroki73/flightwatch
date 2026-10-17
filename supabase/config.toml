@@ -1,0 +1,4 @@
+project_id = "songa-flight-companion"
+
+[functions.flight-search]
+verify_jwt = false
