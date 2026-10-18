@@ -8,6 +8,7 @@ import { demoFlights } from '@/data/demoFlights';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
 import { DisruptionsScreen, StatusBadge as SharedStatusBadge } from '@/screens/DisruptionScreens';
 import { CompensationModule, WhatsAppSection, useWhatsAppJoin } from '@/screens/WorkspaceScreens';
+import { WhatsAppCompanionScreen } from '@/screens/WhatsAppCompanionScreen';
 import { WorkspaceScreen } from '@/screens/WorkspaceScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
@@ -21,6 +22,7 @@ const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
   { id: 'alerts', label: 'Disruptions', icon: Bell },
   { id: 'airports', label: 'Airport Boards', icon: Globe2 },
   { id: 'companion', label: 'Companion', icon: Bot },
+  { id: 'whatsapp', label: 'WhatsApp Companion', icon: MessageCircle },
   { id: 'account', label: 'Account', icon: ShieldCheck },
 ];
 
@@ -175,6 +177,7 @@ function App() {
         {screen === 'airports' && <AirportBoardScreen initialAirport={null} onOpenFlight={openFlight} />}
         {screen === 'workspace' && <WorkspaceScreen flights={[...watchedFlights, ...searchResults, ...demoFlights].filter((flight, index, list) => list.findIndex((item) => item.id === flight.id) === index)} selectedFlight={selectedFlight} onSelectFlight={openFlight} session={session} />}
         {screen === 'companion' && <CompanionScreen onOpenFlight={() => openFlight(demoFlights[0])} />}
+        {screen === 'whatsapp' && <WhatsAppCompanionScreen session={session} onOpenFlight={openFlight} onOpenAccount={() => goTo('account')} />}
         {screen === 'account' && <AccountScreen session={session} authReady={authReady} onSessionChange={setSession} onBack={() => goTo('home')} />}
       </main>
       <footer className="site-footer"><span>SONGA / FLIGHT WATCH</span><span>Secure watchlists, clear journeys.</span><span>{flightProvider.mode === 'live' ? 'Live source configured.' : 'Demo data is not live data.'}</span></footer>
