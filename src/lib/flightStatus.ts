@@ -10,6 +10,8 @@ export type ProviderFlightCore = {
   scheduledArrival?: string;
   estimatedArrival?: string;
   actualArrival?: string;
+  departureDelayMinutes?: number | null;
+  arrivalDelayMinutes?: number | null;
 };
 
 export type Classification = {
@@ -27,41 +29,44 @@ const DELAYED_PATTERN = /delay/i;
 const DELAY_THRESHOLD_MINUTES = 15;
 
 export function classifyFlight(flight: ProviderFlightCore): Classification {
-  const departureDelay = minutesBetween(flight.scheduledDeparture, flight.estimatedDeparture ?? flight.actualDeparture);
-  const arrivalDelay = minutesBetween(flight.scheduledArrival, flight.estimatedArrival ?? flight.actualArrival);
+  // Provider-supplied delay values take precedence; timestamp math is the
+  // justified fallback when the provider gives times but no delay field.
+  const departureDelay = flight.departureDelayMinutes ?? minutesBetween(flight.scheduledDeparture, flight.estimatedDeparture ?? flight.actualDeparture);
+  const arrivalDelay = flight.arrivalDelayMinutes ?? minutesBetween(flight.scheduledArrival, flight.estimatedArrival ?? flight.actualArrival);
+  const delaySource: 'provider' | 'calculated' | null = departureDelay == null && arrivalDelay == null
+    ? null
+    : (flight.departureDelayMinutes != null || flight.arrivalDelayMinutes != null) ? 'provider' : 'calculated';
   const providerStatus = flight.status ?? '';
   const providerSaysDelayed = DELAYED_PATTERN.test(providerStatus);
-  const delaySource = providerSaysDelayed ? 'provider' as const : 'calculated' as const;
+  const delayed = departureDelay != null && departureDelay >= DELAY_THRESHOLD_MINUTES;
+  const arrivalDelayed = arrivalDelay != null && arrivalDelay >= DELAY_THRESHOLD_MINUTES;
 
   if (flight.cancelled === true) {
-    return { status: 'Cancelled', phase: 'unknown', disruption: 'cancelled', departureDelayMinutes: null, arrivalDelayMinutes: null, delaySource: null };
+    return { status: 'Cancelled', phase: 'unknown', disruption: 'cancelled', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
   if (flight.diverted === true) {
-    return { status: 'Diverted', phase: 'unknown', disruption: 'diverted', departureDelayMinutes: departureDelay, arrivalDelayMinutes: null, delaySource: departureDelay == null ? null : delaySource };
+    return { status: 'Diverted', phase: 'unknown', disruption: 'diverted', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
   if (flight.actualArrival) {
-    return { status: 'Landed', phase: 'arrived', disruption: arrivalDelay != null && arrivalDelay >= DELAY_THRESHOLD_MINUTES ? 'delay' : 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource: arrivalDelay == null && departureDelay == null ? null : delaySource };
+    return { status: 'Landed', phase: 'arrived', disruption: arrivalDelayed ? 'delay' : 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
   if (flight.actualDeparture || AIRBORNE_PATTERN.test(providerStatus)) {
-    return { status: 'In flight', phase: 'airborne', disruption: arrivalDelay != null && arrivalDelay >= DELAY_THRESHOLD_MINUTES ? 'delay' : 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource: arrivalDelay == null && departureDelay == null ? null : delaySource };
+    return { status: 'In flight', phase: 'airborne', disruption: arrivalDelayed ? 'delay' : 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
   if (BOARDING_PATTERN.test(providerStatus)) {
-    const delayed = departureDelay != null && departureDelay >= DELAY_THRESHOLD_MINUTES;
     return { status: 'Boarding', phase: 'boarding', disruption: delayed || providerSaysDelayed ? 'delay' : 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource: delayed || providerSaysDelayed ? delaySource : null };
   }
-  if (departureDelay != null && departureDelay >= DELAY_THRESHOLD_MINUTES) {
-    return { status: 'Delayed', phase: 'scheduled', disruption: 'delay', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
-  }
-  if (arrivalDelay != null && arrivalDelay >= DELAY_THRESHOLD_MINUTES) {
+  if (delayed || arrivalDelayed) {
     return { status: 'Delayed', phase: 'scheduled', disruption: 'delay', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
   if (providerSaysDelayed) {
     return { status: 'Delayed', phase: 'scheduled', disruption: 'delay', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource: 'provider' };
   }
-  if (!providerStatus && !flight.scheduledDeparture && !flight.estimatedDeparture) {
-    return { status: 'Unknown', phase: 'unknown', disruption: 'unknown', departureDelayMinutes: null, arrivalDelayMinutes: null, delaySource: null };
+  // Without a provider status word or delay evidence, never claim "On time".
+  if (!providerStatus) {
+    return { status: 'Unknown', phase: 'scheduled', disruption: 'unknown', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
   }
-  return { status: 'On time', phase: 'scheduled', disruption: 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource: departureDelay == null && arrivalDelay == null ? null : delaySource };
+  return { status: 'On time', phase: 'scheduled', disruption: 'none', departureDelayMinutes: departureDelay, arrivalDelayMinutes: arrivalDelay, delaySource };
 }
 
 export function needsAttention(flight: { status: FlightStatus; disruption?: DisruptionCategory }): boolean {

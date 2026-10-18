@@ -86,6 +86,19 @@ function App() {
       if (active) setWatchedFlights(rows.map(watchedRowToFlight));
     }).catch(() => {
       if (active) setWatchError('Your saved flights could not be loaded. Please try again.');
+    }).finally(() => {
+      if (!active) return;
+      const pendingRaw = window.sessionStorage.getItem('songa-pending-watch');
+      if (pendingRaw) {
+        window.sessionStorage.removeItem('songa-pending-watch');
+        try {
+          const pending = JSON.parse(pendingRaw) as Flight;
+          setSelectedFlight(pending);
+          goTo('details');
+        } catch {
+          window.sessionStorage.removeItem('songa-pending-watch');
+        }
+      }
     });
     return () => { active = false; };
   }, [session]);
@@ -104,6 +117,7 @@ function App() {
   const toggleWatch = async (flight: Flight) => {
     setWatchError('');
     if (!session) {
+      window.sessionStorage.setItem('songa-pending-watch', JSON.stringify(flight));
       goTo('account');
       return;
     }
@@ -344,7 +358,7 @@ function AccountScreen({ session, authReady, onSessionChange, onBack }: { sessio
   const signInWithGoogle = async () => {
     setError('');
     const result = await client.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } });
-    if (result.error) setError('Google sign-in is not configured for this environment yet.');
+    if (result.error) setError('Google sign-in could not be started. If it persists, the Google provider must be enabled in the Songa Supabase project\'s Authentication settings.');
   };
 
   if (resetMode) return <section className="page-width page-section auth-layout"><div className="auth-copy"><div className="section-kicker">ACCOUNT / RESET ACCESS</div><h2>Back to a clearer<br /><span>journey.</span></h2><p>We will send reset instructions without revealing whether an address is registered.</p></div><form className="auth-card" onSubmit={sendReset}><div className="auth-card-top"><div><h3>Reset your password</h3><p>Enter the email used for your Songa account.</p></div><div className="auth-card-icon"><ShieldCheck size={18} /></div></div><label htmlFor="reset-email">Email address</label><input id="reset-email" type="email" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required />{error && <div className="inline-error" role="alert"><CircleAlert size={15} /> {error}</div>}{message && <div className="auth-message" role="status">{message}</div>}<button className="primary-button full-button" disabled={submitting}>{submitting ? 'Sending…' : 'Send reset email'} <ArrowRight size={16} /></button><button type="button" className="text-link auth-switch" onClick={() => { setResetMode(false); setError(''); setMessage(''); }}>Back to sign in</button></form></section>;

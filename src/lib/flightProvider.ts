@@ -80,7 +80,7 @@ class EdgeFunctionFlightProvider implements FlightDataProvider {
       travelDate: input.travelDate || null,
     });
     const flights = envelope.flights;
-    if (!flights.length) throw new FlightProviderError('empty', 'No flight matched that number and travel date.');
+    if (!flights.length) throw new FlightProviderError('empty', 'No matching flights found for that number and travel date. Adjust the date or try again.');
     return flights.map(normalizeLiveFlight);
   }
 
@@ -134,6 +134,7 @@ class EdgeFunctionFlightProvider implements FlightDataProvider {
       if (!payload || typeof payload !== 'object' || !('flights' in payload) || !Array.isArray((payload as { flights?: unknown }).flights)) {
         throw new FlightProviderError('unavailable', 'The live provider returned an unsupported response.');
       }
+      // A 200 with an empty flights array is a genuine no-match, not a protocol failure.
       return payload as LiveEnvelope<T>;
     } catch (error) {
       if (error instanceof FlightProviderError) throw error;
@@ -157,6 +158,8 @@ type LiveFlightPayload = {
   statusDetail?: string;
   cancelled?: boolean;
   diverted?: boolean;
+  departureDelayMinutes?: number | null;
+  arrivalDelayMinutes?: number | null;
   duration?: string;
   terminal?: string;
   gate?: string;
@@ -231,7 +234,6 @@ function normalizeLiveFlight(flight: LiveFlightPayload): Flight {
     aircraftRegistration: flight.aircraftRegistration,
   };
 }
-
 function pickTime(airport: LiveFlightPayload['origin']): string | undefined {
   return airport.actualTime ?? airport.estimatedTime ?? airport.scheduledTime;
 }
@@ -406,6 +408,8 @@ function mapRawAeroFlight(f: Record<string, unknown>): LiveFlightPayload | null 
     gate: (origin.gate ?? origin.gate_origin) as string | undefined,
     aircraft: typeof f.aircraft_type === 'string' ? f.aircraft_type : undefined,
     aircraftRegistration: typeof f.registration === 'string' ? f.registration : undefined,
+    departureDelayMinutes: toDelayMinutes(f.departure_delay),
+    arrivalDelayMinutes: toDelayMinutes(f.arrival_delay),
     scheduledDeparture: (f.scheduled_off ?? f.scheduled_departure) as string | undefined,
     scheduledArrival: (f.scheduled_in ?? f.scheduled_arrival) as string | undefined,
     estimatedDeparture: (f.estimated_off ?? f.estimated_departure) as string | undefined,
@@ -419,6 +423,12 @@ function mapRawAeroFlight(f: Record<string, unknown>): LiveFlightPayload | null 
 function formatIdentWithSpace(ident: string): string {
   const match = ident.match(/^([A-Z]{2,3})(\d+[A-Z]?)$/);
   return match ? `${match[1]} ${match[2]}` : ident;
+}
+
+// AeroAPI reports departure_delay/arrival_delay in seconds (may be null).
+function toDelayMinutes(value: unknown): number | null {
+  if (typeof value !== 'number' || !Number.isFinite(value)) return null;
+  return Math.round(value / 60);
 }
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
