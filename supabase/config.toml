@@ -2,3 +2,12 @@ project_id = "songa-flight-companion"
 
 [functions.flight-search]
 verify_jwt = false
+
+[functions.whatsapp-link]
+verify_jwt = true
+
+[functions.whatsapp-webhook]
+verify_jwt = false
+
+[functions.whatsapp-alerts]
+verify_jwt = true
