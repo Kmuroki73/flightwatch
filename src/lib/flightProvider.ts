@@ -370,7 +370,8 @@ function mapRawAeroFlight(f: Record<string, unknown>): LiveFlightPayload | null 
   const airlineCode = operatorIata ?? operator?.slice(0, 3) ?? ident.replace(/\d+$/, '');
   const statusRaw = typeof f.status === 'string' ? f.status : '';
   const date = (typeof f.day === 'string' && f.day) || (typeof f.scheduled_off === 'string' ? f.scheduled_off.slice(0, 10) : '') || '';
-  const minutes = typeof f.block_time === 'number' ? f.block_time : typeof f.filed_ete === 'number' ? f.filed_ete : undefined;
+  const seconds = typeof f.block_time === 'number' ? f.block_time : typeof f.filed_ete === 'number' ? f.filed_ete : undefined;
+  const minutes = seconds != null ? Math.round(seconds / 60) : undefined;
   const duration = minutes && minutes > 0
     ? `${Math.floor(minutes / 60) > 0 ? `${Math.floor(minutes / 60)}h ` : ''}${Math.round(minutes % 60)}m`
     : undefined;

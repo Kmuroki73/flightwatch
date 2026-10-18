@@ -198,10 +198,12 @@ function formatFlightNumber(ident: string): string {
   return match ? `${match[1]} ${match[2]}` : ident;
 }
 
-function formatDuration(minutes: unknown): string | undefined {
-  if (typeof minutes !== "number" || !Number.isFinite(minutes) || minutes <= 0) return undefined;
+// AeroAPI reports block_time/filed_ete in seconds.
+function formatDuration(seconds: unknown): string | undefined {
+  if (typeof seconds !== "number" || !Number.isFinite(seconds) || seconds <= 0) return undefined;
+  const minutes = Math.round(seconds / 60);
   const h = Math.floor(minutes / 60);
-  const m = Math.round(minutes % 60);
+  const m = minutes % 60;
   return h > 0 ? `${h}h ${m}m` : `${m}m`;
 }
 
