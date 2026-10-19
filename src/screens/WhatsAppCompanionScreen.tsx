@@ -346,7 +346,7 @@ function ConnectionPanel({ session, status, statusLoading, statusError, onRefres
             <li>You can pause, disconnect or stop at any time (STOP also works in chat).</li>
           </ol>
           {status && !status.twilioConfigured && (
-            <div className="inline-error" role="status"><CircleAlert size={15} /> Twilio is not configured on the server yet, so no verification message can be sent. Add TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and TWILIO_WHATSAPP_FILTER in Supabase (Edge Functions → Secrets) to activate messaging.</div>
+            <div className="inline-error" role="status"><CircleAlert size={15} /> Twilio is not configured on the server yet, so no verification message can be sent. Add TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN and TWILIO_WHATSAPP_FROM in Supabase (Edge Functions → Secrets) to activate messaging.</div>
           )}
         </div>
 
