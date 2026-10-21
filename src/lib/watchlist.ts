@@ -6,12 +6,14 @@ export type WatchedFlightRow = {
   id: string;
   user_id: string;
   flight_number: string;
+  provider_flight_id?: string | null;
   travel_date: string;
   origin_code: string | null;
   destination_code: string | null;
   monitoring_status: 'active' | 'paused' | 'expired';
   provider_source: string | null;
   airline: string | null;
+  airline_code?: string | null;
   origin_city: string | null;
   destination_city: string | null;
   departure_time: string | null;
@@ -19,6 +21,9 @@ export type WatchedFlightRow = {
   status: string | null;
   duration: string | null;
   terminal: string | null;
+  gate?: string | null;
+  aircraft?: string | null;
+  aircraft_registration?: string | null;
   last_updated_at: string | null;
   created_at: string;
   updated_at: string;
@@ -33,6 +38,7 @@ function requireSupabase() {
   if (!supabase) {
     throw new Error('Supabase is not configured.');
   }
+
   return supabase;
 }
 
@@ -41,6 +47,7 @@ async function requireUserId(): Promise<string> {
   const { data, error } = await client.auth.getUser();
 
   if (error) throw error;
+
   if (!data.user) {
     throw new Error('Please sign in before managing your watchlist.');
   }
@@ -119,15 +126,10 @@ function displayTime(value: string | null): string {
 
   if (Number.isNaN(parsed.getTime())) return value;
 
-  // Convert stored timestamps to the browser's local time.
-  if (/[TZ]/i.test(value) || /^\d{4}-\d{2}-\d{2}/.test(value)) {
-    return parsed.toLocaleTimeString([], {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-  }
-
-  return value;
+  return parsed.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 }
 
 function flightStatus(value: string | null): FlightStatus {
@@ -150,16 +152,29 @@ function flightStatus(value: string | null): FlightStatus {
 export function watchedRowToFlight(row: WatchedFlightRow): Flight {
   const status = flightStatus(row.status);
 
+  const disruption =
+    status === 'Delayed'
+      ? 'delay'
+      : status === 'Cancelled'
+        ? 'cancelled'
+        : status === 'Diverted'
+          ? 'diverted'
+          : 'none';
+
   return {
     id: row.id,
     flightNumber: row.flight_number,
-    airline: row.airline ?? row.provider_source ?? 'Saved flight',
-    airlineCode: row.flight_number.split(' ')[0] ?? '',
+    providerFlightId: row.provider_flight_id ?? undefined,
+
+    airline: row.airline ?? 'Airline unavailable',
+    airlineCode: row.airline_code ?? '',
+
     origin: {
       code: row.origin_code ?? '—',
       city: row.origin_city ?? row.origin_code ?? 'Origin unavailable',
       time: displayTime(row.departure_time),
     },
+
     destination: {
       code: row.destination_code ?? '—',
       city:
@@ -168,32 +183,34 @@ export function watchedRowToFlight(row: WatchedFlightRow): Flight {
         'Destination unavailable',
       time: displayTime(row.arrival_time),
     },
+
     date: row.travel_date,
     status,
     statusDetail:
       'Saved flight · background monitoring depends on the configured alert service.',
+
     duration: row.duration ?? 'Unavailable',
     terminal: row.terminal ?? 'Not provided',
+    gate: row.gate ?? undefined,
+    aircraft: row.aircraft ?? undefined,
+    aircraftRegistration: row.aircraft_registration ?? undefined,
+
     updated: row.last_updated_at ?? row.updated_at,
+
     route: `${row.origin_city ?? row.origin_code ?? 'Origin'} to ${
       row.destination_city ?? row.destination_code ?? 'destination'
     }`,
+
     timeline: [],
     dataMode: 'live',
+    source: row.provider_source ?? 'FlightAware',
+    lastUpdatedAt: row.last_updated_at ?? row.updated_at,
+
     phase: status === 'Boarding' ? 'boarding' : 'unknown',
-    disruption:
-      status === 'Delayed'
-        ? 'delay'
-        : status === 'Cancelled'
-          ? 'cancelled'
-          : status === 'Diverted'
-            ? 'diverted'
-            : 'none',
+    disruption,
     departureDelayMinutes: null,
     arrivalDelayMinutes: null,
     delaySource: null,
     position: null,
-    source: row.provider_source ?? 'FlightAware',
-    lastUpdatedAt: row.last_updated_at ?? row.updated_at,
   };
 }
