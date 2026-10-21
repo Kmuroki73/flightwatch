@@ -1,0 +1,24 @@
+SONGA FLIGHT WATCH — DEPLOY NOW
+
+VERCEL SETTINGS
+1. Upload/import this project with the files in this folder at the project root (package.json must be at the root).
+2. Framework preset: Vite
+3. Build command: npm run build
+4. Output directory: dist
+5. Install command: npm install (default is fine)
+
+REQUIRED VERCEL ENVIRONMENT VARIABLES
+Add these in Project Settings → Environment Variables, for Production (and Preview if needed):
+- VITE_SUPABASE_URL = your existing Supabase project URL
+- VITE_SUPABASE_ANON_KEY = your Supabase anon/publishable key
+
+Then redeploy.
+
+IMPORTANT — THESE ARE NOT INCLUDED IN A ZIP
+- Do not put service-role keys, AeroAPI/FlightAware keys, or Twilio secrets in VITE_* variables.
+- Live flight search requires deploying supabase/functions/flight-search to your existing Supabase project and adding the AeroAPI key as a Supabase Edge Function secret.
+- Watchlist/Live Desk persistence depends on database tables. The current project migrations must be reviewed against your existing database before applying; this package does not change your database.
+- Google sign-in requires the existing Supabase Google provider and production redirect URL to be configured.
+- WhatsApp delivery is not live until Twilio credentials and the Supabase WhatsApp functions are configured and tested.
+
+This ZIP contains the Vite/React source and Vercel SPA rewrite. It does not contain node_modules, build output, .env secrets, or your production database credentials. No one can safely bake private provider keys into a public frontend ZIP.

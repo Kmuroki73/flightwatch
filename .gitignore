@@ -21,3 +21,20 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Never commit environment secrets (keep the safe template)
+.env*
+!.env.example
+
+# Generated output and local tooling
+node_modules/
+dist/
+dist-ssr/
+coverage/
+.vercel/
+.git/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
