@@ -105,11 +105,18 @@ function App() {
     return () => { active = false; };
   }, [session]);
 
-  const goTo = (nextScreen: Screen) => {
+    const goTo = (nextScreen: Screen) => {
     setScreen(nextScreen);
     setMobileNavOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  const openFlight = (flight: Flight) => {
+    setSelectedFlight(flight);
+    goTo('details');
+  };
+
+  const toggleWatch = async (flight: Flight) => {
 
    const toggleWatch = async (flight: Flight) => {
     setWatchError('');
