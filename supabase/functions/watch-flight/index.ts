@@ -43,6 +43,7 @@ function displayRow(watch: any, flight: any) {
     id: watch.id,
     user_id: watch.user_id,
     flight_number: flight.ident,
+    provider_flight_id: flight.provider_flight_id ?? null,
     travel_date: dateOnly(departure ?? arrival, watch.watched_at),
     origin_code: flight.origin,
     destination_code: flight.destination,
