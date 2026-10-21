@@ -432,8 +432,10 @@ function toDelayMinutes(value: unknown): number | null {
 }
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
+
 const configuredEndpoint = (import.meta.env.VITE_FLIGHT_SEARCH_FUNCTION_URL as string | undefined)
-  ?? (supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flight-search` : undefined);
+  ?? (supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flightaware` : undefined);
+
 const legacyEndpoint = supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flightaware` : null;
 
 export const flightProvider: FlightDataProvider = configuredEndpoint
