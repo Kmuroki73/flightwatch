@@ -111,36 +111,70 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const openFlight = (flight: Flight) => {
-    setSelectedFlight(flight);
-    goTo('details');
-  };
-
-  const toggleWatch = async (flight: Flight) => {
+   const toggleWatch = async (flight: Flight) => {
     setWatchError('');
-    if (!session) {
-      window.sessionStorage.setItem('songa-pending-watch', JSON.stringify(flight));
-      goTo('account');
+
+    if (!supabase) {
+      setWatchError('Supabase is not configured. Please try again later.');
       return;
     }
-    const savedFlight = watchedFlights.find((item) => item.flightNumber === flight.flightNumber && item.date === flight.date);
+
     try {
+      const { data, error } = await supabase.auth.getSession();
+
+      if (error) throw error;
+
+      if (!data.session) {
+        window.sessionStorage.setItem(
+          'songa-pending-watch',
+          JSON.stringify(flight)
+        );
+        goTo('account');
+        return;
+      }
+
+      if (flight.dataMode !== 'live') {
+        setWatchError(
+          'Flight Watch is available for live flight results only. Search again to refresh this flight.'
+        );
+        return;
+      }
+
+      const savedFlight = watchedFlights.find(
+        (item) =>
+          item.flightNumber === flight.flightNumber &&
+          item.date === flight.date
+      );
+
       if (savedFlight) {
         await removeWatchedFlight(savedFlight.id);
-        setWatchedFlights((current) => current.filter((item) => item.id !== savedFlight.id));
+
+        setWatchedFlights((current) =>
+          current.filter((item) => item.id !== savedFlight.id)
+        );
       } else {
         const savedRow = await addWatchedFlight(flight);
-        setWatchedFlights((current) => [...current, watchedRowToFlight(savedRow)]);
+        const convertedFlight = watchedRowToFlight(savedRow);
+
+        setWatchedFlights((current) => {
+          if (current.some((item) => item.id === convertedFlight.id)) {
+            return current;
+          }
+
+          return [...current, convertedFlight];
+        });
       }
     } catch (error) {
-      if (error && typeof error === 'object' && 'code' in error && error.code === '23505') {
-        setWatchError('This flight is already in your watchlist.');
-      } else {
-        setWatchError('We could not update your watchlist. Please try again.');
-      }
+      console.error('Flight Watch error:', error);
+
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'An unexpected error occurred.';
+
+      setWatchError(`Flight Watch failed: ${message}`);
     }
   };
-
   const searchFlights = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSearchError('');
