@@ -25,6 +25,7 @@ function respond(body: unknown, status = 200) {
 
 function validTimestamp(value: unknown): string | null {
   if (typeof value !== "string" || !value.trim()) return null;
+
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? null : date.toISOString();
 }
@@ -47,14 +48,18 @@ function displayRow(watch: any, flight: any) {
     destination_code: flight.destination,
     monitoring_status: watch.active ? "active" : "paused",
     provider_source: flight.provider,
-    airline: null,
-    origin_city: null,
-    destination_city: null,
+    airline: flight.airline ?? null,
+    airline_code: flight.airline_code ?? null,
+    origin_city: flight.origin_city ?? null,
+    destination_city: flight.destination_city ?? null,
     departure_time: departure,
     arrival_time: arrival,
     status: flight.status,
-    duration: null,
-    terminal: null,
+    duration: flight.duration ?? null,
+    terminal: flight.terminal ?? null,
+    gate: flight.gate ?? null,
+    aircraft: flight.aircraft ?? null,
+    aircraft_registration: flight.aircraft_registration ?? null,
     last_updated_at:
       flight.last_provider_update ?? flight.last_checked_at ?? null,
     created_at: watch.watched_at ?? now,
@@ -73,7 +78,10 @@ Deno.serve(async (req) => {
 
   try {
     if (!supabaseUrl || !serviceRoleKey) {
-      return respond({ error: "Server configuration is incomplete." }, 500);
+      return respond(
+        { error: "Server configuration is incomplete." },
+        500,
+      );
     }
 
     const authorization = req.headers.get("Authorization") ?? "";
@@ -87,7 +95,10 @@ Deno.serve(async (req) => {
       await admin.auth.getUser(token);
 
     if (authError || !authData.user) {
-      return respond({ error: "Your session is invalid. Please sign in again." }, 401);
+      return respond(
+        { error: "Your session is invalid. Please sign in again." },
+        401,
+      );
     }
 
     const userId = authData.user.id;
@@ -101,6 +112,8 @@ Deno.serve(async (req) => {
           id, user_id, active, watched_at, stopped_at,
           flight:flights!flight_watches_flight_id_fkey (
             id, provider, provider_flight_id, ident, origin, destination,
+            airline, airline_code, origin_city, destination_city,
+            duration, terminal, gate, aircraft, aircraft_registration,
             scheduled_departure, scheduled_arrival, status, delay_minutes,
             diverted, cancelled, last_provider_update, last_checked_at,
             updated_at
@@ -118,6 +131,7 @@ Deno.serve(async (req) => {
           const flight = Array.isArray(item.flight)
             ? item.flight[0]
             : item.flight;
+
           return displayRow(item, flight);
         });
 
@@ -133,7 +147,10 @@ Deno.serve(async (req) => {
 
       if (flight.dataMode !== "live") {
         return respond(
-          { error: "Only live flight results can be added to your watchlist." },
+          {
+            error:
+              "Only live flight results can be added to your watchlist.",
+          },
           400,
         );
       }
@@ -157,10 +174,15 @@ Deno.serve(async (req) => {
         typeof flight.origin?.code !== "string" ||
         typeof flight.destination?.code !== "string"
       ) {
-        return respond({ error: "The flight details are incomplete." }, 400);
+        return respond(
+          { error: "The flight details are incomplete." },
+          400,
+        );
       }
 
-      const scheduledDeparture = validTimestamp(flight.scheduledDeparture);
+      const scheduledDeparture = validTimestamp(
+        flight.scheduledDeparture,
+      );
       const scheduledArrival = validTimestamp(flight.scheduledArrival);
       const lastProviderUpdate = validTimestamp(flight.lastUpdatedAt);
 
@@ -171,34 +193,33 @@ Deno.serve(async (req) => {
             provider: "flightaware",
             provider_flight_id: providerFlightId,
             ident,
-            
-          {
-            provider: "flightaware",
-            provider_flight_id: providerFlightId,
-            ident,
 
             // Additional flight details
             airline: flight.airline ?? null,
             airline_code: flight.airlineCode ?? null,
-            origin_city: flight.origin.city ?? null,
-            destination_city: flight.destination.city ?? null,
+            origin_city: flight.origin?.city ?? null,
+            destination_city: flight.destination?.city ?? null,
             duration: flight.duration ?? null,
             terminal: flight.terminal ?? null,
             gate: flight.gate ?? null,
             aircraft: flight.aircraft ?? null,
-            aircraft_registration: flight.aircraftRegistration ?? null,
+            aircraft_registration:
+              flight.aircraftRegistration ?? null,
 
             origin: flight.origin.code,
             destination: flight.destination.code,
             scheduled_departure: scheduledDeparture,
             scheduled_arrival: scheduledArrival,
-            estimated_departure: validTimestamp(flight.estimatedDeparture),
-            estimated_arrival: validTimestamp(flight.estimatedArrival),
+            estimated_departure: validTimestamp(
+              flight.estimatedDeparture,
+            ),
+            estimated_arrival: validTimestamp(
+              flight.estimatedArrival,
+            ),
             actual_departure: validTimestamp(flight.actualDeparture),
             actual_arrival: validTimestamp(flight.actualArrival),
             status: flight.status ?? "Unknown",
             delay_minutes:
-
               typeof flight.departureDelayMinutes === "number"
                 ? flight.departureDelayMinutes
                 : typeof flight.arrivalDelayMinutes === "number"
@@ -231,6 +252,8 @@ Deno.serve(async (req) => {
           id, user_id, active, watched_at, stopped_at,
           flight:flights!flight_watches_flight_id_fkey (
             id, provider, provider_flight_id, ident, origin, destination,
+            airline, airline_code, origin_city, destination_city,
+            duration, terminal, gate, aircraft, aircraft_registration,
             scheduled_departure, scheduled_arrival, status, delay_minutes,
             diverted, cancelled, last_provider_update, last_checked_at,
             updated_at
@@ -244,7 +267,9 @@ Deno.serve(async (req) => {
         ? savedWatch.flight[0]
         : savedWatch.flight;
 
-      return respond({ row: displayRow(savedWatch, savedFlightData) });
+      return respond({
+        row: displayRow(savedWatch, savedFlightData),
+      });
     }
 
     if (operation === "remove") {
@@ -269,7 +294,10 @@ Deno.serve(async (req) => {
       if (error) throw error;
 
       if (!data) {
-        return respond({ error: "The active watch was not found." }, 404);
+        return respond(
+          { error: "The active watch was not found." },
+          404,
+        );
       }
 
       return respond({ success: true });
@@ -278,7 +306,13 @@ Deno.serve(async (req) => {
     return respond({ error: "Unknown watchlist operation." }, 400);
   } catch (error) {
     console.error("watch-flight error:", error);
-    return respond({ error: "The watchlist operation failed. Please try again." }, 500);
+
+    return respond(
+      {
+        error:
+          "The watchlist operation failed. Please try again.",
+      },
+      500,
+    );
   }
 });
-
