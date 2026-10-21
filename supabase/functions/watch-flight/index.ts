@@ -171,6 +171,23 @@ Deno.serve(async (req) => {
             provider: "flightaware",
             provider_flight_id: providerFlightId,
             ident,
+            
+          {
+            provider: "flightaware",
+            provider_flight_id: providerFlightId,
+            ident,
+
+            // Additional flight details
+            airline: flight.airline ?? null,
+            airline_code: flight.airlineCode ?? null,
+            origin_city: flight.origin.city ?? null,
+            destination_city: flight.destination.city ?? null,
+            duration: flight.duration ?? null,
+            terminal: flight.terminal ?? null,
+            gate: flight.gate ?? null,
+            aircraft: flight.aircraft ?? null,
+            aircraft_registration: flight.aircraftRegistration ?? null,
+
             origin: flight.origin.code,
             destination: flight.destination.code,
             scheduled_departure: scheduledDeparture,
@@ -181,6 +198,7 @@ Deno.serve(async (req) => {
             actual_arrival: validTimestamp(flight.actualArrival),
             status: flight.status ?? "Unknown",
             delay_minutes:
+
               typeof flight.departureDelayMinutes === "number"
                 ? flight.departureDelayMinutes
                 : typeof flight.arrivalDelayMinutes === "number"
