@@ -1,8 +1,10 @@
+
 import type { Flight } from '@/types';
 import { supabase } from '@/lib/supabase';
 
 export type WatchedFlightRow = {
   id: string;
+  user_id: string;
   flight_number: string;
   travel_date: string;
   origin_code: string | null;
@@ -22,24 +24,52 @@ export type WatchedFlightRow = {
   updated_at: string;
 };
 
-export async function loadWatchedFlights(): Promise<WatchedFlightRow[]> {
-  if (!supabase) return [];
-  const { data, error } = await supabase
-    .from('watched_flights')
-    .select('id, flight_number, travel_date, origin_code, destination_code, monitoring_status, provider_source, airline, origin_city, destination_city, departure_time, arrival_time, status, duration, terminal, last_updated_at, created_at, updated_at')
-    .eq('monitoring_status', 'active')
-    .order('travel_date', { ascending: true });
+const ROW_COLUMNS =
+  'id, user_id, flight_number, travel_date, origin_code, destination_code, monitoring_status, provider_source, airline, origin_city, destination_city, departure_time, arrival_time, status, duration, terminal, last_updated_at, created_at, updated_at';
+
+async function requireUserId(): Promise<string> {
+  if (!supabase) {
+    throw new Error('Supabase is not configured.');
+  }
+
+  const { data, error } = await supabase.auth.getUser();
+
   if (error) throw error;
-  return data as WatchedFlightRow[];
+
+  if (!data.user) {
+    throw new Error('Please sign in before managing your watchlist.');
+  }
+
+  return data.user.id;
 }
 
-export async function addWatchedFlight(flight: Flight): Promise<WatchedFlightRow> {
-  if (!supabase) throw new Error('Supabase is not configured.');
-  const { data, error } = await supabase
+export async function loadWatchedFlights(): Promise<WatchedFlightRow[]> {
+  const userId = await requireUserId();
+
+  const { data, error } = await supabase!
+    .from('watched_flights')
+    .select(ROW_COLUMNS)
+    .eq('user_id', userId)
+    .eq('monitoring_status', 'active')
+    .order('travel_date', { ascending: true });
+
+  if (error) throw error;
+
+  return (data ?? []) as WatchedFlightRow[];
+}
+
+export async function addWatchedFlight(
+  flight: Flight,
+): Promise<WatchedFlightRow> {
+  const userId = await requireUserId();
+  const travelDate = toDateValue(flight.date);
+
+  const { data, error } = await supabase!
     .from('watched_flights')
     .insert({
+      user_id: userId,
       flight_number: flight.flightNumber,
-      travel_date: toDateValue(flight.date),
+      travel_date: travelDate,
       origin_code: flight.origin.code,
       destination_code: flight.destination.code,
       provider_source: flight.source,
@@ -53,16 +83,42 @@ export async function addWatchedFlight(flight: Flight): Promise<WatchedFlightRow
       terminal: flight.terminal,
       last_updated_at: flight.lastUpdatedAt,
     })
-    .select('id, flight_number, travel_date, origin_code, destination_code, monitoring_status, provider_source, airline, origin_city, destination_city, departure_time, arrival_time, status, duration, terminal, last_updated_at, created_at, updated_at')
-    .maybeSingle();
+    .select(ROW_COLUMNS)
+    .single();
+
+  if (!error && data) {
+    return data as WatchedFlightRow;
+  }
+
+  // If this user already saved the same flight/date, return
+  // their existing record instead of creating a duplicate.
+  if (error?.code === '23505') {
+    const { data: existing, error: lookupError } = await supabase!
+      .from('watched_flights')
+      .select(ROW_COLUMNS)
+      .eq('user_id', userId)
+      .eq('flight_number', flight.flightNumber)
+      .eq('travel_date', travelDate)
+      .maybeSingle();
+
+    if (lookupError) throw lookupError;
+    if (existing) return existing as WatchedFlightRow;
+  }
+
   if (error) throw error;
-  if (!data) throw new Error('The flight could not be saved.');
-  return data as WatchedFlightRow;
+
+  throw new Error('The flight could not be saved.');
 }
 
 export async function removeWatchedFlight(id: string): Promise<void> {
-  if (!supabase) throw new Error('Supabase is not configured.');
-  const { error } = await supabase.from('watched_flights').delete().eq('id', id);
+  const userId = await requireUserId();
+
+  const { error } = await supabase!
+    .from('watched_flights')
+    .delete()
+    .eq('id', id)
+    .eq('user_id', userId);
+
   if (error) throw error;
 }
 
@@ -72,15 +128,29 @@ export function watchedRowToFlight(row: WatchedFlightRow): Flight {
     flightNumber: row.flight_number,
     airline: row.airline ?? row.provider_source ?? 'Saved flight',
     airlineCode: row.flight_number.split(' ')[0] ?? '',
-    origin: { code: row.origin_code ?? '—', city: row.origin_city ?? 'Origin unavailable', time: row.departure_time ?? 'Unavailable' },
-    destination: { code: row.destination_code ?? '—', city: row.destination_city ?? 'Destination unavailable', time: row.arrival_time ?? 'Unavailable' },
+    origin: {
+      code: row.origin_code ?? '—',
+      city: row.origin_city ?? 'Origin unavailable',
+      time: row.departure_time ?? 'Unavailable',
+    },
+    destination: {
+      code: row.destination_code ?? '—',
+      city: row.destination_city ?? 'Destination unavailable',
+      time: row.arrival_time ?? 'Unavailable',
+    },
     date: row.travel_date,
-    status: row.status === 'Delayed' || row.status === 'Boarding' ? row.status : 'Unknown',
-    statusDetail: 'Saved flight · background monitoring is not active in this release.',
+    status:
+      row.status === 'Delayed' || row.status === 'Boarding'
+        ? row.status
+        : 'Unknown',
+    statusDetail:
+      'Saved flight · background monitoring is not active in this release.',
     duration: row.duration ?? 'Unavailable',
     terminal: row.terminal ?? 'Not provided',
     updated: row.last_updated_at ?? row.updated_at,
-    route: `${row.origin_city ?? row.origin_code ?? 'Origin'} to ${row.destination_city ?? row.destination_code ?? 'destination'}`, 
+    route: `${row.origin_city ?? row.origin_code ?? 'Origin'} to ${
+      row.destination_city ?? row.destination_code ?? 'destination'
+    }`,
     timeline: [],
     dataMode: 'live',
     phase: row.status === 'Boarding' ? 'boarding' : 'unknown',
@@ -96,5 +166,8 @@ export function watchedRowToFlight(row: WatchedFlightRow): Flight {
 
 function toDateValue(value: string): string {
   const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? value : parsed.toISOString().slice(0, 10);
+
+  return Number.isNaN(parsed.getTime())
+    ? value
+    : parsed.toISOString().slice(0, 10);
 }
