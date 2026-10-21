@@ -1,5 +1,5 @@
 
-import type { Flight } from '@/types';
+import type { Flight, FlightStatus } from '@/types';
 import { supabase } from '@/lib/supabase';
 
 export type WatchedFlightRow = {
@@ -24,18 +24,23 @@ export type WatchedFlightRow = {
   updated_at: string;
 };
 
-const ROW_COLUMNS =
-  'id, user_id, flight_number, travel_date, origin_code, destination_code, monitoring_status, provider_source, airline, origin_city, destination_city, departure_time, arrival_time, status, duration, terminal, last_updated_at, created_at, updated_at';
+type FunctionResponse<T> = {
+  data: T | null;
+  error: Error | null;
+};
 
-async function requireUserId(): Promise<string> {
+function requireSupabase() {
   if (!supabase) {
     throw new Error('Supabase is not configured.');
   }
+  return supabase;
+}
 
-  const { data, error } = await supabase.auth.getUser();
+async function requireUserId(): Promise<string> {
+  const client = requireSupabase();
+  const { data, error } = await client.auth.getUser();
 
   if (error) throw error;
-
   if (!data.user) {
     throw new Error('Please sign in before managing your watchlist.');
   }
@@ -43,86 +48,108 @@ async function requireUserId(): Promise<string> {
   return data.user.id;
 }
 
+async function invokeWatchFlight<T>(
+  body: Record<string, unknown>,
+): Promise<T> {
+  const client = requireSupabase();
+
+  const result = (await client.functions.invoke('watch-flight', {
+    body,
+  })) as FunctionResponse<T>;
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  if (!result.data) {
+    throw new Error('The watchlist service returned no data.');
+  }
+
+  const response = result.data as T & { error?: string };
+
+  if (response.error) {
+    throw new Error(response.error);
+  }
+
+  return response;
+}
+
 export async function loadWatchedFlights(): Promise<WatchedFlightRow[]> {
-  const userId = await requireUserId();
+  await requireUserId();
 
-  const { data, error } = await supabase!
-    .from('watched_flights')
-    .select(ROW_COLUMNS)
-    .eq('user_id', userId)
-    .eq('monitoring_status', 'active')
-    .order('travel_date', { ascending: true });
+  const response = await invokeWatchFlight<{
+    rows: WatchedFlightRow[];
+  }>({ operation: 'list' });
 
-  if (error) throw error;
-
-  return (data ?? []) as WatchedFlightRow[];
+  return response.rows ?? [];
 }
 
 export async function addWatchedFlight(
   flight: Flight,
 ): Promise<WatchedFlightRow> {
-  const userId = await requireUserId();
-  const travelDate = toDateValue(flight.date);
+  await requireUserId();
 
-  const { data, error } = await supabase!
-    .from('watched_flights')
-    .insert({
-      user_id: userId,
-      flight_number: flight.flightNumber,
-      travel_date: travelDate,
-      origin_code: flight.origin.code,
-      destination_code: flight.destination.code,
-      provider_source: flight.source,
-      airline: flight.airline,
-      origin_city: flight.origin.city,
-      destination_city: flight.destination.city,
-      departure_time: flight.origin.time,
-      arrival_time: flight.destination.time,
-      status: flight.status,
-      duration: flight.duration,
-      terminal: flight.terminal,
-      last_updated_at: flight.lastUpdatedAt,
-    })
-    .select(ROW_COLUMNS)
-    .single();
+  const response = await invokeWatchFlight<{
+    row: WatchedFlightRow;
+  }>({
+    operation: 'add',
+    flight,
+  });
 
-  if (!error && data) {
-    return data as WatchedFlightRow;
+  if (!response.row) {
+    throw new Error('The flight could not be saved.');
   }
 
-  // If this user already saved the same flight/date, return
-  // their existing record instead of creating a duplicate.
-  if (error?.code === '23505') {
-    const { data: existing, error: lookupError } = await supabase!
-      .from('watched_flights')
-      .select(ROW_COLUMNS)
-      .eq('user_id', userId)
-      .eq('flight_number', flight.flightNumber)
-      .eq('travel_date', travelDate)
-      .maybeSingle();
-
-    if (lookupError) throw lookupError;
-    if (existing) return existing as WatchedFlightRow;
-  }
-
-  if (error) throw error;
-
-  throw new Error('The flight could not be saved.');
+  return response.row;
 }
 
 export async function removeWatchedFlight(id: string): Promise<void> {
-  const userId = await requireUserId();
+  await requireUserId();
 
-  const { error } = await supabase!
-    .from('watched_flights')
-    .delete()
-    .eq('id', id)
-    .eq('user_id', userId);
+  await invokeWatchFlight<{ success: boolean }>({
+    operation: 'remove',
+    id,
+  });
+}
 
-  if (error) throw error;
+function displayTime(value: string | null): string {
+  if (!value) return 'Unavailable';
+
+  const parsed = new Date(value);
+
+  if (Number.isNaN(parsed.getTime())) return value;
+
+  // Convert stored timestamps to the browser's local time.
+  if (/[TZ]/i.test(value) || /^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return parsed.toLocaleTimeString([], {
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  }
+
+  return value;
+}
+
+function flightStatus(value: string | null): FlightStatus {
+  const allowed: FlightStatus[] = [
+    'On time',
+    'Delayed',
+    'Boarding',
+    'Cancelled',
+    'Diverted',
+    'In flight',
+    'Landed',
+    'Unknown',
+  ];
+
+  return allowed.includes(value as FlightStatus)
+    ? (value as FlightStatus)
+    : 'Unknown';
 }
 
 export function watchedRowToFlight(row: WatchedFlightRow): Flight {
+  const status = flightStatus(row.status);
+
   return {
     id: row.id,
     flightNumber: row.flight_number,
@@ -130,21 +157,21 @@ export function watchedRowToFlight(row: WatchedFlightRow): Flight {
     airlineCode: row.flight_number.split(' ')[0] ?? '',
     origin: {
       code: row.origin_code ?? '—',
-      city: row.origin_city ?? 'Origin unavailable',
-      time: row.departure_time ?? 'Unavailable',
+      city: row.origin_city ?? row.origin_code ?? 'Origin unavailable',
+      time: displayTime(row.departure_time),
     },
     destination: {
       code: row.destination_code ?? '—',
-      city: row.destination_city ?? 'Destination unavailable',
-      time: row.arrival_time ?? 'Unavailable',
+      city:
+        row.destination_city ??
+        row.destination_code ??
+        'Destination unavailable',
+      time: displayTime(row.arrival_time),
     },
     date: row.travel_date,
-    status:
-      row.status === 'Delayed' || row.status === 'Boarding'
-        ? row.status
-        : 'Unknown',
+    status,
     statusDetail:
-      'Saved flight · background monitoring is not active in this release.',
+      'Saved flight · background monitoring depends on the configured alert service.',
     duration: row.duration ?? 'Unavailable',
     terminal: row.terminal ?? 'Not provided',
     updated: row.last_updated_at ?? row.updated_at,
@@ -153,21 +180,20 @@ export function watchedRowToFlight(row: WatchedFlightRow): Flight {
     }`,
     timeline: [],
     dataMode: 'live',
-    phase: row.status === 'Boarding' ? 'boarding' : 'unknown',
-    disruption: row.status === 'Delayed' ? 'delay' : 'none',
+    phase: status === 'Boarding' ? 'boarding' : 'unknown',
+    disruption:
+      status === 'Delayed'
+        ? 'delay'
+        : status === 'Cancelled'
+          ? 'cancelled'
+          : status === 'Diverted'
+            ? 'diverted'
+            : 'none',
     departureDelayMinutes: null,
     arrivalDelayMinutes: null,
     delaySource: null,
     position: null,
-    source: row.provider_source ?? 'Saved flight record',
+    source: row.provider_source ?? 'FlightAware',
     lastUpdatedAt: row.last_updated_at ?? row.updated_at,
   };
-}
-
-function toDateValue(value: string): string {
-  const parsed = new Date(value);
-
-  return Number.isNaN(parsed.getTime())
-    ? value
-    : parsed.toISOString().slice(0, 10);
 }
