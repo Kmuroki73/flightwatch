@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SONGA Merchant Operations &amp; Fulfilment</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#00354a","inverse-on-surface":"#2f3034","on-tertiary-container":"#003421","primary":"#ffb59d","tertiary-container":"#00a874","surface-variant":"#343538","primary-fixed-dim":"#ffb59d","error-container":"#93000a","on-primary-fixed":"#390c00","on-error":"#690005","on-surface-variant":"#e3beb3","on-primary-fixed-variant":"#832700","surface-container-high":"#292a2d","inverse-primary":"#ab3500","on-surface":"#e3e2e6","surface-tint":"#ffb59d","surface-container-low":"#1b1b1f","on-primary-container":"#561600","background":"#121316","secondary-container":"#00a6e0","on-secondary-fixed-variant":"#004c69","surface-bright":"#38393d","surface-container-highest":"#343538","secondary-fixed-dim":"#7bd0ff","on-tertiary-fixed-variant":"#005236","on-tertiary":"#003824","tertiary":"#4edea3","tertiary-fixed-dim":"#4edea3","inverse-surface":"#e3e2e6","on-secondary-fixed":"#001e2c","tertiary-fixed":"#6ffbbe","secondary-fixed":"#c4e7ff","surface-container-lowest":"#0d0e11","surface":"#121316","primary-container":"#ff5e1e","outline-variant":"#5b4138","error":"#ffb4ab","on-tertiary-fixed":"#002113","on-primary":"#5d1900","on-error-container":"#ffdad6","secondary":"#7bd0ff","primary-fixed":"#ffdbd0","surface-dim":"#121316","surface-container":"#1f1f23","on-secondary-container":"#00374d","on-background":"#e3e2e6","outline":"#aa897f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"3rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter":"1.5rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-hero-mobile":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"telemetry-md":["JetBrains Mono"],"headline-lg-mobile":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-md":["Space Grotesk"],"headline-lg":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-sm":["Space Grotesk"],"body-md":["Inter"]},"fontSize":{"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"telemetry-lg":["20px",{"lineHeight":"24px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"telemetry-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-white"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-24 w-full px-gutter flex flex-col justify-between py-space-xs"><div class="flex items-center justify-between gap-space-md h-12"><div class="flex items-center gap-space-md flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface font-bold">SONGA</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm"><span class="text-primary-container font-semibold">OPS //</span><span>DISPATCH HUB</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low text-tertiary font-telemetry-sm text-telemetry-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>NBO T1A • HND T3 • JNB A1 [ONLINE]</span></div></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="overview" href="#">Overview</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="orders" href="#">Orders</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="fulfilment-dispatch" href="#">Fulfilment Dispatch</a><a aria-current="page" class="px-space-md py-1.5 transition-colors uppercase bg-primary-container text-on-primary font-bold rounded-lg" data-path="inventory-&amp;-services" href="#">Inventory &amp; Services</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="disputes-&amp;-support" href="#">Disputes &amp; Support</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="merchant-&amp;-team" href="#">Merchant &amp; Team</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary text-[16px]">storefront</span><span class="font-medium truncate max-w-[200px]">TIAT Roasters &amp; Airside Express</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-secondary font-telemetry-sm text-telemetry-sm tracking-wide"><span class="material-symbols-outlined text-[14px]">schedule</span><span>14:48:22 UTC</span></div><div class="hidden sm:flex items-center px-space-xs py-1 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm uppercase tracking-wider">DARK [AERO]</div><div class="flex items-center gap-space-xs pl-space-xs"><div class="text-right hidden sm:block"><div class="font-label-caps text-label-caps text-on-surface leading-tight">K. Ndung'u</div><div class="font-telemetry-sm text-telemetry-sm text-tertiary leading-tight">Duty Ops Lead</div></div><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div></div></div></div><div class="h-8 w-full flex items-center justify-between overflow-x-auto bg-surface-container-lowest/80 px-space-md rounded-lg text-on-surface-variant font-telemetry-sm text-telemetry-sm"><div class="flex items-center gap-space-md whitespace-nowrap"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-on-surface font-medium">TELEMETRY:</span><span>JKIA (NBO) AIRSIDE NODE ACTIVE</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-primary-container font-medium">QUEUE:</span><span>14 PENDING ORDERS</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-tertiary font-medium">FULFILMENT SLA:</span><span>98.6% ON-TIME</span></div></div><div class="flex items-center gap-space-xs whitespace-nowrap pl-space-md"><span class="text-secondary font-medium">PAYPAL SETTLEMENT GATEWAY:</span><span class="text-tertiary">CONNECTED (SANDBOX DEMO MODE)</span></div></div></div></header><main class="w-full pt-24 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Operational Breadcrumb & Airside Status Header Bar -->
+<section class="w-full px-gutter py-space-md bg-surface-container-low shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="flex flex-wrap items-center gap-space-sm text-telemetry-sm font-telemetry-sm">
+<span class="text-primary-container font-semibold uppercase">HUB NODE //</span>
+<span class="text-on-surface">STOCK CONTROL &amp; AIRSIDE SERVICES CATALOGUE</span>
+<span class="text-surface-variant">•</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary">ICAO SEC. ANNEX 17 CONCURRENT</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-secondary">TAMPER-EVIDENT STEBS COMPLIANT</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>AIRSIDE TELEMETRY: 48 ACTIVE SKUS SYNCHRONIZED</span>
+</div>
+<div class="hidden sm:block text-outline font-telemetry-sm text-telemetry-sm uppercase tracking-wider bg-surface-container px-space-sm py-0.5 rounded">
+          REV. 2025.04.14-AERO
+        </div>
+</div>
+</div>
+</section>
+<!-- Section 1: Terminal & Station Ribbon + Emergency Surge Controls -->
+<section class="w-full px-gutter pt-space-lg pb-space-md bg-surface">
+<!-- Top Filter & Emergency Bar -->
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md pb-space-md">
+<!-- Location Node Selector -->
+<div class="flex flex-wrap items-center gap-space-xs w-full xl:w-auto">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase pr-space-xs flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">near_me</span> Node:
+        </span>
+<button class="node-btn active-node px-space-sm py-1.5 rounded-lg bg-primary-container text-on-primary font-label-caps text-label-caps uppercase transition-all shadow-sm">
+          All Airside Nodes (4)
+        </button>
+<button class="node-btn px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-all">
+          JKIA NBO Terminal 1A (Concourse)
+        </button>
+<button class="node-btn px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-all">
+          JKIA T1E Arrivals
+        </button>
+<button class="node-btn px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-all">
+          Tokyo Haneda (HND) T3 Gate 112
+        </button>
+<button class="node-btn px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase transition-all">
+          OR Tambo (JNB) Central A1
+        </button>
+</div>
+<!-- Emergency Airside Surge Suspension Control -->
+<div class="flex items-center gap-space-sm w-full xl:w-auto justify-end">
+<div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded-lg bg-error-container/30 text-error font-telemetry-sm text-telemetry-sm" id="surgeNotice">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>TARMAC SURGE MONITORING ACTIVE</span>
+</div>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-error font-label-caps text-label-caps uppercase transition-all shadow-sm" id="suspensionToggleBtn" onclick="toggleEmergencySuspension()">
+<span class="material-symbols-outlined text-[16px] text-error">bolt</span>
+<span>Temporary Service Suspension</span>
+<span class="ml-space-xs px-1.5 py-0.2 rounded bg-surface-container-lowest text-on-surface-variant font-telemetry-sm text-telemetry-sm" id="suspensionBadge">STANDBY</span>
+</button>
+</div>
+</div>
+<!-- Category Tabs Carousel -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-space-sm scrollbar-none">
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-primary-container text-on-primary font-headline-sm text-body-sm font-semibold transition-all shadow-sm">
+<span class="material-symbols-outlined text-[16px]">apps</span>
+<span>All Items</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-lowest/50 text-[10px] font-telemetry-sm text-white">48</span>
+</button>
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-headline-sm text-body-sm transition-all">
+<span class="material-symbols-outlined text-[16px] text-primary">local_cafe</span>
+<span>Artisanal Coffee &amp; Beverages</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-low text-[10px] font-telemetry-sm">14</span>
+</button>
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-headline-sm text-body-sm transition-all">
+<span class="material-symbols-outlined text-[16px] text-tertiary">bento</span>
+<span>Fresh Airside Catering &amp; Bento</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-low text-[10px] font-telemetry-sm">12</span>
+</button>
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-headline-sm text-body-sm transition-all">
+<span class="material-symbols-outlined text-[16px] text-secondary">headphones</span>
+<span>Travel Comfort &amp; Acoustic Hardware</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-low text-[10px] font-telemetry-sm">10</span>
+</button>
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-headline-sm text-body-sm transition-all">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed">bathtub</span>
+<span>VIP Lounge &amp; Shower Passes</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-low text-[10px] font-telemetry-sm">6</span>
+</button>
+<button class="cat-pill flex-shrink-0 flex items-center gap-space-xs px-space-md py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-headline-sm text-body-sm transition-all">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">luggage</span>
+<span>Rapid Baggage Wrapping</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container-low text-[10px] font-telemetry-sm">6</span>
+</button>
+</div>
+</section>
+<!-- Section 2: Action Bar (Add Service, Search Filter & Rapid Batch Operations) -->
+<section class="w-full px-gutter py-space-md bg-surface-container-low">
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-space-md">
+<!-- Search and Filter Input -->
+<div class="flex flex-1 items-center gap-space-sm bg-surface-container-lowest rounded-xl px-space-md py-1.5 shadow-sm">
+<span class="material-symbols-outlined text-outline text-[20px]">search</span>
+<input class="bg-transparent text-on-surface placeholder:text-outline focus:outline-none w-full font-telemetry-md text-telemetry-md" id="itemSearchInput" oninput="handleSearchFilter(this.value)" placeholder="Filter by SKU (e.g. SKU-COF-KEN), item name, airport gate, dietary flag..." type="text"/>
+<span class="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm">⌘K</span>
+</div>
+<!-- Action Buttons & Batch Switchers -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<!-- Stock Audit Sync Button -->
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase transition-all shadow-sm" onclick="triggerStockAudit()">
+<span class="material-symbols-outlined text-[16px] text-secondary">sync</span>
+<span>Stock Audit Sync</span>
+</button>
+<!-- Batch Availability Toggle -->
+<div class="flex items-center rounded-xl bg-surface-container p-0.5 shadow-sm">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase text-tertiary" id="enableAllBtn" onclick="toggleBatchAvailability(true)">
+            Enable All
+          </button>
+<button class="px-space-sm py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase" id="disableAllBtn" onclick="toggleBatchAvailability(false)">
+            Mute Orders
+          </button>
+</div>
+<!-- Orange CTA: Add Airside Product -->
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-xl bg-primary-container hover:bg-primary-container/90 text-on-primary font-headline-sm text-body-sm font-semibold transition-all shadow-md" onclick="openNewProductModal()">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span>+ Add Airside Product / Service</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 3: Concession SLA & Critical Reorder Dispatch Alert Box -->
+<section class="w-full px-gutter py-space-md">
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-md shadow-md">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md relative z-10">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-error-container/40 flex items-center justify-center flex-shrink-0 text-error">
+<span class="material-symbols-outlined text-[22px]">inventory_2</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-error-container text-on-error font-telemetry-sm text-telemetry-sm uppercase font-semibold">URGENT INVENTORY REORDER</span>
+<span class="text-tertiary font-telemetry-sm text-telemetry-sm">NBO-T1A • CONCESSION ZONE 4</span>
+</div>
+<p class="font-headline-sm text-body-lg text-on-surface mt-space-xs">
+              Kenya Barista Reserve Oat Milk (1L Barista Edition) stock critically low: <span class="font-telemetry-md text-error font-bold">5 units remaining</span> (Threshold &lt; 8).
+            </p>
+<p class="font-body-sm text-on-surface-variant mt-0.5">
+              Automated airside ramp runner dispatch generated via Gate 09 security tunnel. Expected arrival at TIAT Espresso Bar: 14 mins.
+            </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto justify-end">
+<button class="px-space-md py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase transition-all" onclick="acknowledgeAlert(this)">
+            Dismiss Warning
+          </button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-secondary text-on-secondary font-label-caps text-label-caps uppercase transition-all shadow-sm" onclick="trackAirsideRunner()">
+<span class="material-symbols-outlined text-[16px]">local_shipping</span>
+<span>Track Ramp Runner (Van #04)</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: High-Density Airside Products & Services Grid / Table -->
+<section class="w-full px-gutter py-space-md">
+<!-- View Switcher & Table Metric Stats -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-sm pb-space-md">
+<div class="flex items-center gap-space-sm">
+<h2 class="font-headline-md text-headline-sm text-on-surface font-bold tracking-tight">Active Catalogue &amp; Live Dispensaries</h2>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary bg-surface-container px-space-xs py-0.5 rounded">STREAMING REAL-TIME</span>
+</div>
+<div class="flex items-center gap-space-md text-telemetry-sm font-telemetry-sm text-on-surface-variant">
+<div>Total Value: <span class="text-on-surface font-semibold">$38,420.00 USD</span></div>
+<div class="hidden md:block">|</div>
+<div class="hidden md:block">Average Restock Turnaround: <span class="text-tertiary font-semibold">18.4 mins</span></div>
+</div>
+</div>
+<!-- Product Table Container -->
+<div class="overflow-x-auto rounded-xl bg-surface-container-low shadow-lg">
+<table class="w-full text-left border-collapse min-w-[1080px]">
+<thead>
+<tr class="bg-surface-container font-label-caps text-label-caps uppercase text-on-surface-variant">
+<th class="py-space-md px-space-md w-12 text-center">
+<input class="accent-primary-container cursor-pointer rounded" id="selectAllCheckbox" onchange="toggleSelectAll(this)" type="checkbox"/>
+</th>
+<th class="py-space-md px-space-md">Product / Service &amp; Specification</th>
+<th class="py-space-md px-space-md">Station Nodes &amp; Flight Window</th>
+<th class="py-space-md px-space-md">Multi-Currency Airside Tariffs</th>
+<th class="py-space-md px-space-md">Live Stock / Buffer SLA</th>
+<th class="py-space-md px-space-md">Airside Security Directives</th>
+<th class="py-space-md px-space-md text-center">Status &amp; Fulfilment Mode</th>
+<th class="py-space-md px-space-md text-right">Quick Ops</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-on-surface" id="inventoryTableBody">
+<!-- Row 1: Single Origin AA Espresso Beans (Physical Product) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-14 h-14 rounded-lg object-cover bg-surface-container-high flex-shrink-0" data-alt="Premium sealed foil matte black package of Kenyan AA single origin coffee beans with orange typography and airport duty free security sticker on dark slate surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeQ0cld8gomcuyXsJKAMEQG88ueN4leiavkPtcFngn_YPX6UN_PCkSQLwiHmlXnKFRKUtCub2niG2fFcwc1lUw2n3VGWagjZ19qn0BDvm7_ulRBSAVdCp-17Z2kGtCHZC76bUB26Q_m6zFJ8RbTmv9P9AsvUPPYaM36kXHCJSd4LIN7iII_CQxsG0KHIxQcyPjY54V_mrcsg0Te9OqqnjSgjAzk3tGbaDIoVEQnyZI"/>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Mount Kenya Reserve AA Single Origin (250g Whole Bean)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-COF-KEN-01</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Artisanal Coffee &amp; Packaged Goods</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>JKIA T1A Concourse Gate 04</span>
+</div>
+<div class="text-on-surface-variant">04:00 - 23:30 UTC</div>
+<span class="text-secondary font-medium">Synced with Wave 1-4 Departures</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$14.50 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">KES 1,900 / ¥2,180 / €13.20</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary font-semibold mt-0.5">VAT EXEMPT AIRSIDE EXPORT</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-on-surface font-semibold">68 pkgs</span>
+<span class="text-tertiary">Optimal</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 78%;"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Reorder trigger at &lt; 20 units</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-sm text-[10px] flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[11px]">verified</span> STEB Sealed
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-[10px]">
+                  Gate Delivery Eligible
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Active &amp; Airside Orderable</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Instant Pax Pickup</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-COF-KEN-01')" title="Edit Item Specs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-COF-KEN-01')" title="Quick Stock Count">
+<span class="material-symbols-outlined text-[18px]">format_list_numbered</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-COF-KEN-01')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Airside Fresh Wagyu & Salmon Bento Box (Perishable Food) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-14 h-14 rounded-lg object-cover bg-surface-container-high flex-shrink-0" data-alt="Exquisite Japanese airside bento box with grilled salmon, wagyu beef slices, seasoned rice and pickled ginger packaged in eco wood box on clean dark metallic table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHWgHB-L65fbDFTFb_rHaIx5Zl13dg4uRMU-D3EBCCoOVhJA-ePq6VzdzzaseBdWnLUd40voAbDAlRwrNtXW8RFlq4mV4R4fI_rjONC9Vv9vIUlyxM--uvbEPUrK38F-UaHZa_4rpod2bFQYzmBbMb8OOsqakkvC90CWpw6J-YwNoJz0Cw-klf-KQzib6jZivshuRokP_9mCNt5HIrsOoLadxjnPPVhxRoGYpe8d_N"/>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Tokyo Express Premium Shokado Bento</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-CAT-HND-08</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Fresh Airside Catering</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span>HND T3 Airside Gate 112 Pod</span>
+</div>
+<div class="text-on-surface-variant">05:00 - 01:00 UTC (+1)</div>
+<span class="text-secondary font-medium">Batch Pre-pack Window: 40m</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$22.00 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">¥3,300 / KES 2,860 / €20.10</div>
+<div class="font-telemetry-sm text-[10px] text-secondary font-semibold mt-0.5">JAL &amp; ANA FLIGHT CERTIFIED</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-on-surface font-semibold">14 portions</span>
+<span class="text-primary-container">Pre-Order Only</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 32%;"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Batch expires in 4h 22m</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-primary font-telemetry-sm text-[10px]">
+                  Halal / Shellfish Alert
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-sm text-[10px]">
+                  LAGs Exempt (Solid)
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-primary-container/20 text-primary-container font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span>Pre-Order Only (30m Lead)</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Kitchen Warm Prep</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-CAT-HND-08')" title="Edit Item Specs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-CAT-HND-08')" title="Adjust Prep Capacity">
+<span class="material-symbols-outlined text-[18px]">kitchen</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-CAT-HND-08')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Acoustic Noise Cancelling Flight Headphones (Hardware / High Value) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-14 h-14 rounded-lg object-cover bg-surface-container-high flex-shrink-0" data-alt="Sleek aerospace matte dark titanium noise cancelling over-ear headphones rested on aluminum flight flight case with amber ambient glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4U-SULvxsk4IxsU2PqYcdokfmn7vbK30eFp5MbpFzBcfN9zYIwYZY3F3k2cUsmOx9NpPEOUXPgZhT1vMtgprU1Yr2cvJhasKwKRhFtlqvaqJ6fHJqiSnPIHQEg6DmlU-30O-SICt9kbZXAdwfuinULvGtv-EoSbgU4wtnfxTKAyK3To4H2E9PydRtlCcFIoVNELvQPlxTKiyb4jCcNOZQXwAAyOi7wghvSW8v7he1"/>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">AeroSonic Pro ANC Long-Haul Headphones</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-HRD-ACC-04</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Travel Acoustic Hardware</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span>JKIA T1A &amp; HND T3 Gate 112</span>
+</div>
+<div class="text-on-surface-variant">24/7 Airside Automated Lockers</div>
+<span class="text-secondary font-medium">Instant Digital Bluetooth Code</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$289.00 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">KES 37,800 / ¥43,500 / €268.00</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary font-semibold mt-0.5">WORLDWIDE 2-YR AIRLINE WARRANTY</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-on-surface font-semibold">28 units</span>
+<span class="text-tertiary">Sufficient</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 60%;"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Lithium battery transit approved</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-secondary font-telemetry-sm text-[10px]">
+                  UN3481 Li-Ion Cleared
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-[10px]">
+                  Serialized Airside Barcode
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Active &amp; Airside Orderable</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Locker Node Dispenser</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-HRD-ACC-04')" title="Edit Item Specs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-HRD-ACC-04')" title="Serial Audit">
+<span class="material-symbols-outlined text-[18px]">qr_code_2</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-HRD-ACC-04')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: VIP Airside Shower & Rest Suite Access Pass (Service/Capacity based) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">shower</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">First-Class Transit Shower &amp; Nap Suite (45-Min Slot)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-SRV-LOU-02</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">VIP Lounge &amp; Wellness Services</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+<span>JKIA T1A Lounge Mezzanine Level</span>
+</div>
+<div class="text-on-surface-variant">00:00 - 24:00 Continuous Ops</div>
+<span class="text-secondary font-medium">Requires Valid International Boarding Pass</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$35.00 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">KES 4,550 / ¥5,250 / €32.50</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary font-semibold mt-0.5">AMENITY KIT &amp; TOWELS INCLUDED</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-on-surface font-semibold">3 slots free</span>
+<span class="text-error font-medium">High Demand</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 85%;"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Turnaround sanitized: 10 mins</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-sm text-[10px]">
+                  Boarding Pass QR Key
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-[10px]">
+                  Post-Security Clearance
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Active &amp; Airside Orderable</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Live Slot Allocation</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-SRV-LOU-02')" title="Slot Schedule">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-SRV-LOU-02')" title="Sanitize Cycle">
+<span class="material-symbols-outlined text-[18px]">cleaning_services</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-SRV-LOU-02')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Rapid Ultra-Resistant Baggage Security Wrapping (Service) -->
+<tr class="hover:bg-surface-container transition-colors group">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-14 h-14 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary-fixed flex-shrink-0">
+<span class="material-symbols-outlined text-[28px]">lock_reset</span>
+</div>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface group-hover:text-primary transition-colors">Airside Re-Wrap &amp; Tamper-Sealing (Transfer Bags)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-SRV-BAGG-05</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Baggage Protection Services</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span>
+<span>JKIA T1E Arrivals &amp; JNB A1</span>
+</div>
+<div class="text-on-surface-variant">24/7 Rapid Transfer Desk</div>
+<span class="text-secondary font-medium">3-Min Average Application</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$12.00 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">KES 1,560 / ¥1,800 / €11.00</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary font-semibold mt-0.5">INCLUDES $1,500 THEFT COVERAGE</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-on-surface font-semibold">180 wraps</span>
+<span class="text-tertiary">Optimal</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 90%;"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">9 Film rolls remaining</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-sm text-[10px]">
+                  TSA Approved Seal
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-[10px]">
+                  RFID Tracking Patch
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>Active &amp; Airside Orderable</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Walk-in &amp; Pre-Paid Voucher</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-SRV-BAGG-05')" title="Edit Item Specs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-SRV-BAGG-05')" title="Film Restock">
+<span class="material-symbols-outlined text-[18px]">inventory</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-SRV-BAGG-05')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 6: Artisanal Cold Brew Bottle (Liquid Constraints - Out of Stock/Restocking) -->
+<tr class="hover:bg-surface-container transition-colors group bg-surface-container-lowest/60">
+<td class="py-space-md px-space-md text-center">
+<input class="row-checkbox accent-primary-container cursor-pointer" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-space-md opacity-85">
+<img class="w-14 h-14 rounded-lg object-cover bg-surface-container-high flex-shrink-0 grayscale contrast-125" data-alt="Amber glass apothecary bottle of cold brew coffee sealed with tamper-evident strip on dark airport dispatch terminal counter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_B8_pPsn_Gv5M4s0I-z3k8uJ0TWFpBCHw3pW-sMM4VPv4IJxDARJ2Hze2r-DcKtPxzEaOL2YIAQkLYJQfYCxPLAI7e1WpcILijJgQT4OftpJ1S6JwrHFSQ7O03I9XjyzSOSsaTVZrG3SK8qP5DIWas46ZTYgm5dxZjVamKge2ASgQhNVpr0bNmwNAsTjA5PNZANtmwtZ8b755wGmk3dmJt98RKDfo41NwppjZxyza"/>
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Nitro Flash Cold Brew (100ml Flight Flask)</span>
+</div>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container font-bold">SKU-COF-KEN-09</span>
+<span class="text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Beverages &amp; Ready-to-Drink</span>
+</div>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-0.5 font-telemetry-sm text-telemetry-sm opacity-85">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span>JKIA T1A Concourse Kiosk 2</span>
+</div>
+<div class="text-on-surface-variant">04:00 - 23:30 UTC</div>
+<span class="text-error font-medium">Restocking Inbound (Van #04)</span>
+</div>
+</td>
+<td class="py-space-md px-space-md opacity-85">
+<div class="font-telemetry-md text-telemetry-md">
+<div class="font-bold text-on-surface text-base">$5.20 <span class="text-xs text-on-surface-variant font-normal">USD</span></div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">KES 680 / ¥780 / €4.80</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary font-semibold mt-0.5">EXACT 100ML CARRY-ON SIZE</div>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-col gap-1 w-36">
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm">
+<span class="text-error font-semibold">0 units</span>
+<span class="text-error font-bold">Depleted</span>
+</div>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 0%;"></div>
+</div>
+<span class="text-[10px] text-error font-telemetry-sm">Restock ETA: 14 mins</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex flex-wrap gap-1 max-w-[180px]">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-tertiary font-telemetry-sm text-[10px]">
+                  LAGs Compliant (≤100ml)
+                </span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-[10px]">
+                  Clear Tamper Pouch
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-center">
+<div class="inline-flex flex-col items-center gap-1">
+<button class="status-toggle px-space-sm py-1 rounded-full bg-error-container/40 text-error font-label-caps text-label-caps uppercase flex items-center gap-1.5" onclick="toggleRowStatus(this)">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>Out of Stock / Restocking</span>
+</button>
+<span class="text-[10px] text-on-surface-variant font-telemetry-sm">Auto-Restock Alert Sent</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<div class="flex items-center justify-end gap-1">
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-tertiary transition-colors" onclick="triggerAction('Adjust Stock', 'SKU-COF-KEN-09')" title="Force Stock Restock">
+<span class="material-symbols-outlined text-[18px]">add_box</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Edit Spec', 'SKU-COF-KEN-09')" title="Edit Item Specs">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" onclick="triggerAction('Options', 'SKU-COF-KEN-09')" title="More Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Operational Summary Footer -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-md pt-space-md font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<div class="flex items-center gap-space-sm">
+<span>Showing 1 to 6 of 48 registered catalogue items</span>
+<span class="text-surface-variant">•</span>
+<span class="text-tertiary">Realtime Kafka Sync Active (Cluster: JNB-AFR-01)</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps">PREV</button>
+<button class="px-space-sm py-1 rounded bg-primary-container text-on-primary font-bold">1</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface">2</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface">3</button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps">NEXT</button>
+</div>
+</div>
+</section>
+<!-- Section 5: Airside Transit & Gating Regulatory Compliance Watermark Card -->
+<section class="w-full px-gutter py-space-md">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Card 1: LAGs & STEBs Standard -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-secondary mb-space-xs">
+<span class="material-symbols-outlined text-[18px]">water_drop</span>
+<span class="font-label-caps text-label-caps uppercase font-bold">ICAO LAGs Standard 2.4</span>
+</div>
+<p class="font-body-sm text-on-surface-variant">
+            Liquids, Aerosols, and Gels strictly tracked. Items &gt; 100ml must route via approved duty-free Tamper-Evident Bag (STEB) dispensing lines at Nairobi &amp; Haneda nodes.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-telemetry-sm font-telemetry-sm text-tertiary">
+<span>Bag Seal Inventory: 1,420 Left</span>
+<span class="material-symbols-outlined text-[16px]">verified</span>
+</div>
+</div>
+<!-- Card 2: Gate Runway Delivery Window -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-primary-container mb-space-xs">
+<span class="material-symbols-outlined text-[18px]">flight_takeoff</span>
+<span class="font-label-caps text-label-caps uppercase font-bold">Gate Delivery Timers</span>
+</div>
+<p class="font-body-sm text-on-surface-variant">
+            Gate runner dispatches cut off automatically 25 minutes prior to aircraft door closure (D-25). Tarmac delays dynamically unlock order windows for stranded passengers.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-telemetry-sm font-telemetry-sm text-secondary">
+<span>Current Runner Latency: 6.2 mins</span>
+<span class="material-symbols-outlined text-[16px]">speed</span>
+</div>
+</div>
+<!-- Card 3: Multi-Currency Airport Settlement -->
+<div class="p-space-md rounded-xl bg-surface-container-low shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-xs text-tertiary mb-space-xs">
+<span class="material-symbols-outlined text-[18px]">currency_exchange</span>
+<span class="font-label-caps text-label-caps uppercase font-bold">Dynamic Airside FX Index</span>
+</div>
+<p class="font-body-sm text-on-surface-variant">
+            Realtime exchange rates synchronized across USD base with KES, JPY, EUR, and ZAR. Automated fee deduction conforms to airport concession lease terms.
+          </p>
+</div>
+<div class="mt-space-md pt-space-xs flex items-center justify-between text-telemetry-sm font-telemetry-sm text-on-surface-variant">
+<span>PayPal Sandbox Gateway: Synced</span>
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Slide-Over / Modal: Add New Airside Product / Service (Hidden by default) -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center p-4 transition-all opacity-0 pointer-events-none" id="addProductModal">
+<div class="w-full max-w-2xl bg-surface-container-low rounded-2xl shadow-2xl overflow-hidden transform scale-95 transition-transform duration-200">
+<div class="px-space-lg py-space-md bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[20px]">add_business</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Register Airside Product or Service</h3>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Conforms to ICAO Security &amp; Terminal Concession Protocols</p>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg bg-surface-container-high hover:bg-surface-bright flex items-center justify-center text-on-surface-variant hover:text-on-surface" onclick="closeNewProductModal()">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<form class="p-space-lg space-y-space-md" id="newProductForm" onsubmit="handleProductSubmit(event)">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Item Name -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Item / Service Name</label>
+<input class="w-full bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-xl focus:outline-none font-body-md text-body-md" placeholder="e.g. Arabica Reserve French Press" required="" type="text"/>
+</div>
+<!-- SKU Code -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">SKU Code (Monospace)</label>
+<input class="w-full bg-surface-container-lowest text-primary font-telemetry-md px-space-md py-2 rounded-xl focus:outline-none uppercase" placeholder="SKU-COF-KEN-XX" required="" type="text"/>
+</div>
+<!-- Category -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Category Classification</label>
+<select class="w-full bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-xl focus:outline-none font-body-md text-body-md">
+<option>Artisanal Coffee &amp; Beverages</option>
+<option>Fresh Airside Catering &amp; Bento</option>
+<option>Travel Comfort &amp; Acoustic Hardware</option>
+<option>VIP Lounge &amp; Shower Passes</option>
+<option>Rapid Baggage Wrapping</option>
+</select>
+</div>
+<!-- Airside Station Node -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Serving Station Node</label>
+<select class="w-full bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-xl focus:outline-none font-body-md text-body-md">
+<option>JKIA Nairobi T1A (Airside Concourse)</option>
+<option>JKIA T1E Arrivals</option>
+<option>Tokyo Haneda T3 Gate 112</option>
+<option>OR Tambo International (JNB) A1</option>
+<option>All Network Hubs</option>
+</select>
+</div>
+<!-- Primary Pricing USD -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Base Price (USD $)</label>
+<input class="w-full bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-xl focus:outline-none font-telemetry-md" placeholder="12.50" required="" step="0.01" type="number"/>
+</div>
+<!-- Live Stock Capacity -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-1">Initial Stock / Capacity Limit</label>
+<input class="w-full bg-surface-container-lowest text-on-surface px-space-md py-2 rounded-xl focus:outline-none font-telemetry-md" placeholder="50" required="" type="number"/>
+</div>
+</div>
+<!-- Security Directives -->
+<div>
+<label class="block font-label-caps text-label-caps uppercase text-on-surface-variant mb-2">Transit &amp; Aviation Directives</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-xs font-telemetry-sm text-telemetry-sm">
+<label class="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container">
+<input checked="" class="accent-primary-container" type="checkbox"/>
+<span>Tamper-Proof STEB Bag Required</span>
+</label>
+<label class="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container">
+<input checked="" class="accent-primary-container" type="checkbox"/>
+<span>Eligible for Gate Direct Delivery</span>
+</label>
+<label class="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container">
+<input class="accent-primary-container" type="checkbox"/>
+<span>Liquid &lt;100ml Flight Certified</span>
+</label>
+<label class="flex items-center gap-space-xs p-2 rounded-lg bg-surface-container-lowest cursor-pointer hover:bg-surface-container">
+<input class="accent-primary-container" type="checkbox"/>
+<span>Lithium Battery Transport Declared</span>
+</label>
+</div>
+</div>
+<div class="pt-space-sm flex items-center justify-end gap-space-sm">
+<button class="px-space-md py-2 rounded-xl bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase" onclick="closeNewProductModal()" type="button">
+            Cancel
+          </button>
+<button class="px-space-lg py-2 rounded-xl bg-primary-container hover:bg-primary-container/90 text-on-primary font-headline-sm text-body-sm font-semibold shadow-md" type="submit">
+            Save Airside Product
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Client-side Interactive Logic -->
+<script>
+    // Emergency Suspension Toggle
+    let isSuspended = false;
+    function toggleEmergencySuspension() {
+      isSuspended = !isSuspended;
+      const btn = document.getElementById('suspensionToggleBtn');
+      const badge = document.getElementById('suspensionBadge');
+      const notice = document.getElementById('surgeNotice');
+
+      if (isSuspended) {
+        btn.classList.add('bg-error', 'text-on-error');
+        btn.classList.remove('bg-surface-container-high', 'text-error');
+        badge.innerText = 'PAUSED ALL NODES';
+        badge.classList.add('text-error', 'bg-white');
+        notice.classList.remove('hidden');
+        alert('OPERATIONAL ALERT: All airside passenger orders have been temporarily SUSPENDED across JKIA & HND due to tarmac ground-stop or wave surge.');
+      } else {
+        btn.classList.remove('bg-error', 'text-on-error');
+        btn.classList.add('bg-surface-container-high', 'text-error');
+        badge.innerText = 'STANDBY';
+        badge.classList.remove('text-error', 'bg-white');
+        notice.classList.add('hidden');
+      }
+    }
+
+    // Modal Control
+    function openNewProductModal() {
+      const modal = document.getElementById('addProductModal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+      modal.querySelector('div').classList.remove('scale-95');
+      modal.querySelector('div').classList.add('scale-100');
+    }
+
+    function closeNewProductModal() {
+      const modal = document.getElementById('addProductModal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+      modal.querySelector('div').classList.add('scale-95');
+      modal.querySelector('div').classList.remove('scale-100');
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      alert('Airside catalogue item successfully broadcasted to Nairobi T1A and Haneda nodes.');
+      closeNewProductModal();
+    }
+
+    // Row status cycle toggle
+    function toggleRowStatus(btn) {
+      if (btn.innerText.includes('Active')) {
+        btn.className = 'status-toggle px-space-sm py-1 rounded-full bg-primary-container/20 text-primary-container font-label-caps text-label-caps uppercase flex items-center gap-1.5';
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-primary-container"></span><span>Pre-Order Only (30m Lead)</span>';
+      } else if (btn.innerText.includes('Pre-Order')) {
+        btn.className = 'status-toggle px-space-sm py-1 rounded-full bg-error-container/40 text-error font-label-caps text-label-caps uppercase flex items-center gap-1.5';
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span><span>Out of Stock / Restocking</span>';
+      } else {
+        btn.className = 'status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5';
+        btn.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary"></span><span>Active & Airside Orderable</span>';
+      }
+    }
+
+    // Search filter mock
+    function handleSearchFilter(query) {
+      const rows = document.querySelectorAll('#inventoryTableBody tr');
+      const q = query.toLowerCase();
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(q) ? '' : 'none';
+      });
+    }
+
+    // Select all checkboxes
+    function toggleSelectAll(master) {
+      const boxes = document.querySelectorAll('.row-checkbox');
+      boxes.forEach(b => b.checked = master.checked);
+    }
+
+    // Quick ops alerts
+    function triggerAction(action, sku) {
+      alert(action + ' opened for ' + sku + '. Telemetry logged to Station Lead K. Ndung\'u.');
+    }
+
+    function triggerStockAudit() {
+      alert('Terminal inventory barcode scan initialized. RFID hand-scanners in NBO T1A synchronized.');
+    }
+
+    function acknowledgeAlert(btn) {
+      btn.closest('section').style.display = 'none';
+    }
+
+    function trackAirsideRunner() {
+      alert('Ramp runner Van #04 is currently transiting Security Gate 09 at JKIA. Latency: 12 minutes to Concourse.');
+    }
+
+    function toggleBatchAvailability(enable) {
+      const toggles = document.querySelectorAll('.status-toggle');
+      toggles.forEach(t => {
+        if (enable) {
+          t.className = 'status-toggle px-space-sm py-1 rounded-full bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase flex items-center gap-1.5';
+          t.innerHTML = '<span class="w-2 h-2 rounded-full bg-tertiary"></span><span>Active & Airside Orderable</span>';
+        } else {
+          t.className = 'status-toggle px-space-sm py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase flex items-center gap-1.5';
+          t.innerHTML = '<span class="w-2 h-2 rounded-full bg-surface-variant"></span><span>Suspended (Tarmac Delay)</span>';
+        }
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant py-space-md shadow-[0_-1px_8px_rgba(0,0,0,0.3)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-sm font-telemetry-sm text-telemetry-sm text-center md:text-left"><div>ICAO Annex 17 Airside Retail Compliance • IATA AHM 560 Transit Fulfilment Standard • 256-bit TLS v1.3 Verified</div><div class="text-outline">Songa Aviation Technologies (Pan-African &amp; Global Airspace)</div></div></footer></body></html>

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"surface":"#121316","secondary":"#7bd0ff","primary-fixed":"#ffdbd0","on-tertiary-fixed":"#002113","on-tertiary-fixed-variant":"#005236","on-tertiary-container":"#003421","surface-dim":"#121316","on-surface-variant":"#e3beb3","on-primary-fixed-variant":"#832700","on-error":"#690005","secondary-container":"#00a6e0","secondary-fixed":"#c4e7ff","outline-variant":"#5b4138","on-surface":"#e3e2e6","surface-container-high":"#292a2d","secondary-fixed-dim":"#7bd0ff","surface-variant":"#343538","inverse-on-surface":"#2f3034","tertiary":"#4edea3","on-secondary-fixed-variant":"#004c69","tertiary-container":"#00a874","on-secondary":"#00354a","error":"#ffb4ab","on-background":"#e3e2e6","on-primary":"#5d1900","background":"#121316","inverse-primary":"#ab3500","on-primary-container":"#561600","surface-tint":"#ffb59d","on-secondary-container":"#00374d","on-error-container":"#ffdad6","tertiary-fixed-dim":"#4edea3","primary-container":"#ff5e1e","surface-bright":"#38393d","surface-container-highest":"#343538","tertiary-fixed":"#6ffbbe","on-tertiary":"#003824","on-secondary-fixed":"#001e2c","surface-container":"#1f1f23","primary-fixed-dim":"#ffb59d","on-primary-fixed":"#390c00","primary":"#ffb59d","error-container":"#93000a","outline":"#aa897f","surface-container-lowest":"#0d0e11","inverse-surface":"#e3e2e6","surface-container-low":"#1b1b1f"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-md":"1rem","space-sm":"0.5rem","space-xl":"2.5rem","margin":"3rem","space-lg":"1.5rem","margin-mobile":"1rem","gutter":"1.5rem","space-xs":"0.25rem","gutter-mobile":"0.75rem"},fontFamily:{"telemetry-sm":["JetBrains Mono"],"label-caps":["Space Grotesk"],"headline-lg":["Space Grotesk"],"body-md":["Inter"],"display-hero":["Space Grotesk"],"body-sm":["Inter"],"body-lg":["Inter"],"display-hero-mobile":["Space Grotesk"],"headline-sm":["Space Grotesk"],"headline-lg-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"telemetry-md":["JetBrains Mono"],"telemetry-lg":["JetBrains Mono"]},fontSize:{"telemetry-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"500"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"400"}],"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"telemetry-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"telemetry-lg":["20px",{"lineHeight":"24px","letterSpacing":"0.04em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl border-b border-surface-variant/40"><div class="h-16 w-full px-gutter flex items-center justify-between gap-gutter"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><img alt="SONGA Brand Mark" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/ALJJyrB70tt9sWyekxY9_s7wcEB0auM_oMCA0MD29UyUr3yABj1nrsZZmF4tcNBa8VetBwJArB0BNiszlCNdFZ2EMCmVKnnQ_1_hy9SB6y5FEvT5TGfluySbd5rnKEIzDJ-P-p2N_sP8ZUKBFxDMAuV5qK4G_sTtKyrg88bgY9wlX4JOQ9iA8LwMUfVOPtkKWH4chp2lvoGICFDh4b8iokj1B2Pd2zPZsfHe1VxvQ17ZAljRwQ"/><span class="font-label-caps text-label-caps text-on-surface tracking-wider uppercase font-semibold hidden sm:inline-block">SONGA</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-0.5 rounded-full bg-surface-container border border-surface-variant/30 text-tertiary"><span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span><span class="font-telemetry-sm text-telemetry-sm text-tertiary uppercase">4,812 FLIGHTS MONITORED IN REAL-TIME</span></div></div><nav class="hidden md:flex items-center gap-space-lg" data-active-classes="text-on-surface font-semibold border-b-2 border-primary-container pb-1"><a aria-current="page" class="uppercase transition-colors text-on-surface font-semibold border-b-2 border-primary-container pb-1" data-path="flight-intelligence" href="#">Flight Intelligence</a><a class="font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface" data-path="explore" href="#">Explore</a><div class="flex items-center gap-space-xs"><a class="font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface" data-path="my-watchlist" href="#">My Watchlist</a><span class="font-telemetry-sm text-telemetry-sm px-space-xs py-0.5 rounded-full bg-primary-container/20 text-primary border border-primary-container/40">3 active</span></div><a class="font-label-caps text-label-caps uppercase transition-colors text-on-surface-variant hover:text-on-surface" data-path="airport-services" href="#">Airport Services</a></nav><div class="flex items-center gap-space-md"><div class="hidden lg:flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-container-low px-space-sm py-1 rounded border border-surface-variant/40"><span class="material-symbols-outlined text-[14px] text-secondary">schedule</span><span>UTC 14:38:22</span></div><button class="hidden sm:flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface bg-surface-container px-space-sm py-1 rounded border border-surface-variant/50 transition-colors" type="button"><span class="material-symbols-outlined text-[14px]">terminal</span><span>⌘K</span></button><div class="flex items-center gap-space-sm pl-space-xs"><img alt="Profile" class="w-8 h-8 rounded-full object-cover ring-1 ring-surface-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2rkDxVoQwG4Sp68QF7xSBUqmBWqAnNrm1agbMRDAtCPDzJueyQHwIZgfx1AzjrNUU5TE4-gWvAfBhXYTC13_msliZsyoA-67Czt1x9SYlKQGkp1HH1_ic9GypHHxPSDlGl5oIav8oSaQDVIx6I-3cJ0Z2Hlzf5nnwBjhWwKG76MvV1jNd9CSM5FdPUA6F193HhNWyK2nG7nNz2IgAqA8CTtks-_MnV3R-5yj3BOW-"/></div></div></div></header><main class="w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface select-none relative overflow-hidden">
+<!-- LIVING SPACE ENVIRONMENT OVERLAYS (NO SCREEN WRAPPERS) -->
+<div class="absolute inset-0 pointer-events-none z-0">
+<div class="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[1200px] h-[750px] bg-gradient-to-b from-primary-container/10 via-secondary-container/5 to-transparent blur-[140px] opacity-70"></div>
+<div class="absolute top-[35%] right-[-10%] w-[500px] h-[500px] bg-secondary/5 blur-[120px] rounded-full"></div>
+<div class="absolute top-[60%] left-[-8%] w-[450px] h-[450px] bg-primary/5 blur-[100px] rounded-full"></div>
+<!-- Fine tactical avionics grid overlay -->
+<div class="absolute inset-0 opacity-[0.035]" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 48px 48px;"></div>
+</div>
+<!-- ======================================================== -->
+<!-- SECTION 1: CINEMATIC HERO & 3D EARTH RADAR COMMAND DECK -->
+<!-- ======================================================== -->
+<section class="relative z-10 w-full min-h-[940px] flex flex-col justify-between pt-6 pb-12 px-margin-mobile md:px-margin">
+<!-- AI COMMAND ENGINE BAR & HEADLINE SECTION (UPPER DECK) -->
+<div class="w-full max-w-5xl mx-auto flex flex-col items-center text-center mt-2">
+<!-- Operational Status Pill -->
+<div class="inline-flex items-center gap-space-sm px-space-md py-1 rounded-full bg-surface-container-high/80 backdrop-blur-xl shadow-lg border-t border-white/10 mb-6">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary tracking-wider uppercase font-semibold">NEURAL PREDICTIVE ENGINE V4.2</span>
+<span class="text-white/20 font-telemetry-sm">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant tracking-normal">99.84% DISRUPTION ACCURACY RATE</span>
+</div>
+<!-- Main Display Headline -->
+<h1 class="font-display-hero text-display-hero-mobile md:text-display-hero text-white tracking-tight mb-4 max-w-4xl">
+        Your journey. <span class="bg-gradient-to-r from-white via-primary-fixed to-primary bg-clip-text text-transparent">Under control.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mb-8 leading-relaxed">
+        Real-time supersonic telemetry, AI clear-air turbulence modeling, and autonomous disruption mitigation for international airspace and VIP corridors.
+      </p>
+<!-- Glassmorphic AI Command Console -->
+<div class="w-full max-w-3xl rounded-xl bg-surface-container-lowest/85 backdrop-blur-2xl p-2 shadow-2xl relative group">
+<div class="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-primary-container/30 via-secondary/20 to-primary/20 opacity-40 blur-sm group-hover:opacity-75 transition duration-500"></div>
+<div class="relative bg-surface-container-low rounded-lg p-2.5 flex flex-col md:flex-row items-center gap-2">
+<!-- Left Search Input -->
+<div class="flex items-center gap-space-sm flex-1 w-full px-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[22px]">radar</span>
+<input class="w-full bg-transparent font-telemetry-md text-telemetry-md text-white placeholder:text-on-surface-variant/50 focus:outline-none tracking-wide" id="flight-search-input" placeholder="Search flight number, tail, or ask AI (e.g. 'BA178 turbulence' or 'LHR-HND')..." type="text"/>
+<span class="hidden sm:inline-block font-telemetry-sm text-telemetry-sm text-on-surface-variant/40 px-2 py-0.5 rounded bg-surface-container-high border-t border-white/5">⌘K</span>
+</div>
+<!-- Action Buttons Group -->
+<div class="flex items-center gap-2 w-full md:w-auto justify-end pt-2 md:pt-0 border-t md:border-t-0 border-white/5">
+<button class="px-4 py-2.5 rounded font-label-caps text-label-caps uppercase bg-surface-container-high hover:bg-surface-variant text-on-surface hover:text-white transition-all duration-200 flex items-center gap-1.5 active:scale-95 shadow-sm" id="watch-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">bookmark</span>
+<span>Watch</span>
+</button>
+<button class="px-5 py-2.5 rounded font-label-caps text-label-caps uppercase bg-primary-container hover:bg-primary-container/90 text-white font-semibold transition-all duration-200 shadow-[0_0_24px_rgba(255,94,30,0.45)] hover:shadow-[0_0_32px_rgba(255,94,30,0.6)] flex items-center gap-1.5 active:scale-95" id="track-btn" type="button">
+<span class="material-symbols-outlined text-[17px]">near_me</span>
+<span>Track Flight</span>
+</button>
+</div>
+</div>
+<!-- Filter Sub-Pills -->
+<div class="flex items-center gap-space-sm mt-2 px-space-sm overflow-x-auto text-on-surface-variant font-telemetry-sm text-telemetry-sm pb-1">
+<span class="text-white/40 uppercase tracking-widest text-[10px]">Vectors:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:text-primary transition-colors cursor-pointer text-primary">Flight No.</button>
+<button class="px-2 py-0.5 rounded bg-surface-container/60 hover:text-white transition-colors cursor-pointer">Route Matrix</button>
+<button class="px-2 py-0.5 rounded bg-surface-container/60 hover:text-white transition-colors cursor-pointer">Tail Reg</button>
+<button class="px-2 py-0.5 rounded bg-surface-container/60 hover:text-white transition-colors cursor-pointer">ICAO / IATA</button>
+<span class="ml-auto hidden md:inline-flex items-center gap-1 text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+            STREAM ACTIVE
+          </span>
+</div>
+</div>
+</div>
+<!-- ======================================================= -->
+<!-- DOMINATING PHOTOREALISTIC 3D EARTH & AIRSPACE HUD STAGE -->
+<!-- ======================================================= -->
+<div class="relative w-full max-w-7xl mx-auto my-8 flex items-center justify-center min-h-[580px]">
+<!-- Central Photorealistic 3D Globe with Atmosphere Rim and Arc Overlay -->
+<div class="relative w-full max-w-[820px] aspect-square flex items-center justify-center">
+<!-- Deep Atmospheric Glow Rim -->
+<div class="absolute inset-4 rounded-full bg-gradient-to-tr from-secondary-container/20 via-primary-container/10 to-transparent blur-3xl opacity-60"></div>
+<div class="absolute inset-10 rounded-full shadow-[inset_0_0_90px_rgba(0,166,224,0.35)] pointer-events-none z-20"></div>
+<!-- Realistic 3D Earth Image Base with Terminator & City Lights -->
+<div class="relative w-[360px] sm:w-[480px] md:w-[620px] h-[360px] sm:h-[480px] md:h-[620px] rounded-full overflow-hidden shadow-2xl z-10">
+<img class="w-full h-full object-cover scale-105" data-alt="Photorealistic ultra-high-definition 3D satellite view of planet Earth at night transitioning into twilight. Deep blue and black oceanic surfaces, finely resolved golden city light clusters across Europe, the Middle East, and Asia. Luminous high-altitude cyan and soft orange atmospheric ozone limb glow against deep pitch-black space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOuAz5fCKAruhIu4k26uCuJgGTRvFiQzyjfuVTN8_fUJYSBJHrNOiE1B8D6knc2G8HyvV9dB2ljucXe-t9Qqhr0daygMSarF4UkpC4KPD-fbnHd1gd4205kZ5WDEohhaj6kjXE-ifiEfJZQhZ3fulIl0DhKaNfz8gSySvtaLul9Izzi8Gzpi2-4SlZh_VpAkiLhUFuB6cMEGKp5tpTRI-IAa2YH1PSTMF6G-v7KwUM"/>
+<!-- Dark Edge Vignette Mask for Pure Curvature -->
+<div class="absolute inset-0 rounded-full shadow-[inset_0_0_60px_#060709,inset_-40px_-40px_100px_#060709] pointer-events-none"></div>
+</div>
+<!-- SVG 3D Flight Arcs, Delta Vector Blips & Radar Hub Rings (Overlaid Directly on Globe) -->
+<svg class="absolute inset-0 w-full h-full z-20 pointer-events-none" fill="none" viewbox="0 0 820 820" xmlns="http://www.w3.org/2000/svg">
+<!-- Orbital Radar Concentric Rings -->
+<circle cx="410" cy="410" r="330" stroke="rgba(255,255,255,0.06)" stroke-dasharray="4 8" stroke-width="1"></circle>
+<circle cx="410" cy="410" r="375" stroke="rgba(255,94,30,0.12)" stroke-width="1"></circle>
+<circle cx="410" cy="410" r="400" stroke="rgba(123,208,255,0.08)" stroke-dasharray="2 12" stroke-width="1"></circle>
+<!-- Arc 1: London (LHR) -> Tokyo (HND) [The Hero Active Route SGA-882] -->
+<path d="M 285 305 Q 410 180 610 325" stroke="url(#arcGradientActive)" stroke-linecap="round" stroke-width="3"></path>
+<!-- Wake Trail Gradient -->
+<path d="M 285 305 Q 410 180 610 325" filter="blur(3px)" opacity="0.6" stroke="rgba(255,94,30,0.25)" stroke-linecap="round" stroke-width="8"></path>
+<!-- Arc 2: New York (JFK) -> Dubai (DXB) -->
+<path d="M 210 360 Q 360 270 515 390" stroke="url(#arcGradientCyan)" stroke-dasharray="6 4" stroke-width="1.8"></path>
+<!-- Arc 3: Paris (CDG) -> São Paulo (GRU) -->
+<path d="M 295 320 Q 260 480 270 590" stroke="rgba(123,208,255,0.4)" stroke-dasharray="4 6" stroke-width="1.5"></path>
+<!-- Arc 4: Dubai (DXB) -> Singapore (SIN) -->
+<path d="M 515 390 Q 600 440 645 520" stroke="url(#arcGradientAmber)" stroke-width="2"></path>
+<!-- Airport Nodes / Beacon Rings -->
+<!-- LHR -->
+<circle cx="285" cy="305" fill="#FF5E1E" r="4"></circle>
+<circle cx="285" cy="305" opacity="0.6" r="9" stroke="#FF5E1E" stroke-width="1">
+<animate attributename="r" dur="3s" repeatcount="indefinite" values="4;14;4"></animate>
+<animate attributename="opacity" dur="3s" repeatcount="indefinite" values="0.8;0;0.8"></animate>
+</circle>
+<text fill="#FFFFFF" font-family="Space Grotesk" font-size="11" font-weight="600" letter-spacing="1" x="260" y="295">LHR</text>
+<!-- DXB -->
+<circle cx="515" cy="390" fill="#7BD0FF" r="4"></circle>
+<circle cx="515" cy="390" opacity="0.5" r="10" stroke="#7BD0FF" stroke-width="1"></circle>
+<text fill="#E3E2E6" font-family="Space Grotesk" font-size="10" font-weight="600" x="525" y="395">DXB [HOLD]</text>
+<!-- HND -->
+<circle cx="610" cy="325" fill="#4EDEA3" r="4"></circle>
+<text fill="#FFFFFF" font-family="Space Grotesk" font-size="11" font-weight="600" x="622" y="325">HND</text>
+<!-- JFK -->
+<circle cx="210" cy="360" fill="#7BD0FF" r="3.5"></circle>
+<text fill="#E3E2E6" font-family="Space Grotesk" font-size="10" x="180" y="355">JFK</text>
+<!-- SIN -->
+<circle cx="645" cy="520" fill="#7BD0FF" r="3.5"></circle>
+<text fill="#E3E2E6" font-family="Space Grotesk" font-size="10" x="655" y="525">SIN</text>
+<!-- LIVE ACTIVE DELTA AIRCRAFT VECTOR: SGA-882 over Eurasia -->
+<g transform="translate(435, 230) rotate(16)">
+<!-- Vector Blip Aircraft Silhouette -->
+<polygon fill="#FFFFFF" points="0,-8 6,8 0,4 -6,8" stroke="#FF5E1E" stroke-width="1.5"></polygon>
+<!-- Forward Pulse Radar Cone -->
+<path d="M 0 -8 L -14 -32 L 14 -32 Z" fill="url(#radarCone)" opacity="0.35"></path>
+<!-- Beacon ring -->
+<circle cx="0" cy="0" r="12" stroke="#FF5E1E" stroke-dasharray="2 3" stroke-width="0.75"></circle>
+</g>
+<!-- Secondary Vector: UAE-201 -->
+<g transform="translate(380, 315) rotate(28)">
+<polygon fill="#7BD0FF" points="0,-6 4,6 0,3 -4,6"></polygon>
+</g>
+<defs>
+<lineargradient id="arcGradientActive" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#FF5E1E" stop-opacity="0.3"></stop>
+<stop offset="60%" stop-color="#FF5E1E" stop-opacity="1"></stop>
+<stop offset="100%" stop-color="#4EDEA3" stop-opacity="0.8"></stop>
+</lineargradient>
+<lineargradient id="arcGradientCyan" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#7BD0FF" stop-opacity="0.1"></stop>
+<stop offset="100%" stop-color="#7BD0FF" stop-opacity="0.7"></stop>
+</lineargradient>
+<lineargradient id="arcGradientAmber" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#7BD0FF"></stop>
+<stop offset="100%" stop-color="#FFB59D"></stop>
+</lineargradient>
+<lineargradient id="radarCone" x1="0%" x2="0%" y1="100%" y2="0%">
+<stop offset="0%" stop-color="#FF5E1E" stop-opacity="0.8"></stop>
+<stop offset="100%" stop-color="#FF5E1E" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Floating Coordinates Ticker along Globe Curvature -->
+<div class="absolute bottom-6 font-telemetry-sm text-telemetry-sm text-white/40 tracking-widest hidden md:block">
+          SYS REF: 51.4700° N, 0.4543° W // VECTOR ALT 38,000 FT // GNSS LOCK: 31 SATS
+        </div>
+</div>
+<!-- ==================================================== -->
+<!-- LEFT FLOATING HUD PANEL: FLIGHT IN FOCUS (SGA-882)   -->
+<!-- ==================================================== -->
+<div class="absolute left-0 top-12 hidden lg:flex flex-col w-[340px] rounded-xl bg-surface-container-lowest/80 backdrop-blur-2xl shadow-2xl p-space-md z-30">
+<!-- Header -->
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-caps text-label-caps uppercase text-white tracking-wider">Flight In Focus</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-tertiary-container/30 text-tertiary font-semibold">ON TIME</span>
+</div>
+<!-- Flight Sector Code -->
+<div class="flex items-baseline justify-between mb-1">
+<h2 class="font-headline-md text-headline-md text-white font-semibold">SGA-882</h2>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">B787-9 Dreamliner</span>
+</div>
+<!-- Route Nodes -->
+<div class="flex items-center justify-between my-space-sm py-space-xs px-space-sm rounded bg-surface-container-low">
+<div class="text-left">
+<div class="font-headline-sm text-headline-sm text-white font-bold">LHR</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">London, UK</div>
+</div>
+<div class="flex flex-col items-center px-4">
+<span class="font-telemetry-sm text-telemetry-sm text-primary mb-1">04h 22m rem</span>
+<div class="w-24 h-[2px] bg-surface-variant relative">
+<div class="absolute left-0 top-0 h-full w-[65%] bg-primary-container"></div>
+<div class="absolute left-[65%] -top-[3px] w-2 h-2 rounded-full bg-white shadow-[0_0_8px_#FF5E1E]"></div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-headline-sm text-headline-sm text-white font-bold">HND</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Tokyo, JP</div>
+</div>
+</div>
+<!-- Monospaced Telemetry Matrix -->
+<div class="grid grid-cols-3 gap-2 my-space-sm font-telemetry-sm text-telemetry-sm">
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant text-[10px] uppercase">ALTITUDE</div>
+<div class="text-white font-semibold mt-0.5">38,000 <span class="text-[10px] text-white/50">FT</span></div>
+</div>
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant text-[10px] uppercase">SPEED</div>
+<div class="text-white font-semibold mt-0.5">562 <span class="text-[10px] text-white/50">KTS</span></div>
+</div>
+<div class="p-2 rounded bg-surface-container">
+<div class="text-on-surface-variant text-[10px] uppercase">MACH</div>
+<div class="text-secondary font-semibold mt-0.5">0.84 M</div>
+</div>
+</div>
+<!-- Live Atmospheric Profile / Mini Turbulence Chart -->
+<div class="mt-2 pt-2 border-t border-white/5">
+<div class="flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm mb-1.5">
+<span>ATMOSPHERIC PROFILE</span>
+<span class="text-primary-container flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              CAT II ADVISORY
+            </span>
+</div>
+<!-- Mini SVG Altitude / Turbulence Wave -->
+<div class="w-full h-12 bg-surface-container-low rounded p-1 flex items-end">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 280 40">
+<path d="M 0 30 Q 40 28 80 30 T 140 28 Q 170 12 195 32 T 230 20 Q 255 10 280 28 L 280 40 L 0 40 Z" fill="rgba(255,94,30,0.15)"></path>
+<path d="M 0 30 Q 40 28 80 30 T 140 28 Q 170 12 195 32 T 230 20 Q 255 10 280 28" fill="none" stroke="#FF5E1E" stroke-width="2"></path>
+<!-- Marker on the flight position -->
+<circle cx="180" cy="22" fill="#FFFFFF" r="3"></circle>
+</svg>
+</div>
+<div class="flex justify-between font-telemetry-sm text-[10px] text-on-surface-variant mt-1">
+<span>FL380 SMOOTH</span>
+<span class="text-primary">EURASIA JETSTREAM SHIFT</span>
+<span>DESCENT CAT I</span>
+</div>
+</div>
+</div>
+<!-- ==================================================== -->
+<!-- RIGHT FLOATING HUD PANEL: PREDICTIVE DISRUPTION RADAR -->
+<!-- ==================================================== -->
+<div class="absolute right-0 top-12 hidden lg:flex flex-col w-[340px] rounded-xl bg-surface-container-lowest/80 backdrop-blur-2xl shadow-2xl p-space-md z-30">
+<!-- Header -->
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-primary">warning</span>
+<span class="font-label-caps text-label-caps uppercase text-white tracking-wider">Predictive Radar</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-semibold">2 ACTIVE ALERTS</span>
+</div>
+<!-- Confidence Gauge Bar -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-sm">
+<div class="flex justify-between items-center mb-1">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">GLOBAL ON-TIME PROBABILITY</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-bold">98.4%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-variant rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-tertiary-container via-tertiary to-secondary" style="width: 98.4%"></div>
+</div>
+</div>
+<!-- Disruption Alert Cards -->
+<div class="flex flex-col gap-2">
+<!-- Alert 1 -->
+<div class="p-space-sm rounded bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-headline-sm text-[14px] text-white font-medium flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  JFK Weather Congestion
+                </div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  Low visibility ground stop. AI autonomous route Delta-B saved 42 mins.
+                </div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-primary bg-primary-container/20 px-1.5 py-0.5 rounded">REROUTED</span>
+</div>
+</div>
+<!-- Alert 2 -->
+<div class="p-space-sm rounded bg-surface-container hover:bg-surface-container-high transition-colors">
+<div class="flex items-start justify-between">
+<div>
+<div class="font-headline-sm text-[14px] text-white font-medium flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  DXB Sandstorm Advisory
+                </div>
+<div class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+                  12 incoming long-hauls in standard holding pattern. Fuel reserves optimal.
+                </div>
+</div>
+<span class="font-telemetry-sm text-[10px] text-secondary bg-secondary-container/20 px-1.5 py-0.5 rounded">HOLDING</span>
+</div>
+</div>
+</div>
+<!-- Quick Matrix Trigger Button -->
+<button class="mt-space-md w-full py-2.5 rounded bg-surface-container-high hover:bg-surface-variant text-white font-label-caps text-label-caps uppercase transition-all flex items-center justify-center gap-2 active:scale-98 shadow-sm" id="simulate-btn" type="button">
+<span class="material-symbols-outlined text-[16px] text-primary">alt_route</span>
+<span>Simulate Reroute Matrix</span>
+</button>
+</div>
+</div>
+<!-- LOWER HERO DECK: TELEMETRY TELETYPES & LIVE FEED COUNTERS -->
+<div class="w-full flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5 relative z-30">
+<!-- Live Metrics Cluster -->
+<div class="grid grid-cols-3 gap-6 sm:gap-12 w-full md:w-auto">
+<div>
+<div class="font-telemetry-lg text-telemetry-lg text-white font-semibold">14,892</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase mt-0.5">FLIGHTS ACTIVE NOW</div>
+</div>
+<div>
+<div class="font-telemetry-lg text-telemetry-lg text-primary font-semibold">342</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase mt-0.5">STORM CELLS TRACKED</div>
+</div>
+<div>
+<div class="font-telemetry-lg text-telemetry-lg text-tertiary font-semibold">0.4s</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase mt-0.5">TELEMETRY LATENCY</div>
+</div>
+</div>
+<!-- Live Route Ticker -->
+<div class="flex items-center gap-3 overflow-x-auto w-full md:w-auto justify-start md:justify-end font-telemetry-sm text-telemetry-sm py-1">
+<span class="text-on-surface-variant/40 uppercase tracking-widest text-[10px] hidden sm:inline">TRENDING:</span>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="text-white font-medium">LHR ➔ JFK</span>
+<span class="text-tertiary">ON TIME</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="text-white font-medium">HND ➔ SFO</span>
+<span class="text-primary">+15M DELAY</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-low shadow-sm">
+<span class="text-white font-medium">DXB ➔ SYD</span>
+<span class="text-tertiary">ON TIME</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- SECTION 2: AEROSPACE INTELLIGENCE CORE CAPABILITIES      -->
+<!-- ======================================================== -->
+<section class="relative z-10 w-full py-space-xl px-margin-mobile md:px-margin bg-surface-container-lowest/50">
+<div class="w-full max-w-7xl mx-auto">
+<!-- Section Title Lockup -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+<div>
+<div class="flex items-center gap-2 text-primary font-telemetry-sm text-telemetry-sm uppercase tracking-widest mb-2">
+<span class="w-2 h-0.5 bg-primary"></span>
+            AUTONOMOUS AVIONICS INFRASTRUCTURE
+          </div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white font-bold tracking-tight">
+            Engineered for high-altitude certainty.
+          </h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+          Predictive disruption modeling combining radar multilateration, oceanic satellite corridors, and deep convective atmospheric physics.
+        </p>
+</div>
+<!-- Bento Grid of 3 High-End Aerospace Capabilities -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Capability Card 1: Atmospheric Modeling -->
+<div class="rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-lg flex flex-col justify-between group shadow-xl">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 text-primary group-hover:bg-primary-container group-hover:text-white transition-all shadow-md">
+<span class="material-symbols-outlined text-[26px]">air</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-primary tracking-wider uppercase mb-1">01 // METEOROLOGY</div>
+<h3 class="font-headline-md text-headline-md text-white font-semibold mb-3">Hyper-Local Atmospheric Modeling</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+              Instantaneous Clear Air Turbulence (CAT) detection powered by high-resolution thermal Doppler radars and tropospheric wind shear matrices.
+            </p>
+</div>
+<!-- Visual Graphic Container -->
+<div class="w-full h-44 rounded-lg bg-surface-container-lowest relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="Futuristic holographic jet stream airflow simulation showing supersonic turbulence gradients and streamlines over high-altitude geographic mountain ranges in deep obsidian and vivid orange." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCX0Fxpnxv60CNHAOMIzQ--H6iTuqjIR_5kw_N9y2tkpU9gseGH_LJwyXAE-FTrTAKNw-wiqbeHOG783b4qogK7ifDUw7S8WIp0RuzFGODyojAYhhVtArkDtMWXKt9LGdqrSl7rTdbUWaZKsyeTZArkFTqRvzVp7NyutaIsAm0Y2-Yax1qTNyJ1-Cuv7Nq9HrjOEyhq6OYxBZRdcS1aI8UsJ79uYSVdBdJawWG7e10"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-surface/90 font-telemetry-sm text-[10px] text-white">
+              JETSTREAM: 184 KTS @ FL390
+            </div>
+</div>
+</div>
+<!-- Capability Card 2: Autonomous Rerouting -->
+<div class="rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-lg flex flex-col justify-between group shadow-xl">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 text-secondary group-hover:bg-secondary-container group-hover:text-white transition-all shadow-md">
+<span class="material-symbols-outlined text-[26px]">conversion_path</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary tracking-wider uppercase mb-1">02 // AUTONOMOUS LOGISTICS</div>
+<h3 class="font-headline-md text-headline-md text-white font-semibold mb-3">Automated Disruption Rerouting</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+              Autonomous multi-agent system negotiates alternative runway slots, apron gates, and VIP ground connections up to 6 hours before official carrier announcements.
+            </p>
+</div>
+<!-- Visual Graphic Container -->
+<div class="w-full h-44 rounded-lg bg-surface-container-lowest relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="Abstract cybernetic vector diagram showing divergent airport runway corridors, automated rerouting vectors, and flight slot timing graphs in sharp glowing orange and cyan tones against deep black obsidian." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAK383mWQE9HgBkYMpU0tM7xY4zjLaxSjPU10s1t9GzuxBvkI0KxBHomAlIgX5BayoC0Xt8P8ZOA3D2eY-iMgIc00vQriJAqv5jxJFXHG3s4FitkQ6NoApnQAUu2dTPLrTVnKWndusAdJtMYarPzRoJbNaIX3Qn9mjecDmMCQb8jBVA0oHJz23vPIDZU6otQ4eieyLB_sxAiZOjb5NPE235RE4wRoF9BZy5mfZm3TA-"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-surface/90 font-telemetry-sm text-[10px] text-tertiary">
+              SAVINGS: AVG 48 MIN / FLIGHT
+            </div>
+</div>
+</div>
+<!-- Capability Card 3: Satellite Telemetry -->
+<div class="rounded-xl bg-surface-container-low hover:bg-surface-container transition-all duration-300 p-space-lg flex flex-col justify-between group shadow-xl">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-container-high flex items-center justify-center mb-6 text-tertiary group-hover:bg-tertiary-container group-hover:text-white transition-all shadow-md">
+<span class="material-symbols-outlined text-[26px]">satellite_alt</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary tracking-wider uppercase mb-1">03 // AVIONICS DATASTREAM</div>
+<h3 class="font-headline-md text-headline-md text-white font-semibold mb-3">Tail-to-Tail Private &amp; Fleet Telemetry</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+              Low-latency ADS-B space constellation blending, ACARS telemetry ingestion, and precision transponder tracking across uncharted polar and oceanic airspace.
+            </p>
+</div>
+<!-- Visual Graphic Container -->
+<div class="w-full h-44 rounded-lg bg-surface-container-lowest relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="Satellite communications terminal array transmitting radio frequency datalinks to an aircraft in deep night sky with glowing digital constellations and flight telemetry metrics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEwRvU_umhVVHxjjpRgw8zyz7nXOLBUZeDM0TetYgbt74LkcOn4Iu1ihfZB-rTFKOiGpevonGoE0W6QqhPeupchN7e5--SNQrkjkPuleQpXYNIdwuCVhHRk4kO3log0ri46swHfAICLpvwaJ0--RteAkwiJKDJwlsybulUwmb7eNDVnKC9cU6nQa2QynhmTXLRXuaNHL5ngrjCtoFMbXyMucQBA5DltbyngraMDUWv"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 rounded bg-surface/90 font-telemetry-sm text-[10px] text-white">
+              POLAR COVERAGE: 100% NOMINAL
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- SECTION 3: AIRSPACE RADAR SEARCH & INTERACTIVE DISPATCH  -->
+<!-- ======================================================== -->
+<section class="relative z-10 w-full py-space-xl px-margin-mobile md:px-margin">
+<div class="w-full max-w-7xl mx-auto rounded-2xl bg-surface-container-low p-space-lg md:p-space-xl relative overflow-hidden shadow-2xl">
+<!-- Subtle internal radar sweep light -->
+<div class="absolute -top-32 -right-32 w-96 h-96 bg-primary-container/10 blur-3xl rounded-full pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-space-xl">
+<div class="w-full lg:max-w-xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container font-telemetry-sm text-telemetry-sm text-primary mb-4">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+            DISPATCH SIMULATION ENGINE
+          </div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white font-bold mb-4">
+            Simulate cross-continental vectors in under 200ms.
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-6">
+            Test any flight route against impending volcanic ash plumes, solar radio blackouts, or geopolitical airspace closures to instantly generate optimal diversions.
+          </p>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-4 py-2.5 rounded bg-primary-container hover:bg-primary-container/90 text-white font-label-caps text-label-caps uppercase transition-colors shadow-lg flex items-center gap-2" onclick="document.getElementById('flight-search-input').value = 'BA178 LHR to JFK'; document.getElementById('flight-search-input').focus();" type="button">
+<span>Launch Route Simulation</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<button class="px-4 py-2.5 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-caps text-label-caps uppercase transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Export ICAO Flight Plan</span>
+</button>
+</div>
+</div>
+<!-- Mini Interactive Telemetry Feed Terminal -->
+<div class="w-full lg:w-[480px] rounded-xl bg-surface-container-lowest p-space-md font-telemetry-sm text-telemetry-sm shadow-2xl">
+<div class="flex items-center justify-between pb-2 mb-3 border-b border-white/10 text-on-surface-variant">
+<span class="flex items-center gap-1.5 text-white">
+<span class="material-symbols-outlined text-[14px] text-primary">terminal</span>
+              LIVE DISPATCH TERMINAL
+            </span>
+<span>LOG-ID: 994-ALPHA</span>
+</div>
+<div class="space-y-2 text-[12px] font-telemetry-sm">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>&gt; INGESTING OCEANIC WAYPOINTS...</span>
+<span class="text-tertiary">OK</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>&gt; RUNNING TURBULENCE SEED MATRIX...</span>
+<span class="text-tertiary">DONE (12ms)</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container flex items-center justify-between text-white">
+<div>
+<div class="font-semibold text-primary">RECOMMENDED FLIGHT LEVEL: FL410</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">AVOIDS JETSTREAM SHEAR OVER ATLANTIC CELL 4</div>
+</div>
+<span class="px-2 py-1 rounded bg-primary-container text-white text-[10px] font-bold">APPLY</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant text-[11px] pt-1">
+<span>FUEL DELTA: -340 KG</span>
+<span>TIME DELTA: -14 MIN</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- LIGHTWEIGHT INTERACTIVITY SCRIPT (HUD & INPUT STATE)    -->
+<!-- ======================================================== -->
+<script>
+    (function initSongaDeck() {
+      const searchInput = document.getElementById('flight-search-input');
+      const trackBtn = document.getElementById('track-btn');
+      const watchBtn = document.getElementById('watch-btn');
+      const simulateBtn = document.getElementById('simulate-btn');
+
+      if (trackBtn && searchInput) {
+        trackBtn.addEventListener('click', () => {
+          const val = searchInput.value.trim() || 'SGA-882';
+          trackBtn.innerHTML = '<span class="material-symbols-outlined text-[17px] animate-spin">refresh</span><span>Acquiring...</span>';
+          setTimeout(() => {
+            trackBtn.innerHTML = '<span class="material-symbols-outlined text-[17px]">near_me</span><span>Tracked!</span>';
+            searchInput.value = val.toUpperCase() + ' • LOCK ACQUIRED';
+            setTimeout(() => {
+              trackBtn.innerHTML = '<span class="material-symbols-outlined text-[17px]">near_me</span><span>Track Flight</span>';
+            }, 2500);
+          }, 800);
+        });
+      }
+
+      if (watchBtn) {
+        watchBtn.addEventListener('click', () => {
+          const isWatched = watchBtn.classList.contains('text-primary');
+          if (isWatched) {
+            watchBtn.classList.remove('text-primary', 'border-primary/40');
+            watchBtn.querySelector('span:last-child').textContent = 'Watch';
+          } else {
+            watchBtn.classList.add('text-primary', 'border-primary/40');
+            watchBtn.querySelector('span:last-child').textContent = 'Watching';
+          }
+        });
+      }
+
+      if (simulateBtn && searchInput) {
+        simulateBtn.addEventListener('click', () => {
+          searchInput.value = 'SIMULATION: REROUTE MATRIX SGA-882 (SAVED 38M)';
+          searchInput.focus();
+        });
+      }
+
+      // Keyboard Shortcut listener (CMD+K)
+      window.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+          e.preventDefault();
+          if (searchInput) searchInput.focus();
+        }
+      });
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest border-t border-surface-variant/30 py-space-xl"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-md font-telemetry-sm text-telemetry-sm text-on-surface-variant"><div class="flex items-center gap-space-md"><span class="text-on-surface font-label-caps text-label-caps">SONGA AEROSPACE INTELLIGENCE</span><span>© 2025 ALL RIGHTS RESERVED</span></div><div class="flex items-center gap-space-lg"><span class="text-tertiary flex items-center gap-space-xs"><span class="inline-block w-1.5 h-1.5 rounded-full bg-tertiary"></span>SYSTEM NOMINAL</span><span>RADAR FEED V4.18</span></div></div></footer></body></html>

@@ -2,6 +2,7 @@ import { demoFlights } from '@/data/demoFlights';
 import type { BoardResult, Flight, FlightDataMode } from '@/types';
 import { classifyFlight } from '@/lib/flightStatus';
 import { supabase } from '@/lib/supabase';
+import { envValue } from '@/lib/runtimeConfig';
 
 export type FlightSearchInput = {
   flightNumber: string;
@@ -107,7 +108,8 @@ class EdgeFunctionFlightProvider implements FlightDataProvider {
       const { data: sessionData } = supabase ? await supabase.auth.getSession() : { data: { session: null } };
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       if (sessionData.session?.access_token) headers.Authorization = `Bearer ${sessionData.session.access_token}`;
-      if (import.meta.env.VITE_SUPABASE_ANON_KEY) headers.apikey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+      const anonKey = envValue('VITE_SUPABASE_ANON_KEY');
+      if (anonKey) headers.apikey = anonKey;
 
       const response = await fetch(this.endpoint, {
         method: 'POST',
@@ -356,7 +358,7 @@ class ResilientFlightProvider implements FlightDataProvider {
 
 function anonHeaders(): Record<string, string> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+  const key = envValue('VITE_SUPABASE_ANON_KEY');
   if (key) headers.apikey = key;
   return headers;
 }
@@ -431,11 +433,9 @@ function toDelayMinutes(value: unknown): number | null {
   return Math.round(value / 60);
 }
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-
-const configuredEndpoint = (import.meta.env.VITE_FLIGHT_SEARCH_FUNCTION_URL as string | undefined)
-  ?? (supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flightaware` : undefined);
-
+const supabaseUrl = envValue('VITE_SUPABASE_URL');
+const configuredEndpoint = envValue('VITE_FLIGHT_SEARCH_FUNCTION_URL')
+  ?? (supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flight-search` : undefined);
 const legacyEndpoint = supabaseUrl ? `${supabaseUrl.replace(/\/$/, '')}/functions/v1/flightaware` : null;
 
 export const flightProvider: FlightDataProvider = configuredEndpoint

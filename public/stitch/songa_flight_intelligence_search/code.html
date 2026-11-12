@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"surface-container-low":"#f4f4f0","secondary-fixed":"#e3e2e6","primary":"#ab3500","outline":"#8f7066","on-tertiary":"#ffffff","primary-fixed-dim":"#ffb59d","on-secondary-fixed":"#1b1b1f","on-surface":"#1b1c1a","primary-fixed":"#ffdbd0","on-tertiary-fixed-variant":"#005236","surface-bright":"#faf9f5","on-error-container":"#93000a","error":"#ba1a1a","on-tertiary-container":"#003421","surface-dim":"#dbdad6","tertiary-fixed-dim":"#4edea3","on-error":"#ffffff","primary-container":"#ff5e1e","on-background":"#1b1c1a","on-secondary-fixed-variant":"#46464a","surface-container-lowest":"#ffffff","on-surface-variant":"#5b4138","surface-variant":"#e3e2df","on-secondary-container":"#646468","tertiary-container":"#00a874","secondary":"#5e5e62","secondary-fixed-dim":"#c7c6ca","error-container":"#ffdad6","outline-variant":"#e3beb3","on-primary":"#ffffff","inverse-on-surface":"#f2f1ed","on-tertiary-fixed":"#002113","background":"#faf9f5","tertiary-fixed":"#6ffbbe","surface-container":"#efeeea","on-primary-fixed-variant":"#832700","surface-container-highest":"#e3e2df","on-secondary":"#ffffff","inverse-primary":"#ffb59d","tertiary":"#006c49","surface-tint":"#ab3500","secondary-container":"#e3e2e6","surface-container-high":"#e9e8e4","inverse-surface":"#2f312e","surface":"#faf9f5","on-primary-fixed":"#390c00","on-primary-container":"#561600"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"margin-mobile":"1.25rem","space-lg":"1.5rem","margin":"3rem","space-md":"1rem","space-sm":"0.5rem","gutter":"1.5rem","space-xs":"0.25rem","gutter-mobile":"1rem","space-xl":"2.5rem"},"fontFamily":{"headline-sm":["Manrope"],"telemetry-md":["Inter"],"label-md":["Inter"],"headline-lg-mobile":["Manrope"],"body-sm":["Inter"],"headline-md":["Manrope"],"headline-lg":["Manrope"],"label-sm":["Inter"],"display-lg-mobile":["Manrope"],"body-md":["Inter"],"body-lg":["Inter"],"display-lg":["Manrope"]},"fontSize":{"headline-sm":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"500"}],"telemetry-md":["14px",{"lineHeight":"20px","letterSpacing":"0.06em","fontWeight":"500"}],"label-md":["13px",{"lineHeight":"18px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-lg-mobile":["28px",{"lineHeight":"34px","letterSpacing":"-0.015em","fontWeight":"600"}],"body-sm":["13px",{"lineHeight":"20px","letterSpacing":"0.005em","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"600"}],"headline-lg":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"600"}],"label-sm":["11px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"600"}],"display-lg-mobile":["40px",{"lineHeight":"48px","letterSpacing":"-0.025em","fontWeight":"600"}],"body-md":["15px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"400"}],"body-lg":["18px",{"lineHeight":"28px","letterSpacing":"-0.005em","fontWeight":"400"}],"display-lg":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"600"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(20,21,24,0.03)]"><div class="h-20 max-w-7xl mx-auto px-margin-mobile lg:px-margin flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-md"><a class="group flex items-center gap-space-xs" data-path="flight-intelligence" href="#"><span class="font-headline-md text-headline-md tracking-tight text-on-surface">SONGA</span><span class="w-2 h-2 rounded-full bg-primary-container group-hover:scale-125 transition-transform"></span></a><div class="hidden xl:flex items-center gap-space-xs pl-space-sm bg-surface-container-low py-1 px-3 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container animate-pulse"></span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary">4,812 FLIGHTS MONITORED</span></div></div><nav class="hidden lg:flex items-center gap-1 bg-surface-container-lowest/90 px-2 py-1.5 rounded-full shadow-[0_2px_12px_rgba(20,21,24,0.03)]" data-active-classes="text-on-surface font-semibold bg-surface-container-high/70"><a aria-current="page" class="px-3 py-1.5 rounded-full transition-all text-on-surface font-semibold bg-surface-container-high/70" data-path="flight-intelligence" href="#">Flights</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="flight-details" href="#">Details</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="my-flights" href="#">Watchlist</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="songa-ai-assistant" href="#">AI Assistant</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="disruption-compensation" href="#">Compensation</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="airport-marketplace" href="#">Marketplace</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="family-watch" href="#">Family</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="whatsapp-companion" href="#">WhatsApp</a><a class="px-3 py-1.5 rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="dashboard" href="#">Dashboard</a></nav><div class="flex items-center gap-space-sm"><div class="hidden sm:flex items-center gap-space-xs font-telemetry-md text-telemetry-md text-secondary bg-surface-container-low px-3 py-1.5 rounded-full"><span class="material-symbols-outlined text-[16px] text-outline">schedule</span><span>14:38 UTC</span></div><a class="hidden md:inline-flex items-center font-label-md text-label-md text-on-surface-variant hover:text-on-surface px-3 py-1.5 transition-colors" data-path="membership-pricing" href="#">Pricing</a><a class="hidden xl:inline-flex items-center font-label-md text-label-md bg-primary-container text-on-primary px-4 py-2 rounded-full shadow-[0_4px_16px_rgba(255,94,30,0.24)] hover:brightness-105 transition-all" data-path="flight-intelligence" href="#">Track Flight</a><a class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors" data-path="account-settings" href="#"><span class="material-symbols-outlined text-on-surface text-[18px]">settings</span></a></div></div></header><main class="w-full pt-20 bg-surface"><div class="flex flex-col w-full">
+<!-- Sub-Header Airspace Telemetry Ribbon -->
+<div class="w-full bg-surface-container-low py-space-xs px-margin-mobile lg:px-margin">
+<div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-y-space-xs text-secondary font-label-sm text-label-sm">
+<div class="flex items-center gap-space-md">
+<span class="flex items-center gap-1.5 text-tertiary">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-ping"></span>
+<span>AEROAPI V4 ADS-B LINK: NOMINAL</span>
+</span>
+<span class="hidden md:inline-block w-1 h-1 rounded-full bg-secondary-fixed-dim"></span>
+<span class="hidden md:inline-flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">satellite_alt</span>
+          EUR/AFR CORRIDOR RADAR ACTIVE
+        </span>
+</div>
+<div class="flex items-center gap-space-md font-telemetry-md text-telemetry-md">
+<span class="text-on-surface-variant font-medium">QNH: 1014 hPa</span>
+<span class="text-on-surface-variant font-medium">LATENCY: 142ms</span>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-container/10 text-tertiary font-bold text-[11px] uppercase tracking-wide">Live Stream</span>
+</div>
+</div>
+</div>
+<!-- Search & Command Strip -->
+<section class="w-full bg-surface-container-lowest shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] px-margin-mobile lg:px-margin pt-space-lg pb-space-lg">
+<div class="max-w-7xl mx-auto space-y-space-md">
+<!-- Search Input Container -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-space-sm bg-surface-container-low p-2 rounded-xl">
+<!-- Main Search Form Input -->
+<div class="flex-1 flex items-center gap-space-sm bg-surface-container-lowest px-4 py-2.5 rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary-container text-[22px]">flight_takeoff</span>
+<div class="flex-1 min-w-0">
+<span class="block font-label-sm text-label-sm text-secondary uppercase tracking-wider">Flight Number / Route Vector</span>
+<input class="w-full bg-transparent font-headline-sm text-headline-sm text-on-surface placeholder:text-secondary focus:outline-none truncate" placeholder="e.g. KQ102, BA065, or LHR -&gt; NBO" type="text" value="KQ100 / London Heathrow (LHR) to Nairobi Jomo Kenyatta (NBO)"/>
+</div>
+<button class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high text-secondary hover:text-on-surface transition-colors" title="Clear search" type="button">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+<!-- Date & Orbit Selector -->
+<div class="flex items-center gap-2">
+<div class="bg-surface-container-lowest px-4 py-2.5 rounded-lg shadow-sm flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">calendar_today</span>
+<div>
+<span class="block font-label-sm text-label-sm text-secondary uppercase">Departure Date</span>
+<span class="font-label-md text-label-md text-on-surface">Today, 24 Oct 2025</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-[16px]">expand_more</span>
+</div>
+<!-- Primary Query Trigger -->
+<button class="bg-primary-container text-on-primary px-6 py-3.5 rounded-lg font-label-md text-label-md shadow-[0_4px_16px_rgba(255,94,30,0.24)] hover:brightness-105 active:scale-[0.99] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">travel_explore</span>
+<span>Query Radar</span>
+</button>
+</div>
+</div>
+<!-- Filter Controls Strip -->
+<div class="flex flex-wrap items-center justify-between gap-y-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary mr-1">Alliances:</span>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-on-surface text-surface transition-colors">All Operators</button>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>SkyTeam
+          </button>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>Star Alliance
+          </button>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-700"></span>Oneworld
+          </button>
+<span class="hidden md:inline-block w-px h-4 bg-surface-container-highest mx-2"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary mr-1">Airframe:</span>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors">Widebody Long-Haul</button>
+<button class="px-3 py-1 rounded-full font-label-sm text-label-sm bg-surface-container hover:bg-surface-container-high text-on-surface-variant transition-colors">Non-stop Direct Only</button>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm">
+<span>Sort by:</span>
+<span class="font-semibold text-on-surface flex items-center gap-0.5 cursor-pointer">
+            Optimal Departure Time
+            <span class="material-symbols-outlined text-[16px]">unfold_more</span>
+</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Intelligence Cockpit: Results Grid + Operational Sidebar -->
+<div class="w-full max-w-7xl mx-auto px-margin-mobile lg:px-margin py-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Primary Telemetry Results Feed (8 Cols) -->
+<div class="lg:col-span-8 space-y-space-md">
+<!-- Results Metric Header -->
+<div class="flex items-center justify-between pb-space-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Direct &amp; Connecting Vectors</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary font-label-sm text-label-sm">3 Flights Active</span>
+</div>
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary">
+<span>Airspace Density:</span>
+<span class="font-semibold text-tertiary">Optimal</span>
+</div>
+</div>
+<!-- RESULT CARD 1: PRIMARY / ON SCHEDULE (Kenya Airways KQ102) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] hover:shadow-[0_12px_32px_-4px_rgba(20,21,24,0.05)] transition-all">
+<!-- Card Top Bar: Airline, Airframe, Status Beacon -->
+<div class="flex flex-wrap items-center justify-between gap-y-2 pb-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center font-headline-sm text-headline-sm font-bold text-primary">
+                KQ
+              </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">KQ 102</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm">SkyTeam</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Kenya Airways • Boeing 787-8 Dreamliner (Reg: 5Y-KZE)</p>
+</div>
+</div>
+<!-- Status Pill: Nominal -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-800">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">On Schedule</span>
+</div>
+</div>
+<!-- Spatial Flight Path HUD -->
+<div class="bg-surface-container-low rounded-xl p-space-md mb-space-md">
+<div class="grid grid-cols-12 items-center gap-2">
+<!-- Origin Station -->
+<div class="col-span-4 text-left">
+<span class="font-display-lg text-display-lg tracking-tight text-on-surface block leading-none">LHR</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold block mt-1">17:25 GMT</span>
+<span class="font-body-sm text-body-sm text-secondary block">London Heathrow • T4</span>
+<span class="font-label-sm text-label-sm text-tertiary">Gate 14A (Boarding 16:45)</span>
+</div>
+<!-- Trajectory Graphic & Transmit Beacon -->
+<div class="col-span-4 flex flex-col items-center justify-center px-2">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary mb-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span>8h 35m Non-stop</span>
+</div>
+<div class="relative w-full flex items-center justify-center py-2">
+<div class="w-full h-[2px] bg-secondary-fixed-dim relative">
+<!-- Progress Bar indicator -->
+<div class="absolute left-0 top-0 h-full bg-primary-container" style="width: 32%;"></div>
+</div>
+<!-- Flight Icon Marker -->
+<div class="absolute left-[32%] -translate-x-1/2 w-6 h-6 rounded-full bg-surface-container-lowest shadow-md flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-[16px] rotate-90">flight</span>
+</div>
+</div>
+<div class="flex items-center gap-2 font-telemetry-md text-telemetry-md text-on-surface-variant mt-1">
+<span>FL390</span>
+<span class="text-outline-variant">•</span>
+<span>Mach 0.85</span>
+<span class="text-outline-variant">•</span>
+<span>4,244 nm</span>
+</div>
+</div>
+<!-- Destination Station -->
+<div class="col-span-4 text-right">
+<span class="font-display-lg text-display-lg tracking-tight text-on-surface block leading-none">NBO</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold block mt-1">05:00 +1 EAT</span>
+<span class="font-body-sm text-body-sm text-secondary block">Nairobi Jomo Kenyatta • T1A</span>
+<span class="font-label-sm text-label-sm text-secondary">Baggage Carousel 03</span>
+</div>
+</div>
+</div>
+<!-- Real-Time Telemetry Barometer Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-2 py-2 px-3 bg-surface-container/40 rounded-lg mb-space-md text-secondary font-label-sm text-label-sm">
+<div>
+<span class="text-secondary block">CRUISING LEVEL</span>
+<span class="font-semibold text-on-surface">39,000 ft (FL390)</span>
+</div>
+<div>
+<span class="text-secondary block">GROUND SPEED</span>
+<span class="font-semibold text-on-surface">492 kts</span>
+</div>
+<div>
+<span class="text-secondary block">HEADWIND / TAILWIND</span>
+<span class="font-semibold text-tertiary">+18 kts Tailwind</span>
+</div>
+<div>
+<span class="text-secondary block">AIRFRAME TRANSPONDER</span>
+<span class="font-semibold text-on-surface font-telemetry-md text-telemetry-md">SGA-8821B</span>
+</div>
+</div>
+<!-- Bottom Action Deck -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="inline-flex items-center gap-1.5 font-label-sm text-label-sm text-tertiary bg-emerald-50 px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+                EU261 In Compliance
+              </span>
+<span class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[15px]">airline_seat_recline_extra</span>
+                92% Cabin Capacity
+              </span>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">info</span>
+<span>View Flight Details</span>
+</button>
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-5 py-2 rounded-lg shadow-[0_4px_16px_rgba(255,94,30,0.24)] hover:brightness-105 transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span>Watch This Flight</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RESULT CARD 2: ADVISORY / DELAY (British Airways BA 065) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] hover:shadow-[0_12px_32px_-4px_rgba(20,21,24,0.05)] transition-all">
+<div class="flex flex-wrap items-center justify-between gap-y-2 pb-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center font-headline-sm text-headline-sm font-bold text-blue-800">
+                BA
+              </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">BA 065</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm">Oneworld</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">British Airways • Airbus A350-1000 (Reg: G-XWBA)</p>
+</div>
+</div>
+<!-- Status Pill: Advisory Amber -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">+25m Departure Delay</span>
+</div>
+</div>
+<!-- AI Operational Advisory Callout -->
+<div class="bg-amber-50/70 p-3 rounded-lg mb-space-md flex items-start gap-2.5">
+<span class="material-symbols-outlined text-amber-700 text-[18px] shrink-0 mt-0.5">smart_toy</span>
+<div class="flex-1">
+<span class="font-label-sm text-label-sm font-bold text-amber-900 block uppercase tracking-wide">Songa AI Ground Telemetry Advisory</span>
+<p class="font-body-sm text-body-sm text-amber-900/90 leading-snug">
+                Runway maintenance at LHR Terminal 5 is causing ground taxi queues. Inbound aircraft safely stationed at Gate 508. Estimated wheels-up revised to 10:40 GMT.
+              </p>
+</div>
+</div>
+<!-- Route Geometry Strip -->
+<div class="bg-surface-container-low rounded-xl p-space-md mb-space-md">
+<div class="grid grid-cols-12 items-center gap-2">
+<div class="col-span-4 text-left">
+<span class="font-display-lg text-display-lg tracking-tight text-on-surface block leading-none">LHR</span>
+<span class="font-label-md text-label-md text-amber-800 font-semibold block mt-1">10:40 GMT <span class="line-through text-secondary font-normal">10:15</span></span>
+<span class="font-body-sm text-body-sm text-secondary block">Heathrow • Terminal 5</span>
+</div>
+<div class="col-span-4 flex flex-col items-center justify-center px-2">
+<div class="flex items-center gap-1 font-label-sm text-label-sm text-secondary mb-1">
+<span>8h 40m Projected</span>
+</div>
+<div class="relative w-full flex items-center justify-center py-2">
+<div class="w-full h-[2px] bg-secondary-fixed-dim"></div>
+<div class="absolute left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-surface-container-lowest shadow-sm flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[16px] rotate-90">flight</span>
+</div>
+</div>
+<span class="font-label-sm text-label-sm text-secondary">Estimated In-Flight: 11:02 GMT</span>
+</div>
+<div class="col-span-4 text-right">
+<span class="font-display-lg text-display-lg tracking-tight text-on-surface block leading-none">NBO</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold block mt-1">22:05 EAT <span class="text-secondary font-normal">(+25m)</span></span>
+<span class="font-body-sm text-body-sm text-secondary block">Nairobi JKI • Terminal 1B</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Deck -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-secondary">
+<span class="material-symbols-outlined text-[16px]">update</span>
+<span>Next Radar Sync: 45s</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors">Details</button>
+<button class="bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">bookmark_add</span>
+<span>Watch Flight</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RESULT CARD 3: CONNECTING RISK (Air France AF 814 via CDG) -->
+<div class="w-full bg-surface-container-lowest rounded-xl p-space-md lg:p-space-lg shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] hover:shadow-[0_12px_32px_-4px_rgba(20,21,24,0.05)] transition-all">
+<div class="flex flex-wrap items-center justify-between gap-y-2 pb-space-md">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-low flex items-center justify-center font-headline-sm text-headline-sm font-bold text-sky-900">
+                AF
+              </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-semibold text-on-surface">AF 814</span>
+<span class="px-2 py-0.5 rounded-md bg-surface-container text-secondary font-label-sm text-label-sm">SkyTeam</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Air France • Boeing 777-300ER • 1 Transfer in Paris (CDG)</p>
+</div>
+</div>
+<!-- Status Pill: Warning Connection -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-800">
+<span class="w-2 h-2 rounded-full bg-rose-500"></span>
+<span class="font-label-sm text-label-sm font-bold tracking-wide uppercase">1h 10m Tight Layover</span>
+</div>
+</div>
+<!-- Split Transit Pathway -->
+<div class="bg-surface-container-low rounded-xl p-space-md mb-space-md">
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-sm text-center md:text-left">
+<div class="flex items-center gap-3">
+<div>
+<span class="font-headline-md text-headline-md text-on-surface block">LHR</span>
+<span class="font-label-sm text-label-sm text-secondary">06:20 GMT</span>
+</div>
+<span class="material-symbols-outlined text-secondary">arrow_forward</span>
+<div>
+<span class="font-headline-md text-headline-md text-on-surface block">CDG</span>
+<span class="font-label-sm text-label-sm text-secondary">08:45 CET</span>
+</div>
+</div>
+<!-- Layover Warning Center Block -->
+<div class="px-3 py-1.5 rounded-lg bg-rose-100/50 flex items-center gap-2 text-rose-900 font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[16px] text-rose-600">warning</span>
+<span>CDG Terminal 2E to 2F Transfer (Security Queue: +20m)</span>
+</div>
+<div class="flex items-center gap-3 text-right">
+<div>
+<span class="font-headline-md text-headline-md text-on-surface block">NBO</span>
+<span class="font-label-sm text-label-sm text-secondary">18:40 EAT</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Deck -->
+<div class="flex items-center justify-between pt-space-xs">
+<span class="font-body-sm text-body-sm text-secondary">Total Travel Time: 11h 20m</span>
+<div class="flex items-center gap-2">
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors">Layover Intel</button>
+<button class="bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md px-4 py-2 rounded-lg transition-colors">Details</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Operational Context & Airport Airspace Sidebar (4 Cols) -->
+<aside class="lg:col-span-4 space-y-space-md">
+<!-- Congestion Radar Widget: LHR & NBO -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] space-y-space-md">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface">Airport Airspace Status</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<!-- LHR Status -->
+<div class="bg-surface-container-low rounded-lg p-space-sm space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">LHR</span>
+<span class="font-label-sm text-label-sm text-secondary">London Heathrow</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-label-sm text-label-sm">Moderate Delays</span>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm text-secondary">
+<span>Runway Congestion Factor</span>
+<span class="font-semibold text-on-surface">64% Capacity</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-amber-500 h-full rounded-full" style="width: 64%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-telemetry-md text-telemetry-md text-secondary pt-1">
+<span>Avg Taxi: 21m</span>
+<span>Wind: 260° at 14kt</span>
+</div>
+</div>
+<!-- NBO Status -->
+<div class="bg-surface-container-low rounded-lg p-space-sm space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">NBO</span>
+<span class="font-label-sm text-label-sm text-secondary">Nairobi Kenyatta</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-sm text-label-sm">All Gates Free</span>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between font-label-sm text-label-sm text-secondary">
+<span>Runway Congestion Factor</span>
+<span class="font-semibold text-on-surface">18% Capacity</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full rounded-full" style="width: 18%;"></div>
+</div>
+</div>
+<div class="flex items-center justify-between font-telemetry-md text-telemetry-md text-secondary pt-1">
+<span>Avg Taxi: 4m</span>
+<span>Temp: 21°C • CAVOK</span>
+</div>
+</div>
+</div>
+<!-- Cruising Altitude Doppler Radar Vector -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">Atmospheric Telemetry</span>
+<span class="material-symbols-outlined text-secondary text-[20px]">air</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Corridor North-Sahara crossing nominal. Clear conditions at cruising altitude <span class="font-semibold text-on-surface">FL370 - FL410</span> with zero convective storm cells detected.
+          </p>
+<!-- Weather Doppler Visual Mini Matrix -->
+<div class="bg-surface-container-low rounded-lg p-3 space-y-2">
+<div class="flex items-center justify-between font-label-sm text-label-sm">
+<span class="text-secondary">TURBULENCE RISK INDEX</span>
+<span class="font-bold text-tertiary">0.08 (Smooth Air)</span>
+</div>
+<!-- Atmospheric Layer Graphic -->
+<div class="flex items-end gap-1 h-12 pt-2">
+<div class="flex-1 bg-tertiary-container/30 rounded-t h-4" title="Sector 1: Clear"></div>
+<div class="flex-1 bg-tertiary-container/30 rounded-t h-6" title="Sector 2: Light Wind"></div>
+<div class="flex-1 bg-tertiary-container/40 rounded-t h-3" title="Sector 3: Clear"></div>
+<div class="flex-1 bg-amber-400/40 rounded-t h-10" title="Sector 4: Jetstream Boundary"></div>
+<div class="flex-1 bg-tertiary-container/40 rounded-t h-5" title="Sector 5: Clear"></div>
+<div class="flex-1 bg-tertiary-container/30 rounded-t h-3" title="Sector 6: Clear"></div>
+<div class="flex-1 bg-tertiary-container/20 rounded-t h-2" title="Sector 7: Clear"></div>
+</div>
+<div class="flex justify-between font-telemetry-md text-telemetry-md text-secondary text-[10px]">
+<span>UK</span>
+<span>MEDITERRANEAN</span>
+<span>SAHARA</span>
+<span>EAST AFRICA</span>
+</div>
+</div>
+</div>
+<!-- Recent Route Searches Memory Strip -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-[0_4px_24px_-2px_rgba(20,21,24,0.03)] space-y-space-sm">
+<div class="flex items-center justify-between pb-1">
+<span class="font-label-md text-label-md text-on-surface uppercase tracking-wider">Recent Radar Queries</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline">Clear</button>
+</div>
+<div class="space-y-2">
+<a class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary group-hover:text-primary transition-colors">history</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">LHR → JNB</span>
+<span class="font-label-sm text-label-sm text-secondary">Virgin Atlantic • VS 449</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary group-hover:text-primary transition-colors">history</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">DXB → NBO</span>
+<span class="font-label-sm text-label-sm text-secondary">Emirates • EK 719</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">chevron_right</span>
+</a>
+<a class="flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary group-hover:text-primary transition-colors">history</span>
+<div>
+<span class="font-label-md text-label-md text-on-surface block">JFK → LHR</span>
+<span class="font-label-sm text-label-sm text-secondary">British Airways • BA 112</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">chevron_right</span>
+</a>
+</div>
+</div>
+<!-- Aviation Hardware Telemetry Box -->
+<div class="bg-surface-container-high rounded-xl p-space-md space-y-2">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+<span class="font-label-md text-label-md">Direct ADS-B Signal Stream</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+            Raw transponder telemetry is gathered via 450+ ground stations and multi-constellation Iridium satellite uplinks with sub-second ping refresh.
+          </p>
+</div>
+</aside>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-low mt-space-xl"><div class="max-w-7xl mx-auto px-margin-mobile lg:px-margin pt-space-xl pb-space-lg"><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-lg pb-space-lg"><div class="lg:col-span-2 space-y-space-md pr-space-md"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm tracking-tight text-on-surface">SONGA</span><span class="w-2 h-2 rounded-full bg-primary-container"></span></div><p class="font-body-sm text-body-sm text-secondary max-w-sm leading-relaxed">Precision avionics, real-time airspace telemetry, and high-altitude passenger intelligence engineered with uncompromised clarity and aerospace composure.</p><div class="inline-flex items-center gap-space-xs px-3 py-1.5 rounded-full bg-surface-container-lowest text-tertiary font-label-sm text-label-sm"><span class="w-2 h-2 rounded-full bg-tertiary-container"></span><span>RADAR FEED V4.18 — AIRSPACE NOMINAL</span></div></div><div><div class="font-label-md text-label-md uppercase tracking-wider text-on-surface mb-space-sm">Flight Suite</div><ul class="space-y-space-xs"><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="flight-intelligence" href="#">Flight Search &amp; Radar</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="flight-details" href="#">Flight Telemetry Details</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="my-flights" href="#">Active Watchlist</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="songa-ai-assistant" href="#">Songa AI Assistant</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="family-watch" href="#">Family Airspace Watch</a></li></ul></div><div><div class="font-label-md text-label-md uppercase tracking-wider text-on-surface mb-space-sm">Services &amp; Rights</div><ul class="space-y-space-xs"><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="disruption-compensation" href="#">EU261 / DOT Compensation</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="airport-marketplace" href="#">Airport Lounge &amp; Transfers</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="whatsapp-companion" href="#">WhatsApp Live Gateway</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="membership-pricing" href="#">Membership &amp; Passes</a></li></ul></div><div><div class="font-label-md text-label-md uppercase tracking-wider text-on-surface mb-space-sm">Account &amp; Ops</div><ul class="space-y-space-xs"><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="dashboard" href="#">Traveler Console</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="account-settings" href="#">Account Preferences</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="flight-intelligence" href="#">Global ADS-B Feeds</a></li><li class="list-none"><a class="font-body-sm text-body-sm text-secondary hover:text-on-surface transition-colors" data-path="dashboard" href="#">Notification Rules</a></li></ul></div></div><div class="pt-space-md mt-space-md flex flex-col md:flex-row items-center justify-between gap-space-sm bg-surface-container/60 rounded-xl px-space-md py-space-sm"><p class="font-label-sm text-label-sm text-secondary">© 2025 SONGA AEROSPACE INTELLIGENCE. ALL RIGHTS RESERVED.</p><div class="flex items-center gap-space-md font-label-sm text-label-sm text-secondary"><span>ICAO: SGA / IATA: SG</span><span class="w-1 h-1 rounded-full bg-secondary-fixed-dim"></span><span>MIL-STD-810G READY</span><span class="w-1 h-1 rounded-full bg-secondary-fixed-dim"></span><span>WARM SPECTRUM AVIONICS</span></div></div></div></footer></body></html>

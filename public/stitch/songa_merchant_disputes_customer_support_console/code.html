@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SONGA Merchant Operations &amp; Fulfilment</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#00354a","inverse-on-surface":"#2f3034","on-tertiary-container":"#003421","primary":"#ffb59d","tertiary-container":"#00a874","surface-variant":"#343538","primary-fixed-dim":"#ffb59d","error-container":"#93000a","on-primary-fixed":"#390c00","on-error":"#690005","on-surface-variant":"#e3beb3","on-primary-fixed-variant":"#832700","surface-container-high":"#292a2d","inverse-primary":"#ab3500","on-surface":"#e3e2e6","surface-tint":"#ffb59d","surface-container-low":"#1b1b1f","on-primary-container":"#561600","background":"#121316","secondary-container":"#00a6e0","on-secondary-fixed-variant":"#004c69","surface-bright":"#38393d","surface-container-highest":"#343538","secondary-fixed-dim":"#7bd0ff","on-tertiary-fixed-variant":"#005236","on-tertiary":"#003824","tertiary":"#4edea3","tertiary-fixed-dim":"#4edea3","inverse-surface":"#e3e2e6","on-secondary-fixed":"#001e2c","tertiary-fixed":"#6ffbbe","secondary-fixed":"#c4e7ff","surface-container-lowest":"#0d0e11","surface":"#121316","primary-container":"#ff5e1e","outline-variant":"#5b4138","error":"#ffb4ab","on-tertiary-fixed":"#002113","on-primary":"#5d1900","on-error-container":"#ffdad6","secondary":"#7bd0ff","primary-fixed":"#ffdbd0","surface-dim":"#121316","surface-container":"#1f1f23","on-secondary-container":"#00374d","on-background":"#e3e2e6","outline":"#aa897f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"3rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter":"1.5rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-hero-mobile":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"telemetry-md":["JetBrains Mono"],"headline-lg-mobile":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-md":["Space Grotesk"],"headline-lg":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-sm":["Space Grotesk"],"body-md":["Inter"]},"fontSize":{"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"telemetry-lg":["20px",{"lineHeight":"24px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"telemetry-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-white"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-24 w-full px-gutter flex flex-col justify-between py-space-xs"><div class="flex items-center justify-between gap-space-md h-12"><div class="flex items-center gap-space-md flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface font-bold">SONGA</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm"><span class="text-primary-container font-semibold">OPS //</span><span>DISPATCH HUB</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low text-tertiary font-telemetry-sm text-telemetry-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>NBO T1A • HND T3 • JNB A1 [ONLINE]</span></div></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="overview" href="#">Overview</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="orders" href="#">Orders</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="fulfilment-dispatch" href="#">Fulfilment Dispatch</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="inventory-&amp;-services" href="#">Inventory &amp; Services</a><a aria-current="page" class="px-space-md py-1.5 transition-colors uppercase bg-primary-container text-on-primary font-bold rounded-lg" data-path="disputes-&amp;-support" href="#">Disputes &amp; Support</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="merchant-&amp;-team" href="#">Merchant &amp; Team</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary text-[16px]">storefront</span><span class="font-medium truncate max-w-[200px]">TIAT Roasters &amp; Airside Express</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-secondary font-telemetry-sm text-telemetry-sm tracking-wide"><span class="material-symbols-outlined text-[14px]">schedule</span><span>14:48:22 UTC</span></div><div class="hidden sm:flex items-center px-space-xs py-1 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm uppercase tracking-wider">DARK [AERO]</div><div class="flex items-center gap-space-xs pl-space-xs"><div class="text-right hidden sm:block"><div class="font-label-caps text-label-caps text-on-surface leading-tight">K. Ndung'u</div><div class="font-telemetry-sm text-telemetry-sm text-tertiary leading-tight">Duty Ops Lead</div></div><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div></div></div></div><div class="h-8 w-full flex items-center justify-between overflow-x-auto bg-surface-container-lowest/80 px-space-md rounded-lg text-on-surface-variant font-telemetry-sm text-telemetry-sm"><div class="flex items-center gap-space-md whitespace-nowrap"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-on-surface font-medium">TELEMETRY:</span><span>JKIA (NBO) AIRSIDE NODE ACTIVE</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-primary-container font-medium">QUEUE:</span><span>14 PENDING ORDERS</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-tertiary font-medium">FULFILMENT SLA:</span><span>98.6% ON-TIME</span></div></div><div class="flex items-center gap-space-xs whitespace-nowrap pl-space-md"><span class="text-secondary font-medium">PAYPAL SETTLEMENT GATEWAY:</span><span class="text-tertiary">CONNECTED (SANDBOX DEMO MODE)</span></div></div></div></header><main class="w-full pt-24 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Command Strip / Watermark & Protocol Notice -->
+<div class="w-full px-gutter pt-space-md pb-space-sm flex flex-col md:flex-row md:items-center md:justify-between gap-space-sm bg-surface-container-lowest">
+<div class="flex items-center gap-space-sm">
+<div class="px-space-xs py-0.5 rounded bg-primary-container/20 text-primary-container font-telemetry-sm text-telemetry-sm flex items-center gap-1.5 uppercase font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-ping"></span>
+        AIRSIDE EXCEPTION ENGINE v4.11
+      </div>
+<span class="text-surface-variant font-telemetry-sm">|</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[15px] text-tertiary">verified_user</span>
+<span>ICAO ANNEX 17 PROTOCOL ENFORCED</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="px-space-sm py-1 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>ADS-B ESCROW SAFEGUARD: ACTIVE</span>
+</div>
+<div class="px-space-xs py-0.5 rounded bg-error-container/30 text-error font-telemetry-sm text-telemetry-sm uppercase">
+        DEMO DISPUTE ENVIRONMENT
+      </div>
+</div>
+</div>
+<!-- Operational Escalation Matrix & KPI Counters -->
+<section class="w-full px-gutter py-space-md">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-space-sm">
+<!-- Metric 1 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="absolute -right-4 -top-4 w-16 h-16 bg-primary-container/5 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Open Claims</span>
+<span class="material-symbols-outlined text-primary-container text-[18px]">report_problem</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-hero text-headline-lg text-primary-container font-bold">04</span>
+<span class="font-telemetry-sm text-telemetry-sm text-error">Active</span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">
+          2 requiring immediate ops signoff
+        </div>
+</div>
+<!-- Metric 2 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative overflow-hidden group">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Unfulfilled Flights</span>
+<span class="material-symbols-outlined text-error text-[18px]">flight_takeoff</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-hero text-headline-lg text-on-surface font-bold">01</span>
+<span class="font-telemetry-sm text-telemetry-sm text-error-container bg-error/10 px-1 rounded">Gate Close</span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">
+          ET-308 early pushback
+        </div>
+</div>
+<!-- Metric 3 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Gate Delays</span>
+<span class="material-symbols-outlined text-secondary text-[18px]">alt_route</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-hero text-headline-lg text-secondary font-bold">02</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Active Vectors</span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">
+          Avg runner lag +6.4m
+        </div>
+</div>
+<!-- Metric 4 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">PayPal Pending</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">account_balance_wallet</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-display-hero text-headline-lg text-tertiary font-bold">01</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-semibold">$24.00</span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">
+          Instant escrow unlock ready
+        </div>
+</div>
+<!-- Metric 5 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Turnaround Time</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">speed</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">14.2<span class="text-headline-sm font-normal text-on-surface-variant">m</span></span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary flex items-center">
+<span class="material-symbols-outlined text-[13px]">south</span>-2.1m
+          </span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+          Target SLA &lt; 20 mins
+        </div>
+</div>
+<!-- Metric 6 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-sm relative">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Resolution Score</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified</span>
+</div>
+<div class="mt-space-md flex items-baseline gap-space-xs">
+<span class="font-headline-lg text-headline-lg text-tertiary font-bold">99.4%</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">30d</span>
+</div>
+<div class="mt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+          Audit tier: Airside Gold
+        </div>
+</div>
+</div>
+</section>
+<!-- ADS-B Telemetry Directive Banner -->
+<section class="w-full px-gutter pb-space-sm">
+<div class="p-space-md rounded-xl bg-surface-container-high shadow-md flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="flex items-start gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-lowest flex items-center justify-center flex-shrink-0 text-primary-container">
+<span class="material-symbols-outlined text-[24px]">satellite_alt</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-caps text-label-caps uppercase text-primary-container font-bold">Operational Directive #419</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-lowest font-telemetry-sm text-telemetry-sm text-tertiary">ICAO &amp; IATA COMPLIANT</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface mt-0.5">
+            ICAO Airside Transit Consumer Protection standard: Automatic refund trigger is locked when flight cancellation or pre-scheduled departure shifts are verified by <span class="font-telemetry-md text-telemetry-md text-secondary">Songa ADS-B telemetry</span> without merchant dispatch fault.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 w-full lg:w-auto justify-end">
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-low text-on-surface hover:text-white font-label-caps text-label-caps uppercase transition-colors flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">policy</span>
+<span>View Rules Matrix</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase hover:bg-surface-bright transition-colors flex items-center gap-space-xs" type="button">
+<span class="material-symbols-outlined text-[16px]">history</span>
+<span>Telemetry Audit Log</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Filter Matrix & Global Case Switcher -->
+<section class="w-full px-gutter py-space-sm">
+<div class="bg-surface-container-low p-space-sm rounded-xl flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-space-sm">
+<!-- Filter Tabs -->
+<div class="flex items-center gap-1 overflow-x-auto pb-1 xl:pb-0" id="caseFilterTabs">
+<button class="px-space-sm py-1.5 rounded-lg bg-primary-container text-on-primary font-label-caps text-label-caps uppercase font-bold whitespace-nowrap shadow-sm">
+          All Exceptions (24)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap">
+          Unfulfilled Orders (3)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap">
+          Delayed Services / Gate Changes (8)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap">
+          Customer Complaints (7)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap">
+          Refund Requests (6)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap">
+          Resolved / Closed (18)
+        </button>
+</div>
+<!-- Quick Search Bar -->
+<div class="relative min-w-[280px] xl:w-96 flex-shrink-0">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface pl-9 pr-8 py-2 rounded-lg font-telemetry-sm text-telemetry-sm placeholder:text-outline focus:outline-none focus:bg-surface-container-high transition-colors" id="caseSearchInput" placeholder="Search by Case ID (e.g. CAS-4092), Flight #, Order..." type="text"/>
+<span class="absolute right-2.5 top-2.5 text-[10px] font-telemetry-sm bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+</div>
+</section>
+<!-- Main Exception Handling & Ledger Console Layout -->
+<section class="w-full px-gutter py-space-md grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Ledger Table Matrix (Col 1-7) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md min-w-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">Dispute &amp; Airside Incident Stream</span>
+<span class="font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded bg-surface-container text-tertiary font-semibold">LIVE DISPATCH</span>
+</div>
+<div class="flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>SORT:</span>
+<span class="text-primary-container font-medium uppercase cursor-pointer hover:underline">URGENCY (IMPACT)</span>
+</div>
+</div>
+<!-- Case 1: Elena Rostova (High Priority, Expanded State) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-md hover:bg-surface-container transition-all cursor-pointer ring-1 ring-primary-container/40" id="card-CAS-4092" onclick="selectCase('CAS-4092')">
+<div class="flex items-start justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface bg-surface-container px-2 py-0.5 rounded">CAS-4092</span>
+<span class="px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-telemetry-sm text-telemetry-sm flex items-center gap-1 font-semibold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+              HIGH PRIORITY
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary bg-secondary-container/20 px-2 py-0.5 rounded">ORD: SNG-98102</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-error font-medium flex items-center gap-1 whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px]">timer</span> 4m SLA Left
+          </span>
+</div>
+<div class="mt-space-sm flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Elena Rostova</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">flight</span>
+<span>Flight ET-308</span>
+<span class="text-surface-variant">•</span>
+<span class="text-on-surface font-medium">NBO ➔ ADD</span>
+<span class="text-surface-variant">•</span>
+<span class="text-outline">Seat 14A (Business)</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-telemetry-lg text-telemetry-lg font-bold text-on-surface">$24.00 USD</div>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary">PayPal Escrow Captured</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-primary-container font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+              Incident: Flight Boarded Early / Gate Change (12 ➔ 04)
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Gate Runner Alert</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Aircraft initiated pushback 15 mins ahead of published slot. Runner arrived at Gate 12 precisely as doors closed. Sealed bag returned to Central Node.
+          </p>
+</div>
+<div class="mt-space-md flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Songa Telemetry Audit: Flight pushback logged 14:42 UTC</span>
+</div>
+<span class="font-label-caps text-label-caps text-primary-container uppercase font-semibold flex items-center gap-1">
+<span>Action Required</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+</span>
+</div>
+</div>
+<!-- Case 2: Kenji Takahashi (Medium Priority) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm hover:bg-surface-container transition-all cursor-pointer" id="card-CAS-4088" onclick="selectCase('CAS-4088')">
+<div class="flex items-start justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface bg-surface-container px-2 py-0.5 rounded">CAS-4088</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-telemetry-sm text-telemetry-sm uppercase font-medium">
+              MEDIUM PRIORITY
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">ORD: SNG-97914</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Compensated
+          </span>
+</div>
+<div class="mt-space-sm flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Kenji Takahashi</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">flight</span>
+<span>Flight NH-880</span>
+<span class="text-surface-variant">•</span>
+<span class="text-on-surface font-medium">HND ➔ SYD</span>
+<span class="text-surface-variant">•</span>
+<span class="text-outline">Terminal 3 Gate 114</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-telemetry-lg text-telemetry-lg font-semibold text-on-surface">$5.20 USD</div>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary">Partial Reversal Done</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary font-semibold">
+              Quality Variance: Beverage Temp (Cold Brew vs Hot Pour)
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Resolved in 8 mins</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Ordered extra hot flat white; received cold brew can due to barista queue mix-up. Station 2 issued digital Sydney lounge voucher + full reversal.
+          </p>
+</div>
+<div class="mt-space-sm flex items-center justify-between font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[14px]">verified</span>
+<span>Customer accepted voucher &amp; positive review recorded</span>
+</div>
+<span class="font-label-caps text-label-caps uppercase text-outline">View Resolution Deck</span>
+</div>
+</div>
+<!-- Case 3: Dr. Lillian Kiprop (Low Priority / Closed) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm hover:bg-surface-container transition-all cursor-pointer opacity-85 hover:opacity-100" id="card-CAS-4075" onclick="selectCase('CAS-4075')">
+<div class="flex items-start justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface bg-surface-container px-2 py-0.5 rounded">CAS-4075</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm uppercase">
+              LOW PRIORITY
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">ORD: SNG-97812</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span> Closed &amp; Audited
+          </span>
+</div>
+<div class="mt-space-sm flex flex-col md:flex-row md:items-baseline justify-between gap-space-xs">
+<div>
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dr. Lillian Kiprop</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[14px]">flight</span>
+<span>Flight KQ-102</span>
+<span class="text-surface-variant">•</span>
+<span class="text-on-surface font-medium">NBO ➔ LHR</span>
+</div>
+</div>
+<div class="text-right">
+<div class="font-telemetry-lg text-telemetry-lg font-semibold text-on-surface">$48.50 USD</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Settled / No Chargeback</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container-lowest flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-on-surface-variant font-semibold">
+              Inquiry: Transit Bag Tamper-Evident Seal Query
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ICAO Seal #8812</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Passenger verified security tape code before boarding; gate scanner match confirmed valid airside handoff without breach. Case archived.
+          </p>
+</div>
+</div>
+<!-- Historical Mini Stream Pagination -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>Showing 3 of 24 active airside exception records</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">Prev</button>
+<span class="px-2 text-on-surface font-bold">1 / 8</span>
+<button class="px-space-sm py-1 rounded bg-surface-container text-on-surface hover:bg-surface-container-high transition-colors">Next</button>
+</div>
+</div>
+</div>
+<!-- Case Detail, Telemetry Timeline & Action Deck (Col 8-12) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md min-w-0 sticky top-28">
+<!-- Action Console Box -->
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden" id="caseDetailPanel">
+<div class="flex items-start justify-between border-b border-surface-variant/20 pb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary font-telemetry-sm text-telemetry-sm font-bold uppercase">
+                ACTIVE FOCUS
+              </span>
+<span class="font-telemetry-md text-telemetry-md font-bold text-on-surface" id="detailCaseId">CAS-4092</span>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-on-surface mt-1" id="detailPassenger">
+              Elena Rostova
+            </div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary" id="detailFlight">
+              Ethiopian Airlines ET-308 (NBO T1A ➔ ADD)
+            </div>
+</div>
+<div class="text-right">
+<span class="font-telemetry-lg text-telemetry-lg font-bold text-primary-container" id="detailAmount">$24.00</span>
+<div class="font-label-caps text-label-caps uppercase text-tertiary">ESCROW SECURED</div>
+</div>
+</div>
+<!-- Telemetry Vector Visualization -->
+<div class="mt-space-md p-space-md rounded-xl bg-surface-container-lowest">
+<div class="flex items-center justify-between font-label-caps text-label-caps text-on-surface-variant uppercase mb-2">
+<span>Airside Telemetry Audit Trail</span>
+<span class="text-tertiary font-telemetry-sm">ADS-B VERIFIED</span>
+</div>
+<!-- Mini Avionics Route Step Graph -->
+<div class="space-y-3 font-telemetry-sm text-telemetry-sm">
+<div class="flex items-start gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary mt-1.5 flex-shrink-0"></span>
+<div class="flex-1">
+<div class="flex justify-between text-on-surface">
+<span>Order Transmitted to Merchant</span>
+<span class="text-outline">14:18 UTC</span>
+</div>
+<div class="text-on-surface-variant text-[11px]">Roaster Station 1 prepped Espresso Blend</div>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary mt-1.5 flex-shrink-0"></span>
+<div class="flex-1">
+<div class="flex justify-between text-on-surface">
+<span>Runner Dispatched to Gate 12</span>
+<span class="text-outline">14:31 UTC</span>
+</div>
+<div class="text-on-surface-variant text-[11px]">Security clearance bag sealed #SNG-991</div>
+</div>
+</div>
+<div class="flex items-start gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary-container mt-1.5 flex-shrink-0 animate-ping"></span>
+<div class="flex-1">
+<div class="flex justify-between text-primary-container font-semibold">
+<span>Flight Gate Change + Early Pushback</span>
+<span class="text-primary-container font-bold">14:40 UTC</span>
+</div>
+<div class="text-error text-[11px]">ET-308 pulled from Gate 12 to Remote Stand 04 (-15m slot change)</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Settlement Status & PayPal Channel -->
+<div class="mt-space-md p-space-sm rounded-lg bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">account_balance</span>
+</div>
+<div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">PayPal Express Gateway</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">TxID: PP-882194-NBO-01</div>
+</div>
+</div>
+<div class="text-right">
+<span class="px-2 py-0.5 rounded bg-tertiary/20 text-tertiary font-telemetry-sm text-telemetry-sm font-semibold">
+              Escrow Active
+            </span>
+</div>
+</div>
+<!-- One-Click Merchant Resolution Action Deck -->
+<div class="mt-space-md flex flex-col gap-space-sm">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+            One-Click Operational Actions
+          </div>
+<button class="w-full py-2.5 px-space-md rounded-lg bg-primary-container text-white font-headline-sm text-body-md font-semibold hover:bg-opacity-90 active:scale-[0.99] transition-all flex items-center justify-center gap-space-sm shadow-md" id="refundButton" onclick="triggerInstantRefund()" type="button">
+<span class="material-symbols-outlined text-[20px]">currency_exchange</span>
+<span id="refundBtnLabel">Execute Instant PayPal Refund ($24.00)</span>
+</button>
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="py-2 px-space-sm rounded-lg bg-surface-container-highest text-on-surface hover:text-white font-label-caps text-label-caps uppercase hover:bg-surface-bright transition-colors flex items-center justify-center gap-1.5" id="voucherButton" onclick="triggerVoucherApology()" type="button">
+<span class="material-symbols-outlined text-secondary text-[16px]">redeem</span>
+<span id="voucherBtnLabel">Transmit Apology &amp; Lounge Voucher</span>
+</button>
+<button class="py-2 px-space-sm rounded-lg bg-surface-container-highest text-on-surface hover:text-white font-label-caps text-label-caps uppercase hover:bg-surface-bright transition-colors flex items-center justify-center gap-1.5" id="closeCaseButton" onclick="triggerResolveCase()" type="button">
+<span class="material-symbols-outlined text-tertiary text-[16px]">task_alt</span>
+<span id="closeBtnLabel">Resolve &amp; Close Case</span>
+</button>
+</div>
+</div>
+<!-- Status Toast notification message area -->
+<div class="hidden mt-space-md p-space-sm rounded-lg bg-tertiary/15 text-tertiary font-telemetry-sm text-telemetry-sm flex items-center gap-space-xs" id="actionToast">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span id="actionToastMessage">Action executed successfully.</span>
+</div>
+<!-- Customer Communication Thread -->
+<div class="mt-space-lg pt-space-md border-t border-surface-variant/20">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold">Live Passenger Airside Chat</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Passenger In-App
+            </span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-lowest max-h-40 overflow-y-auto space-y-2 font-body-sm text-body-sm">
+<div class="bg-surface-container p-2 rounded-lg text-on-surface max-w-[85%]">
+<div class="font-telemetry-sm text-[10px] text-outline mb-0.5">Passenger • 14:41 UTC</div>
+              "Flight boarding was pushed ahead abruptly, we are already seated in bus to remote stand. Runner was not at Gate 12."
+            </div>
+<div class="bg-primary-container/20 p-2 rounded-lg text-primary max-w-[85%] ml-auto text-right">
+<div class="font-telemetry-sm text-[10px] text-primary-container mb-0.5">Songa Ops Node • 14:43 UTC</div>
+              "Telemetry confirmed gate vector mismatch. Your order is retained, initiating automated refund protocol immediately."
+            </div>
+</div>
+<!-- Quick reply composer -->
+<div class="mt-space-sm flex items-center gap-space-xs">
+<input class="flex-1 bg-surface-container-lowest text-on-surface px-space-sm py-1.5 rounded-lg font-body-sm text-body-sm focus:outline-none" placeholder="Type dispatch response or canned macro..." type="text"/>
+<button class="px-space-md py-1.5 bg-secondary text-on-secondary rounded-lg font-label-caps text-label-caps uppercase font-bold hover:opacity-90">
+              Send
+            </button>
+</div>
+</div>
+</div>
+<!-- Station Runner & Ops Team Dispatch Contacts -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase font-semibold">Gate Runner Station Contacts</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">JKIA T1A ZONE</span>
+</div>
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">badge</span>
+</div>
+<div class="min-w-0">
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium truncate">M. Otieno (Runner #4)</div>
+<div class="font-telemetry-sm text-[10px] text-tertiary">Active at Gate 04</div>
+</div>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container flex items-center gap-space-xs">
+<div class="w-7 h-7 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[16px]">coffee</span>
+</div>
+<div class="min-w-0">
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium truncate">TIAT Central Pod</div>
+<div class="font-telemetry-sm text-[10px] text-secondary">Barista Lead Online</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Case selection switcher interactivity
+  const caseData = {
+    'CAS-4092': {
+      id: 'CAS-4092',
+      passenger: 'Elena Rostova',
+      flight: 'Ethiopian Airlines ET-308 (NBO T1A ➔ ADD)',
+      amount: '$24.00',
+      reason: 'Flight Boarded Early / Gate Change (12 ➔ 04)',
+      canRefund: true,
+      refundText: 'Execute Instant PayPal Refund ($24.00)'
+    },
+    'CAS-4088': {
+      id: 'CAS-4088',
+      passenger: 'Kenji Takahashi',
+      flight: 'All Nippon Airways NH-880 (HND T3 ➔ SYD)',
+      amount: '$5.20',
+      reason: 'Beverage Temperature Variance (Cold Brew vs Hot Pour)',
+      canRefund: false,
+      refundText: 'Refund Processed ($5.20 Reversal Complete)'
+    },
+    'CAS-4075': {
+      id: 'CAS-4075',
+      passenger: 'Dr. Lillian Kiprop',
+      flight: 'Kenya Airways KQ-102 (NBO T1A ➔ LHR)',
+      amount: '$48.50',
+      reason: 'Transit Bag Tamper-Evident Seal Query',
+      canRefund: false,
+      refundText: 'Case Archived / Order Completed'
+    }
+  };
+
+  function selectCase(caseId) {
+    const data = caseData[caseId];
+    if (!data) return;
+
+    // Highlight card
+    document.querySelectorAll('[id^="card-CAS-"]').forEach(el => {
+      el.classList.remove('ring-1', 'ring-primary-container/40');
+    });
+    const activeCard = document.getElementById('card-' + caseId);
+    if (activeCard) {
+      activeCard.classList.add('ring-1', 'ring-primary-container/40');
+    }
+
+    // Populate Detail View
+    document.getElementById('detailCaseId').innerText = data.id;
+    document.getElementById('detailPassenger').innerText = data.passenger;
+    document.getElementById('detailFlight').innerText = data.flight;
+    document.getElementById('detailAmount').innerText = data.amount;
+
+    const refundBtn = document.getElementById('refundButton');
+    const refundLabel = document.getElementById('refundBtnLabel');
+    refundLabel.innerText = data.refundText;
+
+    if (!data.canRefund) {
+      refundBtn.disabled = true;
+      refundBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    } else {
+      refundBtn.disabled = false;
+      refundBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  function showToast(msg) {
+    const toast = document.getElementById('actionToast');
+    const toastMsg = document.getElementById('actionToastMessage');
+    toastMsg.innerText = msg;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 4000);
+  }
+
+  function triggerInstantRefund() {
+    const refundBtn = document.getElementById('refundButton');
+    const refundLabel = document.getElementById('refundBtnLabel');
+    refundLabel.innerText = 'Transmitting to PayPal Sandbox...';
+    refundBtn.disabled = true;
+
+    setTimeout(() => {
+      refundLabel.innerText = 'PayPal Refund Settled ($24.00 Reversed)';
+      refundBtn.classList.remove('bg-primary-container');
+      refundBtn.classList.add('bg-tertiary-container', 'text-on-tertiary-container');
+      showToast('PayPal API 200 OK: Full $24.00 escrow credit returned to Elena Rostova.');
+    }, 1200);
+  }
+
+  function triggerVoucherApology() {
+    const voucherBtnLabel = document.getElementById('voucherBtnLabel');
+    voucherBtnLabel.innerText = 'Voucher Dispatched (SMS/Wallet)';
+    showToast('Addis Ababa (ADD) Skylight Lounge + 500 Songa Air-Miles transmitted to passenger wallet.');
+  }
+
+  function triggerResolveCase() {
+    const closeBtnLabel = document.getElementById('closeBtnLabel');
+    closeBtnLabel.innerText = 'Case CAS-4092 Closed';
+    showToast('Audit recorded. SLA 14.2m turnaround locked in ledger.');
+  }
+
+  // Quick Filter simulation
+  document.querySelectorAll('#caseFilterTabs button').forEach(button => {
+    button.addEventListener('click', function() {
+      document.querySelectorAll('#caseFilterTabs button').forEach(b => {
+        b.className = 'px-space-sm py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors font-label-caps text-label-caps uppercase whitespace-nowrap';
+      });
+      this.className = 'px-space-sm py-1.5 rounded-lg bg-primary-container text-on-primary font-label-caps text-label-caps uppercase font-bold whitespace-nowrap shadow-sm';
+    });
+  });
+
+  // Search filter typing simulation
+  document.getElementById('caseSearchInput').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    const cards = document.querySelectorAll('[id^="card-CAS-"]');
+    cards.forEach(card => {
+      const text = card.innerText.toLowerCase();
+      if (text.includes(query)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant py-space-md shadow-[0_-1px_8px_rgba(0,0,0,0.3)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-sm font-telemetry-sm text-telemetry-sm text-center md:text-left"><div>ICAO Annex 17 Airside Retail Compliance • IATA AHM 560 Transit Fulfilment Standard • 256-bit TLS v1.3 Verified</div><div class="text-outline">Songa Aviation Technologies (Pan-African &amp; Global Airspace)</div></div></footer></body></html>

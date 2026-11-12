@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Grotesk:wght@100..900&display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#5d1900", "tertiary-fixed-dim": "#4edea3", "surface-container": "#1f1f23", "surface-container-highest": "#343538", "on-secondary-fixed": "#001e2c", "tertiary": "#4edea3", "on-error-container": "#ffdad6", "on-secondary": "#00354a", "surface-tint": "#ffb59d", "primary-fixed": "#ffdbd0", "secondary-fixed": "#c4e7ff", "surface": "#121316", "on-background": "#e3e2e6", "background": "#121316", "error": "#ffb4ab", "surface-bright": "#38393d", "on-tertiary-fixed": "#002113", "on-primary-container": "#561600", "primary": "#ffb59d", "on-tertiary-fixed-variant": "#005236", "on-tertiary": "#003824", "secondary": "#7bd0ff", "on-primary-fixed-variant": "#832700", "inverse-primary": "#ab3500", "on-secondary-container": "#00374d", "primary-container": "#ff5e1e", "inverse-surface": "#e3e2e6", "outline": "#aa897f", "secondary-container": "#00a6e0", "on-error": "#690005", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#7bd0ff", "surface-variant": "#343538", "surface-container-high": "#292a2d", "surface-container-lowest": "#0d0e11", "inverse-on-surface": "#2f3034", "on-primary-fixed": "#390c00", "error-container": "#93000a", "surface-dim": "#121316", "on-tertiary-container": "#003421", "outline-variant": "#5b4138", "tertiary-fixed": "#6ffbbe", "on-secondary-fixed-variant": "#004c69", "tertiary-container": "#00a874", "on-surface-variant": "#e3beb3", "on-surface": "#e3e2e6", "primary-fixed-dim": "#ffb59d" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "margin": "3rem", "gutter": "1.5rem", "margin-mobile": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "telemetry-sm": ["JetBrains Mono"], "display-hero": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "display-hero-mobile": ["Space Grotesk"], "telemetry-md": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-caps": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "body-lg": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "telemetry-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "telemetry-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "telemetry-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "500" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-28 w-full flex flex-col justify-between"><div class="h-20 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="font-display-hero text-headline-md tracking-wider text-on-surface uppercase">SONGA</span><span class="font-label-caps text-label-caps text-secondary px-space-xs py-0.5 rounded bg-surface-container-highest">AVN-OPS</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span><span class="font-telemetry-sm text-telemetry-sm text-tertiary tracking-wider uppercase font-semibold">4,812 FLIGHTS MONITORED</span></div></div><nav class="hidden lg:flex items-center gap-space-xs font-label-caps text-label-caps uppercase" data-active-classes="bg-surface-container-highest text-primary-container font-semibold rounded"><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="flights" href="#">Flights</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="details" href="#">Details</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="watchlist" href="#">Watchlist</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendar" href="#">Calendar</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="travel-commerce" href="#">Travel Commerce</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ai-assistant" href="#">AI Assistant</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="billing-passes" href="#">Billing & Passes</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container font-telemetry-md text-telemetry-md text-secondary"><span class="material-symbols-outlined text-[15px]">schedule</span><span>14:38 UTC</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high"><span class="material-symbols-outlined text-[14px] text-primary">ac_unit</span><span class="font-label-caps text-label-caps text-on-surface-variant">Festive Mode</span><div class="w-7 h-4 rounded-full bg-surface-container-lowest p-0.5 flex items-center cursor-pointer"><div class="w-3 h-3 rounded-full bg-primary-fixed"></div></div></div><button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase hover:bg-primary transition-colors shadow-[0_0_16px_rgba(255,94,30,0.35)]"><span class="material-symbols-outlined text-[16px]">radar</span><span>Track Flight</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-8 w-full bg-surface-container-low px-gutter flex items-center justify-between text-telemetry-sm font-telemetry-sm text-on-surface-variant overflow-hidden"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs"><span class="text-secondary font-semibold">ATMOSPHERE</span><span>NOMINAL / FL410 CLEAR</span></div><div class="hidden sm:flex items-center gap-space-xs"><span>SAT-FEED:</span><span class="text-tertiary">GEO-SYNC ACTIVE</span></div><div class="hidden md:flex items-center gap-space-xs"><span>SIGMET ALERT:</span><span class="text-primary">07 SECTORS ACTIVE</span></div></div><div class="flex items-center gap-space-lg"><div class="hidden lg:flex items-center gap-space-xs"><span>STREAM RATE:</span><span class="text-secondary">1.24 GB/S</span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>GLOBAL TELEMETRY STREAM RUNNING</span></div></div></div></div></header><main class="w-full pt-28 bg-surface flex-1"><div class="flex flex-col w-full">
+<!-- Mode Switcher & Operational Environment Banner -->
+<section class="w-full px-gutter py-space-md bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-space-md">
+<!-- Mode Pill Switcher -->
+<div class="flex items-center p-1 rounded-full bg-surface-container-high shadow-inner">
+<button class="px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 text-on-surface-variant hover:text-on-surface" id="mode-prod-btn" onclick="switchMode('prod')">
+          Production Checkout
+        </button>
+<button class="px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 bg-primary-container text-on-primary shadow-sm flex items-center gap-1.5" id="mode-dev-btn" onclick="switchMode('dev')">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary animate-ping"></span>
+          Developer Sandbox Testbed
+        </button>
+</div>
+<!-- Environment Telemetry Pill -->
+<div class="flex items-center gap-space-sm px-space-md py-1.5 rounded-full bg-surface-container font-telemetry-sm text-telemetry-sm text-secondary overflow-x-auto">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-on-surface font-semibold tracking-wide">PAYPAL INTEGRATION ENVIRONMENT:</span>
+<span class="text-tertiary-fixed-dim">SANDBOX VERIFIED</span>
+<span class="text-outline-variant">|</span>
+<span class="text-secondary-fixed">API v2/checkout/orders</span>
+<span class="text-outline-variant">|</span>
+<span class="text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">broadcast_on_personal</span>
+          Webhook Listener Active
+        </span>
+</div>
+</div>
+</section>
+<!-- Interactive Payment Lifecycle State Switcher Bar -->
+<section class="w-full px-gutter py-space-sm bg-surface-container-low">
+<div class="max-w-7xl mx-auto flex items-center gap-space-xs overflow-x-auto py-1">
+<span class="font-label-caps text-label-caps uppercase text-outline mr-2 shrink-0 flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px] text-primary-container">alt_route</span>
+        State Harness:
+      </span>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-primary-container text-on-primary" id="btn-state-ready" onclick="setPaymentState('ready')">
+        01 Ready to Pay
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-processing" onclick="setPaymentState('processing')">
+        02 Telemetry Processing
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-success" onclick="setPaymentState('success')">
+        03 Success / Confirmed
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-pending" onclick="setPaymentState('pending')">
+        04 Bank Review Pending
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-declined" onclick="setPaymentState('declined')">
+        05 Instrument Declined
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-cancelled" onclick="setPaymentState('cancelled')">
+        06 Order Cancelled
+      </button>
+<button class="state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface" id="btn-state-refunded" onclick="setPaymentState('refunded')">
+        07 Credited / Refunded
+      </button>
+</div>
+</section>
+<!-- Primary Split-Panel Checkout Section -->
+<main class="w-full px-gutter py-space-xl max-w-7xl mx-auto flex flex-col gap-space-xl">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Left Panel: Plan Specification & Customer Manifest (7 Cols) -->
+<section class="lg:col-span-7 flex flex-col gap-space-lg">
+<!-- Header & Pass Badge -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-md relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-high font-telemetry-sm text-telemetry-sm text-primary">TIER: AVIONICS UNLIMITED</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest font-label-caps text-label-caps text-secondary uppercase">Pass ID: SGA-VOY-2025</span>
+</div>
+<span class="flex items-center gap-1 font-telemetry-sm text-telemetry-sm text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+              Live Dispatch Tier Active
+            </span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">
+              Voyager Annual Pass & Holiday Travel Shield
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Comprehensive mission control for global long-haul flight routing, real-time predictive ADS-B telemetry, and passenger airframe disruption guarantees.
+            </p>
+</div>
+<!-- Feature Matrix Bento -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+<div class="p-space-sm rounded bg-surface-container-high flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] shrink-0 mt-0.5">satellite_alt</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">Satellite ADS-B Stream</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Continuous 4-second vector updates & SIGMET scans.</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-high flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-tertiary text-[20px] shrink-0 mt-0.5">gavel</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">EU261 €600 Autopilot</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Automated regulatory filing upon severe flight delays.</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-high flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">chat</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">WhatsApp Dispatch Link</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Direct encrypted gate change and baggage carousel ping.</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-container-high flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary-fixed text-[20px] shrink-0 mt-0.5">group</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">Family Fleet Radar</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Simultaneous surveillance for up to 5 family travelers.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer Identity Manifest -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase text-secondary tracking-wider">01. Passenger & Subscriber Identity</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">SECURE DISPATCH MANIFEST</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Primary Account Holder</label>
+<input class="w-full px-space-md py-2.5 rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary-container" type="text" value="Capt. Ethan Vance"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Primary Dispatch Email</label>
+<input class="w-full px-space-md py-2.5 rounded bg-surface-container-lowest text-on-surface font-telemetry-md text-telemetry-md focus:outline-none focus:ring-1 focus:ring-primary-container" type="email" value="ethan.vance@aerocontrol.org"/>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Base Airspace / Origin Hub</label>
+<div class="relative">
+<input class="w-full px-space-md py-2.5 rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary-container" type="text" value="KJFK - New York John F. Kennedy"/>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-secondary text-[18px]">flight_takeoff</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-caps text-label-caps uppercase text-on-surface-variant">Billing Territory</label>
+<select class="w-full px-space-md py-2.5 rounded bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-primary-container">
+<option value="US">United States (USD $)</option>
+<option value="GB">United Kingdom (GBP £)</option>
+<option value="EU">European Union (EUR €)</option>
+<option value="JP">Japan (JPY ¥)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Order Tariff Breakdown Table -->
+<div class="bg-surface-container-low p-space-lg rounded-xl flex flex-col gap-space-sm shadow-md">
+<span class="font-label-caps text-label-caps uppercase text-outline">02. Subscription Ledger Summary</span>
+<div class="flex items-center justify-between py-1 text-on-surface font-body-md text-body-md">
+<span>SONGA Voyager Annual License (365 Days)</span>
+<span class="font-telemetry-md text-telemetry-md font-semibold">$240.00 USD</span>
+</div>
+<div class="flex items-center justify-between py-1 text-tertiary font-body-md text-body-md">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">celebration</span>
+              Festive Aviation Shield Rebate (15% Privilege)
+            </span>
+<span class="font-telemetry-md text-telemetry-md font-semibold">-$36.00 USD</span>
+</div>
+<div class="flex items-center justify-between py-1 text-on-surface-variant font-body-sm text-body-sm">
+<span>IATA Route Compliance & Global Telemetry Fee</span>
+<span class="font-telemetry-sm text-telemetry-sm">$0.00 (Waived)</span>
+</div>
+<div class="flex items-center justify-between py-1 text-on-surface-variant font-body-sm text-body-sm">
+<span>Regulatory VAT / Sales Tax</span>
+<span class="font-telemetry-sm text-telemetry-sm">$0.00 USD</span>
+</div>
+<div class="my-space-xs h-0.5 bg-surface-container-highest"></div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Total Due Today</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">Scheduled auto-renewal on Dec 24, 2026</span>
+</div>
+<div class="text-right">
+<span class="font-display-hero text-headline-lg text-primary-container font-bold">$204.00</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant block uppercase">USD / Annual</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Right Panel: Dedicated PayPal Payment Experience (5 Cols) -->
+<section class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- PayPal Checkout Container Card -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-xl relative overflow-hidden">
+<!-- PayPal Header Bar -->
+<div class="flex items-center justify-between bg-surface-container-lowest px-space-md py-space-sm rounded-lg">
+<div class="flex items-center gap-2">
+<span class="font-display-hero text-headline-sm text-secondary font-bold italic tracking-tight">PayPal</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-tertiary">CHECKOUT v2.4</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold">TLS 1.3 SECURE</span>
+</div>
+</div>
+<!-- Dynamic State Display Area -->
+<div class="flex flex-col gap-space-md min-h-[320px] justify-center" id="payment-state-view">
+<!-- STATE: READY TO PAY -->
+<div class="payment-state-pane flex flex-col gap-space-md" id="state-ready">
+<div class="p-space-sm rounded bg-surface-container-high flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-on-surface">Authorizing Merchant:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary font-bold">SONGA AVN SYSTEMS INC.</span>
+</div>
+<!-- PayPal Smart Buttons Simulation -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<!-- PayPal Gold Smart Button -->
+<button class="w-full py-3.5 px-space-md rounded bg-[#FFC439] hover:bg-[#F2BA36] transition-transform active:scale-[0.99] flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(255,196,57,0.25)] cursor-pointer group" onclick="simulateCustomerPaymentAction()">
+<span class="font-display-hero text-[19px] font-black italic tracking-tighter text-[#003087]">Pay<span class="text-[#0079C1]">Pal</span></span>
+<span class="font-label-caps text-label-caps uppercase text-[#003087] font-bold">Instant Checkout</span>
+</button>
+<!-- PayPal Pay Later / Pay in 4 Button -->
+<button class="w-full py-3 px-space-md rounded bg-[#102B4E] hover:bg-[#153663] text-[#F7F8FA] transition-all flex items-center justify-center gap-2 cursor-pointer" onclick="simulateCustomerPaymentAction()">
+<span class="font-display-hero text-[15px] font-bold italic tracking-tight text-[#0079C1]">Pay<span class="text-[#7bd0ff]">Pal</span></span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Pay in 4 Interest-Free: $51.00/mo</span>
+</button>
+<!-- Alternative Debit/Credit Card standard secondary -->
+<button class="w-full py-2.5 px-space-md rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase flex items-center justify-center gap-2 transition-colors" onclick="setPaymentState('processing')">
+<span class="material-symbols-outlined text-[16px]">credit_card</span>
+<span>Pay with Standard Card via PayPal Guest</span>
+</button>
+</div>
+<!-- Reassurance Statement -->
+<div class="flex items-start gap-space-xs text-on-surface-variant pt-2">
+<span class="material-symbols-outlined text-tertiary text-[18px] shrink-0">verified_user</span>
+<p class="font-body-sm text-body-sm">
+                  Encrypted 256-bit TLS handshake with PayPal Holdings Inc. Instant authorization without storing card credentials on Songa avionics nodes.
+                </p>
+</div>
+</div>
+<!-- STATE: PROCESSING (Telemetry Handshake) -->
+<div class="payment-state-pane hidden flex-col items-center justify-center gap-space-md text-center py-space-lg" id="state-processing">
+<div class="relative w-20 h-20 flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-2 border-primary/20 animate-ping"></div>
+<div class="w-16 h-16 rounded-full border-2 border-transparent border-t-primary-container border-r-primary-container animate-spin"></div>
+<span class="material-symbols-outlined text-primary-container text-[28px] absolute">satellite_alt</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Authorizing Telemetry Token</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">POST /v2/checkout/orders/8829104/capture...</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xs">
+                Awaiting confirmation from PayPal clearance nodes. Handshaking with flight operations cluster.
+              </p>
+</div>
+<!-- STATE: SUCCESS / CONFIRMED -->
+<div class="payment-state-pane hidden flex-col gap-space-md" id="state-success">
+<div class="p-space-md rounded-xl bg-tertiary/10 flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary shrink-0">
+<span class="material-symbols-outlined text-[24px]">done_all</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-tertiary">Payment Capture Confirmed</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">Trans ID: #SGA-PP-8829104</span>
+</div>
+</div>
+<!-- Pass Credential Summary -->
+<div class="p-space-md rounded bg-surface-container-lowest flex flex-col gap-space-xs font-telemetry-sm text-telemetry-sm">
+<div class="flex justify-between text-on-surface-variant">
+<span>SUBSCRIPTION STATUS:</span>
+<span class="text-tertiary font-bold">ACTIVE & PROVISIONED</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>PAYMENT PROVIDER:</span>
+<span class="text-on-surface">PAYPAL INSTANT VAULT</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>AMOUNT CAPTURED:</span>
+<span class="text-on-surface font-bold">$204.00 USD</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>NEXT BILLING DATE:</span>
+<span class="text-on-surface">DECEMBER 24, 2026</span>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs">
+<button class="w-full py-2.5 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase flex items-center justify-center gap-1.5 shadow-md" onclick="downloadPdfReceipt()">
+<span class="material-symbols-outlined text-[18px]">download</span>
+<span>Download IATA Flight Pass PDF</span>
+</button>
+<button class="w-full py-2 rounded bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps uppercase hover:text-on-surface text-center" onclick="setPaymentState('ready')">
+                  Dismiss / Return to Cockpit
+                </button>
+</div>
+</div>
+<!-- STATE: PENDING (Review) -->
+<div class="payment-state-pane hidden flex-col items-center justify-center gap-space-md text-center py-space-md" id="state-pending">
+<div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[32px] animate-pulse">pending</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-secondary">Under Banking Review</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">TRANSACTION STATUS: PENDING_CLEARANCE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                PayPal is conducting safety checks with your issuing institution. Your flight radar access will activate automatically once cleared (typically 2-15 minutes).
+              </p>
+<button class="px-space-md py-1.5 rounded bg-surface-container-high font-label-caps text-label-caps uppercase text-on-surface" onclick="setPaymentState('ready')">
+                Check Status Again
+              </button>
+</div>
+<!-- STATE: DECLINED -->
+<div class="payment-state-pane hidden flex-col items-center justify-center gap-space-md text-center py-space-md" id="state-declined">
+<div class="w-14 h-14 rounded-full bg-error/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[32px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-error">Instrument Declined (422)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-error-container">INSTRUMENT_DECLINED / INSUFFICIENT_FUNDS</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                PayPal could not process the transaction using the selected funding source. Please choose another payment method or update your PayPal wallet.
+              </p>
+<button class="w-full py-2.5 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase" onclick="setPaymentState('ready')">
+                Retry with Alternative Instrument
+              </button>
+</div>
+<!-- STATE: CANCELLED -->
+<div class="payment-state-pane hidden flex-col items-center justify-center gap-space-md text-center py-space-md" id="state-cancelled">
+<div class="w-14 h-14 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[32px]">cancel</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-on-surface">Checkout Cancelled</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">USER_ABORTED_PAYPAL_SESSION</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                No funds were deducted. Your annual flight manifest reservation remains saved for 24 hours.
+              </p>
+<button class="w-full py-2.5 rounded bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase hover:bg-surface-container-highest" onclick="setPaymentState('ready')">
+                Resume Checkout
+              </button>
+</div>
+<!-- STATE: REFUNDED -->
+<div class="payment-state-pane hidden flex-col items-center justify-center gap-space-md text-center py-space-md" id="state-refunded">
+<div class="w-14 h-14 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[32px]">currency_exchange</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-secondary">Refund Completed ($204.00 USD)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">REFUND ID: #RF-PP-9942018</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">
+                Full amount of $204.00 has been credited back to your original PayPal balance / funding instrument. Airspace license deactivated.
+              </p>
+<button class="px-space-md py-1.5 rounded bg-surface-container-high font-label-caps text-label-caps uppercase text-on-surface" onclick="setPaymentState('ready')">
+                New Order Session
+              </button>
+</div>
+</div>
+<!-- Bottom Compliance Consent -->
+<div class="pt-space-xs text-on-surface-variant font-body-sm text-body-sm flex flex-col gap-1 text-center">
+<span>By confirming payment, you authorize recurring annual billing of $204.00 until cancelled.</span>
+<div class="flex justify-center items-center gap-space-md font-label-caps text-label-caps uppercase text-outline">
+<a class="hover:text-primary" href="#">Terms of Flight Service</a>
+<span>•</span>
+<a class="hover:text-primary" href="#">PayPal Agreement</a>
+<span>•</span>
+<a class="hover:text-primary" href="#">Cancel Anytime</a>
+</div>
+</div>
+</div>
+<!-- Security & IATA Seal Bento Box -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-[28px]">shield</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">Zero Data Exposure Guarantee</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">PCI DSS Level-1 / SOC2 Type II Certified</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[20px]">check_circle</span>
+</div>
+</section>
+</div>
+<!-- Section 4: Developer Sandbox Testbed Dashboard -->
+<section class="w-full flex flex-col gap-space-md pt-space-md" id="developer-sandbox-suite">
+<!-- Testbed Header Bar -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="flex items-center gap-space-sm">
+<div class="w-3 h-3 rounded-full bg-primary-container animate-pulse"></div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Developer Sandbox Simulator & Dispatch Telemetry</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">POST /api/v1/integrations/paypal-sandbox • Payload Engine v3.1</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-tertiary">MOCK SANDBOX: READY</span>
+<button class="px-space-sm py-1 rounded bg-surface-container-highest hover:bg-surface-bright font-telemetry-sm text-telemetry-sm text-on-surface-variant hover:text-on-surface" onclick="clearConsoleLog()">
+            Clear Telemetry Buffer
+          </button>
+</div>
+</div>
+<!-- Testbed Workspace Grid (Controls + Live JSON Log) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- Left: Action Trigger Buttons (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-md">
+<span class="font-label-caps text-label-caps uppercase text-outline">Simulated Test Vectors</span>
+<div class="flex flex-col gap-space-sm">
+<!-- Sim 1: 200 OK Capture -->
+<button class="w-full p-space-sm rounded bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between text-left transition-colors group" onclick="triggerSimulatedPayload('CAPTURE_200')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-primary">Simulate 200 OK PayPal Capture</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">POST /v2/checkout/orders/{id}/capture</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[18px]">play_arrow</span>
+</button>
+<!-- Sim 2: 422 Payment Declined -->
+<button class="w-full p-space-sm rounded bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between text-left transition-colors group" onclick="triggerSimulatedPayload('DECLINE_422')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-error">Simulate 422 Declined Instrument</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">INSTRUMENT_DECLINED payload event</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-error text-[18px]">play_arrow</span>
+</button>
+<!-- Sim 3: Webhook PAYMENT.CAPTURE.COMPLETED -->
+<button class="w-full p-space-sm rounded bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between text-left transition-colors group" onclick="triggerSimulatedPayload('WEBHOOK_CAPTURE')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-secondary">Simulate Webhook Trigger</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">PAYMENT.CAPTURE.COMPLETED async hook</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-[18px]">play_arrow</span>
+</button>
+<!-- Sim 4: Duplicate Idempotency Key -->
+<button class="w-full p-space-sm rounded bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between text-left transition-colors group" onclick="triggerSimulatedPayload('IDEMPOTENT_RETRY')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-primary">Simulate Idempotency Key Re-entry</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">PayPal-Request-Id duplicate collision check</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[18px]">play_arrow</span>
+</button>
+<!-- Sim 5: Trigger Instant Refund -->
+<button class="w-full p-space-sm rounded bg-surface-container-high hover:bg-surface-container-highest flex items-center justify-between text-left transition-colors group" onclick="triggerSimulatedPayload('INSTANT_REFUND')">
+<div class="flex items-center gap-space-sm">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-semibold group-hover:text-secondary-fixed">Trigger Instant Refund Flow</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">POST /v2/payments/captures/{id}/refund</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">play_arrow</span>
+</button>
+</div>
+<!-- Supabase DB Sync Indicator -->
+<div class="p-space-sm rounded bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">Supabase DB Sync:</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">CONNECTED (US-EAST-1)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14ms latency</span>
+</div>
+</div>
+<!-- Right: Real-Time Webhook & JSON Telemetry Console (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest p-space-md rounded-xl flex flex-col gap-space-sm shadow-inner">
+<div class="flex items-center justify-between border-b border-surface-container pb-space-xs">
+<div class="flex items-center gap-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[15px] text-tertiary">terminal</span>
+<span class="text-on-surface font-semibold">SANDBOX_EVENT_STREAM.json</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-outline" id="console-timestamp">STREAM LIVE</span>
+</div>
+<!-- Console Output Box -->
+<pre class="w-full h-80 overflow-y-auto font-telemetry-sm text-telemetry-sm text-secondary bg-[#08090C] p-space-md rounded-lg whitespace-pre leading-relaxed select-all" id="telemetry-json-terminal">{
+  "event_type": "CHECKOUT.ORDER.INITIALIZED",
+  "resource_type": "order",
+  "timestamp": "2024-12-24T14:38:12.420Z",
+  "id": "ORD-SONGA-8829104-V",
+  "status": "CREATED",
+  "intent": "CAPTURE",
+  "purchase_units": [
+    {
+      "reference_id": "PU-VOY-2025",
+      "amount": {
+        "currency_code": "USD",
+        "value": "204.00",
+        "breakdown": {
+          "item_total": { "currency_code": "USD", "value": "240.00" },
+          "discount": { "currency_code": "USD", "value": "36.00" },
+          "tax_total": { "currency_code": "USD", "value": "0.00" }
+        }
+      },
+      "payee": {
+        "email_address": "merchant-ops@songa-avionics.com",
+        "merchant_id": "PP-SONGA-HQ-01"
+      }
+    }
+  ],
+  "links": [
+    { "href": "https://api.sandbox.paypal.com/v2/checkout/orders/ORD-SONGA-8829104-V", "rel": "self", "method": "GET" },
+    { "href": "https://www.sandbox.paypal.com/checkoutnow?token=ORD-SONGA-8829104-V", "rel": "approve", "method": "GET" }
+  ]
+}
+          </pre>
+<div class="flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm pt-1">
+<span>Buffer: 1 / 50 events loaded</span>
+<span class="text-tertiary">Idempotency Key Validated</span>
+</div>
+</div>
+</div>
+<!-- Account Billing & Membership History Table -->
+<div class="bg-surface-container p-space-lg rounded-xl flex flex-col gap-space-md shadow-md mt-space-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Account Billing & Historical Passes</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Archived PayPal billing settlements and active airspace dispatch certificates.</p>
+</div>
+<button class="px-space-md py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-1.5 self-start md:self-auto" onclick="downloadAllInvoices()">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+            Export Audit Ledger
+          </button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left font-body-sm text-body-sm">
+<thead>
+<tr class="font-label-caps text-label-caps uppercase text-outline border-b border-surface-container-high">
+<th class="py-2.5 px-space-sm">Invoice / Ref</th>
+<th class="py-2.5 px-space-sm">Flight Pass Product</th>
+<th class="py-2.5 px-space-sm">Settlement Method</th>
+<th class="py-2.5 px-space-sm">Billing Cycle</th>
+<th class="py-2.5 px-space-sm">Amount</th>
+<th class="py-2.5 px-space-sm">Status</th>
+<th class="py-2.5 px-space-sm text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40 text-on-surface font-telemetry-sm text-telemetry-sm">
+<!-- Row 1: Active -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-3 px-space-sm font-semibold text-secondary">INV-2024-8829</td>
+<td class="py-3 px-space-sm font-body-md text-body-md text-on-surface">Voyager Annual + Holiday Shield</td>
+<td class="py-3 px-space-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">account_balance_wallet</span>
+                  PayPal (ethan***@gmail.com)
+                </td>
+<td class="py-3 px-space-sm text-on-surface-variant">2024-12-24 - 2026-12-24</td>
+<td class="py-3 px-space-sm font-bold text-primary">$204.00 USD</td>
+<td class="py-3 px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-tertiary/10 text-tertiary font-bold">SETTLED</span>
+</td>
+<td class="py-3 px-space-sm text-right space-x-2">
+<button class="text-secondary hover:text-on-surface underline" onclick="downloadPdfReceipt()">PDF Receipt</button>
+<button class="text-error hover:underline" onclick="pauseSubscriptionPrompt()">Manage</button>
+</td>
+</tr>
+<!-- Row 2: Prior Year -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-3 px-space-sm text-on-surface-variant">INV-2023-4109</td>
+<td class="py-3 px-space-sm font-body-md text-body-md text-on-surface">AeroCommand Dispatcher Pass</td>
+<td class="py-3 px-space-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">credit_card</span>
+                  PayPal Vault (Card •••• 4012)
+                </td>
+<td class="py-3 px-space-sm text-on-surface-variant">2023-12-19 - 2024-12-19</td>
+<td class="py-3 px-space-sm font-bold">$189.00 USD</td>
+<td class="py-3 px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">EXPIRED</span>
+</td>
+<td class="py-3 px-space-sm text-right space-x-2">
+<button class="text-secondary hover:text-on-surface underline" onclick="downloadPdfReceipt()">PDF Receipt</button>
+</td>
+</tr>
+<!-- Row 3: Add-on Radar -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-3 px-space-sm text-on-surface-variant">INV-2023-1102</td>
+<td class="py-3 px-space-sm font-body-md text-body-md text-on-surface">Transatlantic ADS-B High-Freq Booster</td>
+<td class="py-3 px-space-sm flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[16px]">account_balance_wallet</span>
+                  PayPal Express
+                </td>
+<td class="py-3 px-space-sm text-on-surface-variant">One-Time Token</td>
+<td class="py-3 px-space-sm font-bold">$49.00 USD</td>
+<td class="py-3 px-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container-highest text-on-surface-variant">ARCHIVED</span>
+</td>
+<td class="py-3 px-space-sm text-right space-x-2">
+<button class="text-secondary hover:text-on-surface underline" onclick="downloadPdfReceipt()">PDF Receipt</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Inline Logic for Mode Switching, State Harness, and Payload Simulation -->
+<script>
+  function switchMode(mode) {
+    const prodBtn = document.getElementById('mode-prod-btn');
+    const devBtn = document.getElementById('mode-dev-btn');
+    const devSuite = document.getElementById('developer-sandbox-suite');
+
+    if (mode === 'prod') {
+      prodBtn.className = "px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 bg-primary-container text-on-primary shadow-sm";
+      devBtn.className = "px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 text-on-surface-variant hover:text-on-surface";
+      if (devSuite) devSuite.classList.add('opacity-40', 'pointer-events-none');
+    } else {
+      devBtn.className = "px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 bg-primary-container text-on-primary shadow-sm flex items-center gap-1.5";
+      prodBtn.className = "px-space-md py-1.5 rounded-full font-label-caps text-label-caps uppercase transition-all duration-200 text-on-surface-variant hover:text-on-surface";
+      if (devSuite) devSuite.classList.remove('opacity-40', 'pointer-events-none');
+    }
+  }
+
+  function setPaymentState(stateKey) {
+    // Hide all panes
+    const panes = document.querySelectorAll('.payment-state-pane');
+    panes.forEach(pane => pane.classList.add('hidden'));
+
+    // Reset all state tab button styles
+    const tabBtns = document.querySelectorAll('.state-tab-btn');
+    tabBtns.forEach(btn => {
+      btn.className = "state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface";
+    });
+
+    // Show target pane
+    const targetPane = document.getElementById('state-' + stateKey);
+    if (targetPane) {
+      targetPane.classList.remove('hidden');
+    }
+
+    // Highlight target button
+    const activeBtn = document.getElementById('btn-state-' + stateKey);
+    if (activeBtn) {
+      activeBtn.className = "state-tab-btn px-space-sm py-1 rounded font-telemetry-sm text-telemetry-sm shrink-0 bg-primary-container text-on-primary font-bold";
+    }
+
+    // Append telemetry ping to sandbox console
+    logTelemetryEvent('UI_STATE_TRANSITION', {
+      target_state: stateKey.toUpperCase(),
+      client_timestamp: new Date().toISOString(),
+      session_ref: "SGA-SES-8829104"
+    });
+  }
+
+  function simulateCustomerPaymentAction() {
+    setPaymentState('processing');
+    setTimeout(() => {
+      setPaymentState('success');
+      logTelemetryEvent('PAYMENT.CAPTURE.COMPLETED', {
+        id: "CAP-PP-8829104-OK",
+        status: "COMPLETED",
+        amount: { value: "204.00", currency_code: "USD" },
+        create_time: new Date().toISOString()
+      });
+    }, 1800);
+  }
+
+  function triggerSimulatedPayload(type) {
+    const term = document.getElementById('telemetry-json-terminal');
+    const ts = new Date().toISOString();
+
+    let samplePayload = {};
+
+    switch(type) {
+      case 'CAPTURE_200':
+        setPaymentState('success');
+        samplePayload = {
+          event_type: "PAYMENT.CAPTURE.COMPLETED",
+          resource_id: "CAP-SONGA-" + Math.floor(100000 + Math.random() * 900000),
+          status: "COMPLETED",
+          seller_protection: { status: "ELIGIBLE" },
+          amount: { currency_code: "USD", value: "204.00" },
+          final_capture: true,
+          timestamp: ts
+        };
+        break;
+
+      case 'DECLINE_422':
+        setPaymentState('declined');
+        samplePayload = {
+          name: "UNPROCESSABLE_ENTITY",
+          message: "The requested action could not be performed, semantically incorrect, or failed business validation.",
+          debug_id: "dbg_" + Math.random().toString(36).substring(7),
+          details: [
+            {
+              issue: "INSTRUMENT_DECLINED",
+              description: "The instrument presented was declined by the processor. Please ask the customer for alternative payment."
+            }
+          ],
+          timestamp: ts
+        };
+        break;
+
+      case 'WEBHOOK_CAPTURE':
+        samplePayload = {
+          id: "WH-EVT-" + Math.floor(1000000 + Math.random() * 9000000),
+          event_version: "1.0",
+          create_time: ts,
+          resource_type: "capture",
+          event_type: "PAYMENT.CAPTURE.COMPLETED",
+          summary: "Payment capture for $204.00 USD succeeded and verified against Supabase order store.",
+          resource: {
+            id: "CAP-99210",
+            status: "COMPLETED",
+            custom_id: "SGA-USER-ETHAN-VANCE"
+          }
+        };
+        break;
+
+      case 'IDEMPOTENT_RETRY':
+        samplePayload = {
+          status: "HTTP_STATUS_409_CONFLICT",
+          error: "IDEMPOTENCY_KEY_COLLISION",
+          message: "A request with the same PayPal-Request-Id header 'SGA-IDEMP-0012' has already processed successfully.",
+          original_order_id: "ORD-SONGA-8829104-V",
+          mitigation: "Re-queried existing order data without multiple debiting.",
+          timestamp: ts
+        };
+        break;
+
+      case 'INSTANT_REFUND':
+        setPaymentState('refunded');
+        samplePayload = {
+          id: "REF-PP-" + Math.floor(100000 + Math.random() * 900000),
+          status: "COMPLETED",
+          amount: { value: "204.00", currency_code: "USD" },
+          invoice_id: "INV-2024-8829",
+          note_to_payer: "Disruption Shield Guarantee settlement returned as credit.",
+          create_time: ts
+        };
+        break;
+    }
+
+    logTelemetryEvent(type, samplePayload);
+  }
+
+  function logTelemetryEvent(header, data) {
+    const term = document.getElementById('telemetry-json-terminal');
+    const timeElem = document.getElementById('console-timestamp');
+    const now = new Date().toLocaleTimeString();
+    if (timeElem) timeElem.innerText = "LAST RECEIVED: " + now;
+
+    if (term) {
+      const entry = "// EVENT: " + header + " @ " + now + "\n" + JSON.stringify(data, null, 2) + "\n\n";
+      term.textContent = entry + term.textContent;
+    }
+  }
+
+  function clearConsoleLog() {
+    const term = document.getElementById('telemetry-json-terminal');
+    if (term) {
+      term.textContent = "// Telemetry console flushed. Ready for next sandbox webhook dispatch.\n";
+    }
+  }
+
+  function downloadPdfReceipt() {
+    alert("Songa Avionics: Generating encrypted IATA compliant pass receipt for transaction #SGA-PP-8829104...");
+  }
+
+  function downloadAllInvoices() {
+    alert("Songa Dispatch: Exporting complete CSV/PDF ledger of all historical flight licenses...");
+  }
+
+  function pauseSubscriptionPrompt() {
+    alert("Subscription Control: Modify Voyager Pass auto-renewal parameters in Supabase Account Registry.");
+  }
+</script></main><footer class="w-full bg-surface-container-lowest py-space-xl text-on-surface-variant"><div class="w-full px-gutter max-w-7xl mx-auto flex flex-col gap-space-lg"><div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"><div class="flex flex-col gap-space-xs"><div class="flex items-center gap-space-sm"><span class="font-display-hero text-headline-sm uppercase text-on-surface">SONGA INTELLIGENCE</span><span class="px-space-xs py-0.5 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-secondary">ADS-B STREAMING ACTIVE</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Aeronautical operations, real-time trajectory dispatch engine, and high-altitude passenger travel telemetry. Compliant with international flight dispatch standards.</p></div><div class="flex items-center gap-space-md"><span class="px-space-sm py-1 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-on-surface">ICAO DOC 4444</span><span class="px-space-sm py-1 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-on-surface">IATA AHM 560</span></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-space-md pt-space-md bg-surface-container-low/40 rounded px-space-md"><span class="font-telemetry-sm text-telemetry-sm">© 2024 SONGA AVIATION INTELLIGENCE SYSTEMS. ALL DISPATCH DATA ENCRYPTED.</span><div class="flex items-center gap-space-md font-label-caps text-label-caps uppercase"><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Security & ADS-B Specs</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">API Dispatch Gateway</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Compliance Matrix</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">System Status</a></div></div></div></footer></body></html>

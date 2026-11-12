@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-secondary-fixed": "#001e2c", "surface-container": "#1f1f23", "surface": "#121316", "on-primary-container": "#561600", "outline-variant": "#5b4138", "on-tertiary-fixed-variant": "#005236", "surface-container-lowest": "#0d0e11", "on-tertiary-fixed": "#002113", "on-secondary": "#00354a", "tertiary-fixed-dim": "#4edea3", "on-secondary-fixed-variant": "#004c69", "secondary-fixed": "#c4e7ff", "error": "#ffb4ab", "secondary-fixed-dim": "#7bd0ff", "tertiary": "#4edea3", "outline": "#aa897f", "primary-container": "#ff5e1e", "background": "#121316", "secondary-container": "#00a6e0", "surface-tint": "#ffb59d", "on-surface": "#e3e2e6", "surface-container-high": "#292a2d", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#6ffbbe", "on-error-container": "#ffdad6", "on-background": "#e3e2e6", "secondary": "#7bd0ff", "on-tertiary": "#003824", "on-tertiary-container": "#003421", "primary-fixed": "#ffdbd0", "surface-bright": "#38393d", "inverse-on-surface": "#2f3034", "tertiary-container": "#00a874", "primary": "#ffb59d", "inverse-primary": "#ab3500", "error-container": "#93000a", "on-secondary-container": "#00374d", "primary-fixed-dim": "#ffb59d", "surface-container-highest": "#343538", "on-primary-fixed-variant": "#832700", "on-primary": "#5d1900", "on-surface-variant": "#e3beb3", "on-error": "#690005", "surface-container-low": "#1b1b1f", "on-primary-fixed": "#390c00", "surface-dim": "#121316", "surface-variant": "#343538" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "margin": "3rem" }, fontFamily: { "label-caps": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "telemetry-sm": ["JetBrains Mono"], "display-hero": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "body-md": ["Inter"], "telemetry-md": ["JetBrains Mono"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-lg-mobile": ["Space Grotesk"] }, fontSize: { "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "600" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "500" }], "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "telemetry-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }], "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }], "telemetry-lg": ["20px", { lineHeight: "24px", letterSpacing: "0.04em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" }], "telemetry-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }], "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "-0.01em", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "headline-lg-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative flex items-center justify-center w-6 h-6"><span class="material-symbols-outlined text-primary-container text-[20px]">radar</span><span class="absolute top-0.5 right-0.5 flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface tracking-wider uppercase">Songa Avionics</span><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[10px] text-tertiary">sensors</span>LIVE STREAM</span></div></div><div class="flex items-center gap-space-sm"><div class="bg-surface-container-low px-2 py-1 rounded flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-on-surface-variant">schedule</span><span class="font-telemetry-sm text-telemetry-sm tracking-wide text-on-surface">14:28:05 UTC</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- Section 1: Seasonal Banner & Holiday Countdown Module -->
+<section class="p-gutter-mobile flex flex-col gap-space-sm">
+<!-- Festive Mode Toggle Ribbon -->
+<div class="bg-surface-container-low p-space-sm rounded-xl flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]">ac_unit</span>
+<span class="font-label-caps text-label-caps tracking-wider text-on-surface uppercase">Festive Expedition Mode</span>
+</div>
+<button aria-label="Toggle Christmas Mode" class="relative inline-flex h-6 w-11 items-center rounded-full bg-primary-container transition-colors focus:outline-none" id="festiveToggle">
+<span class="inline-block h-4 w-4 transform rounded-full bg-surface-container-lowest transition-transform translate-x-6" id="festiveKnob"></span>
+</button>
+</div>
+<!-- Airspace Alert Card -->
+<div class="relative overflow-hidden bg-surface-container rounded-xl p-space-md shadow-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div class="flex items-center gap-1.5">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-container"></span>
+</span>
+<span class="font-label-caps text-label-caps text-primary uppercase">Airspace Advisory</span>
+</div>
+<span class="bg-surface-container-highest text-tertiary font-telemetry-sm text-telemetry-sm px-2 py-0.5 rounded">T-MINUS 8 DAYS</span>
+</div>
+<div class="font-headline-sm text-headline-sm text-on-surface mb-1">
+        Peak Holiday Trans-Polar Congestion
+      </div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">
+        Sustained traffic corridor FL360-400 across Siberian-Nordic waypoints. Recommended airport terminal arrival buffer: +45m.
+      </p>
+<!-- Key Metrics Ribbon -->
+<div class="grid grid-cols-2 gap-space-xs bg-surface-container-lowest p-space-sm rounded-lg">
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Booked Sectors</span>
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-semibold">04 Legs</span>
+</div>
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Air Nautical Miles</span>
+<span class="font-telemetry-lg text-telemetry-lg text-secondary font-semibold">14,290 NM</span>
+</div>
+<div class="flex flex-col mt-2">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Total Layover</span>
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-semibold">36h 40m</span>
+</div>
+<div class="flex flex-col mt-2">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Buffer Rating</span>
+<div class="flex items-center gap-1">
+<span class="font-telemetry-lg text-telemetry-lg text-tertiary font-semibold">98.2%</span>
+<span class="bg-tertiary-container text-on-tertiary font-label-caps text-[9px] px-1 rounded uppercase">Punctual</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: View Selector & Dual UTC/Local Clocks -->
+<section class="px-gutter-mobile flex flex-col gap-space-sm">
+<!-- View Switcher Touch Bar -->
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+<button class="bg-primary-container text-on-primary-container font-label-caps text-label-caps px-3 py-1.5 rounded-full shrink-0 uppercase shadow-sm">Month</button>
+<button class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-3 py-1.5 rounded-full shrink-0 uppercase">Week</button>
+<button class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-3 py-1.5 rounded-full shrink-0 uppercase">Daily Plan</button>
+<button class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-3 py-1.5 rounded-full shrink-0 uppercase">Upcoming (4)</button>
+<button class="bg-surface-container-high text-on-surface-variant font-label-caps text-label-caps px-3 py-1.5 rounded-full shrink-0 uppercase">Archive (12)</button>
+</div>
+<!-- Dual Time Clock Strip -->
+<div class="bg-surface-container-low rounded-xl p-space-sm flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">public</span>
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Departure Clock</span>
+<span class="font-telemetry-md text-telemetry-md text-on-surface font-semibold">LHR 14:38 <span class="text-on-surface-variant">GMT</span></span>
+</div>
+</div>
+<div class="text-primary-container flex items-center">
+<span class="material-symbols-outlined text-[16px]">sync_alt</span>
+</div>
+<div class="flex items-center gap-2 text-right">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Arrival Horizon</span>
+<span class="font-telemetry-md text-telemetry-md text-tertiary font-semibold">HND 23:38 <span class="text-on-surface-variant">JST</span></span>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[20px]">flight_land</span>
+</div>
+</div>
+<!-- Secondary Action Bar -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="bg-surface-container-high active:bg-surface-container-highest text-on-surface font-headline-sm text-[13px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">add_circle</span>
+<span>+ Add Flight Leg</span>
+</button>
+<button class="bg-surface-container-high active:bg-surface-container-highest text-on-surface font-headline-sm text-[13px] py-2 px-3 rounded-lg flex items-center justify-center gap-1.5 shadow-sm transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">sync_saved_locally</span>
+<span>Sync Passbook</span>
+</button>
+</div>
+</section>
+<!-- Section 3: December 2024 Tactical Touch Calendar Matrix -->
+<section class="p-gutter-mobile flex flex-col gap-space-sm">
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">December 2024</span>
+<span class="font-telemetry-sm text-telemetry-sm bg-surface-container-highest text-primary-container px-2 py-0.5 rounded">UTC ACTIVE</span>
+</div>
+<div class="flex items-center gap-1">
+<button aria-label="Previous Month" class="p-1 rounded bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button aria-label="Next Month" class="p-1 rounded bg-surface-container-low text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Day Names Header -->
+<div class="grid grid-cols-7 text-center font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>MO</span><span>TU</span><span>WE</span><span>TH</span><span>FR</span><span>SA</span><span>SU</span>
+</div>
+<!-- Calendar Days -->
+<div class="grid grid-cols-7 gap-1 font-telemetry-md text-telemetry-md text-center">
+<!-- Week 1 -->
+<span class="p-2 text-surface-container-highest">25</span>
+<span class="p-2 text-surface-container-highest">26</span>
+<span class="p-2 text-surface-container-highest">27</span>
+<span class="p-2 text-surface-container-highest">28</span>
+<span class="p-2 text-surface-container-highest">29</span>
+<span class="p-2 text-surface-container-highest">30</span>
+<span class="p-2 text-on-surface-variant">01</span>
+<!-- Week 2 -->
+<span class="p-2 text-on-surface-variant">02</span>
+<span class="p-2 text-on-surface-variant">03</span>
+<span class="p-2 text-on-surface-variant">04</span>
+<span class="p-2 text-on-surface-variant">05</span>
+<span class="p-2 text-on-surface-variant">06</span>
+<span class="p-2 text-on-surface-variant">07</span>
+<span class="p-2 text-on-surface-variant">08</span>
+<!-- Week 3 -->
+<span class="p-2 text-on-surface-variant">09</span>
+<span class="p-2 text-on-surface-variant">10</span>
+<span class="p-2 text-on-surface-variant">11</span>
+<span class="p-2 text-on-surface-variant">12</span>
+<span class="p-2 text-on-surface-variant">13</span>
+<span class="p-2 text-on-surface-variant">14</span>
+<span class="p-2 text-on-surface-variant">15</span>
+<!-- Week 4 with Key Indicators -->
+<!-- Dec 16: Today -->
+<div class="flex flex-col items-center justify-center p-1 bg-surface-container-highest rounded text-tertiary relative">
+<span class="font-bold">16</span>
+<span class="h-1 w-1 bg-tertiary rounded-full mt-0.5"></span>
+</div>
+<span class="p-2 text-on-surface">17</span>
+<span class="p-2 text-on-surface">18</span>
+<span class="p-2 text-on-surface">19</span>
+<span class="p-2 text-on-surface">20</span>
+<span class="p-2 text-on-surface">21</span>
+<span class="p-2 text-on-surface">22</span>
+<!-- Week 5: Flight + Holiday Run -->
+<!-- Dec 23: SGA-882 -->
+<div class="flex flex-col items-center justify-center p-1 bg-primary-container text-on-primary-container rounded font-bold shadow-md">
+<span>23</span>
+<span class="material-symbols-outlined text-[10px]">flight_takeoff</span>
+</div>
+<!-- Dec 24: Xmas Eve -->
+<div class="flex flex-col items-center justify-center p-1 bg-surface-container-high text-secondary rounded">
+<span>24</span>
+<span class="material-symbols-outlined text-[10px]">hotel</span>
+</div>
+<!-- Dec 25: Xmas Day -->
+<div class="flex flex-col items-center justify-center p-1 bg-surface-container-high text-tertiary rounded">
+<span>25</span>
+<span class="material-symbols-outlined text-[10px]">celebration</span>
+</div>
+<span class="p-2 text-on-surface">26</span>
+<span class="p-2 text-on-surface">27</span>
+<!-- Dec 28: DL-142 -->
+<div class="flex flex-col items-center justify-center p-1 bg-surface-container-high text-primary rounded">
+<span>28</span>
+<span class="material-symbols-outlined text-[10px]">flight</span>
+</div>
+<span class="p-2 text-on-surface">29</span>
+<!-- Week 6 -->
+<span class="p-2 text-on-surface">30</span>
+<!-- Dec 31: NYE BA-178 -->
+<div class="flex flex-col items-center justify-center p-1 bg-surface-container-highest text-secondary-container rounded font-bold">
+<span>31</span>
+<span class="material-symbols-outlined text-[10px]">auto_awesome</span>
+</div>
+<span class="p-2 text-surface-container-highest">01</span>
+<span class="p-2 text-surface-container-highest">02</span>
+<span class="p-2 text-surface-container-highest">03</span>
+<span class="p-2 text-surface-container-highest">04</span>
+<span class="p-2 text-surface-container-highest">05</span>
+</div>
+<!-- Quick Itinerary Chip Carousel -->
+<div class="flex flex-col gap-2 pt-2">
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2">
+<span class="bg-primary-container text-on-primary-container font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">DEC 23</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface font-semibold">SGA-882 · London ➔ Tokyo</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Dep 11:20 GMT · First Horizon Suite 02A</span>
+</div>
+</div>
+<span class="font-telemetry-sm text-tertiary font-semibold">ON-TIME</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container-highest text-secondary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">DEC 24</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface font-semibold">Tokyo Layover · The EDITION</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Toranomon · Executive Skyline King</span>
+</div>
+</div>
+<span class="font-telemetry-sm text-secondary font-semibold">CONFIRMED</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex items-center gap-2">
+<span class="bg-surface-container-highest text-primary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">DEC 28</span>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface font-semibold">DL-142 · Tokyo ➔ New York</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Dep 18:45 JST · Haneda T3 · Gate 112</span>
+</div>
+</div>
+<span class="font-telemetry-sm text-on-surface-variant font-semibold">MONITORED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Active Flight Inspection Drilldown (SGA-882) -->
+<section class="px-gutter-mobile flex flex-col gap-space-sm">
+<div class="bg-surface-container rounded-xl p-space-md shadow-lg flex flex-col gap-space-sm relative overflow-hidden">
+<!-- Flight Header Ribbon -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="bg-primary-container text-on-primary font-telemetry-md text-telemetry-md px-2 py-0.5 rounded font-bold">SGA 882</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Airbus A350-1000 Direct</span>
+</div>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span>
+<span class="font-telemetry-sm text-telemetry-sm uppercase">Cleared Gate T5</span>
+</div>
+</div>
+<!-- Departure / Arrival Hero Vector -->
+<div class="flex items-center justify-between py-space-xs">
+<div class="flex flex-col">
+<span class="font-display-hero-mobile text-display-hero-mobile text-on-surface font-bold">LHR</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">London Heathrow</span>
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-bold mt-1">11:20 <span class="font-telemetry-sm text-on-surface-variant font-normal">GMT</span></span>
+</div>
+<div class="flex flex-col items-center justify-center flex-1 px-4">
+<span class="font-telemetry-sm text-telemetry-sm text-primary mb-1">11h 55m POLAR</span>
+<div class="w-full flex items-center relative">
+<div class="h-0.5 w-full bg-surface-container-highest"></div>
+<span class="material-symbols-outlined text-primary-container absolute left-1/2 -translate-x-1/2 text-[18px]">flight</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1">Great Circle Vector</span>
+</div>
+<div class="flex flex-col text-right">
+<span class="font-display-hero-mobile text-display-hero-mobile text-on-surface font-bold">HND</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Tokyo Haneda</span>
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-bold mt-1">08:15 <span class="font-telemetry-sm text-tertiary font-normal">+1 JST</span></span>
+</div>
+</div>
+<!-- Telemetry Specifications Grid -->
+<div class="grid grid-cols-3 gap-2 bg-surface-container-lowest p-space-sm rounded-lg text-center">
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Seat Suite</span>
+<span class="font-telemetry-md text-telemetry-md text-on-surface font-bold">02A Horizon</span>
+</div>
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">Baggage Tag</span>
+<span class="font-telemetry-md text-telemetry-md text-secondary font-bold">RFID #882-019</span>
+</div>
+<div class="flex flex-col">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase">HND Metar</span>
+<span class="font-telemetry-md text-telemetry-md text-tertiary font-bold">16°C CAVOK</span>
+</div>
+</div>
+<!-- Haneda Arrival & Polar Advisory Box -->
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">transfer_within_a_station</span>
+            Haneda In-Transit Transfer Corridor
+          </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">18m Shuttle to T2</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Priority passport automation ready at T3. Dedicated high-speed transit directly links to ANA Domestic terminal &amp; Shinkansen connector.
+        </p>
+</div>
+</div>
+</section>
+<!-- Section 5: Dispatch Reminders & Delivery Channels -->
+<section class="p-gutter-mobile flex flex-col gap-space-sm">
+<div class="bg-surface-container rounded-xl p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">notifications_active</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Dispatch Reminders</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary bg-surface-container-highest px-2 py-0.5 rounded">6 ARMED</span>
+</div>
+<!-- Tactile Toggle List -->
+<div class="flex flex-col gap-2">
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Departure -24h Flight Manifest</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">T-24h Passenger list clearance verification</span>
+</div>
+<button aria-label="Toggle Manifest" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Auto Check-In &amp; Passbook Vault</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Instant PKPass push to mobile wallet</span>
+</div>
+<button aria-label="Toggle Auto Check-In" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Gate Change &amp; Taxi Advisory</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Instant runway sequencing ping</span>
+</div>
+<button aria-label="Toggle Gate Change" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+<!-- Toggle 4 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Final Boarding Haptic Alert</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Pulse device at T-25m to door close</span>
+</div>
+<button aria-label="Toggle Boarding Alert" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+<!-- Toggle 5 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Haneda Snow &amp; De-icing Advisory</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Real-time WXR radar feeds &amp; runway braking</span>
+</div>
+<button aria-label="Toggle Snow Advisory" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+<!-- Toggle 6 -->
+<div class="flex items-center justify-between p-2 bg-surface-container-low rounded-lg">
+<div class="flex flex-col">
+<span class="font-headline-sm text-[13px] text-on-surface">Baggage RFID Carousel Ping</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Notifies upon belt induction at HND T3</span>
+</div>
+<button aria-label="Toggle RFID Ping" class="relative inline-flex h-5 w-9 shrink-0 items-center rounded-full bg-primary-container transition-colors">
+<span class="inline-block h-3.5 w-3.5 transform rounded-full bg-surface-container-lowest transition-transform translate-x-4"></span>
+</button>
+</div>
+</div>
+<!-- Delivery Channel Badges -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Synchronized Channels</span>
+<div class="grid grid-cols-4 gap-1.5 text-center">
+<div class="bg-surface-container-lowest p-2 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">app_badging</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface mt-1">PUSH</span>
+<span class="font-label-caps text-[8px] text-tertiary uppercase">Armed</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px] text-secondary">mark_email_read</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface mt-1">EMAIL</span>
+<span class="font-label-caps text-[8px] text-secondary uppercase">Active</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg flex flex-col items-center">
+<span class="material-symbols-outlined text-[16px] text-tertiary">chat</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface mt-1">WHATSAPP</span>
+<span class="font-label-caps text-[8px] text-tertiary uppercase">Linked</span>
+</div>
+<div class="bg-surface-container-lowest p-2 rounded-lg flex flex-col items-center opacity-50">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">sms</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface mt-1">SMS</span>
+<span class="font-label-caps text-[8px] text-on-surface-variant uppercase">Disabled</span>
+</div>
+</div>
+</div>
+<!-- Action Touch CTAs -->
+<div class="flex flex-col gap-2 pt-2">
+<button class="w-full bg-primary-container hover:bg-primary-container/90 active:scale-[0.99] text-on-primary font-headline-sm text-[15px] py-3 rounded-lg flex items-center justify-center gap-2 shadow-lg transition-transform">
+<span class="material-symbols-outlined text-[18px]">account_balance_wallet</span>
+<span>Open Passbook Boarding Pass</span>
+</button>
+<button class="w-full bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-headline-sm text-[13px] py-2.5 rounded-lg flex items-center justify-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">calendar_add_on</span>
+<span>Download ICS Full Calendar &amp; Route Export</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Script for Light Touch Micro-Interactions -->
+<script>
+    (function initHolidayHub() {
+      const toggle = document.getElementById('festiveToggle');
+      const knob = document.getElementById('festiveKnob');
+      let active = true;
+
+      if (toggle && knob) {
+        toggle.addEventListener('click', function() {
+          active = !active;
+          if (active) {
+            toggle.classList.remove('bg-surface-container-highest');
+            toggle.classList.add('bg-primary-container');
+            knob.classList.add('translate-x-6');
+            knob.classList.remove('translate-x-1');
+          } else {
+            toggle.classList.remove('bg-primary-container');
+            toggle.classList.add('bg-surface-container-highest');
+            knob.classList.remove('translate-x-6');
+            knob.classList.add('translate-x-1');
+          }
+        });
+      }
+    })();
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.7)]" data-active-classes="text-primary-container font-headline-sm"><div class="flex items-center justify-around h-16 px-1"><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="flights" href="#"><span class="material-symbols-outlined text-[20px]">flight_takeoff</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Flights</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] transition-colors text-primary-container font-headline-sm" data-path="calendar" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Calendar</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="checkout-passes" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Passes</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-copilot" href="#"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Copilot</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">person_outline</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Profile</span></a></div></nav></body></html>

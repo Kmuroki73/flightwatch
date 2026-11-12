@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>SONGA Flight Watch 2.0</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#121316;color:#e3e2e6;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed":"#ffdbd0","on-background":"#e3e2e6","tertiary-fixed":"#6ffbbe","error":"#ffb4ab","surface-variant":"#343538","on-tertiary-container":"#003421","primary":"#ffb59d","on-error":"#690005","inverse-on-surface":"#2f3034","secondary":"#7bd0ff","inverse-surface":"#e3e2e6","on-tertiary-fixed":"#002113","on-secondary-container":"#00374d","surface-container-high":"#292a2d","tertiary-fixed-dim":"#4edea3","surface-container-low":"#1b1b1f","on-surface-variant":"#e3beb3","tertiary":"#4edea3","on-primary-fixed":"#390c00","on-error-container":"#ffdad6","background":"#121316","on-secondary":"#00354a","on-tertiary":"#003824","surface-dim":"#121316","on-primary-fixed-variant":"#832700","secondary-fixed":"#c4e7ff","surface-bright":"#38393d","on-primary-container":"#561600","error-container":"#93000a","surface-container":"#1f1f23","secondary-fixed-dim":"#7bd0ff","primary-fixed-dim":"#ffb59d","secondary-container":"#00a6e0","outline":"#aa897f","tertiary-container":"#00a874","surface":"#121316","on-secondary-fixed":"#001e2c","surface-container-highest":"#343538","on-secondary-fixed-variant":"#004c69","outline-variant":"#5b4138","surface-container-lowest":"#0d0e11","on-primary":"#5d1900","inverse-primary":"#ab3500","primary-container":"#ff5e1e","surface-tint":"#ffb59d","on-tertiary-fixed-variant":"#005236","on-surface":"#e3e2e6"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"gutter-mobile":"0.75rem","space-xs":"0.25rem","gutter":"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem","margin":"3rem","space-xl":"2.5rem","space-md":"1rem","space-lg":"1.5rem"},fontFamily:{"headline-lg-mobile":["Space Grotesk"],"body-lg":["Inter"],"telemetry-sm":["JetBrains Mono"],"body-md":["Inter"],"label-caps":["Space Grotesk"],"body-sm":["Inter"],"telemetry-md":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"headline-md":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"display-hero-mobile":["Space Grotesk"],"headline-lg":["Space Grotesk"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"-0.01em",fontWeight:"400"}],"telemetry-sm":["11px",{lineHeight:"14px",letterSpacing:"0.05em",fontWeight:"500"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}],"label-caps":["11px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"400"}],"telemetry-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",letterSpacing:"0em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-hero":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"700"}],"telemetry-lg":["20px",{lineHeight:"24px",letterSpacing:"0.04em",fontWeight:"600"}],"display-hero-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"600"}]}}}};</script></head><body class="bg-surface text-on-surface font-body-md flex flex-col min-h-screen selection:bg-primary-container selection:text-white"><header class="fixed top-0 inset-x-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 px-margin-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span><span class="font-label-caps text-label-caps tracking-widest text-on-surface font-bold uppercase">SONGA</span></div><span class="text-outline-variant font-telemetry-sm">/</span><div class="flex items-center gap-1 bg-surface-container px-1.5 py-0.5 rounded"><span class="material-symbols-outlined text-[13px] text-primary-container">near_me</span><span class="font-telemetry-sm text-telemetry-sm text-primary">SGA-882</span></div></div><div class="flex items-center gap-space-sm"><div class="flex items-center gap-1.5 bg-surface-container-low px-2 py-1 rounded"><span class="font-telemetry-sm text-telemetry-sm text-secondary font-medium tracking-wider">14:28:02</span><span class="font-label-caps text-[9px] uppercase tracking-wider text-outline">UTC</span></div><div class="flex items-center gap-1 bg-tertiary/10 px-2 py-0.5 rounded text-tertiary"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="font-label-caps text-[10px] uppercase font-bold tracking-wider">DUTY</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-20 bg-surface min-h-screen"><div class="flex flex-col w-full pb-8">
+<!-- 1. Active Altitude Audio Status Bar -->
+<div class="px-margin-mobile pt-2">
+<div class="bg-surface-container-low px-space-sm py-1.5 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse shrink-0"></span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-semibold truncate tracking-wider">FL390 CRUISE</span>
+<span class="text-surface-variant font-telemetry-sm">•</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase tracking-wider truncate">SPATIAL 360°</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-1.5 py-0.5 rounded shrink-0">
+<span class="material-symbols-outlined text-[12px] text-tertiary">podcasts</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface font-medium">SPOTIFY SYNC</span>
+</div>
+</div>
+</div>
+<!-- 2. Expanded Now Playing Deck -->
+<div class="px-margin-mobile mt-space-md">
+<div class="bg-surface-container rounded-full p-space-md flex flex-col items-center relative overflow-hidden shadow-xl">
+<!-- Ambient Glow Behind Artwork -->
+<div class="absolute -top-10 inset-x-0 h-44 bg-gradient-to-b from-primary-container/20 to-transparent blur-2xl pointer-events-none"></div>
+<!-- Album Artwork with Glowing Rim -->
+<div class="relative w-64 h-64 rounded-xl p-1 bg-gradient-to-br from-primary-container via-primary-container/40 to-surface-variant shadow-[0_12px_36px_rgba(255,94,30,0.22)]">
+<div class="w-full h-full rounded-lg overflow-hidden relative bg-surface-container-lowest">
+<img class="w-full h-full object-cover" data-alt="Futuristic high-altitude night view over Sendai coastline through commercial cockpit glass, deep obsidian ambient shadows, ambient orange cockpit instruments glowing softly, cinematic neon reflections, moody atmospheric ambient electronic album cover in Tycho and Songa aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbNjgLufKkEnrCM3qqnQ8XE_tR-opom49vrUfi78_l3kzZnHy8VkwAyGQB19-Nc1A0HoC22W_nmjQQDZw3ZGY0ZQkD-XneM6135nHfAKQuEYRgD6ixnBvihDQz3Gx74UDuNFY9FofIRJEzXJE2RVu8-F_y08Dq2WdrXpFQCP5MfO3ehIPkYSZpDWXwhU8wLnPuSDuedvMysrqoUt6hB_gB1J5GDPPDLMhcYAdZAtd4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent"></div>
+<!-- Vinyl Center Badge Overlay -->
+<div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5 bg-surface-container-lowest/85 backdrop-blur-md px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[13px] text-primary">spatial_audio</span>
+<span class="font-telemetry-sm text-[10px] text-primary-fixed tracking-widest font-bold uppercase">SONGA FL-AUDIO</span>
+</div>
+<div class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center">
+<span class="material-symbols-outlined text-[15px] text-secondary">graphic_eq</span>
+</div>
+</div>
+</div>
+<!-- Track Metadata & Like Action -->
+<div class="w-full mt-space-md flex items-start justify-between gap-space-sm px-1">
+<div class="min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-[10px] uppercase text-primary tracking-widest bg-primary/10 px-1.5 py-0.5 rounded">Cabin Track 04</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">96kHz / 24-bit</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold tracking-tight truncate mt-0.5">Midnight Over Sendai</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Songa Acoustic Labs x Tycho</p>
+</div>
+<button class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary-container transition-transform active:scale-90 shrink-0" id="like-btn">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">favorite</span>
+</button>
+</div>
+<!-- Live 18-bar Audio Spectrum Visualizer -->
+<div class="w-full h-8 flex items-end justify-between gap-1 px-1 my-space-sm" id="visualizer-bars">
+<div class="w-1 bg-primary-container/80 rounded-full transition-all duration-150 h-3"></div>
+<div class="w-1 bg-primary rounded-full transition-all duration-150 h-5"></div>
+<div class="w-1 bg-primary-container rounded-full transition-all duration-150 h-7"></div>
+<div class="w-1 bg-secondary rounded-full transition-all duration-150 h-4"></div>
+<div class="w-1 bg-primary-container/90 rounded-full transition-all duration-150 h-6"></div>
+<div class="w-1 bg-tertiary rounded-full transition-all duration-150 h-3"></div>
+<div class="w-1 bg-primary rounded-full transition-all duration-150 h-7"></div>
+<div class="w-1 bg-primary-container rounded-full transition-all duration-150 h-5"></div>
+<div class="w-1 bg-secondary rounded-full transition-all duration-150 h-8"></div>
+<div class="w-1 bg-primary rounded-full transition-all duration-150 h-6"></div>
+<div class="w-1 bg-tertiary rounded-full transition-all duration-150 h-4"></div>
+<div class="w-1 bg-primary-container rounded-full transition-all duration-150 h-7"></div>
+<div class="w-1 bg-primary-container/80 rounded-full transition-all duration-150 h-5"></div>
+<div class="w-1 bg-secondary rounded-full transition-all duration-150 h-3"></div>
+<div class="w-1 bg-primary rounded-full transition-all duration-150 h-6"></div>
+<div class="w-1 bg-tertiary rounded-full transition-all duration-150 h-8"></div>
+<div class="w-1 bg-primary-container rounded-full transition-all duration-150 h-4"></div>
+<div class="w-1 bg-primary rounded-full transition-all duration-150 h-2"></div>
+</div>
+<!-- Scrubber & Telemetry Durations -->
+<div class="w-full px-1">
+<div class="w-full h-2 bg-surface-container-highest rounded-full relative cursor-pointer flex items-center" id="scrubber-track">
+<div class="h-full bg-primary-container rounded-full" id="scrubber-fill" style="width: 65%;"></div>
+<div class="absolute w-3.5 h-3.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,94,30,0.8)] -translate-x-1/2 cursor-grab" id="scrubber-thumb" style="left: 65%;"></div>
+</div>
+<div class="flex items-center justify-between mt-1">
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-medium" id="current-time">02:44</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">04:12</span>
+</div>
+</div>
+<!-- Tactile Playback Controls -->
+<div class="w-full mt-space-sm flex items-center justify-between px-2">
+<button class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" id="shuffle-btn">
+<span class="material-symbols-outlined text-[19px]">shuffle</span>
+</button>
+<button class="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-transform active:scale-95 shadow-sm" id="prev-btn">
+<span class="material-symbols-outlined text-[24px]">skip_previous</span>
+</button>
+<!-- Big 56px Orange Play/Pause Touch Target -->
+<button class="w-14 h-14 rounded-full bg-primary-container text-white flex items-center justify-center shadow-[0_0_20px_rgba(255,94,30,0.45)] hover:scale-105 active:scale-95 transition-transform" id="play-pause-btn">
+<span class="material-symbols-outlined text-[30px]" id="play-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="w-11 h-11 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-transform active:scale-95 shadow-sm" id="next-btn">
+<span class="material-symbols-outlined text-[24px]">skip_next</span>
+</button>
+<button class="w-9 h-9 rounded-full bg-surface-container-low flex items-center justify-center text-secondary hover:text-primary transition-colors" id="repeat-btn">
+<span class="material-symbols-outlined text-[19px]">repeat</span>
+</button>
+</div>
+<!-- Volume Rocker Deck -->
+<div class="w-full mt-space-md pt-space-xs flex items-center gap-space-sm px-1">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">volume_down</span>
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full relative cursor-pointer flex items-center" id="volume-bar">
+<div class="h-full bg-secondary rounded-full" id="volume-fill" style="width: 78%;"></div>
+<div class="absolute w-2.5 h-2.5 rounded-full bg-white shadow-sm -translate-x-1/2" style="left: 78%;"></div>
+</div>
+<span class="material-symbols-outlined text-[18px] text-secondary">volume_up</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant ml-1">78%</span>
+</div>
+</div>
+</div>
+<!-- 3. Quick Altitude Modes -->
+<div class="mt-space-lg px-margin-mobile">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">air</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Flight Atmospheric Modes</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">BINAURAL ACTIVE</span>
+</div>
+<!-- Horizontal Scroll Pill Chips -->
+<div class="flex items-center gap-space-sm overflow-x-auto no-scrollbar py-1">
+<button class="mode-pill shrink-0 px-space-md py-2 rounded-full bg-primary-container text-white font-label-caps text-label-caps tracking-wider uppercase flex items-center gap-1.5 shadow-[0_0_12px_rgba(255,94,30,0.3)] transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+        Deep Focus (FL390)
+      </button>
+<button class="mode-pill shrink-0 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase flex items-center gap-1.5 transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+        Descent Relaxation
+      </button>
+<button class="mode-pill shrink-0 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase flex items-center gap-1.5 transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+        Circadian Sleep
+      </button>
+<button class="mode-pill shrink-0 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps tracking-wider uppercase flex items-center gap-1.5 transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+        Terminal Beat
+      </button>
+</div>
+</div>
+<!-- 4. Flight Phase Playlist Queue -->
+<div class="mt-space-lg px-margin-mobile">
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">queue_music</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Flight Phase Queue</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">3 TRACKS REMAINING</span>
+</div>
+<div class="bg-surface-container rounded-xl p-space-sm flex flex-col gap-1.5 shadow-md">
+<!-- Item 1 -->
+<div class="group flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center text-primary font-telemetry-sm text-telemetry-sm font-semibold shrink-0">
+            01
+          </div>
+<div class="min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate group-hover:text-primary transition-colors">Shinjuku Twilight Vector</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Kiasmos • Pre-Descent Ambience</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-outline">3:45</span>
+<button class="w-7 h-7 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="group flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center text-secondary font-telemetry-sm text-telemetry-sm font-semibold shrink-0">
+            02
+          </div>
+<div class="min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate group-hover:text-primary transition-colors">Altitude 38,000</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Jon Hopkins • Deep Vector Wave</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-outline">5:12</span>
+<button class="w-7 h-7 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="group flex items-center justify-between p-2 rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center text-tertiary font-telemetry-sm text-telemetry-sm font-semibold shrink-0">
+            03
+          </div>
+<div class="min-w-0">
+<h4 class="font-body-md text-body-md text-on-surface font-medium truncate group-hover:text-primary transition-colors">Haneda Final Drift</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate">Bonobo • Approach Rhythm</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-outline">4:20</span>
+<button class="w-7 h-7 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[16px]">drag_indicator</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 5. Algorithmic Cabin Sync Toggle -->
+<div class="mt-space-lg px-margin-mobile">
+<div class="bg-surface-container-high rounded-xl p-space-md shadow-lg relative overflow-hidden">
+<!-- Glow ambient corner -->
+<div class="absolute -right-8 -bottom-8 w-28 h-28 bg-tertiary/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-low flex items-center justify-center text-tertiary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">flight_land</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-label-caps text-label-caps text-tertiary uppercase tracking-wider font-semibold">Algorithmic Cabin Sync</span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+</div>
+<h3 class="font-headline-sm text-[15px] leading-5 text-on-surface font-medium mt-1">Auto-Trigger Descent Audio at TOD</h3>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">
+              Top-of-Descent estimated in <span class="text-secondary font-semibold">03h 12m</span>. Acoustic EQ transitions gently to 432Hz binaural drift.
+            </p>
+</div>
+</div>
+<!-- Custom Interactive Switch Toggle -->
+<button class="relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full bg-tertiary-container transition-colors duration-200 ease-in-out p-0.5" id="sync-toggle-btn">
+<span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out" id="sync-toggle-dot"></span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // 1. Highlight Soundtrack Nav Tab in the Shell
+    try {
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        const path = link.getAttribute('data-path');
+        if (path === 'audio-soundtrack') {
+          link.classList.remove('text-on-surface-variant');
+          link.classList.add('text-primary-container', 'font-semibold');
+        } else {
+          link.classList.remove('text-primary-container', 'font-semibold');
+          link.classList.add('text-on-surface-variant');
+        }
+      });
+    } catch(e) {}
+
+    // 2. Play/Pause Toggle with Visualizer Reaction
+    const playBtn = document.getElementById('play-pause-btn');
+    const playIcon = document.getElementById('play-icon');
+    let isPlaying = true;
+
+    playBtn?.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      playIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+      playBtn.classList.toggle('shadow-[0_0_20px_rgba(255,94,30,0.45)]', isPlaying);
+    });
+
+    // 3. Audio Spectrum Pulsing Simulation
+    const barsContainer = document.getElementById('visualizer-bars');
+    const bars = barsContainer ? barsContainer.children : [];
+    
+    setInterval(() => {
+      if (!isPlaying || !bars.length) return;
+      for (let i = 0; i < bars.length; i++) {
+        const randomHeight = Math.floor(Math.random() * 26) + 4;
+        bars[i].style.height = randomHeight + 'px';
+      }
+    }, 180);
+
+    // 4. Like Button Interaction
+    const likeBtn = document.getElementById('like-btn');
+    let isLiked = true;
+    likeBtn?.addEventListener('click', () => {
+      isLiked = !isLiked;
+      const icon = likeBtn.querySelector('.material-symbols-outlined');
+      if (icon) {
+        icon.style.fontVariationSettings = isLiked ? "'FILL' 1" : "'FILL' 0";
+        likeBtn.classList.toggle('text-primary-container', isLiked);
+        likeBtn.classList.toggle('text-outline', !isLiked);
+      }
+    });
+
+    // 5. Altitude Mode Pill Selector
+    const modePills = document.querySelectorAll('.mode-pill');
+    modePills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        modePills.forEach(p => {
+          p.classList.remove('bg-primary-container', 'text-white', 'shadow-[0_0_12px_rgba(255,94,30,0.3)]');
+          p.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+        });
+        pill.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+        pill.classList.add('bg-primary-container', 'text-white', 'shadow-[0_0_12px_rgba(255,94,30,0.3)]');
+      });
+    });
+
+    // 6. Cabin Sync Switch Toggle
+    const syncBtn = document.getElementById('sync-toggle-btn');
+    const syncDot = document.getElementById('sync-toggle-dot');
+    let isSyncActive = true;
+
+    syncBtn?.addEventListener('click', () => {
+      isSyncActive = !isSyncActive;
+      if (isSyncActive) {
+        syncBtn.classList.remove('bg-surface-variant');
+        syncBtn.classList.add('bg-tertiary-container');
+        syncDot.classList.remove('translate-x-0');
+        syncDot.classList.add('translate-x-5');
+      } else {
+        syncBtn.classList.remove('bg-tertiary-container');
+        syncBtn.classList.add('bg-surface-variant');
+        syncDot.classList.remove('translate-x-5');
+        syncDot.classList.add('translate-x-0');
+      }
+    });
+
+    // 7. Interactive Scrubber Scrub Click
+    const scrubberTrack = document.getElementById('scrubber-track');
+    const scrubberFill = document.getElementById('scrubber-fill');
+    const scrubberThumb = document.getElementById('scrubber-thumb');
+    const currentTimeText = document.getElementById('current-time');
+
+    scrubberTrack?.addEventListener('click', (e) => {
+      const rect = scrubberTrack.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      let ratio = Math.max(0, Math.min(1, clickX / rect.width));
+      const percentage = (ratio * 100).toFixed(1) + '%';
+      
+      scrubberFill.style.width = percentage;
+      scrubberThumb.style.left = percentage;
+
+      const totalSecs = 252; // 04:12 in seconds
+      const currentSecs = Math.floor(totalSecs * ratio);
+      const mins = Math.floor(currentSecs / 60);
+      const secs = currentSecs % 60;
+      currentTimeText.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    });
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_-1px_12px_rgba(0,0,0,0.5)]" data-active-classes="text-primary-container font-semibold"><div class="flex justify-around items-center h-20 px-gutter-mobile"><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant hover:text-on-surface transition-colors" data-path="flights" href="#"><span class="material-symbols-outlined text-[22px]">flight</span><span class="font-label-caps text-[10px] tracking-wide">Flights</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant hover:text-on-surface transition-colors" data-path="calendar" href="#"><span class="material-symbols-outlined text-[22px]">calendar_today</span><span class="font-label-caps text-[10px] tracking-wide">Calendar</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant hover:text-on-surface transition-colors" data-path="passes" href="#"><span class="material-symbols-outlined text-[22px]">confirmation_number</span><span class="font-label-caps text-[10px] tracking-wide">Passes</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant hover:text-on-surface transition-colors" data-path="audio-soundtrack" href="#"><span class="material-symbols-outlined text-[22px]">graphic_eq</span><span class="font-label-caps text-[10px] tracking-wide">Audio</span></a><a class="flex flex-col items-center justify-center gap-1 w-14 h-14 text-on-surface-variant hover:text-on-surface transition-colors" data-path="profile-comms" href="#"><span class="material-symbols-outlined text-[22px]">chat</span><span class="font-label-caps text-[10px] tracking-wide">Comms</span></a></div></nav></body></html>

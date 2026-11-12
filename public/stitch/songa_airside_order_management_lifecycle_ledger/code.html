@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SONGA Merchant Operations &amp; Fulfilment</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#00354a","inverse-on-surface":"#2f3034","on-tertiary-container":"#003421","primary":"#ffb59d","tertiary-container":"#00a874","surface-variant":"#343538","primary-fixed-dim":"#ffb59d","error-container":"#93000a","on-primary-fixed":"#390c00","on-error":"#690005","on-surface-variant":"#e3beb3","on-primary-fixed-variant":"#832700","surface-container-high":"#292a2d","inverse-primary":"#ab3500","on-surface":"#e3e2e6","surface-tint":"#ffb59d","surface-container-low":"#1b1b1f","on-primary-container":"#561600","background":"#121316","secondary-container":"#00a6e0","on-secondary-fixed-variant":"#004c69","surface-bright":"#38393d","surface-container-highest":"#343538","secondary-fixed-dim":"#7bd0ff","on-tertiary-fixed-variant":"#005236","on-tertiary":"#003824","tertiary":"#4edea3","tertiary-fixed-dim":"#4edea3","inverse-surface":"#e3e2e6","on-secondary-fixed":"#001e2c","tertiary-fixed":"#6ffbbe","secondary-fixed":"#c4e7ff","surface-container-lowest":"#0d0e11","surface":"#121316","primary-container":"#ff5e1e","outline-variant":"#5b4138","error":"#ffb4ab","on-tertiary-fixed":"#002113","on-primary":"#5d1900","on-error-container":"#ffdad6","secondary":"#7bd0ff","primary-fixed":"#ffdbd0","surface-dim":"#121316","surface-container":"#1f1f23","on-secondary-container":"#00374d","on-background":"#e3e2e6","outline":"#aa897f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"3rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter":"1.5rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-hero-mobile":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"telemetry-md":["JetBrains Mono"],"headline-lg-mobile":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-md":["Space Grotesk"],"headline-lg":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-sm":["Space Grotesk"],"body-md":["Inter"]},"fontSize":{"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"telemetry-lg":["20px",{"lineHeight":"24px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"telemetry-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-white"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-24 w-full px-gutter flex flex-col justify-between py-space-xs"><div class="flex items-center justify-between gap-space-md h-12"><div class="flex items-center gap-space-md flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface font-bold">SONGA</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm"><span class="text-primary-container font-semibold">OPS //</span><span>DISPATCH HUB</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low text-tertiary font-telemetry-sm text-telemetry-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>NBO T1A • HND T3 • JNB A1 [ONLINE]</span></div></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="overview" href="#">Overview</a><a aria-current="page" class="px-space-md py-1.5 transition-colors uppercase bg-primary-container text-on-primary font-bold rounded-lg" data-path="orders" href="#">Orders</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="fulfilment-dispatch" href="#">Fulfilment Dispatch</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="inventory-&amp;-services" href="#">Inventory &amp; Services</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="disputes-&amp;-support" href="#">Disputes &amp; Support</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="merchant-&amp;-team" href="#">Merchant &amp; Team</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary text-[16px]">storefront</span><span class="font-medium truncate max-w-[200px]">TIAT Roasters &amp; Airside Express</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-secondary font-telemetry-sm text-telemetry-sm tracking-wide"><span class="material-symbols-outlined text-[14px]">schedule</span><span>14:48:22 UTC</span></div><div class="hidden sm:flex items-center px-space-xs py-1 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm uppercase tracking-wider">DARK [AERO]</div><div class="flex items-center gap-space-xs pl-space-xs"><div class="text-right hidden sm:block"><div class="font-label-caps text-label-caps text-on-surface leading-tight">K. Ndung'u</div><div class="font-telemetry-sm text-telemetry-sm text-tertiary leading-tight">Duty Ops Lead</div></div><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div></div></div></div><div class="h-8 w-full flex items-center justify-between overflow-x-auto bg-surface-container-lowest/80 px-space-md rounded-lg text-on-surface-variant font-telemetry-sm text-telemetry-sm"><div class="flex items-center gap-space-md whitespace-nowrap"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-on-surface font-medium">TELEMETRY:</span><span>JKIA (NBO) AIRSIDE NODE ACTIVE</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-primary-container font-medium">QUEUE:</span><span>14 PENDING ORDERS</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-tertiary font-medium">FULFILMENT SLA:</span><span>98.6% ON-TIME</span></div></div><div class="flex items-center gap-space-xs whitespace-nowrap pl-space-md"><span class="text-secondary font-medium">PAYPAL SETTLEMENT GATEWAY:</span><span class="text-tertiary">CONNECTED (SANDBOX DEMO MODE)</span></div></div></div></header><main class="w-full pt-24 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Operational Sub-Header & Live Metric Stream -->
+<section class="w-full px-gutter pt-space-lg pb-space-md bg-surface-container-lowest relative">
+<div class="flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-md">
+<!-- Title & Spatial Context -->
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm uppercase tracking-wider text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span>DISPATCH MATRIX // SEC-02</span>
+<span class="text-on-surface-variant">•</span>
+<span class="text-tertiary">LIVE RUNNER BEACONS ACTIVE</span>
+</div>
+<div class="flex items-baseline gap-space-md mt-0.5">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Airside Order Ledger</h1>
+<span class="font-telemetry-md text-telemetry-md text-on-surface-variant">JKIA T1A • HND T3 • JNB A1</span>
+</div>
+</div>
+<!-- Real-Time Metrics Array -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs w-full xl:w-auto">
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-xl flex flex-col shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">SLA Velocity</span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-lg text-telemetry-lg text-tertiary font-bold">4.2m</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">AVG PREP</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-xl flex flex-col shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Gate Dispatches</span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-bold">89</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container">+14 ACTIVE</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-xl flex flex-col shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">PayPal Captured</span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-lg text-telemetry-lg text-secondary font-bold">$18,420</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">USD</span>
+</div>
+</div>
+<div class="bg-surface-container-low px-space-md py-space-xs rounded-xl flex flex-col shadow-sm">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Pending Breaches</span>
+<div class="flex items-center gap-space-xs mt-0.5">
+<span class="font-telemetry-lg text-telemetry-lg text-error font-bold">02</span>
+<span class="font-telemetry-sm text-telemetry-sm text-error">&gt;5 MIN SLA</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Essential Operational Banner: Financial Capture vs Delivery Status -->
+<div class="mt-space-md bg-surface-container p-space-md rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-space-sm shadow-md">
+<div class="flex items-start md:items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center flex-shrink-0 text-secondary">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Payment Settlement Verification Directive</span>
+<span class="bg-surface-container-highest text-secondary font-telemetry-sm text-telemetry-sm px-1.5 py-0.5 rounded">PROTOCOL NOTICE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">
+            A status of <span class="text-tertiary font-semibold font-telemetry-sm">PAYPAL VERIFIED (CAPTURED)</span> confirms currency lock via PayPal Express Vault. It does <span class="text-primary font-semibold">NOT</span> indicate physical airside handover. Do not release high-value duty-free goods without scanning the boarding pass passkey.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0 self-end md:self-auto">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-telemetry-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">tune</span>
+          Audit Rules
+        </button>
+<button class="w-6 h-6 rounded flex items-center justify-center hover:bg-surface-container-highest text-on-surface-variant" onclick="this.closest('div.mt-space-md').classList.add('hidden')">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Interactive Controls, Primary Tabs & Command Bar -->
+<section class="w-full px-gutter py-space-sm bg-surface-container-lowest flex flex-col gap-space-sm">
+<!-- Tab Bar with Live Counts -->
+<div class="flex items-center justify-between overflow-x-auto gap-space-xs pb-1">
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl">
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary font-label-caps text-label-caps uppercase flex items-center gap-space-xs shadow-sm">
+<span>All Orders</span>
+<span class="bg-on-primary-container text-primary-fixed font-telemetry-sm text-telemetry-sm px-1 rounded">1,428</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-space-xs">
+<span>Awaiting Confirm</span>
+<span class="bg-error-container text-on-error-container font-telemetry-sm text-telemetry-sm px-1 rounded animate-pulse">14</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-space-xs">
+<span>Confirmed</span>
+<span class="bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm px-1 rounded">38</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-space-xs">
+<span>In Progress / Runner</span>
+<span class="bg-secondary-container/20 text-secondary font-telemetry-sm text-telemetry-sm px-1 rounded">09</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-space-xs">
+<span>Fulfilled</span>
+<span class="bg-surface-container-high text-tertiary font-telemetry-sm text-telemetry-sm px-1 rounded">1,346</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-space-xs">
+<span>Cancelled / Refunded</span>
+<span class="bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm px-1 rounded">30</span>
+</button>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0">
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-tertiary">autorenew</span>
+          Auto-Sync (3s)
+        </button>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-low hover:bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[16px] text-secondary">download</span>
+          Export Ledger
+        </button>
+</div>
+</div>
+<!-- Multi-Dimensional Filters and Search Bar -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-sm items-center bg-surface-container-low p-space-sm rounded-xl">
+<!-- Search Input -->
+<div class="xl:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-on-surface-variant text-[18px]">search</span>
+<input class="w-full pl-9 pr-space-md py-2 bg-surface-container-lowest text-on-surface placeholder:text-on-surface-variant/60 rounded-lg font-telemetry-sm text-telemetry-sm focus:outline-none focus:ring-1 focus:ring-primary-container transition-all" placeholder="Search by Order Ref (e.g. SNG-ORD-8821), Customer Name, Flight No, Gate..." type="text"/>
+<span class="absolute right-2.5 top-2 text-[10px] font-telemetry-sm bg-surface-container-high text-on-surface-variant px-1.5 py-0.5 rounded">⌘K</span>
+</div>
+<!-- Filter Dropdowns -->
+<div class="xl:col-span-7 flex flex-wrap items-center justify-between xl:justify-end gap-space-xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<!-- Hub Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface px-space-sm py-1.5 pr-7 rounded-lg font-telemetry-sm text-telemetry-sm focus:outline-none cursor-pointer">
+<option value="ALL">Node: ALL (NBO • HND • JNB)</option>
+<option value="NBO">JKIA (NBO T1A)</option>
+<option value="HND">Haneda (HND T3)</option>
+<option value="JNB">O.R. Tambo (JNB A1)</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant text-[14px] pointer-events-none">expand_more</span>
+</div>
+<!-- Gateway Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface px-space-sm py-1.5 pr-7 rounded-lg font-telemetry-sm text-telemetry-sm focus:outline-none cursor-pointer">
+<option value="ALL">Gateway: All Methods</option>
+<option selected="" value="PAYPAL">PayPal Verified (Vaulted)</option>
+<option value="APPLE">Apple Pay Passkey</option>
+<option value="CORP">Corporate Travel Token</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant text-[14px] pointer-events-none">expand_more</span>
+</div>
+<!-- Method Filter -->
+<div class="relative">
+<select class="appearance-none bg-surface-container-lowest text-on-surface px-space-sm py-1.5 pr-7 rounded-lg font-telemetry-sm text-telemetry-sm focus:outline-none cursor-pointer">
+<option value="ALL">Fulfilment: All Channels</option>
+<option value="GATE">Gate-Side Runner Express</option>
+<option value="LOUNGE">Lounge Suite Pickup</option>
+<option value="COUNTER">Airside Counter Rapid</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-2 text-on-surface-variant text-[14px] pointer-events-none">expand_more</span>
+</div>
+</div>
+<button class="px-space-sm py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">filter_list</span>
+          Clear
+        </button>
+</div>
+</div>
+<!-- Active Batch Action Tray (Interactive Floating state representation) -->
+<div class="w-full bg-surface-container-high px-space-md py-space-xs rounded-xl flex items-center justify-between shadow-lg" id="batch-action-bar">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-space-xs">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer" type="checkbox"/>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">3 Orders Selected</span>
+</div>
+<div class="h-4 w-px bg-surface-variant"></div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-primary-container hover:bg-primary-container/90 text-on-primary font-label-caps text-label-caps uppercase flex items-center gap-1 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[14px]">soup_kitchen</span>
+            Mark Selected as In Preparation
+          </button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-highest text-secondary font-label-caps text-label-caps uppercase flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">directions_run</span>
+            Assign Runner Team
+          </button>
+<button class="px-space-sm py-1 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-caps text-label-caps uppercase flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+            Export Dispatch Sheet
+          </button>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">Quick Dispatch Hotkey [ALT + D]</span>
+</div>
+</div>
+</section>
+<!-- Comprehensive Mission-Critical Data Table -->
+<main class="w-full px-gutter py-space-sm bg-surface-container-lowest">
+<div class="w-full overflow-x-auto rounded-xl shadow-xl bg-surface-container-low">
+<table class="w-full text-left border-collapse">
+<!-- Table Header -->
+<thead>
+<tr class="bg-surface-container font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">
+<th class="py-space-md px-space-sm w-10 text-center">
+<input class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer" type="checkbox"/>
+</th>
+<th class="py-space-md px-space-sm">Order Telemetry</th>
+<th class="py-space-md px-space-sm">Passenger / Tier</th>
+<th class="py-space-md px-space-sm">Purchased Manifest</th>
+<th class="py-space-md px-space-sm">Hub / Gate Vector</th>
+<th class="py-space-md px-space-sm">Payment Protocol</th>
+<th class="py-space-md px-space-sm">Fulfilment Status</th>
+<th class="py-space-md px-space-sm text-right">Flight Boarding SLA</th>
+<th class="py-space-md px-space-sm text-center">Action Deck</th>
+</tr>
+</thead>
+<!-- Table Body Rows -->
+<tbody class="font-body-sm text-body-sm text-on-surface divide-y-0">
+<!-- ROW 1: SLA ALERT (>5 MIN PENDING AWAITING CONFIRMATION) -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low/70">
+<td class="py-space-md px-space-sm text-center align-top">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer mt-1" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-telemetry-md text-telemetry-md text-primary font-bold">SNG-98214</span>
+<span class="w-2 h-2 rounded-full bg-error animate-ping" title="SLA Alert"></span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:42:10 UTC</div>
+<span class="inline-block px-1 py-0.2 rounded bg-error-container text-on-error-container font-telemetry-sm text-telemetry-sm w-fit mt-1">
+                  PENDING: 6m 12s
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface flex items-center gap-1">
+                  Capt. J. Vance-Moreau
+                  <span class="material-symbols-outlined text-[14px] text-tertiary">flight_takeoff</span>
+</div>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-secondary font-telemetry-sm text-telemetry-sm">VOYAGER ELITE</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Seat 2A</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top max-w-xs">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Double Single-Origin Oat Flat White + TIAT Bento</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm mt-0.5">Modifiers: Extra shot, Soy sauce separate, Eco thermal pouch</span>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1 font-semibold">$34.50 USD</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-primary-container text-[16px]">location_on</span>
+<span>NBO Gate 14B Airside</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Flight KQ 102 to LHR</span>
+<span class="text-secondary font-telemetry-sm text-telemetry-sm">Gate-Side Express</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="font-semibold">PayPal Verified</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Auth: PP-990812-CAP</span>
+<span class="text-[10px] font-telemetry-sm text-on-surface-variant/80">Funds Captured (Not Handed Over)</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col items-start gap-1">
+<span class="px-2 py-0.5 rounded-full bg-error/10 text-error font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  Awaiting Acceptance
+                </span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Merchant Ping 2/3</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-right">
+<div class="flex flex-col items-end">
+<div class="font-telemetry-md text-telemetry-md font-bold text-error">15:00 UTC</div>
+<span class="font-telemetry-sm text-telemetry-sm text-error bg-error-container/30 px-1 rounded">BOARDING IN 11m</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Airside Walk: 4m</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="px-space-sm py-1 bg-primary-container text-on-primary hover:bg-primary-container/90 rounded font-label-caps text-label-caps uppercase transition-transform active:scale-95 shadow-sm">
+                  Accept
+                </button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: IN PROGRESS / RUNNER IN TRANSIT -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container">
+<td class="py-space-md px-space-sm text-center align-top">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer mt-1" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-0.5">
+<span class="font-telemetry-md text-telemetry-md text-primary font-bold">SNG-98215</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:38:05 UTC</div>
+<span class="inline-block px-1 py-0.2 rounded bg-surface-container-highest text-secondary font-telemetry-sm text-telemetry-sm w-fit mt-1">
+                  RUNNER ASSIGNED
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Dr. Z. Ochieng</div>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-tertiary font-telemetry-sm text-telemetry-sm">FIRST CLASS</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Simba Lounge #4</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top max-w-xs">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Fast-Track Diplomatic Security Pass &amp; Shower Suite Kit</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm mt-0.5">Aromatherapy Pack, Silk Slippers (Size L), Organic Espresso</span>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1 font-semibold">$120.00 USD</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-secondary text-[16px]">meeting_room</span>
+<span>NBO Simba Lounge Concourse</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Transit to QR 1342</span>
+<span class="text-tertiary font-telemetry-sm text-telemetry-sm">Lounge VIP Courier</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="font-semibold">PayPal Verified</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Auth: PP-887163-CAP</span>
+<span class="text-[10px] font-telemetry-sm text-tertiary">Pre-Clearance Passed</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col items-start gap-1">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+                  Runner In Transit
+                </span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Courier: Hassan M. (ID 402)</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-right">
+<div class="flex flex-col items-end">
+<div class="font-telemetry-md text-telemetry-md font-bold text-on-surface">15:45 UTC</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Boarding in 56m</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1">ETA at Suite: 2m</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-bright text-secondary rounded font-label-caps text-label-caps uppercase transition-colors">
+                  Track GPS
+                </button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: CONFIRMED / PREP -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low/70">
+<td class="py-space-md px-space-sm text-center align-top">
+<input checked="" class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer mt-1" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-0.5">
+<span class="font-telemetry-md text-telemetry-md text-primary font-bold">SNG-98216</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:40:55 UTC</div>
+<span class="inline-block px-1 py-0.2 rounded bg-surface-container-highest text-on-surface font-telemetry-sm text-telemetry-sm w-fit mt-1">
+                  PREP STATION 02
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Fatima Al-Mansoor</div>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-primary-fixed font-telemetry-sm text-telemetry-sm">GOLD STAR</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Seat 14K</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top max-w-xs">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Kilimanjaro AA Single Origin Espresso Beans (500g Tin x 2)</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm mt-0.5">Roast Batch: #OCT-24, Coarse French Press Grind, Custom Gift Ribbon</span>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1 font-semibold">$58.00 USD</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-primary-container text-[16px]">location_on</span>
+<span>HND Terminal 3 Gate 112</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Flight NH 880 to SYD</span>
+<span class="text-secondary font-telemetry-sm text-telemetry-sm">Gate Delivery</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="font-semibold">PayPal Verified</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Auth: PP-310492-CAP</span>
+<span class="text-[10px] font-telemetry-sm text-on-surface-variant/80">3D-Secure 2.0 Auth</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col items-start gap-1">
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-primary-container font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Accepted / In Prep
+                </span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Barista: Naomi K.</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-right">
+<div class="flex flex-col items-end">
+<div class="font-telemetry-md text-telemetry-md font-bold text-primary">15:20 UTC</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary">Boarding in 31m</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Pack Ready: 4m</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="px-space-sm py-1 bg-secondary text-on-secondary hover:bg-secondary-fixed rounded font-label-caps text-label-caps uppercase transition-colors shadow-sm">
+                  Dispatch
+                </button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: AWAITING CONFIRMATION (CRITICAL ALERT >7 MINS) -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container">
+<td class="py-space-md px-space-sm text-center align-top">
+<input class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer mt-1" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-1.5">
+<span class="font-telemetry-md text-telemetry-md text-primary font-bold">SNG-98217</span>
+<span class="w-2 h-2 rounded-full bg-error animate-ping"></span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:41:02 UTC</div>
+<span class="inline-block px-1 py-0.2 rounded bg-error-container text-on-error-container font-telemetry-sm text-telemetry-sm w-fit mt-1">
+                  PENDING: 7m 20s
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Kenji Takahashi</div>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-secondary font-telemetry-sm text-telemetry-sm">BUSINESS</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Seat 9D</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top max-w-xs">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Noise-Cancelling Acoustic Travel Kit + Aircraft Adaptor</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm mt-0.5">Sealed sterile earcups, USB-C DAC included</span>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1 font-semibold">$380.00 USD</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-primary-container text-[16px]">location_on</span>
+<span>JNB Gate A08</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Flight SA 260 to FRA</span>
+<span class="text-secondary font-telemetry-sm text-telemetry-sm">Gate Runner</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="font-semibold">PayPal Verified</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Auth: PP-672190-CAP</span>
+<span class="text-[10px] font-telemetry-sm text-tertiary">Express Vault Token</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col items-start gap-1">
+<span class="px-2 py-0.5 rounded-full bg-error/10 text-error font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                  Awaiting Acceptance
+                </span>
+<span class="text-error font-telemetry-sm text-telemetry-sm">Auto-escalate in 2:40</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-right">
+<div class="flex flex-col items-end">
+<div class="font-telemetry-md text-telemetry-md font-bold text-error">15:15 UTC</div>
+<span class="font-telemetry-sm text-telemetry-sm text-error bg-error-container/30 px-1 rounded">BOARDING IN 26m</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Airside Walk: 7m</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="px-space-sm py-1 bg-primary-container text-on-primary hover:bg-primary-container/90 rounded font-label-caps text-label-caps uppercase transition-transform active:scale-95 shadow-sm">
+                  Accept
+                </button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5: FULFILLED / DELIVERED AT GATE -->
+<tr class="hover:bg-surface-container-high transition-colors bg-surface-container-low/70 opacity-90">
+<td class="py-space-md px-space-sm text-center align-top">
+<input class="w-4 h-4 rounded bg-surface-container-lowest text-primary-container accent-primary-container cursor-pointer mt-1" type="checkbox"/>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-0.5">
+<span class="font-telemetry-md text-telemetry-md text-on-surface-variant font-bold">SNG-98211</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:15:22 UTC</div>
+<span class="inline-block px-1 py-0.2 rounded bg-surface-container text-tertiary font-telemetry-sm text-telemetry-sm w-fit mt-1">
+                  DELIVERY VERIFIED
+                </span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="font-headline-sm text-headline-sm font-semibold text-on-surface">Elena Rostova</div>
+<div class="flex items-center gap-1 mt-0.5">
+<span class="px-1.5 py-0.2 rounded bg-surface-container-highest text-on-surface font-telemetry-sm text-telemetry-sm">VOYAGER</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Seat 12C</span>
+</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top max-w-xs">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">Artisanal Macaron Assortment (12pc) + Iced Matcha</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm mt-0.5">Cold packed with dry ice gel sleeve</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1 font-semibold">$24.00 USD</div>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col">
+<div class="flex items-center gap-1 text-on-surface font-medium">
+<span class="material-symbols-outlined text-tertiary text-[16px]">check_circle</span>
+<span>NBO Gate 04 Airside</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Flight ET 308 to ADD</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Delivered via Runner #12</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[15px]">verified_user</span>
+<span class="font-semibold">PayPal Settled</span>
+</div>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Batch: PAY-SETTL-4019</span>
+<span class="text-[10px] font-telemetry-sm text-tertiary">Cryptographic Sign Off</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top">
+<div class="flex flex-col items-start gap-1">
+<span class="px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+                  Delivered at Gate
+                </span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">Signed by Passenger</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-right">
+<div class="flex flex-col items-end">
+<div class="font-telemetry-md text-telemetry-md font-bold text-tertiary">COMPLETED</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Gate Closed (14:35)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1">Transit Time: 6m 40s</span>
+</div>
+</td>
+<td class="py-space-md px-space-sm align-top text-center">
+<div class="flex items-center justify-center gap-1">
+<button class="px-space-sm py-1 bg-surface-container-high hover:bg-surface-bright text-on-surface-variant hover:text-on-surface rounded font-label-caps text-label-caps uppercase transition-colors">
+                  Manifest
+                </button>
+<button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Terminal Telemetry Status Bar -->
+<div class="mt-space-sm flex flex-col sm:flex-row items-center justify-between gap-space-sm font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-container-low px-space-md py-space-xs rounded-xl">
+<div class="flex items-center gap-space-sm">
+<span>Showing <strong class="text-on-surface font-semibold">1-5</strong> of <strong class="text-on-surface font-semibold">1,428</strong> entries</span>
+<span class="text-surface-variant">|</span>
+<div class="flex items-center gap-space-xs">
+<span>Display:</span>
+<select class="bg-surface-container-lowest text-on-surface px-1 py-0.5 rounded font-telemetry-sm text-telemetry-sm focus:outline-none">
+<option>25 rows</option>
+<option>50 rows</option>
+<option>100 rows</option>
+</select>
+</div>
+</div>
+<!-- Pagination Buttons -->
+<div class="flex items-center gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container disabled:opacity-40">
+<span class="material-symbols-outlined text-[16px] leading-none align-middle">chevron_left</span>
+</button>
+<button class="px-2.5 py-1 rounded bg-primary-container text-on-primary font-bold">1</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors">2</button>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="px-2.5 py-1 rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container transition-colors">58</button>
+<button class="px-2 py-1 rounded bg-surface-container-lowest text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
+<span class="material-symbols-outlined text-[16px] leading-none align-middle">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+<!-- Interactive Telemetry Split / Detail Bottom Sheet for Selected Order -->
+<aside class="w-full px-gutter py-space-md bg-surface-container-lowest mt-space-sm">
+<div class="bg-surface-container p-space-lg rounded-xl shadow-xl flex flex-col xl:flex-row items-start justify-between gap-space-lg">
+<!-- Left: Active Order Focused Telemetry -->
+<div class="flex flex-col gap-space-sm w-full xl:w-2/3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary font-telemetry-sm text-telemetry-sm font-bold">INSPECTOR HUD</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Focus: SNG-98214 (Capt. J. Vance-Moreau)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-error font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+            SLI Metric: Immediate Action Required
+          </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm pt-space-xs">
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Airside Routing Coordinates</span>
+<div class="font-telemetry-md text-telemetry-md text-on-surface mt-1 font-semibold">NBO Terminal 1A ➔ Gate 14B</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Airside Corridors Cleared (Security Checkpoint C)</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Payment Settlement Trace</span>
+<div class="flex items-center gap-1 text-tertiary font-telemetry-md text-telemetry-md mt-1 font-semibold">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+              PayPal Capt: $34.50
+            </div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-0.5">Payee: TIAT Roasters NBO Node</span>
+</div>
+<div class="bg-surface-container-lowest p-space-sm rounded-lg flex flex-col justify-between">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Assigned Runner Unit</span>
+<div class="font-telemetry-md text-telemetry-md text-secondary mt-1 font-semibold">Awaiting Lead Dispatcher</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary mt-0.5">Recommended: Runner Unit 07 (at Gate 12)</span>
+</div>
+</div>
+<!-- Order Workflow Stepper -->
+<div class="w-full bg-surface-container-lowest p-space-sm rounded-lg mt-space-xs">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase mb-2 block">Order Lifecycle Progression</span>
+<div class="grid grid-cols-5 gap-space-xs items-center">
+<div class="flex flex-col gap-1 items-center text-center">
+<div class="w-6 h-6 rounded-full bg-tertiary text-on-tertiary flex items-center justify-center font-telemetry-sm text-telemetry-sm font-bold">✓</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-medium">Order Auth</span>
+</div>
+<div class="h-0.5 w-full bg-tertiary"></div>
+<div class="flex flex-col gap-1 items-center text-center">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-telemetry-sm text-telemetry-sm font-bold animate-pulse">2</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-medium">Merchant Prep</span>
+</div>
+<div class="h-0.5 w-full bg-surface-variant"></div>
+<div class="flex flex-col gap-1 items-center text-center opacity-40">
+<div class="w-6 h-6 rounded-full bg-surface-variant text-on-surface flex items-center justify-center font-telemetry-sm text-telemetry-sm">3</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Gate Handover</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Fast Fulfilment Override Command Panel -->
+<div class="w-full xl:w-1/3 bg-surface-container-lowest p-space-md rounded-lg flex flex-col justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary uppercase">Direct Dispatch Overrides</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">NODE SECURE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Dispatch directly to tarmac courier or assign emergency lounge runner if departure window compresses under 10 minutes.
+          </p>
+</div>
+<div class="flex flex-col gap-space-xs">
+<button class="w-full py-2 bg-primary-container hover:bg-primary-container/90 text-on-primary font-label-caps text-label-caps uppercase rounded-lg transition-transform active:scale-98 flex items-center justify-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+            Transmit Urgent Runner Audio Beacon
+          </button>
+<div class="grid grid-cols-2 gap-space-xs">
+<button class="py-1.5 bg-surface-container hover:bg-surface-container-high text-on-surface font-label-caps text-label-caps uppercase rounded-lg transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">print</span>
+              Print Bag Tag
+            </button>
+<button class="py-1.5 bg-surface-container hover:bg-surface-container-high text-secondary font-label-caps text-label-caps uppercase rounded-lg transition-colors flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[14px]">contactless</span>
+              NFC Passkey Handshake
+            </button>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<script>
+    // Micro-interaction keyboard shortcut trigger and auto-sync indication
+    document.addEventListener('keydown', function(e) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) searchInput.focus();
+      }
+    });
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant py-space-md shadow-[0_-1px_8px_rgba(0,0,0,0.3)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-sm font-telemetry-sm text-telemetry-sm text-center md:text-left"><div>ICAO Annex 17 Airside Retail Compliance • IATA AHM 560 Transit Fulfilment Standard • 256-bit TLS v1.3 Verified</div><div class="text-outline">Songa Aviation Technologies (Pan-African &amp; Global Airspace)</div></div></footer></body></html>

@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import { envValue } from '@/lib/runtimeConfig';
 
 export type ConnectionStatus = 'not_connected' | 'pending_verification' | 'verified';
 
@@ -24,8 +25,8 @@ export type CompanionStatus = {
 export type CompanionError = { message: string; kind: 'not_configured' | 'conflict' | 'invalid' | 'auth' | 'unavailable' };
 
 function companionUrl(): string {
-  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined;
-  const custom = import.meta.env.VITE_WHATSAPP_LINK_FUNCTION_URL as string | undefined;
+  const supabaseUrl = envValue('VITE_SUPABASE_URL');
+  const custom = envValue('VITE_WHATSAPP_LINK_FUNCTION_URL');
   if (custom) return custom;
   if (!supabaseUrl) throw new Error('Supabase is not configured.');
   return `${supabaseUrl.replace(/\/$/, '')}/functions/v1/whatsapp-link`;
@@ -40,7 +41,7 @@ async function callLink(body: Record<string, unknown>): Promise<Record<string, u
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${sessionData.session.access_token}`,
   };
-  const apiKey = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined;
+  const apiKey = envValue('VITE_SUPABASE_ANON_KEY');
   if (apiKey) headers.apikey = apiKey;
 
   const controller = new AbortController();

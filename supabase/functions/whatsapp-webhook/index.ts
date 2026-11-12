@@ -247,7 +247,7 @@ Deno.serve(async (req: Request) => {
     }
 
     if (upper === "HELP") {
-      const reply = "Songa Flight Watch: send a flight number (e.g. KQ100) for the latest status. Reply STOP to unsubscribe.";
+      const reply = "Songa Flight Watch: send a flight number (e.g. KQ100) for status. Reply SERVICES to explore Premium, Trip Rescue, Family Watch, Gift Watch and Airside. Reply MYSONGA for your linked account summary, or STOP to unsubscribe.";
       const send = await sendWhatsApp(from, reply);
       await logMessage({
         direction: "outbound",
@@ -272,6 +272,33 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true });
     }
 
+    if (upper === "SERVICES" || upper === "BUY" || upper === "PRICES") {
+      const reply = "Explore Songa services and secure PayPal checkout here: https://songa.co.ke/?screen=commerce\nPremium passes, Trip Rescue, Family & Group Watch, Gift Journey Watch and the JKIA Airside Sandbox menu are available in the web travel desk. Sandbox prices are shown before checkout.";
+      const send = await sendWhatsApp(from, reply);
+      await logMessage({ direction: "outbound", to: from, body: reply, deliveryStatus: send.ok ? "sent" : "failed", errorMessage: send.error });
+      return json({ ok: true });
+    }
+
+    if (upper === "MYSONGA" || upper === "MY SERVICES" || upper === "MY ACCOUNT") {
+      const { data: connection } = await adminClient.from("whatsapp_connections").select("user_id,status").eq("phone_e164", from).eq("status", "verified").maybeSingle();
+      if (!connection?.user_id) {
+        const reply = "Your WhatsApp number is not linked to a Songa account yet. Sign in at https://songa.co.ke, open WhatsApp Companion and link this number, then send MYSONGA again.";
+        const send = await sendWhatsApp(from, reply);
+        await logMessage({ direction: "outbound", to: from, body: reply, deliveryStatus: send.ok ? "sent" : "failed", errorMessage: send.error });
+        return json({ ok: true });
+      }
+      const [ordersResult, entitlementsResult] = await Promise.all([
+        adminClient.from("songa_commerce_orders").select("product_name,payment_status,fulfilment_status,created_at").eq("user_id", connection.user_id).order("created_at", { ascending: false }).limit(4),
+        adminClient.from("songa_commerce_entitlements").select("product_id,status,ends_at").or(`purchaser_user_id.eq.${connection.user_id},beneficiary_user_id.eq.${connection.user_id}`).order("created_at", { ascending: false }).limit(5),
+      ]);
+      const orderLines = (ordersResult.data ?? []).map((item) => `• ${item.product_name}: ${item.payment_status} / ${item.fulfilment_status}`);
+      const entitlementLines = (entitlementsResult.data ?? []).map((item) => `• ${item.product_id.replace(/songa-/g, "").replace(/-/g, " ")}: ${item.status}${item.ends_at ? ` until ${new Date(item.ends_at).toLocaleDateString("en-GB", { timeZone: "UTC" })}` : ""}`);
+      const reply = `Your Songa account summary\n\nServices:\n${entitlementLines.length ? entitlementLines.join("\n") : "No service entitlements found."}\n\nRecent orders:\n${orderLines.length ? orderLines.join("\n") : "No orders found."}\n\nManage your services: https://songa.co.ke/?screen=commerce`;
+      const send = await sendWhatsApp(from, reply);
+      await logMessage({ userId: connection.user_id, direction: "outbound", to: from, body: reply, deliveryStatus: send.ok ? "sent" : "failed", errorMessage: send.error });
+      return json({ ok: true });
+    }
+
     const flightIdent = parseFlightNumber(bodyText);
     if (flightIdent) {
       const result = await lookupFlight(flightIdent);
@@ -288,7 +315,7 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true });
     }
 
-    const reply = "I did not recognise that. Send a flight number like KQ100, or reply HELP for options, STOP to unsubscribe.";
+    const reply = "I did not recognise that. Send a flight number like KQ100, SERVICES to explore Songa travel services, MYSONGA for your linked account summary, HELP for options, or STOP to unsubscribe.";
     const send = await sendWhatsApp(from, reply);
     await logMessage({
       direction: "outbound",

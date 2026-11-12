@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-secondary-fixed": "#001e2c", "surface-container": "#1f1f23", "surface": "#121316", "on-primary-container": "#561600", "outline-variant": "#5b4138", "on-tertiary-fixed-variant": "#005236", "surface-container-lowest": "#0d0e11", "on-tertiary-fixed": "#002113", "on-secondary": "#00354a", "tertiary-fixed-dim": "#4edea3", "on-secondary-fixed-variant": "#004c69", "secondary-fixed": "#c4e7ff", "error": "#ffb4ab", "secondary-fixed-dim": "#7bd0ff", "tertiary": "#4edea3", "outline": "#aa897f", "primary-container": "#ff5e1e", "background": "#121316", "secondary-container": "#00a6e0", "surface-tint": "#ffb59d", "on-surface": "#e3e2e6", "surface-container-high": "#292a2d", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#6ffbbe", "on-error-container": "#ffdad6", "on-background": "#e3e2e6", "secondary": "#7bd0ff", "on-tertiary": "#003824", "on-tertiary-container": "#003421", "primary-fixed": "#ffdbd0", "surface-bright": "#38393d", "inverse-on-surface": "#2f3034", "tertiary-container": "#00a874", "primary": "#ffb59d", "inverse-primary": "#ab3500", "error-container": "#93000a", "on-secondary-container": "#00374d", "primary-fixed-dim": "#ffb59d", "surface-container-highest": "#343538", "on-primary-fixed-variant": "#832700", "on-primary": "#5d1900", "on-surface-variant": "#e3beb3", "on-error": "#690005", "surface-container-low": "#1b1b1f", "on-primary-fixed": "#390c00", "surface-dim": "#121316", "surface-variant": "#343538" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "margin": "3rem" }, fontFamily: { "label-caps": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "telemetry-sm": ["JetBrains Mono"], "display-hero": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "body-md": ["Inter"], "telemetry-md": ["JetBrains Mono"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-lg-mobile": ["Space Grotesk"] }, fontSize: { "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "600" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "500" }], "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "telemetry-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }], "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }], "telemetry-lg": ["20px", { lineHeight: "24px", letterSpacing: "0.04em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" }], "telemetry-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }], "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "-0.01em", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "headline-lg-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative flex items-center justify-center w-6 h-6"><span class="material-symbols-outlined text-primary-container text-[20px]">radar</span><span class="absolute top-0.5 right-0.5 flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface tracking-wider uppercase">Songa Avionics</span><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[10px] text-tertiary">sensors</span>LIVE STREAM</span></div></div><div class="flex items-center gap-space-sm"><div class="bg-surface-container-low px-2 py-1 rounded flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-on-surface-variant">schedule</span><span class="font-telemetry-sm text-telemetry-sm tracking-wide text-on-surface">14:28:05 UTC</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full text-on-surface">
+<!-- Sub-grid Cockpit Background Decoration -->
+<div class="px-gutter-mobile py-space-sm flex flex-col gap-space-md">
+<!-- 1. MODE SWITCHER & TELEMETRY HEADER -->
+<section class="flex flex-col gap-2">
+<!-- Segmented Pill Selector -->
+<div class="p-1 rounded-full bg-surface-container-lowest flex items-center shadow-md">
+<button class="flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant" id="btn-mode-prod" onclick="switchCheckoutMode('prod')">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-caps text-label-caps uppercase">Production Mode</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 bg-primary-container text-on-primary shadow-sm" id="btn-mode-sandbox" onclick="switchCheckoutMode('sandbox')">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span class="font-label-caps text-label-caps uppercase tracking-wider">Dev Sandbox</span>
+</button>
+</div>
+<!-- Live Protocol Status Pill Bar -->
+<div class="bg-surface-container-low px-3 py-2 rounded-lg flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-2 min-w-0">
+<span class="relative flex h-2 w-2 shrink-0">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary truncate">SANDBOX VERIFIED</span>
+<span class="text-on-surface-variant font-telemetry-sm text-[10px]">|</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">v2/checkout/orders</span>
+</div>
+<div class="flex items-center gap-1 shrink-0 bg-surface-container-high px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-tertiary text-[12px]">wifi_tethering</span>
+<span class="font-telemetry-sm text-[10px] text-tertiary uppercase">Webhook Live</span>
+</div>
+</div>
+</section>
+<!-- 2. PAYMENT STATE STEPPER / CAROUSEL -->
+<section class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between px-1">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface-variant">Live Gateway Stepper</span>
+<span class="font-telemetry-sm text-[10px] text-primary" id="stepper-state-indicator">CURRENT: READY TO PAY</span>
+</div>
+<!-- Stepper Scroll Track -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1.5 pt-0.5 scrollbar-none snap-x">
+<!-- 01 Ready -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-primary-container text-on-primary px-3 py-1.5 rounded-full transition-transform active:scale-95 shadow-sm" id="step-node-1" onclick="setSimulatedStep(1, 'Ready to Pay', 'Active Client Session')">
+<span class="font-telemetry-sm text-[11px] font-semibold">01</span>
+<span class="font-label-caps text-label-caps uppercase">Ready to Pay</span>
+<span class="material-symbols-outlined text-[14px]">touch_app</span>
+</button>
+<!-- 02 Processing -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-2" onclick="setSimulatedStep(2, 'Telemetry Processing', 'Capturing Auth Matrix')">
+<span class="font-telemetry-sm text-[11px]">02</span>
+<span class="font-label-caps text-label-caps uppercase">Processing</span>
+<span class="material-symbols-outlined text-[14px]">sync</span>
+</button>
+<!-- 03 Confirmed -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-3" onclick="setSimulatedStep(3, 'Settlement Confirmed', 'Captured &amp; Pass Dispatched')">
+<span class="font-telemetry-sm text-[11px]">03</span>
+<span class="font-label-caps text-label-caps uppercase">Confirmed</span>
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+</button>
+<!-- 04 Bank Review -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-4" onclick="setSimulatedStep(4, 'Bank Review', '3D Secure / PSD2 Challenge')">
+<span class="font-telemetry-sm text-[11px]">04</span>
+<span class="font-label-caps text-label-caps uppercase">Bank Review</span>
+<span class="material-symbols-outlined text-[14px]">security</span>
+</button>
+<!-- 05 Declined -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-5" onclick="setSimulatedStep(5, 'Instrument Declined', 'Card Exhausted / 422 Fallback')">
+<span class="font-telemetry-sm text-[11px]">05</span>
+<span class="font-label-caps text-label-caps uppercase">Declined</span>
+<span class="material-symbols-outlined text-[14px]">error</span>
+</button>
+<!-- 06 Cancelled -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-6" onclick="setSimulatedStep(6, 'Checkout Cancelled', 'Buyer Dismissed Sheet')">
+<span class="font-telemetry-sm text-[11px]">06</span>
+<span class="font-label-caps text-label-caps uppercase">Cancelled</span>
+<span class="material-symbols-outlined text-[14px]">cancel</span>
+</button>
+<!-- 07 Refunded -->
+<button class="step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95" id="step-node-7" onclick="setSimulatedStep(7, 'Refunded', 'Credit Reversal Completed')">
+<span class="font-telemetry-sm text-[11px]">07</span>
+<span class="font-label-caps text-label-caps uppercase">Refunded</span>
+<span class="material-symbols-outlined text-[14px]">history</span>
+</button>
+</div>
+</section>
+<!-- 3. PRODUCT ORDER SUMMARY CARD -->
+<section class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3 relative overflow-hidden shadow-lg">
+<div class="flex items-start justify-between gap-2">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="bg-primary-container/20 text-primary font-telemetry-sm text-[10px] px-2 py-0.5 rounded uppercase font-semibold">Tier: Avionics Unlimited</span>
+<span class="bg-surface-container-highest text-on-surface-variant font-telemetry-sm text-[10px] px-2 py-0.5 rounded uppercase">Pass SGA-VOY-2025</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-tight">Voyager Annual Pass &amp; Holiday Travel Shield</h2>
+</div>
+<div class="h-10 w-10 rounded-lg bg-surface-container-high flex items-center justify-center shrink-0 text-primary-container">
+<span class="material-symbols-outlined text-[24px]">flight_class</span>
+</div>
+</div>
+<!-- Micro Feature Tags -->
+<div class="grid grid-cols-2 gap-1.5 pt-1">
+<div class="bg-surface-container px-2.5 py-1.5 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[14px]">satellite_alt</span>
+<span class="font-body-sm text-[11px] text-on-surface truncate">ADS-B 4s Stream</span>
+</div>
+<div class="bg-surface-container px-2.5 py-1.5 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">shield</span>
+<span class="font-body-sm text-[11px] text-on-surface truncate">EU261 Autopilot (€600)</span>
+</div>
+<div class="bg-surface-container px-2.5 py-1.5 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[14px]">chat</span>
+<span class="font-body-sm text-[11px] text-on-surface truncate">WhatsApp Dispatch</span>
+</div>
+<div class="bg-surface-container px-2.5 py-1.5 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-[14px]">groups</span>
+<span class="font-body-sm text-[11px] text-on-surface truncate">Family Fleet Radar</span>
+</div>
+</div>
+<!-- Pricing Matrix -->
+<div class="bg-surface-container-lowest p-3 rounded-lg flex flex-col gap-2 mt-1">
+<div class="flex items-center justify-between font-body-sm text-body-sm text-on-surface-variant">
+<span>License Term (365 Operational Days)</span>
+<span class="font-telemetry-md text-telemetry-md text-on-surface font-semibold">$240.00 USD</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm text-tertiary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">redeem</span>
+            Festive Aviation Shield Rebate (15%)
+          </span>
+<span class="font-telemetry-md text-telemetry-md font-semibold">-$36.00 USD</span>
+</div>
+<div class="h-[1px] bg-surface-container-highest my-0.5"></div>
+<div class="flex items-baseline justify-between pt-1">
+<div class="flex flex-col">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Total Due Today</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant">Instant Provisioning via PayPal</span>
+</div>
+<div class="flex items-baseline gap-1 text-primary-container">
+<span class="font-headline-lg-mobile text-headline-lg-mobile font-bold tracking-tight">$204.00</span>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold">USD</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. PASSENGER MANIFEST & DISPATCH FORM -->
+<section class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3 shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">badge</span>
+<h3 class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Avionics Billing Profile</h3>
+</div>
+<span class="font-telemetry-sm text-[10px] text-tertiary">VERIFIED CALLSIGN</span>
+</div>
+<div class="flex flex-col gap-2.5">
+<!-- Account Holder -->
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-[10px] uppercase text-on-surface-variant">Primary Account Holder</label>
+<div class="bg-surface-container-lowest px-3 py-2 rounded-lg flex items-center justify-between">
+<span class="font-body-md text-body-md text-on-surface font-medium">Capt. Ethan Vance</span>
+<span class="material-symbols-outlined text-primary text-[16px]">verified_user</span>
+</div>
+</div>
+<!-- Dispatch Email -->
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-[10px] uppercase text-on-surface-variant">Encrypted Dispatch Email</label>
+<div class="bg-surface-container-lowest px-3 py-2 rounded-lg flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface truncate">ethan.vance@aerocontrol.org</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[16px]">lock</span>
+</div>
+</div>
+<!-- Airspace & Territory Split -->
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-[10px] uppercase text-on-surface-variant">Base Airspace</label>
+<div class="bg-surface-container-lowest px-3 py-2 rounded-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[14px]">flight_takeoff</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">KJFK - NY</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-[10px] uppercase text-on-surface-variant">Billing Territory</label>
+<div class="bg-surface-container-lowest px-3 py-2 rounded-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[14px]">public</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface truncate">USA (USD $)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. NATIVE PAYPAL MOBILE CHECKOUT BOX -->
+<section class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3 shadow-xl">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Express Checkout Flow</span>
+<div class="flex items-center gap-1 text-[#FFC439]">
+<span class="font-telemetry-sm text-telemetry-sm font-bold">PayPal</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant">Encrypted</span>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-2.5">
+<!-- Main PayPal Yellow Button -->
+<button class="w-full bg-[#FFC439] hover:bg-[#F2B62C] active:scale-[0.98] text-[#003087] font-headline-sm text-headline-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-md transition-all" onclick="triggerSimulatedAction('PAYPAL_PRIMARY_CAPTURE')">
+<span class="font-bold tracking-tight text-[17px]">Pay<span class="text-[#0079C1]">Pal</span></span>
+<span class="font-body-md text-[14px] font-semibold text-[#003087]">Instant Checkout ($204.00)</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<!-- PayPal Pay in 4 Button -->
+<button class="w-full bg-surface-container hover:bg-surface-container-high active:scale-[0.98] text-secondary py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all" onclick="triggerSimulatedAction('PAYPAL_PAY_IN_4')">
+<span class="font-telemetry-sm text-[12px] font-semibold text-[#FFC439]">PayPal Pay in 4:</span>
+<span class="font-body-sm text-[12px] text-on-surface font-medium">$51.00/mo interest-free</span>
+</button>
+<!-- Guest Card Checkout -->
+<button class="w-full bg-surface-container-lowest hover:bg-surface-container py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-on-surface-variant hover:text-on-surface transition-all" onclick="triggerSimulatedAction('PAYPAL_GUEST_CARD')">
+<span class="material-symbols-outlined text-[16px]">credit_card</span>
+<span class="font-body-sm text-body-sm font-medium">Debit or Credit Card (via PayPal Guest)</span>
+</button>
+</div>
+<!-- Security Credentials & PCI Badges -->
+<div class="pt-2 flex items-center justify-between text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary">lock</span>
+<span class="font-telemetry-sm text-[10px]">TLS 1.3 256-bit</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+<span class="font-telemetry-sm text-[10px]">PCI DSS Level-1</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">security</span>
+<span class="font-telemetry-sm text-[10px]">SOC 2 Type II</span>
+</div>
+</div>
+</section>
+<!-- 6. DEVELOPER SANDBOX SIMULATOR (MOBILE DRAWER / ACCORDION) -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden shadow-lg transition-all" id="sandbox-simulator-box">
+<!-- Accordion Header -->
+<button class="w-full p-space-md flex items-center justify-between bg-surface-container hover:bg-surface-container-high transition-colors" onclick="toggleSandboxDrawer()">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[20px]">smart_toy</span>
+<div class="flex flex-col text-left">
+<span class="font-label-caps text-label-caps uppercase text-on-surface">Developer Sandbox Simulator</span>
+<span class="font-telemetry-sm text-[10px] text-tertiary">Mock HTTP Responses &amp; Webhook Injection</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="sandbox-chevron">expand_less</span>
+</button>
+<!-- Drawer Content -->
+<div class="p-space-md flex flex-col gap-3" id="sandbox-drawer-content">
+<!-- Action Trigger Buttons -->
+<div class="grid grid-cols-1 gap-2">
+<button class="w-full bg-surface-container-lowest hover:bg-surface-container-high p-2.5 rounded-lg flex items-center justify-between text-left active:scale-[0.99] transition-transform" onclick="runSimulation('200_CAPTURE')">
+<div class="flex items-center gap-2">
+<span class="bg-tertiary/20 text-tertiary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">200 OK</span>
+<span class="font-body-sm text-[12px] text-on-surface font-medium">Simulate PayPal Capture</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-tertiary">play_circle</span>
+</button>
+<button class="w-full bg-surface-container-lowest hover:bg-surface-container-high p-2.5 rounded-lg flex items-center justify-between text-left active:scale-[0.99] transition-transform" onclick="runSimulation('422_DECLINED')">
+<div class="flex items-center gap-2">
+<span class="bg-error/20 text-error font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">422 ERR</span>
+<span class="font-body-sm text-[12px] text-on-surface font-medium">Simulate Declined Instrument</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-error">play_circle</span>
+</button>
+<button class="w-full bg-surface-container-lowest hover:bg-surface-container-high p-2.5 rounded-lg flex items-center justify-between text-left active:scale-[0.99] transition-transform" onclick="runSimulation('WEBHOOK_TRIGGER')">
+<div class="flex items-center gap-2">
+<span class="bg-secondary/20 text-secondary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-bold">ASYNC</span>
+<span class="font-body-sm text-[12px] text-on-surface font-medium">Simulate Webhook Trigger (async)</span>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary">play_circle</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-surface-container-lowest hover:bg-surface-container-high p-2 rounded-lg flex items-center justify-between text-left" onclick="runSimulation('IDEMPOTENCY')">
+<span class="font-telemetry-sm text-[11px] text-on-surface truncate">Idempotency Key</span>
+<span class="material-symbols-outlined text-[14px] text-primary">refresh</span>
+</button>
+<button class="bg-surface-container-lowest hover:bg-surface-container-high p-2 rounded-lg flex items-center justify-between text-left" onclick="runSimulation('REFUND')">
+<span class="font-telemetry-sm text-[11px] text-on-surface truncate">Instant Refund</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant">undo</span>
+</button>
+</div>
+</div>
+<!-- Telemetry JSON Inspector -->
+<div class="bg-surface-container-lowest rounded-lg p-3 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary">data_object</span>
+<span class="font-telemetry-sm text-[11px] text-on-surface">SANDBOX_EVENT_STREAM.json</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span>
+<span class="font-telemetry-sm text-[10px] text-tertiary">14ms • US-EAST-1</span>
+</div>
+</div>
+<pre class="font-telemetry-sm text-[10px] text-on-surface-variant overflow-x-auto p-2 bg-surface-container-high rounded leading-relaxed whitespace-pre font-mono" id="json-sandbox-output">{
+  "event_id": "EV-9924-OK",
+  "status": "COMPLETED",
+  "order_id": "ORD-SONGA-882914",
+  "capture_id": "CAP-881940182",
+  "intent": "CAPTURE",
+  "amount": { "currency_code": "USD", "value": "204.00" },
+  "payer": {
+    "email_address": "ethan.vance@aerocontrol.org",
+    "payer_id": "SB-8F291AA0"
+  },
+  "supabase_sync": { "synced": true, "ack_ms": 14 }
+}</pre>
+</div>
+</div>
+</section>
+<!-- 7. ACCOUNT BILLING LEDGER (MOBILE CARDS) -->
+<section class="bg-surface-container-low rounded-xl p-space-md flex flex-col gap-3 shadow-md mb-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">receipt_long</span>
+<h3 class="font-label-caps text-label-caps uppercase tracking-wider text-on-surface">Pass Billing Ledger</h3>
+</div>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant">HISTORIC TRANSACTIONS</span>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Invoice 1 -->
+<div class="bg-surface-container-lowest p-3 rounded-lg flex items-center justify-between">
+<div class="flex flex-col min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-md text-telemetry-md font-semibold text-on-surface truncate">INV-2024-8829</span>
+<span class="bg-tertiary/15 text-tertiary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase">Settled</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant mt-0.5">Voyager Annual Pass • $204.00 USD</span>
+</div>
+<button class="shrink-0 bg-surface-container-high hover:bg-surface-container hover:text-on-surface text-on-surface-variant p-2 rounded-md flex items-center gap-1 transition-colors" onclick="downloadPdfInvoice('INV-2024-8829')">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span class="font-label-caps text-[10px] uppercase">PDF</span>
+</button>
+</div>
+<!-- Invoice 2 -->
+<div class="bg-surface-container-lowest p-3 rounded-lg flex items-center justify-between opacity-80">
+<div class="flex flex-col min-w-0 pr-2">
+<div class="flex items-center gap-2">
+<span class="font-telemetry-md text-telemetry-md font-semibold text-on-surface truncate">INV-2023-4109</span>
+<span class="bg-surface-container-high text-on-surface-variant font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-semibold uppercase">Expired</span>
+</div>
+<span class="font-body-sm text-[11px] text-on-surface-variant mt-0.5">AeroCommand Pass • $189.00 USD</span>
+</div>
+<button class="shrink-0 bg-surface-container-high hover:bg-surface-container hover:text-on-surface text-on-surface-variant p-2 rounded-md flex items-center gap-1 transition-colors" onclick="downloadPdfInvoice('INV-2023-4109')">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span class="font-label-caps text-[10px] uppercase">PDF</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Operational System Notice -->
+<div class="flex items-center justify-center gap-1.5 py-2 text-on-surface-variant font-telemetry-sm text-[10px]">
+<span class="material-symbols-outlined text-[12px] text-tertiary">check_circle</span>
+<span>Songa Core Dispatch Engine • Node US-EAST #440-2</span>
+</div>
+</div>
+<!-- Interactive Client-side Script -->
+<script>
+    function switchCheckoutMode(mode) {
+      const btnProd = document.getElementById('btn-mode-prod');
+      const btnSandbox = document.getElementById('btn-mode-sandbox');
+      const simulatorBox = document.getElementById('sandbox-simulator-box');
+      
+      if (mode === 'prod') {
+        btnProd.className = "flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 bg-primary-container text-on-primary shadow-sm";
+        btnSandbox.className = "flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant";
+        if (simulatorBox) {
+          simulatorBox.classList.add('opacity-40');
+        }
+      } else {
+        btnSandbox.className = "flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 bg-primary-container text-on-primary shadow-sm";
+        btnProd.className = "flex-1 py-2 px-3 rounded-full flex items-center justify-center gap-1.5 transition-all duration-200 text-on-surface-variant";
+        if (simulatorBox) {
+          simulatorBox.classList.remove('opacity-40');
+        }
+      }
+    }
+
+    function setSimulatedStep(stepNumber, label, detail) {
+      const indicator = document.getElementById('stepper-state-indicator');
+      if (indicator) {
+        indicator.textContent = `STATE 0${stepNumber}: ${label.toUpperCase()}`;
+      }
+
+      // Reset all nodes to base inactive state
+      for (let i = 1; i <= 7; i++) {
+        const node = document.getElementById(`step-node-${i}`);
+        if (node) {
+          if (i === stepNumber) {
+            node.className = "step-chip snap-start shrink-0 flex items-center gap-2 bg-primary-container text-on-primary px-3 py-1.5 rounded-full transition-transform active:scale-95 shadow-sm";
+          } else {
+            node.className = "step-chip snap-start shrink-0 flex items-center gap-2 bg-surface-container-high text-on-surface-variant hover:text-on-surface px-3 py-1.5 rounded-full transition-transform active:scale-95";
+          }
+        }
+      }
+
+      // Feed into Sandbox telemetry screen
+      const jsonViewer = document.getElementById('json-sandbox-output');
+      if (jsonViewer) {
+        jsonViewer.textContent = JSON.stringify({
+          stepper_event: `STEP_0${stepNumber}_CHANGED`,
+          stage: label,
+          detail: detail,
+          timestamp: new Date().toISOString(),
+          status_code: stepNumber === 5 ? 422 : 200,
+          supabase_sync: { synced: true, ack_ms: Math.floor(Math.random() * 18) + 4 }
+        }, null, 2);
+      }
+    }
+
+    function toggleSandboxDrawer() {
+      const drawer = document.getElementById('sandbox-drawer-content');
+      const chevron = document.getElementById('sandbox-chevron');
+      if (!drawer || !chevron) return;
+
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        chevron.textContent = 'expand_less';
+      } else {
+        drawer.classList.add('hidden');
+        chevron.textContent = 'expand_more';
+      }
+    }
+
+    function triggerSimulatedAction(actionName) {
+      const jsonViewer = document.getElementById('json-sandbox-output');
+      if (jsonViewer) {
+        jsonViewer.textContent = JSON.stringify({
+          action_triggered: actionName,
+          client_token: "MOCK_PAYPAL_SANDBOX_TOKEN_" + Math.random().toString(36).substring(2, 9).toUpperCase(),
+          status: "CAPTURED_INITIATED",
+          currency: "USD",
+          total: "204.00",
+          auth_handshake: "TLS 1.3 SECURE",
+          dispatch_recipient: "ethan.vance@aerocontrol.org"
+        }, null, 2);
+      }
+      setSimulatedStep(2, 'Telemetry Processing', 'Capturing Auth Matrix');
+      setTimeout(() => {
+        setSimulatedStep(3, 'Settlement Confirmed', 'Captured & Pass Dispatched');
+      }, 900);
+    }
+
+    function runSimulation(type) {
+      const jsonViewer = document.getElementById('json-sandbox-output');
+      if (!jsonViewer) return;
+
+      if (type === '200_CAPTURE') {
+        jsonViewer.textContent = JSON.stringify({
+          http_status: 200,
+          code: "ORDER_CAPTURED_SUCCESS",
+          order_id: "ORD-SONGA-" + Math.floor(100000 + Math.random() * 900000),
+          idempotency_key: "IDEM-" + Math.random().toString(36).substring(2, 8),
+          settlement_ms: 12,
+          buyer_email: "ethan.vance@aerocontrol.org"
+        }, null, 2);
+        setSimulatedStep(3, 'Settlement Confirmed', 'Captured & Pass Dispatched');
+      } else if (type === '422_DECLINED') {
+        jsonViewer.textContent = JSON.stringify({
+          http_status: 422,
+          code: "INSTRUMENT_DECLINED",
+          issue: "PAYER_ACCOUNT_RESTRICTED_OR_INSUFFICIENT",
+          suggested_action: "TRY_ALTERNATIVE_FUNDING_SOURCE",
+          gateway_log_id: "GW-FAIL-" + Math.floor(1000 + Math.random() * 9000)
+        }, null, 2);
+        setSimulatedStep(5, 'Instrument Declined', 'Card Exhausted / 422 Fallback');
+      } else if (type === 'WEBHOOK_TRIGGER') {
+        jsonViewer.textContent = JSON.stringify({
+          webhook_event: "PAYMENT.CAPTURE.COMPLETED",
+          event_version: "2.1",
+          create_time: new Date().toISOString(),
+          resource_type: "capture",
+          summary: "Payment capture completed for $204.00 USD",
+          event_id: "WH-" + Math.random().toString(36).substring(2, 10).toUpperCase()
+        }, null, 2);
+      } else if (type === 'IDEMPOTENCY') {
+        jsonViewer.textContent = JSON.stringify({
+          idempotency_check: "MATCH_FOUND",
+          original_request_id: "REQ-99210-A",
+          replay_prevented: true,
+          status: "CACHED_PAYLOAD_RETURNED"
+        }, null, 2);
+      } else if (type === 'REFUND') {
+        jsonViewer.textContent = JSON.stringify({
+          refund_id: "REF-00918-USD",
+          status: "COMPLETED",
+          amount: { "value": "204.00", "currency": "USD" },
+          refund_reason: "DEVELOPER_SANDBOX_SIMULATION",
+          reverse_time: new Date().toISOString()
+        }, null, 2);
+        setSimulatedStep(7, 'Refunded', 'Credit Reversal Completed');
+      }
+    }
+
+    function downloadPdfInvoice(invoiceId) {
+      const jsonViewer = document.getElementById('json-sandbox-output');
+      if (jsonViewer) {
+        jsonViewer.textContent = JSON.stringify({
+          action: "DISPATCH_INVOICE_PDF",
+          invoice: invoiceId,
+          rendered_format: "application/pdf (A4 Flight Standard)",
+          storage_uri: `s3://songa-vault-prod/invoices/${invoiceId}.pdf`,
+          status: "DISPATCHED_TO_DEVICE"
+        }, null, 2);
+      }
+    }
+  </script>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.7)]" data-active-classes="text-primary-container font-headline-sm"><div class="flex items-center justify-around h-16 px-1"><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="flights" href="#"><span class="material-symbols-outlined text-[20px]">flight_takeoff</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Flights</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="calendar" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Calendar</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] transition-colors text-primary-container font-headline-sm" data-path="checkout-passes" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Passes</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-copilot" href="#"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Copilot</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">person_outline</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Profile</span></a></div></nav></body></html>

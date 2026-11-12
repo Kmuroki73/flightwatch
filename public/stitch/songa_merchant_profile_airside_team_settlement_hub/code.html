@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SONGA Merchant Operations &amp; Fulfilment</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-secondary":"#00354a","inverse-on-surface":"#2f3034","on-tertiary-container":"#003421","primary":"#ffb59d","tertiary-container":"#00a874","surface-variant":"#343538","primary-fixed-dim":"#ffb59d","error-container":"#93000a","on-primary-fixed":"#390c00","on-error":"#690005","on-surface-variant":"#e3beb3","on-primary-fixed-variant":"#832700","surface-container-high":"#292a2d","inverse-primary":"#ab3500","on-surface":"#e3e2e6","surface-tint":"#ffb59d","surface-container-low":"#1b1b1f","on-primary-container":"#561600","background":"#121316","secondary-container":"#00a6e0","on-secondary-fixed-variant":"#004c69","surface-bright":"#38393d","surface-container-highest":"#343538","secondary-fixed-dim":"#7bd0ff","on-tertiary-fixed-variant":"#005236","on-tertiary":"#003824","tertiary":"#4edea3","tertiary-fixed-dim":"#4edea3","inverse-surface":"#e3e2e6","on-secondary-fixed":"#001e2c","tertiary-fixed":"#6ffbbe","secondary-fixed":"#c4e7ff","surface-container-lowest":"#0d0e11","surface":"#121316","primary-container":"#ff5e1e","outline-variant":"#5b4138","error":"#ffb4ab","on-tertiary-fixed":"#002113","on-primary":"#5d1900","on-error-container":"#ffdad6","secondary":"#7bd0ff","primary-fixed":"#ffdbd0","surface-dim":"#121316","surface-container":"#1f1f23","on-secondary-container":"#00374d","on-background":"#e3e2e6","outline":"#aa897f"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"margin":"3rem","space-xl":"2.5rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","margin-mobile":"1rem","space-xs":"0.25rem","gutter":"1.5rem","space-lg":"1.5rem","space-md":"1rem"},"fontFamily":{"display-hero-mobile":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"telemetry-md":["JetBrains Mono"],"headline-lg-mobile":["Space Grotesk"],"label-caps":["Space Grotesk"],"headline-md":["Space Grotesk"],"headline-lg":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-sm":["JetBrains Mono"],"body-lg":["Inter"],"body-sm":["Inter"],"headline-sm":["Space Grotesk"],"body-md":["Inter"]},"fontSize":{"display-hero-mobile":["36px",{"lineHeight":"44px","letterSpacing":"-0.02em","fontWeight":"700"}],"telemetry-lg":["20px",{"lineHeight":"24px","letterSpacing":"0.04em","fontWeight":"600"}],"telemetry-md":["13px",{"lineHeight":"18px","letterSpacing":"0.02em","fontWeight":"500"}],"headline-lg-mobile":["26px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"600"}],"label-caps":["11px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"600"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"600"}],"display-hero":["56px",{"lineHeight":"64px","letterSpacing":"-0.03em","fontWeight":"700"}],"telemetry-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.05em","fontWeight":"500"}],"body-lg":["16px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"400"}],"body-sm":["12px",{"lineHeight":"18px","letterSpacing":"0em","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","letterSpacing":"0em","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"22px","letterSpacing":"0em","fontWeight":"400"}]}}}}</script></head><body class="bg-surface-container-lowest font-body-md text-on-surface min-h-screen selection:bg-primary-container selection:text-white"><header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-24 w-full px-gutter flex flex-col justify-between py-space-xs"><div class="flex items-center justify-between gap-space-md h-12"><div class="flex items-center gap-space-md flex-shrink-0"><div class="flex items-center gap-space-sm"><div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div><span class="font-headline-sm text-headline-sm tracking-wider text-on-surface font-bold">SONGA</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-high text-on-surface-variant font-telemetry-sm text-telemetry-sm"><span class="text-primary-container font-semibold">OPS //</span><span>DISPATCH HUB</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-xs py-0.5 rounded bg-surface-container-low text-tertiary font-telemetry-sm text-telemetry-sm"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>NBO T1A • HND T3 • JNB A1 [ONLINE]</span></div></div><nav class="hidden lg:flex items-center gap-space-xs bg-surface-container-low p-1 rounded-xl" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="overview" href="#">Overview</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="orders" href="#">Orders</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="fulfilment-dispatch" href="#">Fulfilment Dispatch</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="inventory-&amp;-services" href="#">Inventory &amp; Services</a><a class="px-space-md py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface transition-colors font-label-caps text-label-caps uppercase" data-path="disputes-&amp;-support" href="#">Disputes &amp; Support</a><a aria-current="page" class="px-space-md py-1.5 transition-colors uppercase bg-primary-container text-on-primary font-bold rounded-lg" data-path="merchant-&amp;-team" href="#">Merchant &amp; Team</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container text-on-surface font-body-sm text-body-sm"><span class="material-symbols-outlined text-secondary text-[16px]">storefront</span><span class="font-medium truncate max-w-[200px]">TIAT Roasters &amp; Airside Express</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-secondary font-telemetry-sm text-telemetry-sm tracking-wide"><span class="material-symbols-outlined text-[14px]">schedule</span><span>14:48:22 UTC</span></div><div class="hidden sm:flex items-center px-space-xs py-1 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm uppercase tracking-wider">DARK [AERO]</div><div class="flex items-center gap-space-xs pl-space-xs"><div class="text-right hidden sm:block"><div class="font-label-caps text-label-caps text-on-surface leading-tight">K. Ndung'u</div><div class="font-telemetry-sm text-telemetry-sm text-tertiary leading-tight">Duty Ops Lead</div></div><div class="relative"><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-tertiary ring-2 ring-surface"></span></div></div></div></div><div class="h-8 w-full flex items-center justify-between overflow-x-auto bg-surface-container-lowest/80 px-space-md rounded-lg text-on-surface-variant font-telemetry-sm text-telemetry-sm"><div class="flex items-center gap-space-md whitespace-nowrap"><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span class="text-on-surface font-medium">TELEMETRY:</span><span>JKIA (NBO) AIRSIDE NODE ACTIVE</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-primary-container font-medium">QUEUE:</span><span>14 PENDING ORDERS</span></div><span class="text-surface-variant">|</span><div class="flex items-center gap-space-xs"><span class="text-tertiary font-medium">FULFILMENT SLA:</span><span>98.6% ON-TIME</span></div></div><div class="flex items-center gap-space-xs whitespace-nowrap pl-space-md"><span class="text-secondary font-medium">PAYPAL SETTLEMENT GATEWAY:</span><span class="text-tertiary">CONNECTED (SANDBOX DEMO MODE)</span></div></div></div></header><main class="w-full pt-24 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Canvas Decor -->
+<div class="relative w-full overflow-hidden px-gutter-mobile md:px-gutter py-space-md lg:py-space-lg">
+<div class="absolute -top-32 -left-20 w-96 h-96 bg-primary-container/10 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="absolute top-1/3 -right-24 w-80 h-80 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
+<!-- Header Telemetry Strip -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-container text-primary-container font-telemetry-sm text-telemetry-sm uppercase tracking-wider font-semibold">SEC-ADMIN // 06</span>
+<span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm tracking-widest uppercase">AIRSIDE STATION PROFILE &amp; RBAC</span>
+<span class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm bg-surface-container-low px-2 py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span>
+            NODE SYNC: OPTIMAL
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Merchant Identity &amp; Airside Governance</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">
+          Authorized concessionaire credentials, physical airside apron clearance rosters, multi-node terminal allocation, and cryptographic settlement vaulting.
+        </p>
+</div>
+<!-- Quick Action Utilities -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-surface-container text-on-surface font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-colors shadow-sm" id="toggleAuditBtn">
+<span class="material-symbols-outlined text-[16px] text-secondary">verified_user</span>
+<span>Annex 17 Audit Log</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2 rounded-lg bg-primary-container text-on-primary font-label-caps text-label-caps uppercase hover:brightness-110 shadow-lg shadow-primary-container/20 transition-all" id="openPasskeyModal">
+<span class="material-symbols-outlined text-[16px]">key</span>
+<span>+ Issue Dispatch Passkey</span>
+</button>
+</div>
+</div>
+<!-- Top Bento: Merchant Legal Credentials & Multi-Airport Concession Nodes -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-space-lg">
+<!-- Merchant Business Profile Card (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col justify-between p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-space-md opacity-20 pointer-events-none select-none">
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface tracking-widest font-bold">ICAO // SEC-L3</span>
+</div>
+<div>
+<!-- Status Banner Badge -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-tertiary/10 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-semibold tracking-wider uppercase">VERIFIED CONCESSIONAIRE (LEVEL 3 TARMAC &amp; AIRSIDE SECURITY CLEARED)</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ID: NBO-CONC-2024-88A</span>
+</div>
+<!-- Merchant Legal Identifiers -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-md mb-space-md">
+<div class="bg-surface-container-low p-space-md rounded-lg">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Registered Entity Name</div>
+<div class="font-headline-sm text-headline-sm text-on-surface leading-tight font-semibold">TIAT Roasters &amp; Airside Express International Ltd</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary mt-1">DBA: TIAT Roasters Airside</div>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg">
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Aviation Concession Operating License</div>
+<div class="font-telemetry-md text-telemetry-md text-primary font-semibold">ICAO Annex 17 Airside Concessionaire</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Nairobi KAA / Tokyo CAB / ACSA Registered</div>
+</div>
+</div>
+<!-- Signature Verification Rail -->
+<div class="p-space-sm rounded bg-surface-container-lowest font-telemetry-sm text-telemetry-sm flex items-center justify-between flex-wrap gap-space-xs text-on-surface-variant">
+<div class="flex items-center gap-space-xs truncate">
+<span class="material-symbols-outlined text-tertiary text-[16px]">fingerprint</span>
+<span class="text-on-surface truncate">SHA256: 9e4f:88b1:cc03:9912:00aa:1492:ee09:ac77:4188:99fa</span>
+</div>
+<span class="text-tertiary flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> 256-BIT CRYPTO VALIDATED
+            </span>
+</div>
+</div>
+<!-- Terminal Presence Overview -->
+<div class="mt-space-md pt-space-md flex flex-wrap items-center justify-between gap-space-md bg-surface-container-high/40 p-space-sm rounded-lg">
+<div class="flex items-center gap-space-md">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">Airside Terminals</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-bold">4 Active Nodes</div>
+</div>
+<div class="h-8 w-px bg-surface-variant"></div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">Apron Runners</div>
+<div class="font-headline-sm text-headline-sm text-tertiary font-bold">12 Dispatched</div>
+</div>
+<div class="h-8 w-px bg-surface-variant"></div>
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase">Security Audit Score</div>
+<div class="font-headline-sm text-headline-sm text-secondary font-bold">99.8%</div>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-tertiary text-[14px]">shield</span>
+<span>Annual KAA Security Clearance Valid thru Nov 2025</span>
+</div>
+</div>
+</div>
+<!-- Active Airport Concession Nodes (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col justify-between p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl">
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">hub</span>
+<span class="font-label-caps text-label-caps uppercase text-on-surface font-semibold tracking-wider">Active Concession Nodes</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary bg-tertiary/10 px-2 py-0.5 rounded">4/4 BROADCASTING</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<!-- Node 1 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded bg-primary-container/20 text-primary-container flex items-center justify-center font-telemetry-md font-bold text-telemetry-md">N1</span>
+<div class="truncate">
+<div class="font-body-md text-body-md text-on-surface font-semibold truncate">JKIA (NBO) — Terminal 1A</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">Concourse Gate 04–14 • Espresso &amp; Mobile Apron Bay</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary flex items-center gap-1 justify-end">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> PRI-HUB
+              </span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">4 Runners</div>
+</div>
+</div>
+<!-- Node 2 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center font-telemetry-md font-bold text-telemetry-md">N2</span>
+<div class="truncate">
+<div class="font-body-md text-body-md text-on-surface font-semibold truncate">JKIA (NBO) — Terminal 1E</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">Rapid Transfer Desk • Pre-Security Transit Link</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">TRANSFER</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">2 Runners</div>
+</div>
+</div>
+<!-- Node 3 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center font-telemetry-md font-bold text-telemetry-md">N3</span>
+<div class="truncate">
+<div class="font-body-md text-body-md text-on-surface font-semibold truncate">Tokyo Haneda (HND) — T3</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">Satellite Gate 112 • Matcha &amp; Aeropress Kiosk</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">REMOTE INT</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">3 Runners</div>
+</div>
+</div>
+<!-- Node 4 -->
+<div class="p-space-sm rounded-lg bg-surface-container-low hover:bg-surface-container-high transition-colors flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm min-w-0">
+<span class="w-8 h-8 rounded bg-surface-container text-on-surface flex items-center justify-center font-telemetry-md font-bold text-telemetry-md">N4</span>
+<div class="truncate">
+<div class="font-body-md text-body-md text-on-surface font-semibold truncate">OR Tambo (JNB) — Central T-A1</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant truncate">Gate Pier A • Direct Jetbridge Delivery Station</div>
+</div>
+</div>
+<div class="text-right flex-shrink-0">
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">ACTIVE</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">3 Runners</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Split: Airside Roster (RBAC) & Interactive Permissions Matrix -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter mb-space-lg">
+<!-- Airside Team Personnel (8 cols) -->
+<div class="xl:col-span-8 flex flex-col p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[18px]">badge</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Active Airside Personnel &amp; Apron Staff</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Role-based physical gate badges with cryptographic dispatch passkeys.</p>
+</div>
+<div class="flex items-center gap-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span>FILTER:</span>
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-semibold">ALL (4)</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container-high">ON SHIFT (3)</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container-high">RAMP ACCESS</button>
+</div>
+</div>
+<!-- Team Table -->
+<div class="overflow-x-auto w-full">
+<table class="w-full text-left font-body-sm text-body-sm border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-label-caps text-label-caps uppercase">
+<th class="py-2.5 px-space-sm font-semibold">Operator / Staff</th>
+<th class="py-2.5 px-space-sm font-semibold">Assigned Role</th>
+<th class="py-2.5 px-space-sm font-semibold">Airside Clearance Area</th>
+<th class="py-2.5 px-space-sm font-semibold">Duty Status</th>
+<th class="py-2.5 px-space-sm font-semibold text-right">Passkey Action</th>
+</tr>
+</thead>
+<tbody class="divide-y-0">
+<!-- Member 1 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-bold flex items-center justify-center font-headline-sm text-headline-sm">KN</div>
+<div>
+<div class="font-semibold text-on-surface">Kevin Ndung'u</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ID: KAA-SEC-9921 • Lead</div>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">Duty Operations Lead</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-[14px]">flight_takeoff</span>
+<span>Full Airside Ramp &amp; Concourse</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1.5 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+<span>On Shift (NBO T1A)</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-bright font-telemetry-sm text-telemetry-sm transition-colors">Rotate Passkey</button>
+</td>
+</tr>
+<!-- Member 2 -->
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-high/60 transition-colors">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-variant text-on-surface font-bold flex items-center justify-center font-headline-sm text-headline-sm">NK</div>
+<div>
+<div class="font-semibold text-on-surface">Naomi Kemboi</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ID: KAA-SEC-4412 • Supervisor</div>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">Head Barista &amp; Station 02 Sup</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">storefront</span>
+<span>Terminal Concourse Only</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1.5 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>On Shift</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-bright font-telemetry-sm text-telemetry-sm transition-colors">Rotate Passkey</button>
+</td>
+</tr>
+<!-- Member 3 -->
+<tr class="hover:bg-surface-container-high/60 transition-colors">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary font-bold flex items-center justify-center font-headline-sm text-headline-sm">OH</div>
+<div>
+<div class="font-semibold text-on-surface">Omar Hassan</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ID: KAA-SEC-8109 • Runner</div>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">Airside Mobile Runner Unit 07</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[14px]">directions_run</span>
+<span>Ramp, Jetbridge &amp; Lounge</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1.5 text-primary-container font-telemetry-sm text-telemetry-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-ping"></span>
+<span>Active on Apron</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-bright font-telemetry-sm text-telemetry-sm transition-colors">Ping Transponder</button>
+</td>
+</tr>
+<!-- Member 4 -->
+<tr class="bg-surface-container-lowest/30 hover:bg-surface-container-high/60 transition-colors">
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary font-bold flex items-center justify-center font-headline-sm text-headline-sm">AT</div>
+<div>
+<div class="font-semibold text-on-surface">Aiko Tanaka</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ID: CAB-HND-192 • Remote Lead</div>
+</div>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface font-medium">Tokyo Hub Dispatch Manager</span>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">location_city</span>
+<span>Haneda T3 Airside</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm">
+<div class="flex items-center gap-1.5 text-secondary font-telemetry-sm text-telemetry-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Online (HND)</span>
+</div>
+</td>
+<td class="py-space-sm px-space-sm text-right">
+<button class="px-2 py-1 rounded bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-bright font-telemetry-sm text-telemetry-sm transition-colors">Rotate Passkey</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Notice within card -->
+<div class="mt-space-md pt-space-sm flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+<span>All active staff hold valid biometric tamper-proof smart-cards.</span>
+</div>
+<div>4 of 12 Registered Licences Active</div>
+</div>
+</div>
+<!-- Role Permission Matrix (4 cols) -->
+<div class="xl:col-span-4 flex flex-col justify-between p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl">
+<div>
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">security</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">RBAC Authority Matrix</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Station permissions enforced cryptographically via airside enclave tokens.</p>
+<!-- Matrix View -->
+<div class="flex flex-col gap-space-xs font-telemetry-sm text-telemetry-sm">
+<!-- Matrix Item: Orders View -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="text-on-surface font-medium">Orders View &amp; Fulfillment Stream</div>
+<div class="text-on-surface-variant text-[10px]">Real-time queue &amp; passenger locator</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary font-bold">
+<span>ALL ROLES</span>
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+</div>
+<!-- Matrix Item: Refund Trigger -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="text-on-surface font-medium">Refund Trigger &amp; Flight Void</div>
+<div class="text-on-surface-variant text-[10px]">Transit disruption automated vouchers</div>
+</div>
+<div class="flex items-center gap-1 text-primary-container font-bold">
+<span>LEAD / SUP ONLY</span>
+<span class="material-symbols-outlined text-[16px]">lock</span>
+</div>
+</div>
+<!-- Matrix Item: Stock Editing -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="text-on-surface font-medium">Stock Editing &amp; 86 Disablement</div>
+<div class="text-on-surface-variant text-[10px]">Duty-free inventory &amp; perishables</div>
+</div>
+<div class="flex items-center gap-1 text-tertiary font-bold">
+<span>SUPERVISOR +</span>
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+</div>
+<!-- Matrix Item: Settlement Reports -->
+<div class="p-space-sm rounded bg-surface-container-low flex items-center justify-between">
+<div>
+<div class="text-on-surface font-medium">Settlement Reports &amp; Banking Sweep</div>
+<div class="text-on-surface-variant text-[10px]">PayPal Vault vault routing keys</div>
+</div>
+<div class="flex items-center gap-1 text-error font-bold">
+<span>OWNER AUTH</span>
+<span class="material-symbols-outlined text-[16px]">admin_panel_settings</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-space-md p-space-sm rounded bg-surface-container-high/60 flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px]">policy</span>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+            Changes to RBAC matrix propagate across edge dispatch pods within <span class="text-on-surface font-semibold">&lt; 3.2 seconds</span>.
+          </div>
+</div>
+</div>
+</div>
+<!-- Bottom Split: Airside Telemetry Notification Toggles & Financial Settlement Compliance -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Operational Notification Preferences (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col justify-between p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl">
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[18px]">notifications_active</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Airside Notification Triggers</h2>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container bg-primary-container/10 px-2 py-0.5 rounded">HAPTIC &amp; AUDIO</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">Real-time alerts broadcasted to airside runner wearable devices and concourse terminals.</p>
+<div class="flex flex-col gap-space-sm">
+<!-- Toggle 1 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Urgent Boarding Alert (&lt;15 min Gate Closure)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Auto-escalates runner priority • Push &amp; Audio Beacon</span>
+</div>
+<button class="w-11 h-6 bg-primary-container rounded-full relative transition-colors cursor-pointer flex-shrink-0" data-toggle="urgent-boarding" onclick="this.classList.toggle('bg-primary-container'); this.classList.toggle('bg-surface-variant'); this.querySelector('span').classList.toggle('translate-x-5'); this.querySelector('span').classList.toggle('translate-x-1');">
+<span class="w-4 h-4 rounded-full bg-white absolute top-1 translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 2 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Runner Proximity Alert (&lt;50m of Jetbridge)</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">UWB Transponder Beacon • Vibration Chime</span>
+</div>
+<button class="w-11 h-6 bg-primary-container rounded-full relative transition-colors cursor-pointer flex-shrink-0" data-toggle="runner-proximity" onclick="this.classList.toggle('bg-primary-container'); this.classList.toggle('bg-surface-variant'); this.querySelector('span').classList.toggle('translate-x-5'); this.querySelector('span').classList.toggle('translate-x-1');">
+<span class="w-4 h-4 rounded-full bg-white absolute top-1 translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 3 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">New PayPal Captured Order</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Concourse Kiosk Receipt • Station Terminal Bell</span>
+</div>
+<button class="w-11 h-6 bg-primary-container rounded-full relative transition-colors cursor-pointer flex-shrink-0" data-toggle="order-captured" onclick="this.classList.toggle('bg-primary-container'); this.classList.toggle('bg-surface-variant'); this.querySelector('span').classList.toggle('translate-x-5'); this.querySelector('span').classList.toggle('translate-x-1');">
+<span class="w-4 h-4 rounded-full bg-white absolute top-1 translate-x-5 transition-transform"></span>
+</button>
+</div>
+<!-- Toggle 4 -->
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-on-surface font-medium">Tarmac Ground-Stop Notification</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">ATC Severe Weather Hold • SMS &amp; Dashboard Flash</span>
+</div>
+<button class="w-11 h-6 bg-primary-container rounded-full relative transition-colors cursor-pointer flex-shrink-0" data-toggle="ground-stop" onclick="this.classList.toggle('bg-primary-container'); this.classList.toggle('bg-surface-variant'); this.querySelector('span').classList.toggle('translate-x-5'); this.querySelector('span').classList.toggle('translate-x-1');">
+<span class="w-4 h-4 rounded-full bg-white absolute top-1 translate-x-5 transition-transform"></span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-space-md text-on-surface-variant font-telemetry-sm text-telemetry-sm flex items-center justify-between">
+<span>Audio Output: 85dB Concourse Tone</span>
+<span class="text-tertiary">STATION AUDIO READY</span>
+</div>
+</div>
+<!-- Financial Settlement & Banking Information (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col justify-between p-space-lg rounded-xl bg-surface-container/90 backdrop-blur-xl shadow-xl relative">
+<div>
+<!-- Top Tag & Compliance Scrim -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-md">
+<div>
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-[18px]">account_balance</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Financial Settlement &amp; Escrow Vault</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Read-only airside financial routing synchronized with PayPal Commerce Platform.</p>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-secondary-container/20 text-secondary font-telemetry-sm text-telemetry-sm font-semibold">
+<span class="material-symbols-outlined text-[14px]">lock_clock</span>
+<span>READ-ONLY COMPLIANCE</span>
+</div>
+</div>
+<!-- Compliance Notice Box -->
+<div class="p-space-sm rounded-lg bg-surface-container-low mb-space-md text-on-surface-variant font-telemetry-sm text-telemetry-sm flex items-start gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[16px] flex-shrink-0 mt-0.5">info</span>
+<span>Display Only — Live settlement is conducted automatically via connected PayPal Commerce Platform Vault. Direct account modifications require Dual-Key Officer authorization.</span>
+</div>
+<!-- Settlement Data Bento -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- PayPal Gateway Node -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Connected Settlement Account</div>
+<div class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate flex items-center gap-space-xs">
+<span>TIAT-NBO-88219-LIVE</span>
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-tertiary mt-1">Status: Connected &amp; Verified Vault</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center justify-between">
+<span>Routing: Instant Webhook API</span>
+<span class="text-secondary">v2/vault</span>
+</div>
+</div>
+<!-- Reserve Escrow Balance -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Reserve Escrow Balance</div>
+<div class="font-headline-md text-headline-md text-primary-container font-bold tracking-tight">$12,450.00 USD</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Airside Transit Protection Deposit</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-telemetry-sm text-telemetry-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">format_image_left</span>
+<span>Fully Funded (ICAO AHM-560 Mandate)</span>
+</div>
+</div>
+<!-- Currency Auto-Sweep -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Currency Routing Model</div>
+<div class="font-telemetry-md text-telemetry-md text-on-surface font-semibold">Multi-Currency Auto-Sweep</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">USD Incoming ➔ KES / JPY / EUR</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-telemetry-sm text-telemetry-sm text-secondary">
+                FX Spread: Tier-1 Interbank -0.15%
+              </div>
+</div>
+<!-- Payout Cadence -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col justify-between">
+<div>
+<div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mb-1">Payout Cadence &amp; Window</div>
+<div class="font-telemetry-md text-telemetry-md text-on-surface font-semibold">T+1 Daily Airside Batch</div>
+<div class="font-telemetry-sm text-telemetry-sm text-on-surface-variant mt-1">Scheduled at 00:00 UTC (Next in 9h 11m)</div>
+</div>
+<div class="mt-space-sm pt-space-xs font-telemetry-sm text-telemetry-sm text-tertiary">
+                Next Automated Batch: #BAT-88194
+              </div>
+</div>
+</div>
+</div>
+<!-- Visual Bar Chart for Weekly Airside Sweeps -->
+<div class="mt-space-md pt-space-md bg-surface-container-lowest/50 p-space-sm rounded-lg">
+<div class="flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm mb-2">
+<span>WEEKLY SETTLEMENT DISBURSEMENT VELOCITY (USD)</span>
+<span class="text-tertiary">AGGREGATE: $74,820.00</span>
+</div>
+<!-- Sparkline Mini Visualization -->
+<div class="h-12 w-full flex items-end gap-1.5 pt-2">
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[60%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Mon:$9.8k</span>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[75%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Tue:$11.4k</span>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[50%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Wed:$8.1k</span>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[90%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Thu:$14.2k</span>
+</div>
+<div class="flex-1 bg-primary-container rounded-t h-[100%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Fri:$16.9k</span>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[45%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Sat:$7.2k</span>
+</div>
+<div class="flex-1 bg-surface-container-high hover:bg-primary-container transition-colors rounded-t h-[40%] relative group">
+<span class="hidden group-hover:block absolute -top-6 left-1/2 -translate-x-1/2 font-telemetry-sm text-telemetry-sm bg-surface-bright px-1 rounded text-on-surface">Sun:$6.8k</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Security & Watermark Stamp Bar -->
+<div class="mt-space-lg p-space-md rounded-xl bg-surface-container-low flex flex-col md:flex-row items-center justify-between gap-space-sm text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-container text-[20px]">verified</span>
+<span>SECURITY ENCLAVE HSM: #01-NBO-T1A-SEC-HSM-ONLINE</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="text-outline">ENVIRONMENT: LIVE PRODUCTION AIRSIDE</span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-primary font-bold">DEMO SAMPLE DATA WATERMARK</span>
+</div>
+</div>
+</div>
+<!-- Interactive Modal: Issue Dispatch Passkey (Client-side interactive) -->
+<div class="fixed inset-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md flex items-center justify-center p-space-md hidden" id="passkeyModal">
+<div class="w-full max-w-lg bg-surface-container p-space-lg rounded-xl shadow-2xl relative">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary-container text-[22px]">vpn_key</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">Issue Airside Dispatch Passkey</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="closePasskeyModal">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-md">
+        Generate a cryptographic short-lived transit token linked to apron runner hardware transponders. Requires biometric confirmation.
+      </p>
+<div class="flex flex-col gap-space-md mb-space-lg">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Select Active Crew Member</label>
+<select class="w-full bg-surface-container-low text-on-surface p-space-sm rounded font-body-sm text-body-sm focus:outline-none">
+<option>Omar Hassan — Unit 07 Runner (NBO)</option>
+<option>Kevin Ndung'u — Operations Lead (NBO)</option>
+<option>Naomi Kemboi — Supervisor (NBO T1A)</option>
+<option>Aiko Tanaka — Station Lead (HND)</option>
+</select>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Airside Zone Authorization</label>
+<div class="grid grid-cols-2 gap-2 text-on-surface font-body-sm text-body-sm">
+<label class="flex items-center gap-2 bg-surface-container-low p-2 rounded cursor-pointer">
+<input checked="" class="accent-primary-container" type="checkbox"/>
+<span>Gate Concourse (Pier A)</span>
+</label>
+<label class="flex items-center gap-2 bg-surface-container-low p-2 rounded cursor-pointer">
+<input checked="" class="accent-primary-container" type="checkbox"/>
+<span>Jetbridge Direct Access</span>
+</label>
+<label class="flex items-center gap-2 bg-surface-container-low p-2 rounded cursor-pointer">
+<input class="accent-primary-container" type="checkbox"/>
+<span>Apron &amp; Tarmac Vehicle Bay</span>
+</label>
+<label class="flex items-center gap-2 bg-surface-container-low p-2 rounded cursor-pointer">
+<input class="accent-primary-container" type="checkbox"/>
+<span>Transit Lounges &amp; VIP Suite</span>
+</label>
+</div>
+</div>
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant uppercase mb-1">Passkey TTL (Time-to-Live)</label>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm">4 HOURS</button>
+<button class="flex-1 py-1.5 rounded bg-primary-container text-on-primary font-telemetry-sm text-telemetry-sm font-bold">8 HOURS (SHIFT)</button>
+<button class="flex-1 py-1.5 rounded bg-surface-container-high text-on-surface font-telemetry-sm text-telemetry-sm">24 HOURS</button>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-end gap-space-sm pt-space-sm">
+<button class="px-space-md py-2 rounded bg-surface-container-low text-on-surface font-label-caps text-label-caps uppercase hover:bg-surface-container-high transition-colors" id="cancelPasskeyModal">
+          Cancel
+        </button>
+<button class="px-space-md py-2 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase hover:brightness-110 font-bold transition-all flex items-center gap-1" id="confirmPasskeyGen">
+<span class="material-symbols-outlined text-[16px]">key_vertical</span>
+<span>Sign &amp; Provision Token</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+    // Minimal Inline Interactivity for Enterprise Passkey Modal
+    const modal = document.getElementById('passkeyModal');
+    const openBtn = document.getElementById('openPasskeyModal');
+    const closeBtn = document.getElementById('closePasskeyModal');
+    const cancelBtn = document.getElementById('cancelPasskeyModal');
+    const confirmBtn = document.getElementById('confirmPasskeyGen');
+    const auditBtn = document.getElementById('toggleAuditBtn');
+
+    if (openBtn && modal) {
+      openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+      });
+    }
+
+    const closeModal = () => {
+      if (modal) modal.classList.add('hidden');
+    };
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+    if (confirmBtn) {
+      confirmBtn.addEventListener('click', () => {
+        confirmBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">sync</span> Provisioning...';
+        setTimeout(() => {
+          confirmBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Token Active!';
+          setTimeout(() => {
+            closeModal();
+            confirmBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">key_vertical</span> Sign & Provision Token';
+          }, 800);
+        }, 1000);
+      });
+    }
+
+    if (auditBtn) {
+      auditBtn.addEventListener('click', () => {
+        alert('ICAO Annex 17 Cryptographic Verification Checksum: MATCHED.\nRegistry Hash: 9e4f:88b1:cc03:9912\nAuthority: Kenya Civil Aviation Authority (KCAA) & Songa Aerospace Enclave.');
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant py-space-md shadow-[0_-1px_8px_rgba(0,0,0,0.3)]"><div class="w-full px-gutter flex flex-col md:flex-row items-center justify-between gap-space-sm font-telemetry-sm text-telemetry-sm text-center md:text-left"><div>ICAO Annex 17 Airside Retail Compliance • IATA AHM 560 Transit Fulfilment Standard • 256-bit TLS v1.3 Verified</div><div class="text-outline">Songa Aviation Technologies (Pan-African &amp; Global Airspace)</div></div></footer></body></html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "on-secondary-fixed": "#001e2c", "surface-container": "#1f1f23", "surface": "#121316", "on-primary-container": "#561600", "outline-variant": "#5b4138", "on-tertiary-fixed-variant": "#005236", "surface-container-lowest": "#0d0e11", "on-tertiary-fixed": "#002113", "on-secondary": "#00354a", "tertiary-fixed-dim": "#4edea3", "on-secondary-fixed-variant": "#004c69", "secondary-fixed": "#c4e7ff", "error": "#ffb4ab", "secondary-fixed-dim": "#7bd0ff", "tertiary": "#4edea3", "outline": "#aa897f", "primary-container": "#ff5e1e", "background": "#121316", "secondary-container": "#00a6e0", "surface-tint": "#ffb59d", "on-surface": "#e3e2e6", "surface-container-high": "#292a2d", "inverse-surface": "#e3e2e6", "tertiary-fixed": "#6ffbbe", "on-error-container": "#ffdad6", "on-background": "#e3e2e6", "secondary": "#7bd0ff", "on-tertiary": "#003824", "on-tertiary-container": "#003421", "primary-fixed": "#ffdbd0", "surface-bright": "#38393d", "inverse-on-surface": "#2f3034", "tertiary-container": "#00a874", "primary": "#ffb59d", "inverse-primary": "#ab3500", "error-container": "#93000a", "on-secondary-container": "#00374d", "primary-fixed-dim": "#ffb59d", "surface-container-highest": "#343538", "on-primary-fixed-variant": "#832700", "on-primary": "#5d1900", "on-surface-variant": "#e3beb3", "on-error": "#690005", "surface-container-low": "#1b1b1f", "on-primary-fixed": "#390c00", "surface-dim": "#121316", "surface-variant": "#343538" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "2.5rem", "space-sm": "0.5rem", "space-xs": "0.25rem", "gutter": "1.5rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-md": "1rem", "margin": "3rem" }, fontFamily: { "label-caps": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "telemetry-sm": ["JetBrains Mono"], "display-hero": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "body-md": ["Inter"], "telemetry-md": ["JetBrains Mono"], "body-lg": ["Inter"], "body-sm": ["Inter"], "headline-lg-mobile": ["Space Grotesk"] }, fontSize: { "label-caps": ["11px", { lineHeight: "14px", letterSpacing: "0.08em", fontWeight: "600" }], "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }], "headline-sm": ["18px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "500" }], "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }], "telemetry-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.05em", fontWeight: "500" }], "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }], "headline-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "600" }], "telemetry-lg": ["20px", { lineHeight: "24px", letterSpacing: "0.04em", fontWeight: "600" }], "body-md": ["14px", { lineHeight: "22px", letterSpacing: "0em", fontWeight: "400" }], "telemetry-md": ["13px", { lineHeight: "18px", letterSpacing: "0.02em", fontWeight: "500" }], "body-lg": ["16px", { lineHeight: "26px", letterSpacing: "-0.01em", fontWeight: "400" }], "body-sm": ["12px", { lineHeight: "18px", letterSpacing: "0em", fontWeight: "400" }], "headline-lg-mobile": ["26px", { lineHeight: "34px", letterSpacing: "-0.01em", fontWeight: "600" }] } } } };</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-background font-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_4px_24px_rgba(0,0,0,0.6)]"><div class="h-16 px-gutter-mobile flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="relative flex items-center justify-center w-6 h-6"><span class="material-symbols-outlined text-primary-container text-[20px]">radar</span><span class="absolute top-0.5 right-0.5 flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-tertiary"></span></span></div><div class="flex flex-col"><span class="font-label-caps text-label-caps text-on-surface tracking-wider uppercase">Songa Avionics</span><span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1"><span class="material-symbols-outlined text-[10px] text-tertiary">sensors</span>LIVE STREAM</span></div></div><div class="flex items-center gap-space-sm"><div class="bg-surface-container-low px-2 py-1 rounded flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-on-surface-variant">schedule</span><span class="font-telemetry-sm text-telemetry-sm tracking-wide text-on-surface">14:28:05 UTC</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex flex-col relative w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Flight Telemetry Backdrop Canvas (Inline SVG Avionics Grid) -->
+<div class="relative w-full px-margin-mobile pt-space-md pb-space-lg flex flex-col gap-space-md">
+<!-- 1. Top Context / Flight Link Banner -->
+<div class="relative overflow-hidden bg-surface-container-low rounded-xl p-space-md shadow-xl">
+<!-- Avionics Ambient Vector Line -->
+<div class="absolute -right-8 -top-8 w-36 h-36 bg-primary-container/10 rounded-full blur-2xl pointer-events-none"></div>
+<!-- Top Micro Bar: Transponder & Mode Status -->
+<div class="flex items-center justify-between gap-2 pb-2 mb-2">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-tertiary">
+<span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-tertiary opacity-75"></span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary font-semibold tracking-wide uppercase truncate">SGA-882 • AIRBORNE</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant/80 hidden xs:inline">B787-9</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-container px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[12px] text-primary">altitude</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">FL390</span>
+</div>
+</div>
+<!-- Route Matrix & Vector Graphic -->
+<div class="grid grid-cols-12 items-center gap-2 my-1">
+<div class="col-span-4 flex flex-col">
+<span class="font-display-hero-mobile text-headline-md text-on-surface font-bold tracking-tight">LHR</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">11:20 Z</span>
+</div>
+<div class="col-span-4 flex flex-col items-center justify-center px-1">
+<div class="flex items-center justify-between w-full text-on-surface-variant font-telemetry-sm text-[10px] mb-1">
+<span>73%</span>
+<span class="text-tertiary font-medium">+84 kt tail</span>
+</div>
+<div class="relative w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-secondary-container via-primary-container to-tertiary rounded-full w-[73%]"></div>
+</div>
+<div class="flex items-center gap-0.5 mt-1 text-on-surface-variant">
+<span class="material-symbols-outlined text-[13px] text-tertiary">north_east</span>
+<span class="font-telemetry-sm text-[10px]">RADAR 220°</span>
+</div>
+</div>
+<div class="col-span-4 flex flex-col items-end text-right">
+<span class="font-display-hero-mobile text-headline-md text-primary-fixed font-bold tracking-tight">HND</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary-fixed-dim">07:15 +1 JST</span>
+</div>
+</div>
+<!-- Security Micro Badge / Zero-Auto-Charge Policy -->
+<div class="mt-2.5 pt-2 bg-surface-container-lowest/80 px-2.5 py-1.5 rounded flex items-center justify-between gap-2">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="material-symbols-outlined text-tertiary text-[15px] shrink-0">verified_user</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant truncate">Strict Zero-Auto-Charge Policy</span>
+</div>
+<span class="font-label-caps text-[9px] uppercase tracking-wider text-secondary bg-surface-container-high px-1.5 py-0.5 rounded shrink-0">Passkey Locked</span>
+</div>
+</div>
+<!-- 2. Songa Concierge AI (Mobile Copilot Card) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col gap-3 relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container text-[16px]">smart_toy</span>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Songa Concierge AI</span>
+<span class="font-telemetry-sm text-[10px] text-tertiary px-1.5 py-0.2 bg-tertiary/10 rounded font-medium">v4.8 ACTIVE</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">auto_awesome</span>
+</div>
+<!-- Briefing Dialog Box -->
+<div class="bg-surface-container p-3 rounded-lg flex flex-col gap-2">
+<p class="font-body-sm text-body-sm text-on-surface leading-relaxed">
+<span class="font-medium text-primary">Good morning, Julian.</span> Verified early <strong class="text-on-surface font-semibold">07:15 JST</strong> touchdown at Haneda T3. Shuto Expressway B-Route (Wangan) has heavy commercial freight; verified 4 high-certainty arrival transit options for your 11:00 JST Marunouchi summit.
+        </p>
+<div class="flex items-center gap-2 pt-1">
+<span class="material-symbols-outlined text-tertiary text-[14px]">lock_reset</span>
+<span class="font-telemetry-sm text-[11px] text-on-surface-variant">Guaranteed static rates. Zero dynamic surge.</span>
+</div>
+</div>
+<!-- Quick Action Prompt Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+<button class="shrink-0 bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-[11px] px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[13px] text-primary">traffic</span>
+<span>Traffic to Marunouchi?</span>
+</button>
+<button class="shrink-0 bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-[11px] px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[13px] text-secondary">cell_tower</span>
+<span>NTT DoCoMo 5G band?</span>
+</button>
+<button class="shrink-0 bg-surface-container-high hover:bg-surface-bright text-on-surface font-telemetry-sm text-[11px] px-3 py-1.5 rounded-full flex items-center gap-1 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[13px] text-tertiary">hot_tub</span>
+<span>TIAT Lounge wait?</span>
+</button>
+</div>
+<!-- Concierge Unified Search / Voice Dispatch Bar -->
+<div class="relative flex items-center bg-surface-container-lowest rounded-lg p-1.5">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px] ml-2">mic</span>
+<input class="w-full bg-transparent px-2.5 py-1 text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant/60 focus:outline-none" placeholder="Ask: 'Hold shower slot' or 'Book S-Class'..." type="text"/>
+<button class="w-8 h-8 rounded bg-primary-container hover:bg-primary-fixed-dim text-on-primary-container flex items-center justify-center shrink-0 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 3. Curated Haneda Airport Smart Services Header & Countdown -->
+<div class="flex flex-col gap-2 pt-1">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Haneda T3 Terminal Hub</span>
+<h2 class="font-headline-md text-headline-sm text-on-surface font-bold tracking-tight">Concierge Marketplace</h2>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-full">
+<span class="material-symbols-outlined text-primary-container text-[14px] animate-pulse">timer</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary-fixed font-semibold">14:52 MIN</span>
+</div>
+</div>
+<!-- Horizontal Filter Badges -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+<button class="shrink-0 bg-primary-container text-on-primary font-label-caps text-label-caps uppercase px-3 py-1.5 rounded-full font-semibold shadow-sm">All Services (12)</button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase px-3 py-1.5 rounded-full font-medium">Chauffeur (4)</button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase px-3 py-1.5 rounded-full font-medium">Showers &amp; Spa (3)</button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase px-3 py-1.5 rounded-full font-medium">eSIM &amp; Data (2)</button>
+<button class="shrink-0 bg-surface-container text-on-surface-variant hover:text-on-surface font-label-caps text-label-caps uppercase px-3 py-1.5 rounded-full font-medium">Baggage (3)</button>
+</div>
+</div>
+<!-- Service Card 1: Chauffeur -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-lg flex flex-col">
+<!-- Media Header -->
+<div class="relative h-44 w-full bg-cover bg-center" data-alt="Sleek black Mercedes-Benz S-Class sedan waiting in Tokyo Haneda international airport pickup bay under atmospheric neon nocturnal lights with soft rain reflection, deep obsidian luxury photography tone" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCmLYUDw6oS3pXUqpIDyKVw1EspzVuJzCiSPiJmXKsc6nlQqLcp_eSOsqgTS2D4JHVo996YTzBoUXCTMazcprerI9PzEXS8c1QPSYMcRKq3MakQQl9onoa1a0PxYSNHc2fEkn5AveSwDKOgDcOCmmpEib6wHT08RH0Jndxqcky9UJb0RCL5g2EbmazRsGiJPZQENvdIaSJ5ArzPP1_rcIgjVSkjYFCj1C2B2XYEZec0')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-surface-container-low/40 to-transparent"></div>
+<div class="absolute top-3 left-3 flex flex-wrap gap-1.5">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md text-tertiary font-telemetry-sm text-[10px] px-2 py-0.5 rounded flex items-center gap-1 font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> FLIGHT SYNCED
+          </span>
+<span class="bg-surface-container-lowest/90 backdrop-blur-md text-secondary font-telemetry-sm text-[10px] px-2 py-0.5 rounded font-medium">
+            API VERIFIED
+          </span>
+</div>
+<div class="absolute bottom-3 right-3 bg-surface-container-lowest/90 backdrop-blur-md px-2.5 py-1 rounded">
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-bold">$145.00</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant"> USD</span>
+</div>
+</div>
+<!-- Card Body -->
+<div class="p-space-md flex flex-col gap-2.5">
+<div class="flex items-start justify-between">
+<div>
+<h3 class="font-headline-sm text-body-lg font-semibold text-on-surface">Tokyo Haneda Executive Pickup</h3>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Mercedes-Benz S-Class (W223) Long Wheelbase</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-normal">
+          Direct T3 International Arrivals greeting with personalized digital OLED placard. Automated flight transponder tracking, 90-minute customs delay tolerance, onboard high-speed satellite Wi-Fi.
+        </p>
+<!-- Spec telemetry grid -->
+<div class="grid grid-cols-3 gap-1.5 py-1 bg-surface-container rounded p-2 text-center">
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Luggage Cap</span>
+<span class="font-telemetry-sm text-[12px] text-on-surface font-medium">3 Large Check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Transit Time</span>
+<span class="font-telemetry-sm text-[12px] text-tertiary font-medium">28 min to Core</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-[10px] text-on-surface-variant uppercase">Cancellation</span>
+<span class="font-telemetry-sm text-[12px] text-on-surface font-medium">Free T-2h</span>
+</div>
+</div>
+<button class="w-full mt-1 bg-primary-container hover:bg-primary-fixed-dim text-on-primary py-3 rounded-lg font-headline-sm text-body-md font-semibold tracking-wide flex items-center justify-center gap-2 active:scale-98 transition-all shadow-md">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span>Review &amp; Reserve ($145.00)</span>
+</button>
+</div>
+</div>
+<!-- Service Card 2: 5G eSIM -->
+<div class="bg-surface-container-low rounded-xl overflow-hidden shadow-lg flex flex-col">
+<div class="p-space-md flex flex-col gap-3">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[24px]">sim_card</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Japan Unlimited 5G eSIM</span>
+<span class="bg-tertiary/10 text-tertiary font-telemetry-sm text-[10px] px-1.5 py-0.5 rounded font-medium">TIER-1</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">15-Day Sector Pass • NTT DoCoMo + SoftBank</span>
+</div>
+</div>
+<div class="text-right">
+<span class="font-telemetry-lg text-telemetry-lg text-on-surface font-bold">$28.00</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Auto-stages via Apple/Android Wallet while crossing Japanese airspace. Activates on Haneda Runway 34R deceleration. Unlimited 5G NR + tethering.
+        </p>
+<div class="flex items-center justify-between bg-surface-container px-3 py-2 rounded text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">qr_code_2</span> Instant Passkey Delivery
+          </span>
+<span class="text-secondary font-medium">Dual-Core eSIM</span>
+</div>
+<button class="w-full bg-primary-container hover:bg-primary-fixed-dim text-on-primary py-2.5 rounded-lg font-headline-sm text-body-md font-semibold flex items-center justify-center gap-2 active:scale-98 transition-all">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+<span>One-Click Pre-Order</span>
+</button>
+</div>
+</div>
+<!-- Service Card 3 & 4: 2-Column Split for Shower & Luggage Courier -->
+<div class="grid grid-cols-1 gap-space-md">
+<!-- Service Card 3: Shower Suite -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col justify-between gap-3">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">shower</span>
+<h3 class="font-headline-sm text-body-md font-semibold text-on-surface">TIAT Shower Suite &amp; Lounge</h3>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">T3 International Arrivals (Airside / Post-Customs)</span>
+</div>
+<span class="font-telemetry-lg text-telemetry-lg font-bold text-on-surface">$45.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Private rainfall shower cabin, Shiseido amenities, espresso bar access, and garment steaming before your Marunouchi meeting.
+        </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span> 3 slots open at 07:30 JST
+          </span>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2 rounded-lg font-headline-sm text-body-sm font-semibold flex items-center gap-1 active:scale-95 transition-transform">
+<span>Hold Slot</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Service Card 4: Luggage Courier -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-lg flex flex-col justify-between gap-3">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">luggage</span>
+<h3 class="font-headline-sm text-body-md font-semibold text-on-surface">HND T3 ➔ Hotel Courier</h3>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Direct Room Delivery • Yamato Trans-Logistics</span>
+</div>
+<span class="font-telemetry-lg text-telemetry-lg font-bold text-on-surface">$32.00</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+          Drop bags at JAL ABC Counter directly outside T3 customs. Delivered directly into Tokyo Station Hotel suite by 14:00 JST with GPS tags.
+        </p>
+<div class="flex items-center justify-between pt-1">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span> BLE Radar Tag Included
+          </span>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2 rounded-lg font-headline-sm text-body-sm font-semibold flex items-center gap-1 active:scale-95 transition-transform">
+<span>Select Courier</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- 4. Pre-Emptive Delay Defense & Passenger Rights Card -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-[20px]">gavel</span>
+<h3 class="font-headline-sm text-body-md font-semibold text-on-surface">Pre-Emptive Delay Defense</h3>
+</div>
+<span class="font-telemetry-sm text-[10px] text-tertiary bg-tertiary/10 px-2 py-0.5 rounded font-semibold uppercase">ACTIVE PROTECTION</span>
+</div>
+<div class="bg-surface-container p-3 rounded-lg flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-on-surface">UK261 / EU261 Regulatory Dossier</span>
+<span class="font-telemetry-sm text-telemetry-sm font-semibold text-tertiary">£520 / €600 Staged</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-sm text-on-surface">Contingency Hotel Reserve</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">The Peninsula Tokyo</span>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Zero-Deductible Guarantee Active</span>
+<button class="text-primary font-telemetry-sm text-telemetry-sm hover:underline flex items-center gap-0.5">
+<span>Inspect Legal Matrix</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 5. Traveler Credentials & Privacy Vault (Mobile Card) -->
+<div class="bg-surface-container-low rounded-xl p-space-md shadow-xl flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[18px]">shield</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-body-md font-semibold text-on-surface">Traveler Privacy &amp; Identity</h4>
+<span class="font-telemetry-sm text-[11px] text-on-surface-variant">Zero-Knowledge Tokenized Merchant Release</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[20px]">check_circle</span>
+</div>
+<!-- Identity Ledger Breakdown -->
+<div class="grid grid-cols-2 gap-2 bg-surface-container p-2.5 rounded">
+<div>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase">Authenticated Dispatch</span>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium truncate">Julian Vance-Moreau</p>
+</div>
+<div>
+<span class="font-label-caps text-[9px] text-on-surface-variant uppercase">FX Auto-Hedging</span>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface font-medium">USD ($) ➔ JPY (¥)</p>
+</div>
+</div>
+<!-- Privacy Toggle Switch Mockup -->
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col pr-2">
+<span class="font-body-sm text-body-sm text-on-surface font-medium">Merchant Identity Mask</span>
+<span class="font-telemetry-sm text-[10px] text-on-surface-variant">Release full name to driver only upon physical touchdown</span>
+</div>
+<!-- Toggle button visual -->
+<div class="w-11 h-6 bg-tertiary-container rounded-full p-1 flex items-center justify-end cursor-pointer shrink-0">
+<div class="w-4 h-4 bg-on-tertiary rounded-full shadow-sm"></div>
+</div>
+</div>
+</div>
+<!-- Final Reassurance Tagline -->
+<div class="text-center py-2">
+<p class="font-telemetry-sm text-[11px] text-on-surface-variant/70 tracking-wide uppercase">
+        Songa Aerospace Intelligence • Encrypted Session 0x7E2A91
+      </p>
+</div>
+</div>
+</div></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-container-lowest/85 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.7)]" data-active-classes="text-primary-container font-headline-sm"><div class="flex items-center justify-around h-16 px-1"><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="flights" href="#"><span class="material-symbols-outlined text-[20px]">flight_takeoff</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Flights</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="calendar" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Calendar</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="checkout-passes" href="#"><span class="material-symbols-outlined text-[20px]">confirmation_number</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Passes</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="ai-copilot" href="#"><span class="material-symbols-outlined text-[20px]">smart_toy</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Copilot</span></a><a class="flex flex-col items-center justify-center gap-1 min-w-[56px] min-h-[44px] text-on-surface-variant hover:text-on-surface transition-colors" data-path="profile" href="#"><span class="material-symbols-outlined text-[20px]">person_outline</span><span class="font-label-caps text-[10px] tracking-tight uppercase">Profile</span></a></div></nav></body></html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-primary": "#5d1900", "tertiary-fixed-dim": "#4edea3", "surface-container": "#1f1f23", "surface-container-highest": "#343538", "on-secondary-fixed": "#001e2c", "tertiary": "#4edea3", "on-error-container": "#ffdad6", "on-secondary": "#00354a", "surface-tint": "#ffb59d", "primary-fixed": "#ffdbd0", "secondary-fixed": "#c4e7ff", "surface": "#121316", "on-background": "#e3e2e6", "background": "#121316", "error": "#ffb4ab", "surface-bright": "#38393d", "on-tertiary-fixed": "#002113", "on-primary-container": "#561600", "primary": "#ffb59d", "on-tertiary-fixed-variant": "#005236", "on-tertiary": "#003824", "secondary": "#7bd0ff", "on-primary-fixed-variant": "#832700", "inverse-primary": "#ab3500", "on-secondary-container": "#00374d", "primary-container": "#ff5e1e", "inverse-surface": "#e3e2e6", "outline": "#aa897f", "secondary-container": "#00a6e0", "on-error": "#690005", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#7bd0ff", "surface-variant": "#343538", "surface-container-high": "#292a2d", "surface-container-lowest": "#0d0e11", "inverse-on-surface": "#2f3034", "on-primary-fixed": "#390c00", "error-container": "#93000a", "surface-dim": "#121316", "on-tertiary-container": "#003421", "outline-variant": "#5b4138", "tertiary-fixed": "#6ffbbe", "on-secondary-fixed-variant": "#004c69", "tertiary-container": "#00a874", "on-surface-variant": "#e3beb3", "on-surface": "#e3e2e6", "primary-fixed-dim": "#ffb59d" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": { "space-sm": "0.5rem", "gutter-mobile": "0.75rem", "space-xs": "0.25rem", "space-xl": "2.5rem", "space-md": "1rem", "space-lg": "1.5rem", "margin": "3rem", "gutter": "1.5rem", "margin-mobile": "1rem" }, "fontFamily": { "body-sm": ["Inter"], "telemetry-sm": ["JetBrains Mono"], "display-hero": ["Space Grotesk"], "telemetry-lg": ["JetBrains Mono"], "display-hero-mobile": ["Space Grotesk"], "telemetry-md": ["JetBrains Mono"], "headline-md": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "label-caps": ["Space Grotesk"], "headline-lg-mobile": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "body-lg": ["Inter"], "body-md": ["Inter"] }, "fontSize": { "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "telemetry-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "500" }], "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "telemetry-lg": ["20px", { "lineHeight": "24px", "letterSpacing": "0.04em", "fontWeight": "600" }], "display-hero-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "telemetry-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }], "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }], "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "0em", "fontWeight": "500" }], "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }] } } } };</script></head><body class="bg-surface text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-on-primary"><header class="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)]"><div class="h-28 w-full flex flex-col justify-between"><div class="h-20 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm"><span class="font-display-hero text-headline-md tracking-wider text-on-surface uppercase">SONGA</span><span class="font-label-caps text-label-caps text-secondary px-space-xs py-0.5 rounded bg-surface-container-highest">AVN-OPS</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span><span class="font-telemetry-sm text-telemetry-sm text-tertiary tracking-wider uppercase font-semibold">4,812 FLIGHTS MONITORED</span></div></div><nav class="hidden lg:flex items-center gap-space-xs font-label-caps text-label-caps uppercase" data-active-classes="bg-surface-container-highest text-primary-container font-semibold rounded"><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="flights" href="#">Flights</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="details" href="#">Details</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="watchlist" href="#">Watchlist</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="calendar" href="#">Calendar</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="travel-commerce" href="#">Travel Commerce</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ai-assistant" href="#">AI Assistant</a><a class="px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="billing-passes" href="#">Billing &amp; Passes</a></nav><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-container font-telemetry-md text-telemetry-md text-secondary"><span class="material-symbols-outlined text-[15px]">schedule</span><span>14:38 UTC</span></div><div class="flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container-high"><span class="material-symbols-outlined text-[14px] text-primary">ac_unit</span><span class="font-label-caps text-label-caps text-on-surface-variant">Festive Mode</span><div class="w-7 h-4 rounded-full bg-surface-container-lowest p-0.5 flex items-center cursor-pointer"><div class="w-3 h-3 rounded-full bg-primary-fixed"></div></div></div><button class="flex items-center gap-space-xs px-space-md py-2 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase hover:bg-primary transition-colors shadow-[0_0_16px_rgba(255,94,30,0.35)]"><span class="material-symbols-outlined text-[16px]">radar</span><span>Track Flight</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-8 w-full bg-surface-container-low px-gutter flex items-center justify-between text-telemetry-sm font-telemetry-sm text-on-surface-variant overflow-hidden"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs"><span class="text-secondary font-semibold">ATMOSPHERE</span><span>NOMINAL / FL410 CLEAR</span></div><div class="hidden sm:flex items-center gap-space-xs"><span>SAT-FEED:</span><span class="text-tertiary">GEO-SYNC ACTIVE</span></div><div class="hidden md:flex items-center gap-space-xs"><span>SIGMET ALERT:</span><span class="text-primary">07 SECTORS ACTIVE</span></div></div><div class="flex items-center gap-space-lg"><div class="hidden lg:flex items-center gap-space-xs"><span>STREAM RATE:</span><span class="text-secondary">1.24 GB/S</span></div><div class="flex items-center gap-space-xs"><span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span><span>GLOBAL TELEMETRY STREAM RUNNING</span></div></div></div></div></header><main class="w-full pt-28 bg-surface flex-1"><div class="flex flex-col w-full text-on-surface">
+<!-- Sub-pixel Grid & Ambient Radar Glow Container -->
+<div class="relative w-full overflow-hidden px-gutter max-w-7xl mx-auto py-space-md flex flex-col gap-space-lg">
+<!-- Ambient avionics optical glows -->
+<div class="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-primary-container/10 blur-[120px] pointer-events-none"></div>
+<div class="absolute top-1/3 -right-24 w-80 h-80 rounded-full bg-tertiary/10 blur-[100px] pointer-events-none"></div>
+<!-- 1. Top Avionics Telemetry Ribbon & Breadcrumb -->
+<div class="w-full bg-surface-container-low/80 backdrop-blur-md rounded-lg p-space-sm shadow-md flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary-container">terminal</span>
+          SONGA PLATFORM
+        </span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline-variant">/</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">INTEGRATIONS</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline-variant">/</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary font-semibold tracking-wider flex items-center gap-1.5 bg-surface-container-highest px-space-xs py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          WHATSAPP DISPATCH GATEWAY (E2EE)
+        </span>
+</div>
+<div class="flex items-center gap-space-md font-telemetry-sm text-telemetry-sm overflow-x-auto py-1">
+<div class="flex items-center gap-1.5 bg-surface-container-lowest/80 px-2.5 py-1 rounded">
+<span class="text-on-surface-variant">ADS-B MESH SYNC:</span>
+<span class="text-tertiary font-semibold tracking-wider">100% NOMINAL</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest/80 px-2.5 py-1 rounded">
+<span class="text-on-surface-variant">GATEWAY:</span>
+<span class="text-secondary font-semibold">EDGE RELAY ACTIVE</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container-lowest/80 px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-[13px] text-tertiary">lock</span>
+<span class="text-on-surface font-semibold">256-BIT TLS v1.3</span>
+</div>
+</div>
+</div>
+<!-- Section Heading & Micro Overview -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-col gap-1 max-w-2xl">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-tertiary/15 text-tertiary font-label-caps text-label-caps uppercase tracking-wider flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">verified</span> WhatsApp Verified Enterprise Node
+          </span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">SESSION SGA-7092X</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg tracking-tight text-on-surface">WhatsApp Dispatch Companion &amp; Cryptographic Pairing</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">
+          Bind your personal WhatsApp number directly to Songa's high-altitude telemetry core. Receive algorithmic gate change notices, in-cockpit weather forecasts, and descent acoustic cues with zero latency.
+        </p>
+</div>
+<div class="flex items-center gap-2">
+<div class="text-right hidden sm:block">
+<div class="font-telemetry-sm text-telemetry-sm text-outline">AUTHENTICATION PROTOCOL</div>
+<div class="font-telemetry-md text-telemetry-md text-secondary">AIR-PAIR NOISE-PIPE v2</div>
+</div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-[24px]">phonelink_ring</span>
+</div>
+</div>
+</div>
+<!-- 2. Primary Setup & Verification Grid (2-Column Master Split) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-stretch">
+<!-- Left Column: Step-by-Step Interactive Pairing Console (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col justify-between bg-surface-container-low rounded-xl p-space-lg shadow-lg relative">
+<div class="flex flex-col gap-space-lg">
+<!-- Badge and Step Title -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-full bg-primary-container text-on-primary font-display-hero text-body-md font-bold flex items-center justify-center">1</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Secure Handshake Authorization</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Step 1 of 2: Authorize encrypted air-relay via E.164 phone hash</p>
+</div>
+</div>
+<span class="px-2 py-1 rounded bg-surface-container-highest text-secondary font-telemetry-sm text-telemetry-sm">AUTO-SYNC ON</span>
+</div>
+<!-- Step 1: Phone Verification Input -->
+<div class="flex flex-col gap-space-xs bg-surface-container rounded-lg p-space-md">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider flex items-center justify-between">
+<span>Traveler Primary Mobile (E.164 Standard)</span>
+<span class="text-tertiary flex items-center gap-1 font-telemetry-sm text-telemetry-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> Ready for dispatch
+              </span>
+</label>
+<div class="flex flex-col sm:flex-row gap-space-xs">
+<!-- Country selector -->
+<div class="relative min-w-[140px]">
+<select class="w-full bg-surface-container-lowest text-on-surface font-telemetry-md text-telemetry-md px-3 py-2.5 rounded appearance-none cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary-container" id="country-code">
+<option selected="" value="+44">🇬🇧 +44 (UK)</option>
+<option value="+1">🇺🇸 +1 (US/CA)</option>
+<option value="+81">🇯🇵 +81 (JP)</option>
+<option value="+254">🇰🇪 +254 (KE)</option>
+<option value="+49">🇩🇪 +49 (DE)</option>
+<option value="+33">🇫🇷 +33 (FR)</option>
+<option value="+971">🇦🇪 +971 (UAE)</option>
+</select>
+<span class="material-symbols-outlined text-[18px] text-outline absolute right-2.5 top-3 pointer-events-none">expand_more</span>
+</div>
+<!-- Formatted input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined text-[18px] text-outline absolute left-3 top-3">perm_phone_msg</span>
+<input class="w-full bg-surface-container-lowest text-on-surface font-telemetry-md text-telemetry-md pl-10 pr-4 py-2.5 rounded focus:outline-none focus:ring-1 focus:ring-primary-container tracking-wider placeholder:text-outline-variant" id="phone-number" placeholder="7911 000000" type="tel" value="7911 123882"/>
+</div>
+<button class="px-space-md py-2.5 rounded bg-primary-container hover:bg-primary transition-colors text-on-primary font-label-caps text-label-caps uppercase flex items-center justify-center gap-1.5 shadow-[0_0_16px_rgba(255,94,30,0.3)]" id="send-token-btn">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>Send Token</span>
+</button>
+</div>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">info</span>
+              Cryptographic PIN dispatches to your verified WhatsApp chat in &lt; 2.4s.
+            </p>
+</div>
+<!-- Step 2: 6-Digit One-Time Security Token Box -->
+<div class="flex flex-col gap-space-sm bg-surface-container rounded-lg p-space-md">
+<div class="flex items-center justify-between">
+<label class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider flex items-center gap-2">
+<span class="w-5 h-5 rounded-full bg-surface-container-highest text-secondary text-body-sm flex items-center justify-center">2</span>
+<span>One-Time Pairing Cipher (OTP)</span>
+</label>
+<div class="flex items-center gap-1 font-telemetry-sm text-telemetry-sm text-primary">
+<span class="material-symbols-outlined text-[14px]">timer</span>
+<span id="countdown-timer">EXPIRES IN 04:42</span>
+</div>
+</div>
+<!-- 6 PIN inputs -->
+<div class="grid grid-cols-6 gap-2 sm:gap-3 py-1">
+<input class="otp-box text-center bg-surface-container-lowest text-primary font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" type="text" value="8"/>
+<input class="otp-box text-center bg-surface-container-lowest text-primary font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" type="text" value="2"/>
+<input class="otp-box text-center bg-surface-container-lowest text-primary font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" type="text" value="9"/>
+<input class="otp-box text-center bg-surface-container-lowest text-primary font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" type="text" value="1"/>
+<input class="otp-box text-center bg-surface-container-lowest text-on-surface font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" placeholder="•" type="text"/>
+<input class="otp-box text-center bg-surface-container-lowest text-on-surface font-telemetry-lg text-telemetry-lg py-3 rounded focus:outline-none focus:ring-2 focus:ring-primary-container shadow-inner" maxlength="1" placeholder="•" type="text"/>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pt-1">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary">check_circle</span>
+                Auto-validating token string hash...
+              </span>
+<button class="font-telemetry-sm text-telemetry-sm text-secondary hover:text-secondary-fixed transition-colors underline">Resend Code via WA Voice</button>
+</div>
+</div>
+<!-- Security & Privacy Guarantee Notice -->
+<div class="p-space-md rounded-lg bg-surface-container-lowest flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-tertiary flex-shrink-0 mt-0.5">shield_lock</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Zero-Spam Aeronautical Guarantee</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Songa only dispatches alerts for flight routes explicitly watched, booked, or tracked under profile <span class="text-on-surface font-mono">SGA-7092X (Julian Vance-Moreau)</span>. Data frames travel over Signal-protocol end-to-end encryption.
+              </p>
+</div>
+</div>
+</div>
+<!-- Terminal Handshake Diagnostics Footer -->
+<div class="pt-space-md mt-space-md flex flex-wrap items-center justify-between gap-space-xs font-telemetry-sm text-telemetry-sm text-outline">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span>NOISE_PIPE: HANDSHAKE_INITIATED</span>
+</div>
+<div class="font-mono">PUB_KEY_FINGERPRINT: c6:81:4e:99:a2:ff:07</div>
+</div>
+</div>
+<!-- Right Column: High-Tech QR Code Air-Pairing Console (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col justify-between bg-surface-container-low rounded-xl p-space-lg shadow-lg relative overflow-hidden">
+<!-- Radar Scan Corner Accents & Heading -->
+<div class="flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-primary-container">qr_code_scanner</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Direct Air-Pairing</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-tertiary font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span> OPTICAL SYNC
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Point your smartphone camera or native WhatsApp Scanner at this radar QR code to pair your current traveler profile without manual code entry.
+          </p>
+<!-- Precision Glowing QR Container -->
+<div class="relative mx-auto my-2 p-5 bg-surface-container-lowest rounded-xl shadow-2xl flex flex-col items-center justify-center">
+<!-- Scanning Laser Line (Animated via inline keyframes) -->
+<div class="absolute inset-x-4 top-4 h-0.5 bg-gradient-to-r from-transparent via-primary-container to-transparent opacity-80 animate-pulse pointer-events-none"></div>
+<!-- Corner avionics brackets -->
+<div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-primary-container"></div>
+<div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-primary-container"></div>
+<div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-primary-container"></div>
+<div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-primary-container"></div>
+<!-- Embedded Precision SVG QR Matrix -->
+<div class="w-52 h-52 sm:w-60 sm:h-60 bg-surface-container p-3 rounded-lg flex items-center justify-center relative shadow-inner">
+<svg class="w-full h-full text-on-surface" fill="currentColor" viewbox="0 0 160 160">
+<!-- Top-Left Finder -->
+<rect fill="#ff5e1e" height="40" rx="3" width="40" x="10" y="10"></rect>
+<rect fill="#0d0e11" height="24" width="24" x="18" y="18"></rect>
+<rect fill="#ff5e1e" height="12" width="12" x="24" y="24"></rect>
+<!-- Top-Right Finder -->
+<rect fill="#ff5e1e" height="40" rx="3" width="40" x="110" y="10"></rect>
+<rect fill="#0d0e11" height="24" width="24" x="118" y="18"></rect>
+<rect fill="#ff5e1e" height="12" width="12" x="124" y="24"></rect>
+<!-- Bottom-Left Finder -->
+<rect fill="#ff5e1e" height="40" rx="3" width="40" x="10" y="110"></rect>
+<rect fill="#0d0e11" height="24" width="24" x="18" y="118"></rect>
+<rect fill="#ff5e1e" height="12" width="12" x="24" y="124"></rect>
+<!-- Telemetry Matrix Bits (Stylized Avionics Grid) -->
+<rect fill="#e3e2e6" height="6" width="6" x="60" y="14"></rect>
+<rect fill="#7bd0ff" height="14" width="6" x="74" y="14"></rect>
+<rect fill="#e3e2e6" height="6" width="12" x="88" y="14"></rect>
+<rect fill="#e3e2e6" height="6" width="18" x="60" y="28"></rect>
+<rect fill="#4edea3" height="18" width="6" x="86" y="28"></rect>
+<rect fill="#e3e2e6" height="18" width="6" x="14" y="60"></rect>
+<rect fill="#e3e2e6" height="6" width="18" x="28" y="60"></rect>
+<rect fill="#7bd0ff" height="12" width="6" x="28" y="74"></rect>
+<rect fill="#ff5e1e" height="8" rx="1" width="8" x="60" y="60"></rect>
+<rect fill="#e3e2e6" height="8" rx="1" width="8" x="76" y="60"></rect>
+<rect fill="#ff5e1e" height="8" rx="1" width="8" x="92" y="60"></rect>
+<rect fill="#7bd0ff" height="8" rx="1" width="24" x="60" y="76"></rect>
+<rect fill="#e3e2e6" height="8" rx="1" width="16" x="92" y="76"></rect>
+<rect fill="#4edea3" height="16" rx="1" width="8" x="68" y="92"></rect>
+<rect fill="#ff5e1e" height="8" rx="1" width="24" x="84" y="92"></rect>
+<rect fill="#e3e2e6" height="24" width="8" x="110" y="60"></rect>
+<rect fill="#e3e2e6" height="8" width="14" x="126" y="60"></rect>
+<rect fill="#7bd0ff" height="14" width="8" x="126" y="76"></rect>
+<rect fill="#e3e2e6" height="18" width="8" x="142" y="70"></rect>
+<rect fill="#e3e2e6" height="6" width="12" x="60" y="118"></rect>
+<rect fill="#4edea3" height="6" width="18" x="80" y="118"></rect>
+<rect fill="#e3e2e6" height="8" width="24" x="60" y="132"></rect>
+<rect fill="#7bd0ff" height="18" width="8" x="92" y="132"></rect>
+<rect fill="#e3e2e6" height="8" rx="1" width="8" x="118" y="110"></rect>
+<rect fill="#ff5e1e" height="8" rx="1" width="16" x="134" y="110"></rect>
+<rect fill="#4edea3" height="8" rx="1" width="16" x="118" y="126"></rect>
+<rect fill="#e3e2e6" height="24" rx="1" width="8" x="142" y="126"></rect>
+<rect fill="#e3e2e6" height="8" rx="1" width="16" x="118" y="142"></rect>
+</svg>
+<!-- Central Emblem overlay -->
+<div class="absolute inset-0 m-auto w-10 h-10 bg-surface-container-lowest rounded-full p-1.5 flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[20px] text-primary-container">flight_takeoff</span>
+</div>
+</div>
+<!-- Dynamic Session Hash & Expiry -->
+<div class="w-full mt-3 flex items-center justify-between text-telemetry-sm font-telemetry-sm px-1">
+<span class="text-outline">HASH: <span class="text-secondary font-mono">0x7E2A91F4A8</span></span>
+<span class="text-tertiary">REFRESH IN 48s</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-space-xs pt-1">
+<button class="flex-1 py-2.5 px-3 rounded bg-surface-container hover:bg-surface-container-high transition-colors font-label-caps text-label-caps text-on-surface uppercase flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">refresh</span>
+<span>Regenerate QR</span>
+</button>
+<a class="flex-1 py-2.5 px-3 rounded bg-tertiary/15 hover:bg-tertiary/25 text-tertiary transition-colors font-label-caps text-label-caps uppercase flex items-center justify-center gap-1.5" href="https://web.whatsapp.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span>Open WhatsApp Web</span>
+</a>
+</div>
+</div>
+<!-- Air-Pairing User metadata chip -->
+<div class="bg-surface-container rounded-lg p-2.5 mt-space-md flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary/20 text-secondary flex items-center justify-center font-telemetry-sm font-bold">
+              JV
+            </div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-body-sm font-semibold text-on-surface">Julian Vance-Moreau</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline">TIER: FL410 EXECUTIVE COHORT</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-tertiary text-[18px]">verified_user</span>
+</div>
+</div>
+</div>
+<!-- 3. Live WhatsApp Bot Capabilities Preview & Interactive Command Sandbox -->
+<div class="w-full flex flex-col gap-space-md pt-space-xs">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-xs">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">AVIONICS ENGINE INTERFACE</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">WhatsApp Dispatch Bot Core Capabilities</h2>
+</div>
+<div class="flex items-center gap-2 font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>RESPONSE LATENCY: 320ms VIA EDGE ROUTE</span>
+</div>
+</div>
+<!-- Capability Cards & Conversational Preview Split -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- 4 Core Pillars Grid (7 cols) -->
+<div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-space-md">
+<!-- Pillar 1 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded bg-primary-container/20 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">radar</span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary px-2 py-0.5 rounded bg-surface-container-highest">REAL-TIME</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">1. Live Flight Radar In-Chat</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Send <code class="text-primary font-mono font-semibold">STATUS SGA-882</code> or forward flight ticket images to receive real-time ADS-B vectors, tail altitude, and crosswind shifts.
+              </p>
+</div>
+<div class="mt-3 pt-2 bg-surface-container-lowest/60 p-2 rounded text-telemetry-sm font-telemetry-sm text-secondary">
+              &gt; "Altitude FL390 • Ground Speed 514kts"
+            </div>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded bg-secondary/20 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">coffee</span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary px-2 py-0.5 rounded bg-surface-container-highest">PRE-ORDER</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">2. Gate-Side Refreshments</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                One-tap barista espresso staging at transit hubs. WhatsApp remembers previous roast preferences without needing re-entry or app downloads.
+              </p>
+</div>
+<div class="mt-3 pt-2 bg-surface-container-lowest/60 p-2 rounded text-telemetry-sm font-telemetry-sm text-tertiary">
+              &gt; "TIAT Roasters Gate 112: Double Flat White"
+            </div>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded bg-tertiary/20 text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">headphones</span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary px-2 py-0.5 rounded bg-surface-container-highest">ACOUSTICS</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">3. Descent Soundtrack Sync</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Algorithmic Spotify &amp; Apple Music triggers that match cabin pressure descent transitions with ambient binaural landscapes.
+              </p>
+</div>
+<div class="mt-3 pt-2 bg-surface-container-lowest/60 p-2 rounded text-telemetry-sm font-telemetry-sm text-on-surface-variant">
+              &gt; "Descent 10,000ft: Shinjuku Dusk [Playing]"
+            </div>
+</div>
+<!-- Pillar 4 -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between hover:bg-surface-container transition-all">
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="w-8 h-8 rounded bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">gavel</span>
+</span>
+<span class="font-telemetry-sm text-telemetry-sm text-primary px-2 py-0.5 rounded bg-surface-container-highest">EU261 / DOT</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">4. Delay Defense Auto-Claim</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                If taxi delay exceeds 180 minutes, Songa drafts airline claim filings directly inside WhatsApp with certified meteorological evidence attachments.
+              </p>
+</div>
+<div class="mt-3 pt-2 bg-surface-container-lowest/60 p-2 rounded text-telemetry-sm font-telemetry-sm text-primary">
+              &gt; "€600 Claim Prepared • Sign in Chat"
+            </div>
+</div>
+</div>
+<!-- Interactive Realistic Mock WhatsApp Conversation View (5 cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-xl p-space-md shadow-xl flex flex-col justify-between relative overflow-hidden">
+<!-- Mock Phone Bar Header -->
+<div class="flex items-center justify-between pb-space-sm bg-surface-container-low px-space-sm py-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<div class="relative">
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary font-bold text-body-sm">
+                  S
+                </div>
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary absolute -bottom-0.5 -right-0.5 ring-2 ring-surface-container-low"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">SONGA AVN-AI</span>
+<span class="material-symbols-outlined text-[14px] text-tertiary">verified</span>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">Online • Telemetry Stream</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs text-outline">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</div>
+</div>
+<!-- Chat Stream Messages -->
+<div class="flex flex-col gap-3 py-space-md overflow-y-auto max-h-[380px] pr-1">
+<!-- User Query Bubble -->
+<div class="self-end bg-primary-container/25 text-on-surface rounded-l-lg rounded-tr-lg p-space-sm max-w-[85%] shadow-sm">
+<p class="font-body-sm text-body-sm">STATUS SGA-882</p>
+<span class="font-telemetry-sm text-telemetry-sm text-outline flex items-center justify-end gap-1 mt-0.5">
+                14:39 <span class="material-symbols-outlined text-[12px] text-secondary">done_all</span>
+</span>
+</div>
+<!-- Bot Telemetry Dispatch Card -->
+<div class="self-start bg-surface-container rounded-r-lg rounded-tl-lg p-space-sm max-w-[92%] shadow-md flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-caps text-label-caps text-primary uppercase">RADAR DISPATCH REPORT</span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary">EN ROUTE</span>
+</div>
+<!-- Flight Card Embedded inside chat -->
+<div class="bg-surface-container-low p-2 rounded flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-headline-sm text-body-md font-bold text-on-surface">
+<span>LHR</span>
+<span class="material-symbols-outlined text-[16px] text-primary-container">arrow_forward</span>
+<span>HND</span>
+</div>
+<div class="grid grid-cols-3 gap-1 font-telemetry-sm text-telemetry-sm text-outline-variant pt-1">
+<div>ALT: <span class="text-on-surface">FL390</span></div>
+<div>GS: <span class="text-on-surface">514 kts</span></div>
+<div>ETA: <span class="text-tertiary">07:15 JST</span></div>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Turbulence level is light over Sector 4. Siberian jetstream headwind reduced by 14kts. Estimated touchdown is 18 minutes ahead of schedule.
+              </p>
+<span class="font-telemetry-sm text-telemetry-sm text-outline flex items-center justify-end gap-1">
+                14:39 UTC
+              </span>
+</div>
+<!-- Audio Player Preview Bubble -->
+<div class="self-start bg-surface-container rounded-r-lg rounded-tl-lg p-space-sm max-w-[90%] shadow-md flex items-center gap-space-sm">
+<button class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</button>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="font-body-sm text-body-sm font-semibold text-on-surface truncate">Descent Mood: Shinjuku Skyline</span>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden mt-1">
+<div class="bg-tertiary h-full w-2/5"></div>
+</div>
+<div class="flex justify-between font-telemetry-sm text-telemetry-sm text-outline mt-1">
+<span>01:14</span>
+<span>03:42</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Mock Chat Input Field -->
+<div class="pt-space-xs flex items-center gap-space-xs">
+<div class="flex-1 bg-surface-container-low rounded-lg px-space-sm py-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-outline">mood</span>
+<input class="w-full bg-transparent text-body-sm text-on-surface focus:outline-none placeholder:text-outline-variant" placeholder="Type flight code or command..." type="text"/>
+<span class="material-symbols-outlined text-[18px] text-outline">mic</span>
+</div>
+<button class="w-9 h-9 rounded-lg bg-tertiary text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Notification & Dispatch Preferences Configurator (Granular Controls) -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">DISPATCH CHANNELS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Granular WhatsApp Dispatch Matrix</h2>
+</div>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">5 OF 5 CHANNELS ARMED</span>
+</div>
+<!-- Toggles Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-space-md">
+<!-- Toggle Item 1 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container">priority_high</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Critical Gate &amp; Route Shifts</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Immediate ping on gate changes, taxi holdover alerts, and tarmac delays.</p>
+</div>
+<!-- Tactile Switch ON -->
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle Item 2 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">air</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Turbulence &amp; Descent Weather</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Barometric changes, severe shear warnings, and local destination weather.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Toggle Item 3 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-tertiary">luggage</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">RFID Carousel Bag Induction</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Telemetry alert the moment your tagged baggage enters carousel conveyor.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+<!-- Toggle Item 4 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary">local_cafe</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Terminal Refreshment Staging</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Consent-driven alerts for zero-queue lounge and gate artisan coffee.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<!-- Toggle Item 5 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">music_note</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Acoustic Playlist Descents</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Auto-generated flight altitude music links pushed 25 mins prior to landing.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div>
+</label>
+</div>
+<!-- Toggle Item 6 -->
+<div class="bg-surface-container p-space-md rounded-lg flex items-start justify-between gap-space-sm">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline">hotel</span>
+<span class="font-headline-sm text-body-md font-semibold text-on-surface">Arrival Ground Transfer Sync</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Dispatch driver plate numbers and train platform transfers directly.</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer flex-shrink-0 mt-1">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- 5. Connected Status & Safety Fail-Safe Console -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-lg">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-[28px]">lock_reset</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-on-surface">Cryptographic Session Revocation</span>
+<span class="font-telemetry-sm text-telemetry-sm text-outline px-2 py-0.5 rounded bg-surface-container">E2EE ACTIVE</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-xl">
+            Want to terminate WhatsApp dispatch on this device? Revoking your key instantly flushes session salts from Supabase edge relays and wipes telemetry caches.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="px-space-md py-2.5 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface transition-colors font-label-caps text-label-caps uppercase flex items-center gap-1.5" id="disconnect-btn">
+<span class="material-symbols-outlined text-[16px]">phonelink_erase</span>
+<span>Disconnect WhatsApp</span>
+</button>
+<button class="px-space-md py-2.5 rounded bg-error-container/20 hover:bg-error-container/30 text-error transition-colors font-label-caps text-label-caps uppercase flex items-center gap-1.5" id="purge-btn">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<span>Ghost Purge Session</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Countdown Timer Simulation
+  (function initCountdown() {
+    let secondsLeft = 282; // 04:42
+    const timerEl = document.getElementById('countdown-timer');
+    if (!timerEl) return;
+
+    setInterval(() => {
+      if (secondsLeft <= 0) {
+        secondsLeft = 300;
+      }
+      secondsLeft--;
+      const mins = Math.floor(secondsLeft / 60);
+      const secs = secondsLeft % 60;
+      timerEl.textContent = `EXPIRES IN ${mins < 10 ? '0' : ''}${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }, 1000);
+  })();
+
+  // OTP Auto Focus Behavior
+  (function initOtpInputs() {
+    const inputs = document.querySelectorAll('.otp-box');
+    inputs.forEach((input, index) => {
+      input.addEventListener('keyup', (e) => {
+        if (e.key >= '0' && e.key <= '9') {
+          if (index < inputs.length - 1) {
+            inputs[index + 1].focus();
+          }
+        } else if (e.key === 'Backspace') {
+          if (index > 0) {
+            inputs[index - 1].focus();
+          }
+        }
+      });
+    });
+  })();
+
+  // Send token micro-interaction
+  const sendBtn = document.getElementById('send-token-btn');
+  if (sendBtn) {
+    sendBtn.addEventListener('click', () => {
+      sendBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span><span>Transmitting...</span>';
+      setTimeout(() => {
+        sendBtn.innerHTML = '<span class="material-symbols-outlined text-[16px] text-tertiary">check</span><span>Token Dispatched</span>';
+        setTimeout(() => {
+          sendBtn.innerHTML = '<span class="material-symbols-outlined text-[16px]">send</span><span>Send Token</span>';
+        }, 3000);
+      }, 700);
+    });
+  }
+</script></main><footer class="w-full bg-surface-container-lowest py-space-xl text-on-surface-variant"><div class="w-full px-gutter max-w-7xl mx-auto flex flex-col gap-space-lg"><div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md"><div class="flex flex-col gap-space-xs"><div class="flex items-center gap-space-sm"><span class="font-display-hero text-headline-sm uppercase text-on-surface">SONGA INTELLIGENCE</span><span class="px-space-xs py-0.5 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-secondary">ADS-B STREAMING ACTIVE</span></div><p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">Aeronautical operations, real-time trajectory dispatch engine, and high-altitude passenger travel telemetry. Compliant with international flight dispatch standards.</p></div><div class="flex items-center gap-space-md"><span class="px-space-sm py-1 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-on-surface">ICAO DOC 4444</span><span class="px-space-sm py-1 rounded bg-surface-container font-telemetry-sm text-telemetry-sm text-on-surface">IATA AHM 560</span></div></div><div class="flex flex-col md:flex-row items-center justify-between gap-space-md pt-space-md bg-surface-container-low/40 rounded px-space-md"><span class="font-telemetry-sm text-telemetry-sm">© 2024 SONGA AVIATION INTELLIGENCE SYSTEMS. ALL DISPATCH DATA ENCRYPTED.</span><div class="flex items-center gap-space-md font-label-caps text-label-caps uppercase"><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Security &amp; ADS-B Specs</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">API Dispatch Gateway</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">Compliance Matrix</a><a class="text-on-surface-variant hover:text-on-surface transition-colors" href="#">System Status</a></div></div></div></footer></body></html>

@@ -1,38 +1,57 @@
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass, Filter,
-  Eye, EyeOff, Globe2, Heart, Info, MapPin, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Route, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, Timer, X,
+  Eye, EyeOff, Globe2, Heart, Info, Lock, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
 } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
-import { demoFlights } from '@/data/demoFlights';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
 import { DisruptionsScreen, StatusBadge as SharedStatusBadge } from '@/screens/DisruptionScreens';
-import { CompensationModule, WhatsAppSection, useWhatsAppJoin } from '@/screens/WorkspaceScreens';
+import { CompensationModule } from '@/screens/WorkspaceScreens';
 import { WhatsAppCompanionScreen } from '@/screens/WhatsAppCompanionScreen';
+import { LiveDeskScreen } from '@/screens/LiveDeskScreen';
 import { WorkspaceScreen } from '@/screens/WorkspaceScreen';
+import { CommerceScreen } from '@/screens/CommerceScreen';
+import { DashboardScreen } from '@/screens/DashboardScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { addWatchedFlight, loadWatchedFlights, removeWatchedFlight, watchedRowToFlight } from '@/lib/watchlist';
 import type { Flight, Screen } from '@/types';
 
 const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
-  { id: 'home', label: 'Flight Command', icon: Search },
-  { id: 'workspace', label: 'Trip Workspace', icon: Compass },
-  { id: 'watch', label: 'My Flight Watch', icon: Radar },
+  { id: 'dashboard', label: 'My Songa', icon: Activity },
+  { id: 'home', label: 'Search', icon: Search },
+  { id: 'watch', label: 'My flights', icon: Radar },
   { id: 'alerts', label: 'Disruptions', icon: Bell },
-  { id: 'airports', label: 'Airport Boards', icon: Globe2 },
-  { id: 'companion', label: 'Companion', icon: Bot },
-  { id: 'whatsapp', label: 'WhatsApp Companion', icon: MessageCircle },
-  { id: 'account', label: 'Account', icon: ShieldCheck },
+  { id: 'airports', label: 'Airports', icon: Globe2 },
+  { id: 'companion', label: 'Songa AI', icon: Bot },
+  { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
+  { id: 'workspace', label: 'Trip tools', icon: Compass },
+  { id: 'commerce', label: 'Travel services', icon: Ticket },
+  { id: 'live-desk', label: 'Live desk', icon: Activity },
 ];
 
 type WatchFilter = 'All flights' | 'Needs attention' | 'On time';
 type Theme = 'dark' | 'light';
+type SearchCacheEntry = { expiresAt: number; flights: Flight[] };
+const flightSearchCache = new Map<string, SearchCacheEntry>();
+function searchCacheKey(flightNumber: string, travelDate: string): string {
+  return `${flightNumber.trim().toUpperCase().replace(/\s+/g, '')}|${travelDate || ''}`;
+}
+function rememberFlightSearch(key: string, flights: Flight[]) {
+  flightSearchCache.set(key, { expiresAt: Date.now() + 90_000, flights });
+  if (flightSearchCache.size > 40) {
+    const oldest = flightSearchCache.keys().next().value;
+    if (oldest) flightSearchCache.delete(oldest);
+  }
+}
 
 function App() {
-  const [screen, setScreen] = useState<Screen>('home');
+  const [screen, setScreen] = useState<Screen>(() => new URLSearchParams(window.location.search).get('screen') === 'commerce' ? 'commerce' : 'home');
   const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
   const [searchResults, setSearchResults] = useState<Flight[]>([]);
+  const [recentSearches, setRecentSearches] = useState<Flight[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchDate, setSearchDate] = useState('');
   const [searchError, setSearchError] = useState('');
@@ -41,21 +60,89 @@ function App() {
   const [watchError, setWatchError] = useState('');
   const [session, setSession] = useState<Session | null>(null);
   const [authReady, setAuthReady] = useState(!isSupabaseConfigured);
+  const [commerceNotice, setCommerceNotice] = useState('');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
-  const { join } = useWhatsAppJoin();
   const [watchFilter, setWatchFilter] = useState<WatchFilter>('All flights');
-  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'light' ? 'light' : 'dark');
+  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'dark' ? 'dark' : 'light');
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
     window.localStorage.setItem('songa-theme', theme);
   }, [theme]);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paypalState = params.get('paypal');
+    const orderId = params.get('token') || params.get('orderId');
+    if (paypalState === 'cancel') {
+      setCommerceNotice('PayPal checkout was cancelled. No payment was captured.');
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+    if (paypalState !== 'success' || !orderId || !supabase) return;
+    if (!session) {
+      setCommerceNotice('Sign in with the account used at checkout to verify your PayPal payment.');
+      return;
+    }
+    let active = true;
+    supabase.functions.invoke('paypal-capture-order', { body: { orderId } }).then(({ data, error }) => {
+      if (!active) return;
+      if (error || !data?.completed) {
+        setCommerceNotice(data?.message || 'We could not verify the payment yet. Please contact Songa support before trying again.');
+      } else {
+        setCommerceNotice('Payment verified. Your Songa Premium Travel Assistance is now active.');
+      }
+      window.history.replaceState({}, '', window.location.pathname);
+    }).catch(() => {
+      if (active) setCommerceNotice('Payment verification is temporarily unavailable. Your order has not been marked active.');
+    });
+    return () => { active = false; };
+  }, [session]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const commerceState = params.get('songa_commerce');
+    const orderId = params.get('token') || params.get('orderId');
+    if (commerceState === 'cancel') {
+      setCommerceNotice('PayPal checkout was cancelled. No payment was captured.');
+      window.history.replaceState({}, '', window.location.pathname);
+      return;
+    }
+    if (commerceState !== 'success' || !orderId || !supabase) return;
+    if (!session) {
+      setCommerceNotice('Sign in with the Songa account used at checkout to verify and activate your purchase.');
+      return;
+    }
+    let active = true;
+    supabase.functions.invoke('songa-commerce-capture-order', { body: { orderId } }).then(({ data, error }) => {
+      if (!active) return;
+      if (error || !data?.completed) {
+        setCommerceNotice(data?.message || 'We could not verify this PayPal payment yet. Do not pay again until the order has been checked.');
+      } else {
+        const detail = data.giftCode ? ` Gift code: ${data.giftCode}.` : data.groupCode ? ` Family invite code: ${data.groupCode}.` : data.airsideOrder?.pickup_reference ? ` Airside order: ${data.airsideOrder.pickup_reference}.` : '';
+        setCommerceNotice(`${data.productName || 'Songa service'} payment verified and service issued.${detail}`);
+        window.dispatchEvent(new CustomEvent('songa-commerce-updated'));
+      }
+      window.history.replaceState({}, '', window.location.pathname);
+    }).catch(() => {
+      if (active) setCommerceNotice('Payment verification is temporarily unavailable. Do not pay again until the order status is checked.');
+    });
+    return () => { active = false; };
+  }, [session]);
+
   const visibleWatchedFlights = useMemo(() => {
     if (watchFilter === 'Needs attention') return watchedFlights.filter((flight) => flight.status === 'Delayed');
     if (watchFilter === 'On time') return watchedFlights.filter((flight) => flight.status === 'On time');
     return watchedFlights;
   }, [watchFilter, watchedFlights]);
+
+  useEffect(() => {
+    const key = `songa-search-history:${session?.user.id ?? 'guest'}`;
+    try {
+      const raw = window.localStorage.getItem(key);
+      setRecentSearches(raw ? (JSON.parse(raw) as Flight[]).slice(0, 12) : []);
+    } catch { setRecentSearches([]); }
+  }, [session?.user.id]);
 
   useEffect(() => {
     if (!supabase) return;
@@ -146,7 +233,19 @@ function App() {
     setSearchError('');
     setSearchLoading(true);
     try {
-      const results = await flightProvider.search({ flightNumber: searchTerm, travelDate: searchDate || undefined });
+      const key = searchCacheKey(searchTerm, searchDate);
+      const cached = flightSearchCache.get(key);
+      const results = cached && cached.expiresAt > Date.now()
+        ? cached.flights
+        : await flightProvider.search({ flightNumber: searchTerm, travelDate: searchDate || undefined });
+      rememberFlightSearch(key, results);
+      if (results[0]) {
+        setRecentSearches((current) => {
+          const next = [results[0], ...current.filter((item) => !(item.flightNumber === results[0].flightNumber && item.date === results[0].date))].slice(0, 12);
+          try { window.localStorage.setItem(`songa-search-history:${session?.user.id ?? 'guest'}`, JSON.stringify(next)); } catch { /* local history is optional */ }
+          return next;
+        });
+      }
       setSearchResults(results);
       setSelectedFlight(results[0] ?? null);
       goTo('results');
@@ -162,113 +261,208 @@ function App() {
     <div className={`app-shell theme-${theme}`}>
       <div className={`demo-ribbon ${flightProvider.mode === 'live' ? 'live-ribbon' : ''}`}><span className="demo-dot" /> {flightProvider.mode === 'live' ? 'Live provider mode · source and freshness shown on results' : 'Demo mode · sample flight information only'}</div>
       <header className="site-header">
-        <button className="brand" onClick={() => goTo('home')} aria-label="Go to Songa Flight Watch home"><span className="brand-mark"><img src="/songa-logo-64.png" alt="" width={40} height={40} /></span><span className="brand-copy"><strong>Songa</strong><span>Flight Companion</span></span></button>
+        <button className="brand" onClick={() => goTo('home')} aria-label="Go to Songa Flight Watch home"><span className="brand-mark"><img src="/songa-logo-64.png" alt="" width={40} height={40} /></span><span className="brand-copy"><strong>Songa<span className="brand-spark">.</span></strong><span>AI TRAVEL COMPANION</span></span></button>
         <nav className={`main-nav ${mobileNavOpen ? 'is-open' : ''}`} aria-label="Main navigation">
           {navItems.map(({ id, label, icon: Icon }) => <button key={id} className={screen === id ? 'nav-link active' : 'nav-link'} onClick={() => goTo(id)}><Icon size={16} /> {label}</button>)}
         </nav>
         <div className="header-actions"><button className="icon-button mobile-menu" onClick={() => setMobileNavOpen((open) => !open)} aria-label="Toggle navigation">{mobileNavOpen ? <X size={20} /> : <Menu size={20} />}</button><button className="theme-toggle" onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>{theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}</button><button className="profile-button" onClick={() => goTo('account')}><span className="profile-avatar">{session?.user.email?.slice(0, 1).toUpperCase() ?? 'A'}</span><span>{session ? 'Account' : 'Sign in'}</span></button></div>
       </header>
       <main>
-        {screen === 'home' && <HomeScreen onSearch={searchFlights} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} onOpenFlight={openFlight} onWhatsAppJoin={join} />}
+        {commerceNotice && <div className="commerce-notice page-width" role="status"><ShieldCheck size={17} /><span>{commerceNotice}</span><button onClick={() => setCommerceNotice('')} aria-label="Dismiss notification"><X size={16} /></button></div>}
+        {screen === 'dashboard' && <DashboardScreen session={session} watchedFlights={watchedFlights} recentSearches={recentSearches} onOpenFlight={openFlight} onOpenCommerce={() => goTo('commerce')} onOpenAccount={() => goTo('account')} />}
+        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
         {screen === 'results' && <ResultsScreen flights={searchResults} onBack={() => goTo('home')} onOpenFlight={openFlight} watchedFlights={watchedFlights} onToggleWatch={toggleWatch} watchError={watchError} />}
-        {screen === 'details' && selectedFlight && <DetailsScreen flight={selectedFlight} onBack={() => goTo('results')} isWatched={watchedFlights.some((flight) => flight.flightNumber === selectedFlight.flightNumber && flight.date === selectedFlight.date)} onToggleWatch={toggleWatch} onOpenAlerts={() => goTo('alerts')} />}
-        {screen === 'watch' && <WatchScreen flights={visibleWatchedFlights} filter={watchFilter} setFilter={setWatchFilter} onOpenFlight={openFlight} onToggleWatch={toggleWatch} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
+        {screen === 'details' && selectedFlight && <DetailsScreen flight={selectedFlight} session={session} onBack={() => goTo('results')} isWatched={watchedFlights.some((flight) => flight.flightNumber === selectedFlight.flightNumber && flight.date === selectedFlight.date)} onToggleWatch={toggleWatch} onOpenAlerts={() => goTo('alerts')} onOpenAccount={() => goTo('account')} onAskAI={() => goTo('companion')} />}
+        {screen === 'watch' && <WatchScreen flights={visibleWatchedFlights} filter={watchFilter} setFilter={setWatchFilter} onOpenFlight={openFlight} onGoSearch={() => goTo('home')} onToggleWatch={toggleWatch} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
+        {screen === 'live-desk' && <LiveDeskScreen session={session} watchedFlights={watchedFlights} onOpenFlight={openFlight} />}
         {screen === 'alerts' && <DisruptionsScreen onOpenFlight={openFlight} onToggleWatch={toggleWatch} watchedFlights={watchedFlights} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
         {screen === 'airports' && <AirportBoardScreen initialAirport={null} onOpenFlight={openFlight} />}
-        {screen === 'workspace' && <WorkspaceScreen flights={[...watchedFlights, ...searchResults, ...demoFlights].filter((flight, index, list) => list.findIndex((item) => item.id === flight.id) === index)} selectedFlight={selectedFlight} onSelectFlight={openFlight} session={session} />}
-        {screen === 'companion' && <CompanionScreen onOpenFlight={() => openFlight(demoFlights[0])} />}
+        {screen === 'workspace' && <WorkspaceScreen flights={[...watchedFlights, ...searchResults].filter((flight, index, list) => list.findIndex((item) => item.id === flight.id) === index)} selectedFlight={selectedFlight} onSelectFlight={openFlight} session={session} />}
+        {screen === 'companion' && <CompanionScreen flight={selectedFlight} session={session} onOpenFlight={() => selectedFlight ? openFlight(selectedFlight) : goTo('home')} />}
         {screen === 'whatsapp' && <WhatsAppCompanionScreen session={session} onOpenFlight={openFlight} onOpenAccount={() => goTo('account')} />}
+        {screen === 'commerce' && <CommerceScreen session={session} selectedFlight={selectedFlight} onOpenAccount={() => goTo('account')} />}
         {screen === 'account' && <AccountScreen session={session} authReady={authReady} onSessionChange={setSession} onBack={() => goTo('home')} />}
       </main>
-      <footer className="site-footer"><span>SONGA / FLIGHT WATCH</span><span>Secure watchlists, clear journeys.</span><span>{flightProvider.mode === 'live' ? 'Live source configured.' : 'Demo data is not live data.'}</span></footer>
+      <nav className="mobile-bottom-nav" aria-label="Quick navigation">
+        <button className={screen === 'home' ? 'active' : ''} onClick={() => goTo('home')}><Search size={19}/><span>Search</span></button>
+        <button className={screen === 'watch' ? 'active' : ''} onClick={() => goTo('watch')}><Radar size={19}/><span>My flights</span></button>
+        <button className={screen === 'companion' ? 'active' : ''} onClick={() => goTo('companion')}><Bot size={19}/><span>Songa AI</span></button>
+        <button className={screen === 'whatsapp' ? 'active' : ''} onClick={() => goTo('whatsapp')}><MessageCircle size={19}/><span>WhatsApp</span></button>
+        <button onClick={() => setMobileNavOpen((open) => !open)}><Menu size={19}/><span>More</span></button>
+      </nav>
+      <footer className="site-footer"><span>SONGA AI / TRAVEL COMPANION</span><span>Your flight changes. Songa knows and alerts you in real time.</span><span>{flightProvider.mode === 'live' ? 'Flight data provider connected.' : 'Flight provider not configured.'}</span></footer>
     </div>
   );
 }
 
-type HomeProps = { onSearch: (event: React.FormEvent<HTMLFormElement>) => void; searchTerm: string; setSearchTerm: (value: string) => void; searchDate: string; setSearchDate: (value: string) => void; searchError: string; searchLoading: boolean; onOpenFlight: (flight: Flight) => void; onWhatsAppJoin: (email: string) => Promise<void> };
+type HomeProps = {
+  onSearch: (event: React.FormEvent<HTMLFormElement>) => void;
+  onShowLookupResults: (flights: Flight[]) => void;
+  searchTerm: string;
+  setSearchTerm: (value: string) => void;
+  searchDate: string;
+  setSearchDate: (value: string) => void;
+  searchError: string;
+  searchLoading: boolean;
+  watchedFlights: Flight[];
+  onOpenFlight: (flight: Flight) => void;
+  onOpenWatch: () => void;
+  onOpenAlerts: () => void;
+  onOpenCompanion: () => void;
+  onOpenWhatsApp: () => void;
+  onOpenCommerce: () => void;
+};
 
-function HomeScreen({ onSearch, searchTerm, setSearchTerm, searchDate, setSearchDate, searchError, searchLoading, onOpenFlight, onWhatsAppJoin }: HomeProps) {
-  return <div className="landing-page"><section className="hero-section"><div className="hero-grid" /><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-line" /> GLOBAL FLIGHT INTELLIGENCE</div><h1>Track the world.<br /><em>Stay ahead.</em></h1><p className="hero-lede">Real-time flight tracking, disruption alerts and smarter travel decisions — all in one place.</p><SearchForm onSearch={onSearch} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} /><div className="quick-searches"><span>Try a flight</span>{demoFlights.map((flight) => <button key={flight.id} onClick={() => setSearchTerm(flight.flightNumber)}>{flight.flightNumber}</button>)}</div></div><GlobeVisual onSelectFlight={onOpenFlight} /><div className="hero-live-chip"><span className="live-dot" /> {flightProvider.mode === 'live' ? 'Live data · updated moments ago' : 'Sample routes · connect live coverage for real-time positions'}</div><div className="hero-footnote"><span>01</span><span className="footnote-rule" /><span>Designed for the moments between departure and arrival.</span></div></section><CommandMetrics /><section className="command-grid page-width"><WatchPreview onOpenFlight={onOpenFlight} /><IntelligencePreview /></section><section className="feature-strip page-width"><Feature icon={<Radar />} title="Watch the change" text="A clear view of the flight details that actually move." /><Feature icon={<Sparkles />} title="Understand the moment" text="Plain-language context, never invented certainty." /><Feature icon={<ShieldCheck />} title="Travel with confidence" text="A calmer, more useful way to follow your journey." /></section><WhatsAppSection onJoin={onWhatsAppJoin} /><AirHelpSection /><section className="mission-section page-width"><div><div className="section-kicker">MORE THAN A FLIGHT</div><h2>The calm between<br /><span>takeoff and touch down.</span></h2></div><div className="mission-copy"><p>Songa brings status, meaningful changes, disruption context and next steps into one quietly intelligent companion for every journey.</p><div className="mission-points"><span><BadgeCheck size={17} /> Verified where possible</span><span><BadgeCheck size={17} /> Private by design</span><span><BadgeCheck size={17} /> Clear when unavailable</span></div><button className="text-link" onClick={() => onOpenFlight(demoFlights[0])}>Explore a flight <ArrowRight size={16} /></button></div></section></div>;
-}
-
-type SearchMode = 'flight' | 'airport' | 'route';
-
-function SearchForm({ onSearch, searchTerm, setSearchTerm, searchDate, setSearchDate, searchError, searchLoading }: Omit<HomeProps, 'onOpenFlight' | 'onWhatsAppJoin' | 'whatsappJoined'>) {
-  const [mode, setMode] = useState<SearchMode>('flight');
-  const [modeError, setModeError] = useState('');
-  const labels: Record<SearchMode, string> = { flight: 'Flight number', airport: 'Airport', route: 'Route' };
-  const placeholders: Record<SearchMode, string> = { flight: 'e.g. KQ100, KQA100', airport: 'e.g. NBO or London', route: 'e.g. Nairobi to London' };
-  const submit = (event: React.FormEvent<HTMLFormElement>) => {
-    if (mode !== 'flight') {
-      event.preventDefault();
-      setModeError('Airport and route search will unlock with live provider coverage. Try a flight number for now.');
+function HomeScreen(props: HomeProps) {
+  const {
+    onSearch, onShowLookupResults, searchTerm, setSearchTerm, searchDate, setSearchDate, searchError,
+    searchLoading, watchedFlights, onOpenWatch, onOpenAlerts,
+    onOpenCompanion, onOpenWhatsApp, onOpenCommerce,
+  } = props;
+  const quickFlights = ['KQ100', 'EK720', 'BA63', 'QR1341'];
+  const savedCount = watchedFlights.length;
+  const [typedLookup, setTypedLookup] = useState<{ key: string; status: 'loading' | 'done' | 'error'; flights: Flight[]; message?: string } | null>(null);
+  useEffect(() => {
+    const ident = searchTerm.trim().toUpperCase().replace(/\s+/g, '');
+    const key = searchCacheKey(ident, searchDate);
+    if (!/^[A-Z]{2,3}\d{1,5}[A-Z]?$/.test(ident)) {
+      setTypedLookup(null);
       return;
     }
-    setModeError('');
-    onSearch(event);
-  };
-  return <form className="search-panel" onSubmit={submit}><div className="search-tabs">{([['flight', PlaneTakeoff], ['airport', MapPin], ['route', Route]] as const).map(([value, Icon]) => <button type="button" key={value} className={mode === value ? 'search-tab active' : 'search-tab'} onClick={() => { setMode(value); setModeError(''); }}><Icon size={13} /> {labels[value]}</button>)}</div><div className="search-input-row"><div className="search-field"><Plane size={18} /><label htmlFor="flight-number">{labels[mode]}</label><input id="flight-number" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder={placeholders[mode]} /></div><div className="search-divider" /><div className="search-field date-field"><Clock3 size={18} /><label htmlFor="flight-date">Travel date</label><input id="flight-date" type="date" value={searchDate} onChange={(event) => setSearchDate(event.target.value)} aria-label="Travel date, optional" /></div><button className="primary-button search-button" type="submit" disabled={searchLoading}>{searchLoading ? 'Checking…' : 'Search'} {!searchLoading && <ArrowRight size={17} />}</button></div>{(searchError || modeError) && <div className="form-error" role="alert"><CircleAlert size={15} />{searchError || modeError}</div>}</form>;
+    const cached = flightSearchCache.get(key);
+    if (cached && cached.expiresAt > Date.now()) {
+      setTypedLookup({ key, status: 'done', flights: cached.flights });
+      return;
+    }
+    let active = true;
+    const timer = window.setTimeout(async () => {
+      if (active) setTypedLookup({ key, status: 'loading', flights: [] });
+      try {
+        const flights = await flightProvider.search({ flightNumber: ident, travelDate: searchDate || undefined });
+        rememberFlightSearch(key, flights);
+        if (active) setTypedLookup({ key, status: 'done', flights });
+      } catch (error) {
+        const message = error instanceof FlightProviderError ? error.message : 'Flight details could not be retrieved right now.';
+        if (active) setTypedLookup({ key, status: 'error', flights: [], message });
+      }
+    }, 650);
+    return () => { active = false; window.clearTimeout(timer); };
+  }, [searchTerm, searchDate]);
+  const activeLookupKey = searchCacheKey(searchTerm, searchDate);
+  return <div className="songa2-home">
+    <section className="songa2-hero page-width">
+      <div className="songa2-hero-copy">
+        <div className="songa2-eyebrow"><span className="songa2-live-dot"/> YOUR JOURNEY, WATCHED INTELLIGENTLY</div>
+        <h1>What's happening<br className="desktop-break"/> with your <span>flight?</span></h1>
+        <p className="songa2-lede">Check your flight, stay ahead of changes and know what to do next. Songa keeps the important details in view.</p>
+        <form className="songa2-search" onSubmit={onSearch}>
+          <div className="songa2-search-input-wrap">
+            <PlaneTakeoff size={21}/>
+            <label htmlFor="songa-flight-search">Flight number</label>
+            <input id="songa-flight-search" list="songa-flight-suggestions" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value.toUpperCase().replace(/\s+/g, ''))} placeholder="Try KQ100 or EK720" autoComplete="off" spellCheck={false} maxLength={10} aria-describedby="songa-search-help" /><datalist id="songa-flight-suggestions">{quickFlights.map((code) => <option key={code} value={code}/>)}</datalist>
+            {searchTerm && <button type="button" className="songa2-clear" onClick={() => setSearchTerm('')} aria-label="Clear flight number"><X size={17}/></button>}
+          </div>
+          <div className="songa2-date-row"><label htmlFor="songa-travel-date"><Clock3 size={15}/> Travel date <span>Optional</span></label><input id="songa-travel-date" type="date" value={searchDate} onChange={(event) => setSearchDate(event.target.value)} /></div>
+          <button className="songa2-search-submit" type="submit" disabled={searchLoading || !searchTerm.trim()}>{searchLoading ? <><span className="songa2-loader"/> Checking flight…</> : <>Check flight <ArrowRight size={19}/></>}</button>
+          {searchError && <div className="songa2-search-error" role="alert"><CircleAlert size={16}/>{searchError}</div>}
+        </form>
+        {typedLookup?.key === activeLookupKey && typedLookup.status === 'loading' && <div className="songa2-live-suggestion loading"><span className="songa2-loader"/><span>Checking available flight information for <strong>{searchTerm}</strong>…</span></div>}
+        {typedLookup?.key === activeLookupKey && typedLookup.status === 'done' && typedLookup.flights.length > 0 && <button type="button" className="songa2-live-suggestion found" onClick={() => onShowLookupResults(typedLookup.flights)}><span className="suggestion-status"><i/> FLIGHT INFORMATION FOUND · {typedLookup.flights[0].dataMode === 'demo' ? 'SAMPLE' : typedLookup.flights[0].source.toUpperCase()}</span><strong>{typedLookup.flights[0].flightNumber}</strong><span>{typedLookup.flights[0].origin.code} {typedLookup.flights[0].origin.city} <ArrowRight size={14}/> {typedLookup.flights[0].destination.code} {typedLookup.flights[0].destination.city}</span><small>{typedLookup.flights.length} matching record{typedLookup.flights.length === 1 ? '' : 's'} · Updated {typedLookup.flights[0].lastUpdatedAt}</small></button>}
+        {typedLookup?.key === activeLookupKey && typedLookup.status === 'error' && <div className="songa2-live-suggestion unavailable"><Info size={16}/><span>{typedLookup.message} You can still press Check flight to retry.</span></div>}
+        <div className="songa2-search-meta" id="songa-search-help"><ShieldCheck size={15}/> Search first. No account required. Sign in only when you save a flight.</div>
+        <div className="songa2-quick-searches"><span>FLIGHT NUMBER EXAMPLES</span>{quickFlights.map((code) => <button type="button" key={code} onClick={() => setSearchTerm(code)}>{code}</button>)}</div>
+      </div>
+      <div className="songa2-hero-art" aria-hidden="true">
+        <div className="songa2-flight-orbit orbit-a"/><div className="songa2-flight-orbit orbit-b"/>
+        <div className="songa2-planet"><div className="planet-gridline grid-one"/><div className="planet-gridline grid-two"/><div className="planet-land land-one"/><div className="planet-land land-two"/><div className="planet-land land-three"/></div>
+        <div className="songa2-plane-3d"><PlaneTakeoff size={94} strokeWidth={1.1}/></div>
+        <div className="songa2-art-label label-left"><span>NBO</span><small>NAIROBI</small></div><div className="songa2-art-label label-right"><span>WORLD</span><small>ONE JOURNEY AT A TIME</small></div>
+        <div className="songa2-art-caption"><span className="songa2-live-dot"/> Flight intelligence, made personal</div>
+      </div>
+    </section>
+
+    <section className="songa2-map-section page-width" aria-label="Live flight activity">
+      <FlightActivityMap />
+    </section>
+
+    <section className="songa2-quick-services page-width">
+      <div className="songa2-section-heading"><div><span>YOUR TRAVEL DESK</span><h2>What do you need today?</h2></div><p>Everything important, without the noise.</p></div>
+      <div className="songa2-service-grid">
+        <button className="songa2-service-card" onClick={onOpenWatch}><span className="service-icon"><Radar size={22}/></span><strong>My Flight Watch</strong><small>{savedCount ? `${savedCount} saved ${savedCount === 1 ? 'flight' : 'flights'}` : 'Save flights and keep them close'}</small><ArrowUpRight size={17}/></button>
+        <button className="songa2-service-card" onClick={onOpenAlerts}><span className="service-icon"><Bell size={22}/></span><strong>Flight delayed?</strong><small>Understand changes and explore your options</small><ArrowUpRight size={17}/></button>
+        <button className="songa2-service-card" onClick={onOpenCompanion}><span className="service-icon"><Sparkles size={22}/></span><strong>Ask Songa AI</strong><small>Get help understanding your journey</small><ArrowUpRight size={17}/></button>
+        <button className="songa2-service-card" onClick={onOpenCommerce}><span className="service-icon"><Ticket size={22}/></span><strong>Travel services</strong><small>Premium assistance, group watch and Airside</small><ArrowUpRight size={17}/></button>
+        <button className="songa2-service-card" onClick={onOpenWhatsApp}><span className="service-icon whatsapp-service"><MessageCircle size={22}/></span><strong>WhatsApp companion</strong><small>Continue your journey on WhatsApp</small><ArrowUpRight size={17}/></button>
+      </div>
+    </section>
+
+    <section className="songa2-airhelp-band page-width">
+      <div className="songa2-airhelp-icon"><ShieldAlert size={28}/></div>
+      <div><span>WHEN TRAVEL DOESN'T GO TO PLAN</span><h2>Delayed or cancelled flight?</h2><p>Find out whether your disruption may qualify for assistance or compensation.</p></div>
+      <a href="https://www.airhelp.de/?utm_source=tradetracker&utm_medium=Songa%20AI%20Travel&utm_campaign=38376&utm_content=12&data=12%3A%3A512363%3A%3A%3A%3A%3A%3A1794088845" target="_blank" rel="noreferrer">Explore compensation <ArrowUpRight size={18}/></a>
+    </section>
+  </div>;
 }
 
-function GlobeVisual({ onSelectFlight }: { onSelectFlight: (flight: Flight) => void }) {
-  return <div className="globe-visual" aria-label="Interactive flight routes across the earth" role="group"><div className="globe-orbit orbit-one" /><div className="globe-orbit orbit-two" /><div className="globe-shadow" /><svg viewBox="0 0 420 420" className="globe-svg"><defs><radialGradient id="earth" cx="35%" cy="25%"><stop offset="0" stopColor="#294c66" /><stop offset="0.6" stopColor="#102a40" /><stop offset="1" stopColor="#071727" /></radialGradient><linearGradient id="route" x1="0" x2="1"><stop stopColor="#ffb14a" /><stop offset="1" stopColor="#ff5c16" /></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="4" result="blur" /><feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge></filter></defs><g className="globe-spin"><circle cx="210" cy="210" r="166" fill="url(#earth)" stroke="#3c6074" strokeWidth="1" /><ellipse cx="210" cy="210" rx="166" ry="67" fill="none" stroke="#6e97a8" strokeOpacity=".26" /><ellipse cx="210" cy="210" rx="72" ry="166" fill="none" stroke="#6e97a8" strokeOpacity=".18" /><path d="M70 165c60-44 126-54 215-14 41 19 70 18 86 9M73 254c55 36 137 47 259 6M136 82c-12 48-14 102-4 167 5 32 19 62 39 86M294 73c-33 47-43 109-33 188 4 34 15 60 31 81" fill="none" stroke="#8cb3bd" strokeOpacity=".16" strokeWidth="1" /><path d="M116 274C153 195 252 145 315 122" fill="none" stroke="url(#route)" strokeWidth="2.5" strokeDasharray="6 7" filter="url(#glow)" /><path d="M100 202C164 253 228 276 310 232" fill="none" stroke="#ff8b25" strokeOpacity=".72" strokeWidth="1.5" strokeDasharray="4 9" /><circle cx="116" cy="274" r="5" fill="#ff7a1a" stroke="#fff1dc" strokeWidth="3" /><circle cx="315" cy="122" r="5" fill="#ff7a1a" stroke="#fff1dc" strokeWidth="3" /><circle cx="100" cy="202" r="4" fill="#ffb14a" /><circle cx="310" cy="232" r="4" fill="#ffb14a" /></g></svg><button className="map-flight-marker marker-kq" onClick={() => onSelectFlight(demoFlights[0])} aria-label="Open KQ 100 flight details"><span className="marker-pulse" /><Plane size={14} /></button><button className="map-flight-marker marker-ek" onClick={() => onSelectFlight(demoFlights[1])} aria-label="Open EK 720 flight details"><span className="marker-pulse" /><Plane size={13} /></button><button className="map-flight-marker marker-ba" onClick={() => onSelectFlight(demoFlights[2])} aria-label="Open BA 63 flight details"><span className="marker-pulse" /><Plane size={12} /></button><div className="map-label label-nbo"><span>NBO</span><small>Nairobi</small></div><div className="map-label label-lhr"><span>LHR</span><small>London</small></div><div className="globe-caption"><Globe2 size={14} /> Click a route to explore</div></div>;
-}
+function FlightActivityMap() {
+  type Position = { id: string; ident: string; origin: string; destination: string; latitude: number; longitude: number; altitudeFt?: number; groundspeedKts?: number; headingDeg?: number; updatedAt: string };
+  const [positions, setPositions] = useState<Position[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [lastUpdated, setLastUpdated] = useState('');
+  const [mapError, setMapError] = useState('');
 
-function CommandMetrics() {
-  const metrics = [
-    { icon: PlaneTakeoff, value: '03', label: 'Demo routes available', detail: 'Clearly labelled examples' },
-    { icon: Timer, value: '50m', label: 'KQ 100 delay found', detail: 'Calculated from timestamps' },
-    { icon: ShieldAlert, value: '01', label: 'Disruption in view', detail: 'AirHelp guidance available' },
-    { icon: Activity, value: '24/7', label: 'Journey awareness', detail: 'Watch what changes next' },
-  ];
-  return <section className="command-metrics page-width" aria-label="Flight command highlights">{metrics.map(({ icon: Icon, value, label, detail }) => <div className="metric-item" key={label}><Icon size={19} /><div><strong>{value}</strong><span>{label}</span><small>{detail}</small></div></div>)}</section>;
-}
-
-function WatchPreview({ onOpenFlight }: { onOpenFlight: (flight: Flight) => void }) {
-  return <section className="command-panel watch-preview"><div className="panel-heading"><div><div className="section-kicker">MY FLIGHT WATCH</div><h3>Keep the important moments in view.</h3></div><button className="panel-link" onClick={() => onOpenFlight(demoFlights[0])}>View all <ArrowUpRight size={14} /></button></div><div className="preview-flight-list">{demoFlights.map((flight) => <button className="preview-flight" key={flight.id} onClick={() => onOpenFlight(flight)}><span className="preview-airline-mark">{flight.airlineCode}</span><span className="preview-flight-main"><strong>{flight.flightNumber}</strong><small>{flight.origin.code} → {flight.destination.code}</small></span><StatusBadge status={flight.status} /><ChevronRight size={15} /></button>)}</div><div className="panel-footnote"><ShieldCheck size={14} /> Saved flights stay private to your account.</div></section>;
-}
-
-type IntelligenceTab = 'Delays' | 'Cancellations' | 'Airports';
-
-function IntelligencePreview() {
-  const [tab, setTab] = useState<IntelligenceTab>('Delays');
-  const [airport, setAirport] = useState('NBO');
-  const [airline, setAirline] = useState('All airlines');
-  const [demoOpen, setDemoOpen] = useState(false);
-  const airports = useMemo(() => Array.from(new Set(demoFlights.flatMap((flight) => [flight.origin.code, flight.destination.code]))), []);
-  const airlines = useMemo(() => Array.from(new Set(demoFlights.map((flight) => flight.airline))), []);
-  const scoped = demoFlights.filter((flight) => (flight.origin.code === airport || flight.destination.code === airport) && (airline === 'All airlines' || flight.airline === airline));
-  const delayed = scoped.filter((flight) => flight.status === 'Delayed');
+  const client = supabase;
   useEffect(() => {
-    if (!demoOpen) return;
-    const onKey = (event: KeyboardEvent) => { if (event.key === 'Escape') setDemoOpen(false); };
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [demoOpen]);
-  return <section className="command-panel intelligence-preview">
-    <div className="panel-heading"><div><div className="section-kicker">AIRPORT & AIRLINE INTELLIGENCE</div><h3>See the signal behind the schedule.</h3></div><button type="button" className="demo-label demo-label-button" onClick={() => setDemoOpen(true)} aria-haspopup="dialog" aria-expanded={demoOpen}>DEMO VIEW</button></div>
-    <div className="intelligence-tabs" role="tablist" aria-label="Intelligence views">{(['Delays', 'Cancellations', 'Airports'] as const).map((item) => <button type="button" key={item} role="tab" aria-selected={tab === item} className={tab === item ? 'active' : ''} onClick={() => setTab(item)}>{item}</button>)}</div>
-    <div className="intelligence-selector">
-      <span><MapPin size={14} />
-        <select className="intelligence-select" value={airport} onChange={(event) => setAirport(event.target.value)} aria-label="Select airport">{airports.map((code) => <option key={code} value={code}>{code} · {demoFlights.find((flight) => flight.origin.code === code)?.origin.city ?? demoFlights.find((flight) => flight.destination.code === code)?.destination.city}</option>)}</select>
-      </span>
-      <span>
-        <select className="intelligence-select" value={airline} onChange={(event) => setAirline(event.target.value)} aria-label="Filter by airline"><option>All airlines</option>{airlines.map((name) => <option key={name}>{name}</option>)}</select>
-      </span>
+    if (!client) { setMapError('Connect the Songa flight data service to show live aircraft positions.'); return; }
+    let active = true;
+    let first = true;
+    const load = async () => {
+      if (!active) return;
+      if (first) setLoading(true);
+      try {
+        const { data, error } = await client.functions.invoke('flight-positions');
+        if (error) throw error;
+        const rows = Array.isArray(data?.positions) ? data.positions as Position[] : [];
+        if (!active) return;
+        setPositions(rows.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).slice(0, 30));
+        setLastUpdated(data?.fetchedAt ? new Date(data.fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'just now');
+        setMapError(rows.length ? '' : 'No current aircraft positions were returned by the provider.');
+      } catch {
+        if (active) setMapError('Live position coverage is not enabled for this provider connection yet. Flight search remains available above.');
+      } finally {
+        if (active) setLoading(false);
+        first = false;
+      }
+    };
+    void load();
+    const interval = window.setInterval(() => void load(), 5 * 60 * 1000);
+    return () => { active = false; window.clearInterval(interval); };
+  }, [client]);
+
+  const xFor = (longitude: number) => 40 + ((longitude + 180) / 360) * 920;
+  const yFor = (latitude: number) => 40 + ((85 - latitude) / 170) * 420;
+  return <div className="songa2-map-card">
+    <div className="songa2-map-header"><div><span>THE WORLD, IN MOTION</span><h2>Flight activity</h2></div><div className="songa2-map-status">{positions.length > 0 ? <><span className="songa2-live-dot"/> LIVE POSITIONS</> : <><span className="map-status-muted"/>{loading ? 'CONNECTING' : 'POSITIONS UNAVAILABLE'}</>}</div></div>
+    <div className="songa2-map-canvas">
+      <svg viewBox="0 0 1000 500" role="img" aria-label={positions.length ? `${positions.length} provider-reported aircraft positions` : 'Illustrated world map; live aircraft positions are not currently available'}>
+        <defs><radialGradient id="mapGlow"><stop offset="0" stopColor="#ff8b37" stopOpacity=".18"/><stop offset="1" stopColor="#ff8b37" stopOpacity="0"/></radialGradient><pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#e9a36b" strokeOpacity=".13" strokeWidth="1"/></pattern></defs>
+        <rect width="1000" height="500" fill="#161b20"/><rect width="1000" height="500" fill="url(#mapGrid)"/>
+        <g fill="#3b4247" stroke="#657079" strokeOpacity=".4" strokeWidth="1.2">
+          <path d="M70 110 110 72 177 65 218 92 270 87 310 120 290 153 245 164 228 203 188 217 165 255 128 242 104 202 80 177Z"/>
+          <path d="M240 260 272 277 295 328 286 375 265 432 240 405 225 350Z"/>
+          <path d="M420 105 458 80 493 88 512 117 491 145 455 147 435 130Z"/>
+          <path d="M435 160 470 147 510 165 530 205 515 253 492 286 470 254 448 223Z"/>
+          <path d="M520 104 565 83 634 75 682 96 718 80 780 103 844 95 909 139 884 173 830 179 797 206 747 194 708 217 674 190 635 198 596 171 560 184 531 151Z"/>
+          <path d="M730 235 778 224 819 248 823 282 793 296 762 275Z"/>
+          <path d="M874 317 914 305 944 329 930 357 892 354Z"/>
+        </g>
+        {positions.map((p) => <g key={p.id} transform={`translate(${xFor(p.longitude)} ${yFor(p.latitude)}) rotate(${p.headingDeg ?? 0})`}><circle r="15" fill="url(#mapGlow)"/><path d="M0 -9 3.8 5 0 2.5 -3.8 5Z" fill="#ff8b37" stroke="#fff2e7" strokeWidth="1.2"/><circle r="2" fill="#fff2e7"/></g>)}
+      </svg>
+      <div className="songa2-map-overlay"><strong>{positions.length ? positions.length.toLocaleString() : '—'}</strong><span>aircraft positions<br/>returned by provider</span></div>
     </div>
-    {tab === 'Delays' && (delayed.length ? <div className="intelligence-cards">{delayed.map((flight) => <div key={flight.id}><strong>{flight.flightNumber} · {flight.statusDetail}</strong><small>{flight.origin.code} → {flight.destination.code} · {flight.date}</small></div>)}</div> : <div className="intelligence-empty"><Activity size={19} /><p>No delays found for this airport and airline in the demonstration dataset.</p></div>)}
-    {tab === 'Cancellations' && <div className="intelligence-empty"><Activity size={19} /><p>No cancellations in the demonstration dataset. Live cancellation data is not connected yet — this view stays empty rather than showing invented totals.</p></div>}
-    {tab === 'Airports' && <div className="intelligence-cards">{airports.map((code) => { const flights = demoFlights.filter((flight) => flight.origin.code === code || flight.destination.code === code); return <div key={code}><strong>{code} · {flights.length} demo {flights.length === 1 ? 'route' : 'routes'}</strong><small>{flights.map((flight) => flight.flightNumber).join(', ')}</small></div>; })}</div>}
-    <div className="intelligence-empty"><Activity size={19} /><p>Figures come from the labelled demonstration dataset. Live statistics appear when supported provider data is connected — Songa will never fill this view with invented totals.</p></div>
-    {demoOpen && <div className="demo-modal-backdrop" onClick={() => setDemoOpen(false)} role="presentation"><div className="demo-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title" onClick={(event) => event.stopPropagation()}><div className="panel-heading"><h3 id="demo-modal-title">About this demo view</h3><button type="button" className="icon-button" onClick={() => setDemoOpen(false)} aria-label="Close dialog"><X size={18} /></button></div><p>This panel is an illustration built from Songa’s labelled demonstration flights (KQ 100, EK 720, BA 63). Nothing here is live airport or airline data.</p><p>Live delay, cancellation and airport intelligence activate once a supported provider is connected. Until then the empty states stay honest instead of showing estimated totals.</p><button type="button" className="primary-button" onClick={() => setDemoOpen(false)}>Got it</button></div></div>}
-  </section>;
+    <div className="songa2-map-footer"><span>{mapError || (lastUpdated ? `Provider positions refreshed at ${lastUpdated}` : 'Waiting for provider positions')}</span><span>Position data is provider-dependent</span></div>
+  </div>;
 }
-
-function AirHelpSection() {
-  return <section className="airhelp-section page-width"><div className="airhelp-copy"><div className="section-kicker">AIRHELP DE PARTNER EXPERIENCE</div><h2>Flight disrupted?<br /><span>Ask in one sentence.</span></h2><p>Songa structures your disruption details, then sends you securely to AirHelp DE for the official assessment.</p><div className="airhelp-disclosure"><BadgeCheck size={16} /> Official partner referral · eligibility is assessed by AirHelp.</div><a className="primary-button airhelp-button" href="https://affiliate-tt.airhelp.de/c?c=38376&m=12&a=512363&r=&u=%2F" target="_blank" rel="noreferrer">Check possible compensation <ArrowUpRight size={16} /></a></div><div className="airhelp-card"><div className="airhelp-card-top"><img className="airhelp-logo" src="/airhelp.jpg" alt="AirHelp logo" width={44} height={44} /><strong>AirHelp assessment</strong><div className="language-pills"><span className="active">EN</span><span>DE</span><span>SW</span></div></div><div className="airhelp-input">My Kenya Airways flight KQ100 from Nairobi to London was delayed by five hours.</div><a className="airhelp-card-action airhelp-button" href="https://affiliate-tt.airhelp.de/c?c=38376&m=12&a=512363&r=&u=%2F" target="_blank" rel="noreferrer">Check possible compensation <ArrowRight size={16} /></a><small>Eligibility is estimated. AirHelp performs the official assessment and handles the claim.</small></div></section>;
-}
-
-function Feature({ icon, title, text }: { icon: React.ReactNode; title: string; text: string }) { return <article className="feature-card"><div className="feature-icon">{icon}</div><h3>{title}</h3><p>{text}</p></article>; }
 
 function ResultsScreen({ flights, onBack, onOpenFlight, watchedFlights, onToggleWatch, watchError }: { flights: Flight[]; onBack: () => void; onOpenFlight: (flight: Flight) => void; watchedFlights: Flight[]; onToggleWatch: (flight: Flight) => Promise<void>; watchError: string }) {
   return <section className="page-width page-section"><BackButton onClick={onBack} label="Back to search" /><div className="section-heading"><div><div className="section-kicker">SEARCH RESULT / {flightProvider.mode.toUpperCase()}</div><h2>Here is the signal.</h2></div><span className="result-count">{flights.length} {flights.length === 1 ? 'flight' : 'flights'} found</span></div>{watchError && <div className="inline-error" role="alert"><CircleAlert size={15} /> {watchError}</div>}{flights.length ? <div className="result-list">{flights.map((flight) => <FlightResultCard key={flight.id} flight={flight} onOpen={() => onOpenFlight(flight)} isWatched={watchedFlights.some((saved) => saved.flightNumber === flight.flightNumber && saved.date === flight.date)} onToggleWatch={onToggleWatch} />)}</div> : <EmptyState title="No result to show" text="Return to search and try a valid flight number and travel date." action="Return to search" onAction={onBack} />}</section>;
@@ -283,22 +477,194 @@ function FlightResultCard({ flight, onOpen, isWatched, onToggleWatch }: { flight
   return <article className="flight-card result-card"><div className="flight-card-top"><div><span className="flight-code">{flight.flightNumber}</span><span className="airline-name">{flight.airline}</span></div><StatusBadge status={flight.status} /></div><div className="route-row"><div><span className="airport-code">{flight.origin.code}</span><span className="city-name">{flight.origin.city}</span><strong>{flight.origin.time}</strong></div><div className="route-visual"><span className="route-duration">{flight.duration}</span><div className="route-line"><span /><Plane size={18} /></div><span className="route-date">{flight.date}</span></div><div className="align-right"><span className="airport-code">{flight.destination.code}</span><span className="city-name">{flight.destination.city}</span><strong>{flight.destination.time}</strong></div></div><div className="flight-meta"><span><Info size={15} /> {flight.statusDetail}</span><span><Clock3 size={15} /> Updated {flight.lastUpdatedAt}</span><span><Ticket size={15} /> {flight.terminal}</span></div><div className="source-chip"><ShieldCheck size={14} /> Source: {flight.source} · {flight.dataMode === 'demo' ? 'sample data' : 'provider response'}</div><div className="card-actions"><button className="primary-button" onClick={onOpen}>View flight details <ArrowRight size={16} /></button><button className={isWatched ? 'secondary-button selected' : 'secondary-button'} onClick={() => void onToggleWatch(flight)}><Heart size={16} fill={isWatched ? 'currentColor' : 'none'} /> {isWatched ? 'Watching' : 'Watch flight'}</button><button className="secondary-button whatsapp-option" onClick={() => void enableWhatsappAlerts(flight)}><MessageCircle size={16} /> WhatsApp alerts</button></div>{whatsappHint && <p className="whatsapp-hint"><MessageCircle size={14} /> Watching this flight. WhatsApp delivery activates for early-access users once the official sender is verified - join the list on the home page.</p>}</article>;
 }
 
-function DetailsScreen({ flight, onBack, isWatched, onToggleWatch, onOpenAlerts }: { flight: Flight; onBack: () => void; isWatched: boolean; onToggleWatch: (flight: Flight) => Promise<void>; onOpenAlerts: () => void }) {
+function DetailsScreen({ flight, session, onBack, isWatched, onToggleWatch, onOpenAlerts, onOpenAccount, onAskAI }: { flight: Flight; session: Session | null; onBack: () => void; isWatched: boolean; onToggleWatch: (flight: Flight) => Promise<void>; onOpenAlerts: () => void; onOpenAccount: () => void; onAskAI: () => void }) {
   const liveLabel = flight.dataMode === 'live' ? `Source: ${flight.source}` : 'Demo mode · source connection is not active';
-  return <section className="page-width page-section"><BackButton onClick={onBack} label="Back to result" /><div className="detail-header"><div><div className="section-kicker">FLIGHT DETAILS / {flight.dataMode === 'demo' ? 'SAMPLE DATA' : 'LIVE'}</div><h2>{flight.flightNumber}</h2><p>{flight.airline} · {flight.date}</p></div><StatusBadge status={flight.status} /></div><div className="detail-layout"><div><div className="flight-card detail-route-card"><div className="route-row large-route"><div><span className="airport-code">{flight.origin.code}</span><span className="city-name">{flight.origin.city}</span><strong>{flight.origin.time}</strong></div><div className="route-visual"><div className="route-line"><span /><Plane size={22} /></div><span className="route-date">{flight.duration} · {flight.terminal}</span></div><div className="align-right"><span className="airport-code">{flight.destination.code}</span><span className="city-name">{flight.destination.city}</span><strong>{flight.destination.time}</strong></div></div><div className="source-note"><ShieldCheck size={17} /><span><strong>{liveLabel}</strong><br />Last updated {flight.lastUpdatedAt}. Fields not supplied by the source are left unavailable.</span></div><button className="primary-button full-button" onClick={() => void onToggleWatch(flight)}><Bell size={16} /> {isWatched ? 'Remove from Flight Watch' : 'Add to Flight Watch'}</button></div><div className="section-heading compact-heading"><div><div className="section-kicker">WHAT CHANGED</div><h3>Flight timeline</h3></div><button className="text-link" onClick={onOpenAlerts}>View disruption board <ChevronRight size={15} /></button></div>{flight.timeline.length ? <Timeline flight={flight} /> : <EmptyState title="Timeline unavailable" text="This source has not supplied timeline events for this flight." action="View disruption board" onAction={onOpenAlerts} />}</div><aside className="detail-aside"><div className="aside-card orange-aside"><Sparkles size={20} /><span className="section-kicker">TRAVEL COPILOT</span><h3>Need a clearer next step?</h3><p>Gate navigation, expenses and your disruption rights are ready in the Trip Workspace.</p><button className="text-link light-link" onClick={onOpenAlerts}>Open disruption tools <ArrowRight size={15} /></button></div><div className="aside-card"><span className="section-kicker">TRIP CONTEXT</span><div className="context-row"><Globe2 size={17} /><span><strong>{flight.route}</strong><small>Route from provider response</small></span></div><div className="context-row"><Compass size={17} /><span><strong>{flight.duration}</strong><small>Estimated flight time</small></span></div>{(flight.aircraft || flight.aircraftRegistration) && <div className="context-row"><Plane size={17} /><span><strong>{flight.aircraft ?? 'Aircraft details available'}</strong><small>{flight.aircraftRegistration ?? 'Aircraft type'}</small></span></div>}</div><CompensationModule flight={flight} /></aside></div></section>;
+  return <section className="page-width page-section"><BackButton onClick={onBack} label="Back to results" /><div className="detail-header"><div><div className="section-kicker">FLIGHT DETAILS / {flight.dataMode === 'demo' ? 'SAMPLE DATA' : 'LIVE'}</div><h2>{flight.flightNumber}</h2><p>{flight.airline} · {flight.date}</p></div><StatusBadge status={flight.status} /></div><div className="detail-layout"><div><div className="flight-card detail-route-card"><div className="route-row large-route"><div><span className="airport-code">{flight.origin.code}</span><span className="city-name">{flight.origin.city}</span><strong>{flight.origin.time}</strong></div><div className="route-visual"><div className="route-line"><span /><Plane size={22} /></div><span className="route-date">{flight.duration} · {flight.terminal}</span></div><div className="align-right"><span className="airport-code">{flight.destination.code}</span><span className="city-name">{flight.destination.city}</span><strong>{flight.destination.time}</strong></div></div><div className="source-note"><ShieldCheck size={17} /><span><strong>{liveLabel}</strong><br />Last updated {flight.lastUpdatedAt}. Fields not supplied by the source are left unavailable.</span></div><button className="primary-button full-button" onClick={() => void onToggleWatch(flight)}><Bell size={16} /> {isWatched ? 'Remove from Flight Watch' : 'Add to Flight Watch'}</button></div><div className="section-heading compact-heading"><div><div className="section-kicker">WHAT CHANGED</div><h3>Flight timeline</h3></div><button className="text-link" onClick={onOpenAlerts}>View disruption board <ChevronRight size={15} /></button></div>{flight.timeline.length ? <Timeline flight={flight} /> : <EmptyState title="Timeline unavailable" text="This source has not supplied timeline events for this flight." action="View disruption board" onAction={onOpenAlerts} />}</div><aside className="detail-aside"><div className="aside-card orange-aside"><Sparkles size={20} /><span className="section-kicker">SONGA AI</span><h3>Need a clearer next step?</h3><p>Ask Songa to explain the flight information and help you consider your options.</p><button className="text-link light-link" onClick={onAskAI}>Ask Songa AI <ArrowRight size={15} /></button></div><div className="aside-card"><span className="section-kicker">TRIP CONTEXT</span><div className="context-row"><Globe2 size={17} /><span><strong>{flight.route}</strong><small>Route from provider response</small></span></div><div className="context-row"><Compass size={17} /><span><strong>{flight.duration}</strong><small>Estimated flight time</small></span></div>{(flight.aircraft || flight.aircraftRegistration) && <div className="context-row"><Plane size={17} /><span><strong>{flight.aircraft ?? 'Aircraft details available'}</strong><small>{flight.aircraftRegistration ?? 'Aircraft type'}</small></span></div>}</div><PremiumAssistanceCard flight={flight} session={session} onSignIn={onOpenAccount}/><CompensationModule flight={flight} /></aside></div></section>;
+}
+
+function PremiumAssistanceCard({ flight, session, onSignIn }: { flight: Flight; session: Session | null; onSignIn: () => void }) {
+  const [loading, setLoading] = useState(false);
+  const [notice, setNotice] = useState('');
+  const startCheckout = async () => {
+    if (flight.dataMode !== 'live') { setNotice('Premium checkout is available after Songa retrieves a provider-backed flight result.'); return; }
+    if (!session) { onSignIn(); return; }
+    if (!supabase) { setNotice('PayPal checkout is not configured in this deployment.'); return; }
+    setLoading(true); setNotice('');
+    try {
+      const { data, error } = await supabase.functions.invoke('paypal-create-order', { body: { productId: 'premium-travel-assistance', flightNumber: flight.flightNumber, travelDate: flight.date } });
+      if (error || !data?.approvalUrl) throw new Error(data?.message || 'PayPal checkout could not be started.');
+      window.location.assign(data.approvalUrl);
+    } catch (err) { setNotice(err instanceof Error ? err.message : 'PayPal checkout is temporarily unavailable.'); }
+    finally { setLoading(false); }
+  };
+  return <div className="songa2-premium-card"><div className="premium-top"><span>SONGA PREMIUM</span><BadgeCheck size={19}/></div><h3>Extra help when plans change.</h3><p>Extended AI disruption guidance, a personalised action plan and a practical traveller checklist for this flight.</p><div className="premium-price"><strong>US$3.99</strong><small>Sandbox demonstration price</small></div><button type="button" onClick={() => void startCheckout()} disabled={loading || flight.dataMode !== 'live'}>{loading ? 'Connecting to PayPal…' : flight.dataMode !== 'live' ? 'Live flight required' : session ? 'Continue with PayPal' : 'Sign in to purchase'} <ArrowRight size={16}/></button><small className="premium-footnote">Secure PayPal Sandbox checkout. A payment is verified on the server before service access is granted.</small>{notice && <p className="premium-error" role="alert">{notice}</p>}</div>;
 }
 
 function Timeline({ flight }: { flight: Flight }) { return <div className="timeline">{flight.timeline.map((event) => <div className={`timeline-item ${event.state}`} key={event.title}><div className="timeline-marker" /><div className="timeline-content"><span>{event.time}</span><h4>{event.title}</h4><p>{event.description}</p></div></div>)}</div>; }
 
-function WatchScreen({ flights, filter, setFilter, onOpenFlight, onToggleWatch, watchError, session, onOpenAccount }: { flights: Flight[]; filter: WatchFilter; setFilter: (filter: WatchFilter) => void; onOpenFlight: (flight: Flight) => void; onToggleWatch: (flight: Flight) => Promise<void>; watchError: string; session: Session | null; onOpenAccount: () => void }) {
-  return <section className="page-width page-section"><div className="section-heading watch-heading"><div><div className="section-kicker">YOUR FLIGHT WATCH</div><h2>Keep the important<br /><span>moments in view.</span></h2><p className="heading-description">{session ? 'Your saved flights are private to your account and persist across sessions. Background monitoring is not active yet.' : 'Sign in to save flights across sessions and keep them private.'}</p></div><div className="watch-orbit"><Radar size={21} /><span>{flights.length}<small>watching</small></span></div></div>{watchError && <div className="inline-error" role="alert"><CircleAlert size={15} /> {watchError}</div>}{!session ? <EmptyState title="Sign in to start watching" text="A secure account is required before a flight can be saved." action="Open account" onAction={onOpenAccount} /> : <><div className="filter-row"><div className="filter-label"><Filter size={15} /> Filter flights</div>{(['All flights', 'Needs attention', 'On time'] as const).map((item) => <button key={item} className={filter === item ? 'filter-pill active' : 'filter-pill'} onClick={() => setFilter(item)}>{item}</button>)}</div>{flights.length ? <div className="watch-grid">{flights.map((flight) => <WatchCard key={flight.id} flight={flight} onOpen={() => onOpenFlight(flight)} onRemove={() => void onToggleWatch(flight)} />)}</div> : <EmptyState title="Your watch is clear" text="Search for a flight and add it here once you are signed in." action="Search flights" onAction={() => onOpenFlight(demoFlights[0])} />}</>}</section>;
+function WatchScreen({ flights, filter, setFilter, onOpenFlight, onGoSearch, onToggleWatch, watchError, session, onOpenAccount }: { flights: Flight[]; filter: WatchFilter; setFilter: (filter: WatchFilter) => void; onOpenFlight: (flight: Flight) => void; onGoSearch: () => void; onToggleWatch: (flight: Flight) => Promise<void>; watchError: string; session: Session | null; onOpenAccount: () => void }) {
+  return <section className="page-width page-section"><div className="section-heading watch-heading"><div><div className="section-kicker">YOUR FLIGHT WATCH</div><h2>Keep the important<br /><span>moments in view.</span></h2><p className="heading-description">{session ? 'Your saved flights are private to your account and persist across sessions. Background monitoring is not active yet.' : 'Sign in to save flights across sessions and keep them private.'}</p></div><div className="watch-orbit"><Radar size={21} /><span>{flights.length}<small>watching</small></span></div></div>{watchError && <div className="inline-error" role="alert"><CircleAlert size={15} /> {watchError}</div>}{!session ? <EmptyState title="Sign in to start watching" text="A secure account is required before a flight can be saved." action="Open account" onAction={onOpenAccount} /> : <><div className="filter-row"><div className="filter-label"><Filter size={15} /> Filter flights</div>{(['All flights', 'Needs attention', 'On time'] as const).map((item) => <button key={item} className={filter === item ? 'filter-pill active' : 'filter-pill'} onClick={() => setFilter(item)}>{item}</button>)}</div>{flights.length ? <div className="watch-grid">{flights.map((flight) => <WatchCard key={flight.id} flight={flight} onOpen={() => onOpenFlight(flight)} onRemove={() => void onToggleWatch(flight)} />)}</div> : <EmptyState title="Your watch is clear" text="Search for a flight and add it here once you are signed in." action="Search flights" onAction={onGoSearch} />}</>}</section>;
 }
 
 function WatchCard({ flight, onOpen, onRemove }: { flight: Flight; onOpen: () => void; onRemove: () => void }) { return <article className="watch-card"><div className="watch-card-head"><span className="flight-code">{flight.flightNumber}</span><StatusBadge status={flight.status} /></div><p className="watch-airline">{flight.airline} · {flight.date}</p><div className="mini-route"><strong>{flight.origin.code}</strong><span /><Plane size={15} /><span /><strong>{flight.destination.code}</strong></div><p className="watch-detail"><Clock3 size={14} /> {flight.statusDetail}</p><div className="watch-card-actions"><button className="text-link" onClick={onOpen}>Open flight <ArrowRight size={15} /></button><button className="icon-text-button" onClick={onRemove}><X size={14} /> Remove</button></div></article>; }
 
 /* The example-alert inbox is superseded by the provider-backed Disruptions screen; kept out of navigation. */
 
-function CompanionScreen({ onOpenFlight }: { onOpenFlight: () => void }) { return <section className="page-width page-section companion-page"><div className="companion-intro"><div className="companion-orb"><Bot size={25} /></div><div><div className="section-kicker">AI TRAVEL COMPANION / DEMONSTRATION</div><h2>Clarity for the<br /><span>next decision.</span></h2><p>These clearly labelled example responses show how Songa can explain verified flight information without inventing what it does not know.</p></div></div><div className="chat-window"><div className="chat-top"><span><span className="online-dot" /> Demonstration conversation</span><span>Not connected to a live flight</span></div><div className="chat-messages"><div className="message user-message">What changed with my flight?</div><div className="message assistant-message"><div className="message-avatar"><Sparkles size={14} /></div><div><strong>Example response</strong><p>The latest demonstration information shows that KQ 100’s departure moved from 14:20 to 15:10. The source snapshot does not explain why, so I won’t guess at the cause. Check with Kenya Airways for rebooking or airport guidance.</p><small>Based on labelled demonstration data · not a live recommendation</small></div></div><div className="message user-message">What should I do next?</div><div className="message assistant-message"><div className="message-avatar"><Sparkles size={14} /></div><div><strong>Example response</strong><p>Keep your original travel documents close, allow extra time at the airport, and confirm the updated departure directly with the airline before leaving.</p><small>General travel guidance · airline decisions may differ</small></div></div></div><div className="chat-input"><span>Ask about this example flight</span><button onClick={onOpenFlight}><ArrowRight size={17} /></button></div></div><div className="companion-footnote"><ShieldCheck size={16} /> Songa explains verified information. It does not make airline decisions or promise compensation.</div></section>; }
+function CompanionScreen({ flight, session, onOpenFlight }: { flight: Flight | null; session: Session | null; onOpenFlight: () => void }) {
+  type ChatMessage = { role: 'user' | 'assistant'; content: string };
+  const [messages, setMessages] = useState<ChatMessage[]>([{ role: 'assistant', content: flight ? `Hi, I’m Songa. I have ${flight.flightNumber} in view. Ask me about its status, delays, connections or what to consider next.` : 'Hi, I’m Songa, your AI travel companion. Ask me about a flight, a disruption or planning your next journey. You can also search for a flight first so I can use its available details.' }]);
+  const [draft, setDraft] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  const [premiumUnlocked, setPremiumUnlocked] = useState(false);
+  const client = supabase;
+  useEffect(() => {
+    let active = true;
+    setPremiumUnlocked(false);
+    if (!flight || !session || !client) return () => { active = false; };
+    const flightNumber = flight.flightNumber.toUpperCase().replace(/\s+/g, '');
+    const loadPremiumAccess = async () => {
+      try {
+        const now = new Date().toISOString();
+        const [legacy, owned, gifted] = await Promise.all([
+          client.from('premium_entitlements').select('id').eq('user_id', session.user.id).eq('flight_number', flightNumber).eq('travel_date', flight.date).eq('status', 'active').maybeSingle(),
+          client.from('songa_commerce_entitlements').select('id,product_id,metadata,ends_at').eq('purchaser_user_id', session.user.id).in('status', ['ACTIVE','CLAIMED']).lte('starts_at', now),
+          client.from('songa_commerce_entitlements').select('id,product_id,metadata,ends_at').eq('beneficiary_user_id', session.user.id).in('status', ['ACTIVE','CLAIMED']).lte('starts_at', now),
+        ]);
+        const rows = [...(owned.data ?? []), ...(gifted.data ?? [])].filter((row) => !row.ends_at || new Date(row.ends_at).getTime() > Date.now());
+        const general = rows.some((row) => ['songa-premium-30','songa-premium-365'].includes(row.product_id));
+        const rescue = rows.some((row) => {
+          if (row.product_id !== 'songa-trip-rescue') return false;
+          const metadata = row.metadata && typeof row.metadata === 'object' ? row.metadata as Record<string, unknown> : {};
+          return String(metadata.flightNumber ?? '').toUpperCase().replace(/\s+/g, '') === flightNumber && String(metadata.travelDate ?? '') === flight.date;
+        });
+        if (active) setPremiumUnlocked(!!legacy.data || general || rescue);
+      } catch { if (active) setPremiumUnlocked(false); }
+    };
+    void loadPremiumAccess();
+    return () => { active = false; };
+  }, [flight, session, client]);
+  const send = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const text = draft.trim();
+    if (!text || busy) return;
+    if (!supabase) { setError('Songa AI is not configured in this deployment yet. Add the Supabase connection and AI function secrets.'); return; }
+    const next = [...messages, { role: 'user' as const, content: text }];
+    setMessages(next); setDraft(''); setError(''); setBusy(true);
+    try {
+      const { data, error: invokeError } = await supabase.functions.invoke('songa-ai-assistant', {
+        body: { messages: next.slice(-10), premium: premiumUnlocked, flight: flight ? { flightNumber: flight.flightNumber, airline: flight.airline, origin: flight.origin, destination: flight.destination, date: flight.date, dataMode: flight.dataMode, status: flight.status, statusDetail: flight.statusDetail, source: flight.source, lastUpdatedAt: flight.lastUpdatedAt, departureDelayMinutes: flight.departureDelayMinutes, arrivalDelayMinutes: flight.arrivalDelayMinutes, gate: flight.gate, terminal: flight.terminal } : null },
+      });
+      if (invokeError) throw invokeError;
+      const reply = typeof data?.reply === 'string' ? data.reply : 'I could not prepare an answer just now. Please try again.';
+      setMessages((current) => [...current, { role: 'assistant', content: reply }]);
+    } catch {
+      setError('Songa AI could not reach its assistant service. Please try again shortly.');
+    } finally { setBusy(false); }
+  };
+  return <section className="page-width page-section songa2-ai-page">
+    <div className="songa2-ai-heading">
+  <div className="songa2-ai-avatar">
+    <Sparkles size={25} />
+  </div>
+  <div>
+    <span>SONGA AI / TRAVEL COMPANION</span>
+    <h1>Let's make your next<br /><em>move clearer.</em></h1>
+    <p>
+      Ask about a flight, a disruption or your next step. Songa uses the
+      flight details you provide and clearly separates facts from suggestions.
+    </p>
+  </div>
+</div>
+
+{flight && (
+  <div className="songa2-ai-context">
+    <Plane size={17} />
+    <span>
+      Flight context: <strong>{flight.flightNumber}</strong> ·
+      {flight.origin.code} → {flight.destination.code} · {flight.status}
+    </span>
+    <button type="button" onClick={onOpenFlight}>View flight</button>
+  </div>
+)}
+
+{premiumUnlocked && (
+  <div className="songa2-premium-unlocked">
+    <BadgeCheck size={16} />
+    Premium assistance active for {flight?.flightNumber}. Your AI responses
+    include an expanded action plan and traveller checklist.
+  </div>
+)}
+
+<div className="songa2-ai-chat">
+  <div className="songa2-ai-chat-header">
+    <span><i /> Songa AI</span>
+    <small>
+      AI-generated travel guidance · verify operational decisions with the airline
+    </small>
+  </div>
+
+  <div className="songa2-ai-messages" aria-live="polite">
+    {messages.map((m, i) => (
+      <div className={`songa2-ai-message ${m.role}`} key={i}>
+        <span className="message-label">
+          {m.role === 'user' ? 'YOU' : 'SONGA'}
+        </span>
+
+        <div className="songa2-ai-message-content">
+          {m.role === 'assistant' ? (
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {m.content}
+            </ReactMarkdown>
+          ) : (
+            <p>{m.content}</p>
+          )}
+        </div>
+      </div>
+    ))}
+
+    {busy && (
+      <div className="songa2-ai-message assistant">
+        <span className="message-label">SONGA</span>
+        <p className="songa2-typing">
+          Thinking through your journey<span>•••</span>
+        </p>
+      </div>
+    )}
+  </div>
+
+  {error && (
+    <div className="songa2-search-error ai-error" role="alert">
+      {error}
+    </div>
+  )}
+
+  <form className="songa2-ai-composer" onSubmit={send}>
+    <textarea
+      value={draft}
+      onChange={(event) => setDraft(event.target.value)}
+      placeholder="Ask Songa about your journey…"
+      rows={2}
+      maxLength={1200}
+      aria-label="Message Songa AI"
+    />
+    <button
+      type="submit"
+      disabled={busy || !draft.trim()}
+      aria-label="Send message"
+    >
+      {busy ? <span className="songa2-loader" /> : <ArrowUpRight size={21} />}
+    </button>
+  </form>
+
+  <div className="songa2-ai-footnote">
+    <ShieldCheck size={15} />
+    Songa does not make airline decisions or guarantee compensation,
+    rebooking or refunds.
+  </div>
+</div>
+  </section>;
+}
 
 function AccountScreen({ session, authReady, onSessionChange, onBack }: { session: Session | null; authReady: boolean; onSessionChange: (session: Session | null) => void; onBack: () => void }) {
   const [mode, setMode] = useState<'sign-in' | 'sign-up'>('sign-in');
@@ -309,10 +675,77 @@ function AccountScreen({ session, authReady, onSessionChange, onBack }: { sessio
   const [submitting, setSubmitting] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [resetMode, setResetMode] = useState(false);
+  const [displayName, setDisplayName] = useState('');
+  const [homeAirport, setHomeAirport] = useState('');
+  const [preferredCurrency, setPreferredCurrency] = useState('USD');
+  const [travelInterests, setTravelInterests] = useState('flight updates, airport services');
+  const [profileBusy, setProfileBusy] = useState(false);
+  const [profileLoaded, setProfileLoaded] = useState(false);
   const client = supabase;
 
+  useEffect(() => {
+    let active = true;
+    if (!session || !client) { setProfileLoaded(false); return () => { active = false; }; }
+    client.from('songa_traveller_profiles')
+      .select('display_name,home_airport,preferred_currency,travel_interests')
+      .eq('user_id', session.user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (!active) return;
+        if (data) {
+          setDisplayName(data.display_name ?? '');
+          setHomeAirport(data.home_airport ?? '');
+          setPreferredCurrency(data.preferred_currency ?? 'USD');
+          setTravelInterests(Array.isArray(data.travel_interests) ? data.travel_interests.join(', ') : '');
+        }
+        setProfileLoaded(true);
+      });
+    return () => { active = false; };
+  }, [session?.user.id, client]);
+
+  const saveTravellerProfile = async () => {
+    if (!session || !client) return;
+    setProfileBusy(true);
+    setError('');
+    setMessage('');
+    const airport = homeAirport.trim().toUpperCase();
+    if (airport && !/^[A-Z]{3}$/.test(airport)) {
+      setError('Home airport must be a three-letter IATA code, such as NBO.');
+      setProfileBusy(false);
+      return;
+    }
+    const interests = travelInterests.split(',').map((value) => value.trim().slice(0, 40)).filter(Boolean).slice(0, 8);
+    const { error: saveError } = await client.from('songa_traveller_profiles').upsert({
+      user_id: session.user.id,
+      display_name: displayName.trim().slice(0, 80) || null,
+      home_airport: airport || null,
+      preferred_currency: preferredCurrency,
+      travel_interests: interests,
+      updated_at: new Date().toISOString(),
+    }, { onConflict: 'user_id' });
+    setProfileBusy(false);
+    if (saveError) setError('Your preferences could not be saved. Apply the Songa personalisation migration and try again.');
+    else setMessage('Your Songa travel preferences have been saved.');
+  };
+
   if (!authReady) return <section className="page-width page-section auth-state"><div className="loading-orb"><Radar size={22} /></div><h2>Checking your account</h2><p>Restoring your secure session.</p></section>;
-  if (session) return <section className="page-width page-section auth-state"><div className="loading-orb"><ShieldCheck size={22} /></div><div className="section-kicker">ACCOUNT / CONNECTED</div><h2>Your watch is private.</h2><p>Signed in as {session.user.email}. Saved flights will persist across sessions.</p><button className="primary-button" onClick={() => void client?.auth.signOut().then(() => onSessionChange(null))}>Sign out <ArrowRight size={16} /></button><button className="back-button auth-back" onClick={onBack}>Return to search</button></section>;
+  if (session) return <section className="page-width page-section auth-state">
+    <div className="loading-orb"><ShieldCheck size={22} /></div>
+    <div className="section-kicker">ACCOUNT / YOUR TRAVEL PROFILE</div>
+    <h2>Make Songa feel like yours.</h2>
+    <p>Signed in as {session.user.email}. Save your travel preferences to personalise the Songa experience across your devices.</p>
+    <div className="traveller-profile-card">
+      <label>Display name<input value={displayName} onChange={(event) => setDisplayName(event.target.value)} maxLength={80} placeholder="How should Songa address you?"/></label>
+      <label>Home airport <span>Three-letter IATA code</span><input value={homeAirport} onChange={(event) => setHomeAirport(event.target.value.toUpperCase().slice(0, 3))} maxLength={3} placeholder="e.g. NBO"/></label>
+      <label>Preferred currency<select value={preferredCurrency} onChange={(event) => setPreferredCurrency(event.target.value)}><option value="USD">USD · US Dollar</option><option value="KES">KES · Kenyan Shilling</option><option value="EUR">EUR · Euro</option><option value="GBP">GBP · Pound Sterling</option></select></label>
+      <label>Travel interests <span>Separate with commas · up to 8</span><input value={travelInterests} onChange={(event) => setTravelInterests(event.target.value)} placeholder="flight updates, airport services, family travel"/></label>
+      <button className="primary-button full-button" onClick={() => void saveTravellerProfile()} disabled={profileBusy || !profileLoaded}>{profileBusy ? 'Saving preferences…' : 'Save my preferences'} <ArrowRight size={16}/></button>
+      {error && <div className="inline-error" role="alert"><CircleAlert size={15}/> {error}</div>}
+      {message && <div className="auth-message" role="status">{message}</div>}
+    </div>
+    <button className="primary-button" onClick={() => void client?.auth.signOut().then(() => onSessionChange(null))}>Sign out <ArrowRight size={16} /></button>
+    <button className="back-button auth-back" onClick={onBack}>Return to search</button>
+  </section>;
   if (!client) return <section className="page-width page-section auth-state"><div className="loading-orb"><ShieldCheck size={22} /></div><div className="section-kicker">ACCOUNT / NOT CONFIGURED</div><h2>Secure watchlists need a dedicated connection.</h2><p>Supabase client configuration is not available in this environment, so saving flights is disabled rather than simulated.</p><button className="back-button auth-back" onClick={onBack}>Return to search</button></section>;
 
   const submit = async (event: React.FormEvent<HTMLFormElement>) => {

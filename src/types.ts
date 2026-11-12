@@ -15,7 +15,7 @@ export type DisruptionCategory = 'none' | 'delay' | 'cancelled' | 'diverted' | '
 
 export type FlightDataMode = 'demo' | 'live';
 
-export type Screen = 'home' | 'results' | 'details' | 'watch' | 'alerts' | 'airports' | 'companion' | 'workspace' | 'whatsapp' | 'account';
+export type Screen = 'home' | 'dashboard' | 'results' | 'details' | 'watch' | 'alerts' | 'airports' | 'companion' | 'workspace' | 'whatsapp' | 'live-desk' | 'commerce' | 'account';
 
 export type FlightPosition = {
   latitude: number;

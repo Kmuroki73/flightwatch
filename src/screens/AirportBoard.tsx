@@ -1,7 +1,35 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowRight, CircleAlert, Clock3, Globe2, Plane, PlaneLanding, PlaneTakeoff, RefreshCw, Search } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { ArrowRight, CircleAlert, Clock3, Globe2, LocateFixed, MapPin, Plane, PlaneLanding, PlaneTakeoff, RefreshCw, Search } from 'lucide-react';
 import type { BoardResult, Flight } from '@/types';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
+
+type Airport = { code: string; name: string; city: string; lat: number; lon: number };
+
+// Coordinates are for discovery only; the provider remains the source of flight data.
+const AIRPORTS: Airport[] = [
+  { code: 'NBO', name: 'Jomo Kenyatta International', city: 'Nairobi, Kenya', lat: -1.3192, lon: 36.9278 },
+  { code: 'WIL', name: 'Wilson Airport', city: 'Nairobi, Kenya', lat: -1.3217, lon: 36.8148 },
+  { code: 'MBA', name: 'Moi International', city: 'Mombasa, Kenya', lat: -4.0348, lon: 39.5942 },
+  { code: 'KIS', name: 'Kisumu International', city: 'Kisumu, Kenya', lat: -0.0861, lon: 34.7289 },
+  { code: 'EDL', name: 'Eldoret International', city: 'Eldoret, Kenya', lat: 0.4045, lon: 35.2389 },
+  { code: 'MYD', name: 'Malindi Airport', city: 'Malindi, Kenya', lat: -3.2293, lon: 40.1017 },
+  { code: 'LAU', name: 'Manda Airport', city: 'Lamu, Kenya', lat: -2.2524, lon: 40.9131 },
+  { code: 'UAS', name: 'Samburu Airport', city: 'Samburu, Kenya', lat: 0.5306, lon: 37.5342 },
+  { code: 'LHR', name: 'Heathrow Airport', city: 'London, United Kingdom', lat: 51.4700, lon: -0.4543 },
+  { code: 'LGW', name: 'Gatwick Airport', city: 'London, United Kingdom', lat: 51.1537, lon: -0.1821 },
+  { code: 'DXB', name: 'Dubai International', city: 'Dubai, UAE', lat: 25.2532, lon: 55.3657 },
+  { code: 'AMS', name: 'Amsterdam Schiphol', city: 'Amsterdam, Netherlands', lat: 52.3105, lon: 4.7683 },
+  { code: 'JFK', name: 'John F. Kennedy International', city: 'New York, USA', lat: 40.6413, lon: -73.7781 },
+  { code: 'LAX', name: 'Los Angeles International', city: 'Los Angeles, USA', lat: 33.9416, lon: -118.4085 },
+  { code: 'SIN', name: 'Singapore Changi', city: 'Singapore', lat: 1.3644, lon: 103.9915 },
+];
+
+function distanceKm(lat1: number, lon1: number, lat2: number, lon2: number) {
+  const rad = (value: number) => value * Math.PI / 180;
+  const dLat = rad(lat2 - lat1); const dLon = rad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(rad(lat1)) * Math.cos(rad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 export function AirportsScreen({ initialAirport, onOpenFlight }: { initialAirport: string | null; onOpenFlight: (flight: Flight) => void }) {
   const [airport, setAirport] = useState((initialAirport ?? 'NBO').toUpperCase().slice(0, 4));
@@ -10,17 +38,20 @@ export function AirportsScreen({ initialAirport, onOpenFlight }: { initialAirpor
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [query, setQuery] = useState('');
+  const [nearby, setNearby] = useState<Array<Airport & { distance: number }> | null>(null);
+  const [locationLoading, setLocationLoading] = useState(false);
+  const [locationError, setLocationError] = useState('');
 
-  const load = (code: string, dir: 'departures' | 'arrivals') => {
+  const load = useCallback((code: string, dir: 'departures' | 'arrivals') => {
     setLoading(true);
     setError('');
     flightProvider.searchAirport({ airport: code, direction: dir })
       .then(setBoard)
       .catch((err) => setError(err instanceof FlightProviderError ? err.message : 'The airport board could not be loaded right now.'))
       .finally(() => setLoading(false));
-  };
+  }, []);
 
-  useEffect(() => { load((initialAirport ?? 'NBO').toUpperCase(), direction); /* eslint-disable-line react-hooks/exhaustive-deps */ }, [direction, initialAirport]);
+  useEffect(() => { load((initialAirport ?? 'NBO').toUpperCase(), direction); }, [direction, initialAirport, load]);
 
   const visibleFlights = useMemo(() => {
     if (!board) return [];
@@ -78,6 +109,35 @@ export function AirportsScreen({ initialAirport, onOpenFlight }: { initialAirpor
             {loading ? 'Loading…' : 'Load board'} {!loading && <RefreshCw size={14} />}
           </button>
         </form>
+      </div>
+
+      <div className="nearby-airports-panel" style={{ marginBottom: 22, padding: 18, border: '1px solid var(--line)', borderRadius: 14, background: 'var(--surface)' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <MapPin size={20} color="var(--orange)" />
+            <div><strong style={{ color: 'var(--warm)' }}>Find airports near you</strong><p style={{ margin: '4px 0 0', color: '#8fa5ab', fontSize: 12 }}>Location is optional. Your coordinates are used in this browser to calculate distances and are not sent to Songa.</p></div>
+          </div>
+          <button className="secondary-button" type="button" disabled={locationLoading} onClick={() => {
+            setLocationError('');
+            if (!navigator.geolocation) { setLocationError('Location is not available in this browser. Search for an airport manually instead.'); return; }
+            setLocationLoading(true);
+            navigator.geolocation.getCurrentPosition((position) => {
+              const { latitude, longitude } = position.coords;
+              const results = AIRPORTS.map((item) => ({ ...item, distance: distanceKm(latitude, longitude, item.lat, item.lon) })).sort((a, b) => a.distance - b.distance).slice(0, 5);
+              setNearby(results); setLocationLoading(false);
+            }, (geoError) => {
+              setLocationLoading(false);
+              setLocationError(geoError.code === geoError.PERMISSION_DENIED ? 'Location permission was denied. You can still enter an airport code above.' : 'We could not determine your location. You can still enter an airport code above.');
+            }, { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 });
+          }}><LocateFixed size={15} /> {locationLoading ? 'Finding airports…' : 'Use my location'}</button>
+        </div>
+        {locationError && <p className="inline-error" role="alert" style={{ marginTop: 12 }}>{locationError}</p>}
+        {nearby && <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(190px, 1fr))', gap: 10, marginTop: 16 }}>
+          {nearby.map((item) => <button key={item.code} type="button" className={airport === item.code ? 'secondary-button selected' : 'secondary-button'} onClick={() => { setAirport(item.code); load(item.code, direction); }} style={{ textAlign: 'left', display: 'flex', alignItems: 'flex-start', gap: 10, padding: 12 }}>
+            <Globe2 size={16} style={{ marginTop: 2, flexShrink: 0 }} /><span><strong>{item.code} · {Math.round(item.distance)} km</strong><small style={{ display: 'block', marginTop: 4, whiteSpace: 'normal' }}>{item.name}<br />{item.city}</small></span>
+          </button>)}
+          <p style={{ gridColumn: '1 / -1', margin: '2px 0 0', color: '#8fa5ab', fontSize: 11 }}>Nearby results use a curated airport list, not a complete global directory. Flight boards load from the configured provider and may be unavailable for some airports.</p>
+        </div>}
       </div>
 
       {error && <div className="inline-error" role="alert"><CircleAlert size={15} /> {error}</div>}

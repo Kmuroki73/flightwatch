@@ -25,6 +25,10 @@ dist-ssr
 # Never commit environment secrets (keep the safe template)
 .env*
 !.env.example
+!.env.sandbox.example
+!.env.live.example
+!supabase/.env.sandbox.example
+!supabase/.env.live.example
 
 # Generated output and local tooling
 node_modules/

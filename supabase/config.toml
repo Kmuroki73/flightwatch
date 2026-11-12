@@ -11,3 +11,39 @@ verify_jwt = false
 
 [functions.whatsapp-alerts]
 verify_jwt = true
+
+[functions.songa-ai-assistant]
+verify_jwt = false
+
+[functions.flight-positions]
+verify_jwt = false
+
+[functions.paypal-create-order]
+verify_jwt = true
+
+[functions.paypal-capture-order]
+verify_jwt = true
+
+[functions.paypal-webhook]
+verify_jwt = false
+
+[functions.songa-commerce-create-order]
+verify_jwt = true
+
+[functions.songa-commerce-capture-order]
+verify_jwt = true
+
+[functions.songa-commerce-webhook]
+verify_jwt = false
+
+[functions.songa-redeem-gift]
+verify_jwt = true
+
+[functions.songa-join-group]
+verify_jwt = true
+
+[functions.songa-group-add-flight]
+verify_jwt = true
+
+[functions.songa-accommodation-search]
+verify_jwt = true

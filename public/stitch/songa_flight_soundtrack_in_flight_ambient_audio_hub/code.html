@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><title>SONGA Flight Watch 2.0</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"primary-fixed":"#ffdbd0","on-background":"#e3e2e6","tertiary-fixed":"#6ffbbe","error":"#ffb4ab","surface-variant":"#343538","on-tertiary-container":"#003421","primary":"#ffb59d","on-error":"#690005","inverse-on-surface":"#2f3034","secondary":"#7bd0ff","inverse-surface":"#e3e2e6","on-tertiary-fixed":"#002113","on-secondary-container":"#00374d","surface-container-high":"#292a2d","tertiary-fixed-dim":"#4edea3","surface-container-low":"#1b1b1f","on-surface-variant":"#e3beb3","tertiary":"#4edea3","on-primary-fixed":"#390c00","on-error-container":"#ffdad6","background":"#121316","on-secondary":"#00354a","on-tertiary":"#003824","surface-dim":"#121316","on-primary-fixed-variant":"#832700","secondary-fixed":"#c4e7ff","surface-bright":"#38393d","on-primary-container":"#561600","error-container":"#93000a","surface-container":"#1f1f23","secondary-fixed-dim":"#7bd0ff","primary-fixed-dim":"#ffb59d","secondary-container":"#00a6e0","outline":"#aa897f","tertiary-container":"#00a874","surface":"#121316","on-secondary-fixed":"#001e2c","surface-container-highest":"#343538","on-secondary-fixed-variant":"#004c69","outline-variant":"#5b4138","surface-container-lowest":"#0d0e11","on-primary":"#5d1900","inverse-primary":"#ab3500","primary-container":"#ff5e1e","surface-tint":"#ffb59d","on-tertiary-fixed-variant":"#005236","on-surface":"#e3e2e6"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"gutter-mobile":"0.75rem","space-xs":"0.25rem",gutter:"1.5rem","space-sm":"0.5rem","margin-mobile":"1rem",margin:"3rem","space-xl":"2.5rem","space-md":"1rem","space-lg":"1.5rem"},fontFamily:{"headline-lg-mobile":["Space Grotesk"],"body-lg":["Inter"],"telemetry-sm":["JetBrains Mono"],"body-md":["Inter"],"label-caps":["Space Grotesk"],"body-sm":["Inter"],"telemetry-md":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"headline-md":["Space Grotesk"],"display-hero":["Space Grotesk"],"telemetry-lg":["JetBrains Mono"],"display-hero-mobile":["Space Grotesk"],"headline-lg":["Space Grotesk"]},fontSize:{"headline-lg-mobile":["26px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"600"}],"body-lg":["16px",{lineHeight:"26px",letterSpacing:"-0.01em",fontWeight:"400"}],"telemetry-sm":["11px",{lineHeight:"14px",letterSpacing:"0.05em",fontWeight:"500"}],"body-md":["14px",{lineHeight:"22px",letterSpacing:"0em",fontWeight:"400"}],"label-caps":["11px",{lineHeight:"14px",letterSpacing:"0.08em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",letterSpacing:"0em",fontWeight:"400"}],"telemetry-md":["13px",{lineHeight:"18px",letterSpacing:"0.02em",fontWeight:"500"}],"headline-sm":["18px",{lineHeight:"26px",letterSpacing:"0em",fontWeight:"500"}],"headline-md":["24px",{lineHeight:"32px",letterSpacing:"-0.01em",fontWeight:"600"}],"display-hero":["56px",{lineHeight:"64px",letterSpacing:"-0.03em",fontWeight:"700"}],"telemetry-lg":["20px",{lineHeight:"24px",letterSpacing:"0.04em",fontWeight:"600"}],"display-hero-mobile":["36px",{lineHeight:"44px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-lg":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"600"}]}}}}</script></head><body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-primary-container selection:text-on-primary font-body-md text-body-md"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-28 w-full flex flex-col justify-between"><div class="h-18 px-margin flex items-center justify-between gap-space-lg"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><span class="flex h-2.5 w-2.5 relative"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-tertiary opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-tertiary"></span></span><span class="font-headline-md text-headline-md uppercase tracking-wider text-on-surface font-bold">SONGA</span><span class="font-telemetry-sm text-telemetry-sm text-primary tracking-widest px-space-xs py-0.5 rounded bg-surface-container-high">2.0</span></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container-low text-tertiary font-telemetry-sm text-telemetry-sm"><span class="material-symbols-outlined text-sm">radar</span><span class="tracking-wider">AVN-OPS: 4,812 FLIGHTS MONITORED</span></div></div><nav class="hidden lg:flex items-center gap-space-md font-label-caps text-label-caps uppercase" data-active-classes="text-primary-container font-semibold"><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="flights" href="#">Flights</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="details" href="#">Details</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="watchlist" href="#">Watchlist</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="calendar" href="#">Calendar</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="travel-commerce" href="#">Travel Commerce</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="ai-assistant" href="#">AI Assistant</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="billing-and-passes" href="#">Billing &amp; Passes</a><a aria-current="page" class="transition-colors py-1 text-primary-container font-semibold" data-path="soundtrack" href="#">Soundtrack</a><a class="text-on-surface-variant hover:text-on-surface transition-colors py-1" data-path="whatsapp" href="#">WhatsApp</a></nav><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container font-telemetry-md text-telemetry-md text-secondary tracking-widest"><span class="material-symbols-outlined text-sm">schedule</span><span>14:52:10 UTC</span></div><button class="flex items-center gap-space-xs bg-primary-container hover:bg-primary text-on-primary font-label-caps text-label-caps uppercase px-space-md py-2 rounded-lg transition-colors shadow-[0_0_16px_rgba(255,94,30,0.3)]"><span class="material-symbols-outlined text-sm">flight_takeoff</span><span>Track Flight</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="h-10 px-margin flex items-center justify-between bg-surface-container-low/80 font-telemetry-sm text-telemetry-sm text-on-surface-variant"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-xs"><span class="h-1.5 w-1.5 rounded-full bg-tertiary"></span><span class="uppercase tracking-wider text-on-surface">ADS-B MESH:</span><span class="text-tertiary font-semibold">SYNCHRONIZED (99.98% COVERAGE)</span></div><div class="hidden md:flex items-center gap-space-xs"><span class="h-1.5 w-1.5 rounded-full bg-secondary"></span><span class="uppercase tracking-wider text-on-surface">SAT FEED:</span><span class="text-secondary font-semibold">GEO-STATIONARY ORBIT 4 / INMARSAT-S</span></div><div class="hidden 2xl:flex items-center gap-space-xs"><span class="uppercase tracking-wider text-on-surface">FRAME DRIFT:</span><span class="text-on-surface-variant">+1.2ms LATENCY</span></div></div><div class="flex items-center gap-space-md font-telemetry-sm text-telemetry-sm"><span class="hidden sm:inline text-on-surface-variant">SURVEILLANCE SECTOR: GLOBAL 360°</span><div class="flex items-center gap-space-xs text-primary"><span class="material-symbols-outlined text-xs">broadcast_on_home</span><span class="uppercase tracking-widest">LIVE STREAM ACTIVE</span></div></div></div></div></header><main class="w-full pt-28 bg-surface-container-lowest min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Acoustic Canvas Wrapper -->
+<div class="w-full px-margin py-space-lg flex flex-col gap-space-xl relative">
+<!-- Atmospheric Ambient Glows (Clipped to Local Canvas) -->
+<div class="absolute top-10 left-1/4 w-96 h-96 rounded-full bg-primary-container/10 blur-[120px] pointer-events-none -z-10"></div>
+<div class="absolute top-80 right-10 w-[30rem] h-[30rem] rounded-full bg-secondary-container/10 blur-[140px] pointer-events-none -z-10"></div>
+<div class="absolute bottom-20 left-10 w-80 h-80 rounded-full bg-tertiary-container/10 blur-[130px] pointer-events-none -z-10"></div>
+<!-- MODULE 1: Flight Altitude Vector Sync Header & Stream Integration Bridge -->
+<section class="w-full bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden">
+<!-- Background Micro-Grid Pattern SVG -->
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+<svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="32" id="sound-grid" patternunits="userSpaceOnUse" width="32">
+<path class="text-on-surface" d="M 32 0 L 0 0 0 32" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#sound-grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<div class="relative z-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-space-lg">
+<!-- Flight & Altitude Telemetry Vector -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-telemetry-sm text-telemetry-sm tracking-wider">
+<span class="h-1.5 w-1.5 rounded-full bg-tertiary animate-pulse"></span>
+              FLIGHT SYNC ACTIVE
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant uppercase tracking-widest">
+              VESSEL: B787-9 DREAMLINER // TAIL: G-ZBLA
+            </span>
+<span class="hidden sm:inline text-surface-variant">•</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary uppercase tracking-widest">
+              LHR ➔ HND (SGA-882)
+            </span>
+</div>
+<div class="flex items-baseline gap-space-md mt-1">
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold flex items-center gap-space-sm">
+              FL390 CRUISE
+              <span class="font-telemetry-md text-telemetry-md text-primary font-normal tracking-wide hidden md:inline">
+                // SIBERIAN JETSTREAM SECTOR
+              </span>
+</h1>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-2xl">
+            Acoustic envelope continually adjusted for Boeing 787-9 carbon composite cabin resonance, current Mach 0.85 Mach buffet frequency, and UTC+09:00 Tokyo destination circadian phase.
+          </p>
+</div>
+<!-- System & Audio Bridge Integrations -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-md bg-surface-container rounded-lg p-space-md self-stretch lg:self-auto shadow-md">
+<div class="flex flex-col gap-0.5">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Acoustic Engine Bridge</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-sm">hub</span>
+              SPOTIFY &amp; APPLE MUSIC PKCE
+            </span>
+<span class="font-telemetry-sm text-telemetry-sm text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified</span>
+              OAuth 2.0 Token Authenticated
+            </span>
+</div>
+<div class="h-8 w-px bg-surface-variant hidden sm:block"></div>
+<div class="flex items-center gap-2">
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-on-surface hover:text-primary transition-colors cursor-pointer" title="Spotify Connected">
+<span class="material-symbols-outlined text-[20px]">graphic_eq</span>
+</div>
+<div class="w-9 h-9 rounded bg-surface-container-high flex items-center justify-center text-on-surface hover:text-secondary transition-colors cursor-pointer" title="Apple Music Connected">
+<span class="material-symbols-outlined text-[20px]">music_note</span>
+</div>
+<div class="flex flex-col pl-1">
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Latency</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-semibold">18ms Ultra-Low</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE 2: Now Playing Immersive Hero Console -->
+<section class="w-full bg-surface-container rounded-xl p-space-lg lg:p-space-xl shadow-2xl relative overflow-hidden">
+<!-- Dynamic Vector Wave Ambient Header -->
+<div class="flex flex-col xl:flex-row items-center gap-space-xl relative z-10">
+<!-- Left Column: Album Art + Vinyl Altitude Ring Visualizer -->
+<div class="relative flex-shrink-0 group">
+<!-- Ambient Rotating Aura Ring -->
+<div class="absolute -inset-3 rounded-full bg-gradient-to-tr from-primary-container/30 via-transparent to-secondary-container/20 blur-xl group-hover:opacity-100 transition duration-700 opacity-60"></div>
+<div class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-2xl bg-surface-container-lowest flex items-center justify-center">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Futuristic minimalist album cover titled Midnight Over Sendai. Moody twilight Siberian atmospheric stratosphere seen from flight deck cockpit window, ultra deep obsidian black, vibrant glowing neon orange trajectory line, soft icy cyan horizon gradient, grainy high-end editorial album artwork by Tycho aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtH0qCDBLze-eJzXnt-VRiGGE_OAbRelZWae8cy4Ste_HGYgHBntSe1tx8cbFD-QjHvJQo6msHVz9_Z-2pCiO87BTrDzWBq2RkJYFp2Ic5KpWrGEG4NVEEfVhZYMk02ueE13Au91l5r7oADVgAV4UpW7w0q6OPbEnU27lxCaCC8gJyqBVb3OBAdGoUpsAzqfuW-pS-ZxVbNw5CjRYx-7AUqyrD2k8xre_aBVweOZCd"/>
+<!-- Vinyl Center Ring Watermark Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 via-transparent to-transparent flex flex-col justify-end p-4">
+<div class="flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-primary tracking-widest px-2 py-0.5 rounded bg-surface-container-lowest/90 backdrop-blur-md">
+                  432Hz BINAURAL
+                </span>
+<span class="flex items-center gap-1 font-telemetry-sm text-telemetry-sm text-tertiary bg-surface-container-lowest/90 px-2 py-0.5 rounded backdrop-blur-md">
+<span class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></span>
+                  MASTER RES: 96kHz / 24-bit
+                </span>
+</div>
+</div>
+<!-- Stylized HUD Coordinate Crosshairs -->
+<div class="absolute top-3 left-3 font-telemetry-sm text-telemetry-sm text-on-surface/40 select-none">
+              +43° 12' N // 141° 21' E
+            </div>
+<div class="absolute top-3 right-3 font-telemetry-sm text-telemetry-sm text-on-surface/40 select-none">
+              HDG 118°
+            </div>
+</div>
+</div>
+<!-- Right Column: Track Metas, Frequency Spectrum & Tactile Controls -->
+<div class="flex flex-col justify-between flex-grow w-full min-w-0">
+<!-- Track Identity & Mood Tags -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary font-label-caps text-label-caps uppercase tracking-wider font-bold">
+                  CABIN VECTOR ACTIVE
+                </span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+                  ISOLATION LEVEL: 94% (ANC ENGINE)
+                </span>
+</div>
+<!-- Spatial Mode Status -->
+<div class="flex items-center gap-space-xs text-secondary bg-surface-container-high px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-sm">spatial_audio</span>
+<span class="font-telemetry-sm text-telemetry-sm tracking-wider uppercase">B787 Wide-Cabin Spatial Sound</span>
+</div>
+</div>
+<div class="mt-2">
+<h2 class="font-display-hero-mobile sm:font-display-hero text-display-hero-mobile sm:text-display-hero text-on-surface font-bold tracking-tight truncate">
+                Midnight Over Sendai
+              </h2>
+<div class="flex items-center gap-space-sm mt-1 flex-wrap">
+<span class="font-headline-sm text-headline-sm text-primary font-medium">Songa Acoustic Labs</span>
+<span class="text-on-surface-variant font-headline-sm">×</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-medium">Tycho</span>
+<span class="text-surface-variant hidden md:inline">•</span>
+<span class="font-telemetry-md text-telemetry-md text-on-surface-variant hidden md:inline">
+                  Album: Trans-Polar Stratosphere Vol. IV
+                </span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm mt-1 text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm">play_movies</span>
+                FL390 Night Cruise
+              </span>
+<span>•</span>
+<span class="text-tertiary">112 BPM Ambient Pulse</span>
+<span>•</span>
+<span>432Hz Harmonic Tuning</span>
+<span>•</span>
+<span class="text-on-surface font-medium">Cabin Pressure: 6,000ft Equivalent</span>
+</div>
+</div>
+<!-- 24-Bar Audio Spectrum Visualizer (Live Waveform Simulation) -->
+<div class="w-full my-space-md py-space-sm bg-surface-container-low rounded-lg px-space-md flex flex-col gap-2 shadow-inner">
+<div class="flex items-center justify-between text-on-surface-variant font-telemetry-sm text-telemetry-sm">
+<span class="flex items-center gap-1.5 uppercase tracking-wider text-secondary">
+<span class="material-symbols-outlined text-sm">equalizer</span>
+                Cockpit Telemetry Spectrum Analysis
+              </span>
+<span class="font-mono text-tertiary">SUB: 42Hz | PEAK: 3.2kHz | AIR: 16kHz</span>
+</div>
+<!-- Dynamic Bars with varied CSS animations -->
+<div class="h-14 w-full flex items-end justify-between gap-1 sm:gap-1.5 px-1" id="spectrum-bars">
+<!-- Bar 1 to 24 -->
+<div class="flex-1 bg-primary/40 rounded-t h-[42%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary/60 rounded-t h-[68%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary rounded-t h-[85%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary-container rounded-t h-[92%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary rounded-t h-[75%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary/80 rounded-t h-[60%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary rounded-t h-[78%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary rounded-t h-[94%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary-container rounded-t h-[100%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary rounded-t h-[82%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary/70 rounded-t h-[55%] transition-all duration-150"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[48%] transition-all duration-150"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[70%] transition-all duration-150"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[88%] transition-all duration-150"></div>
+<div class="flex-1 bg-tertiary-container rounded-t h-[64%] transition-all duration-150"></div>
+<div class="flex-1 bg-tertiary rounded-t h-[45%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary/80 rounded-t h-[58%] transition-all duration-150"></div>
+<div class="flex-1 bg-secondary rounded-t h-[72%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary rounded-t h-[80%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary-container rounded-t h-[62%] transition-all duration-150"></div>
+<div class="flex-1 bg-primary/70 rounded-t h-[40%] transition-all duration-150"></div>
+<div class="flex-1 bg-on-surface-variant/40 rounded-t h-[30%] transition-all duration-150"></div>
+<div class="flex-1 bg-on-surface-variant/30 rounded-t h-[22%] transition-all duration-150"></div>
+<div class="flex-1 bg-on-surface-variant/20 rounded-t h-[15%] transition-all duration-150"></div>
+</div>
+</div>
+<!-- Interactive Playback Scrubber -->
+<div class="flex flex-col gap-1 w-full">
+<div class="relative w-full h-2 bg-surface-container-high rounded-full overflow-hidden cursor-pointer group" id="timeline-track">
+<!-- Buffered Portion -->
+<div class="absolute left-0 top-0 bottom-0 w-[84%] bg-surface-variant rounded-full"></div>
+<!-- Active Progress Portion -->
+<div class="absolute left-0 top-0 bottom-0 w-[64%] bg-gradient-to-r from-primary to-primary-container rounded-full relative">
+<span class="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-on-primary shadow-lg border-2 border-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></span>
+</div>
+</div>
+<div class="flex justify-between items-center font-telemetry-sm text-telemetry-sm text-on-surface-variant px-0.5">
+<span class="text-on-surface font-medium" id="current-time">02:44</span>
+<span class="text-surface-variant uppercase tracking-wider text-[10px]">Estimated Cruise Leg Time Remaining: 04h 38m</span>
+<span id="total-time">04:12</span>
+</div>
+</div>
+<!-- Tactile Playback Transport Controls & Volume Array -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-md mt-space-md pt-space-xs">
+<!-- Center Buttons -->
+<div class="flex items-center gap-space-md order-2 md:order-1">
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-2" title="Shuffle Vectors">
+<span class="material-symbols-outlined text-[20px]">shuffle</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-2" title="Previous Track">
+<span class="material-symbols-outlined text-[28px]">skip_previous</span>
+</button>
+<!-- Main Glowing CTA Play/Pause -->
+<button class="w-14 h-14 rounded-full bg-primary-container hover:bg-primary text-on-primary flex items-center justify-center transition-all transform hover:scale-105 shadow-[0_0_24px_rgba(255,94,30,0.45)]" id="play-pause-btn">
+<span class="material-symbols-outlined text-[34px] leading-none" id="play-pause-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors p-2" title="Next Track">
+<span class="material-symbols-outlined text-[28px]">skip_next</span>
+</button>
+<button class="text-primary-container hover:text-primary transition-colors p-2" title="Loop Track">
+<span class="material-symbols-outlined text-[20px]">repeat</span>
+</button>
+</div>
+<!-- Right Controls: Spatial Audio & Sound Limiter -->
+<div class="flex items-center gap-space-md order-1 md:order-2 w-full md:w-auto justify-between md:justify-end">
+<!-- Spatial Toggle Pill -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-variant text-secondary text-label-caps font-label-caps uppercase transition-colors" id="spatial-toggle">
+<span class="material-symbols-outlined text-sm">surround_sound</span>
+<span id="spatial-status">Spatial: Active</span>
+</button>
+<!-- dB Volume Level HUD -->
+<div class="flex items-center gap-space-xs bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="material-symbols-outlined text-on-surface-variant text-base">volume_up</span>
+<div class="w-24 h-1.5 bg-surface-container-high rounded-full overflow-hidden relative cursor-pointer" id="volume-slider">
+<div class="h-full bg-secondary rounded-full w-[78%]"></div>
+</div>
+<div class="flex items-baseline gap-0.5 ml-1">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface font-bold">84</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant text-[9px]">dB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Audio Mode Presets Switcher -->
+<div class="mt-space-lg pt-space-sm flex flex-wrap items-center gap-2">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider mr-1">Cabin Acoustic Profiles:</span>
+<button class="px-3 py-1 rounded bg-primary-container text-on-primary font-telemetry-sm text-telemetry-sm font-semibold tracking-wide shadow-sm flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary animate-ping"></span>
+              FL390 Deep Focus
+            </button>
+<button class="px-3 py-1 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface font-telemetry-sm text-telemetry-sm tracking-wide transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs">air</span>
+              Descent Relaxation
+            </button>
+<button class="px-3 py-1 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface font-telemetry-sm text-telemetry-sm tracking-wide transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs">bedtime</span>
+              Circadian Reset &amp; Sleep
+            </button>
+<button class="px-3 py-1 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface font-telemetry-sm text-telemetry-sm tracking-wide transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs">flight_land</span>
+              Terminal Transit Pulse
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE 3: Atmospheric Curated Flight Playlists Bento Grid -->
+<section class="flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">flight</span>
+<span>Altitude Curations</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">
+            Stratospheric Soundbanks
+          </h3>
+</div>
+<p class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+          Engineered for cabin pressure differentials, headphone frequency response &amp; circadian entrainment.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<!-- Playlist Card 1: Trans-Polar Midnight Horizon -->
+<div class="bg-surface-container rounded-xl overflow-hidden flex flex-col group hover:shadow-2xl transition duration-300">
+<div class="relative h-44 w-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Minimalist abstract dark polar landscape at midnight seen from airplane window. Cold indigo and deep obsidian ice sheets, glowing radioactive green aurora borealis ribbon across dark sky, elegant aerospace photography style, serene isolation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv-DjrLLT5SGLgA64QAfAlrTGELVNVWKTNcF7avK7n-7bCBE7FV3SNweqI-E70rPUAipxnNFqBJ8iYT51FR9nrjHsFn78sDrKatlSPFCo1c9AAZWyxcu_0qSEzHWYhWdN0f1jIq3s-8LUE4zb7w2K3GGu7HeX0Nx4eAEoUp5YoWmFPmbsm7XPkRRTBrqCycZQxD3RBXnvxx8sOiHccd9kOUfGWjbdxNh54H2tDSMBn"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded bg-surface-container-lowest/80 backdrop-blur-md text-tertiary font-telemetry-sm text-telemetry-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+              NOW ACTIVE
+            </div>
+<div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-secondary font-telemetry-sm text-telemetry-sm">18 Tracks</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-on-surface-variant font-telemetry-sm text-telemetry-sm">1h 24m</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Polar Route Phase</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Spotify • Apple</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                Trans-Polar Midnight Horizon
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Ambient Drone, Lo-fi Minimal, sub-bass harmonics engineered for nighttime transcontinental flight decks.
+              </p>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<div class="flex items-center gap-1 text-tertiary font-telemetry-sm text-telemetry-sm">
+<span class="material-symbols-outlined text-sm">equalizer</span>
+<span>Active Output</span>
+</div>
+<button class="px-3 py-1.5 rounded bg-primary-container hover:bg-primary text-on-primary font-label-caps text-label-caps uppercase transition-colors shadow-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">play_arrow</span>
+<span>Cockpit Armed</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Playlist Card 2: Tokyo Twilight Descent -->
+<div class="bg-surface-container rounded-xl overflow-hidden flex flex-col group hover:shadow-2xl transition duration-300">
+<div class="relative h-44 w-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Futuristic neo Tokyo skyline illuminated by neon violet and cyan lights reflecting in rainy asphalt, Mount Fuji silhouette against lavender twilight gradient in the far background, aerial aesthetic from descending airliner wing view." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcSCFMJyRgErdbpZTdRi81zc_JQwCN5EpvE9tK0eZngkPOJ3MnqMp9wzyW_5epCRN9ioTxW6PHgT-QIwQrBGcTzvLDDgwRMXtEDrdVLk4YTJls3dRY2-pRWjY6fpcxQYaZbfLmk--TgcQXe06GrZn8qeiKXp-B_FpKTdd0epqArndLrWD40GV7UCrjvSjv7pz_uCjiJ_HHX5fGEKBnjWU9lj-I-L3xGYPrq3CRiC3J"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-secondary font-telemetry-sm text-telemetry-sm">14 Tracks</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-on-surface-variant font-telemetry-sm text-telemetry-sm">58m</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-label-caps text-primary uppercase">TOD Descent Phase</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Spotify</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                Tokyo Twilight Descent
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Neo-Tokyo Synthwave &amp; Cinematic Chillout timed precisely to ignite dopamine before touchdown at Haneda.
+              </p>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Trigger: FL180 Descent</span>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-caps text-label-caps uppercase transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">queue_music</span>
+<span>Load to Cockpit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Playlist Card 3: Equatorial Jetstream Sunrise -->
+<div class="bg-surface-container rounded-xl overflow-hidden flex flex-col group hover:shadow-2xl transition duration-300">
+<div class="relative h-44 w-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Golden solar dawn breaking above endless fluffy cloud deck over Pacific ocean, brilliant amber and warm coral rays slicing through airplane cockpit windshield, clean minimalist aerospace photography, uplifting morning vibe." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRIGY7C5d3m4VUMBzEngZwOco-Lj_8xOiyQ_d6ys-XCfbmJIU1TSiLOO-RcFoUmgDgRYnmSHOaOFCPcH-SRQjky0FEOsp3sDtjsjAeWgV11Zx8I762tz2_CvyrSadNjgazUrsrLglVfcn2sme4f2NWmueqJxp1PTw7QPfunjFZ2VbJWE7qCZrQd_OvGyf_m2FM3ojQneUQPv3sxhZQwTnqNPTNIzGV8MZC8d-TwN8l"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-secondary font-telemetry-sm text-telemetry-sm">20 Tracks</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-on-surface-variant font-telemetry-sm text-telemetry-sm">1h 45m</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-label-caps text-tertiary uppercase">Dawn Transition</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Apple Music</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                Equatorial Jetstream Sunrise
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Deep Afro-House, warm organic acoustic strings, and 120 BPM morning wake-up pulses to reset the body clock.
+              </p>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Trigger: Solar Vector</span>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-caps text-label-caps uppercase transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">queue_music</span>
+<span>Load to Cockpit</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Playlist Card 4: Transatlantic Sleep Vault -->
+<div class="bg-surface-container rounded-xl overflow-hidden flex flex-col group hover:shadow-2xl transition duration-300">
+<div class="relative h-44 w-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Quiet nighttime airplane passenger cabin in soft deep blue darkness, glowing subtle overhead star ceiling lights, passengers sleeping comfortably in modern lie-flat business class pods, calm serene atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBso06ggYuxkJwrabqcifTT752W65xypsCAC5Q1SQzruZVds0_ExXxIodAicFpSGs8FYKUKcmmSYgSd-XqJL7Kapj-PA4w3DR0kjgMFgJzLTfSf2f2R6bkL9oXSL1epnL6Qa10ONqRv6qokOsPyIsZrW4nzj3zewNHSxff-p7m01DvOcMtSrzlFHJl4L0zUXX0zYLBjxqHpa2w86WaIHwavP1ZMwOU_uPzB5pwIACI3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container via-transparent to-transparent"></div>
+<div class="absolute bottom-2.5 left-2.5 flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-secondary font-telemetry-sm text-telemetry-sm">12 Tracks</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high/90 text-on-surface-variant font-telemetry-sm text-telemetry-sm">6h 30m</span>
+</div>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between gap-space-md">
+<div>
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Red-Eye Deep REM</span>
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">Lossless ALAC</span>
+</div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors">
+                Transatlantic Sleep Vault
+              </h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+                Continuous calibrated Pink Noise, zero melodic spikes, and 1.5Hz Delta frequency entrainment for long red-eyes.
+              </p>
+</div>
+<div class="pt-space-sm flex items-center justify-between">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">FAA Non-Disturb Certified</span>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-variant text-on-surface font-label-caps text-label-caps uppercase transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">queue_music</span>
+<span>Load to Cockpit</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE 4: Flight Stage Acoustic Automation Matrix -->
+<section class="w-full bg-surface-container rounded-xl p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-space-xs text-tertiary font-label-caps text-label-caps uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">settings_suggest</span>
+<span>Avionics Integration Hub</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold tracking-tight">
+            Flight Stage Acoustic Automation Matrix
+          </h3>
+</div>
+<div class="flex items-center gap-space-sm font-telemetry-sm text-telemetry-sm text-on-surface-variant bg-surface-container-low px-3 py-1.5 rounded-lg">
+<span class="h-2 w-2 rounded-full bg-tertiary"></span>
+<span>ARINC 429 BUS PROTOCOL SYNCED</span>
+</div>
+</div>
+<!-- Automation Table -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="font-label-caps text-label-caps text-on-surface-variant uppercase bg-surface-container-low">
+<th class="py-3 px-4">Flight Stage</th>
+<th class="py-3 px-4">Altimeter Trigger</th>
+<th class="py-3 px-4">Acoustic Policy &amp; Soundscape</th>
+<th class="py-3 px-4 text-center">Safety dB Limit</th>
+<th class="py-3 px-4 text-center">EQ / Isolation Profile</th>
+<th class="py-3 px-4 text-right">Matrix Status</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md divide-y divide-transparent">
+<!-- Row 1: Taxi & Pushback -->
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3.5 px-4 font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">flight_takeoff</span>
+                Taxi &amp; Pushback
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-secondary">
+                GND ➔ 0 FT AGL
+              </td>
+<td class="py-3.5 px-4 font-body-sm text-body-sm text-on-surface-variant">
+                Subdued Ground Ambient (Horns &amp; Safety Announcements prioritized)
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface">
+                55 dB Max
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface-variant">
+                Open Ambient Passthrough
+              </td>
+<td class="py-3.5 px-4 text-right">
+<button class="toggle-switch inline-flex items-center h-6 w-11 rounded-full bg-tertiary p-0.5 cursor-pointer transition-colors" data-state="on">
+<span class="h-5 w-5 rounded-full bg-on-tertiary shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Initial Ascent FL100 -->
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3.5 px-4 font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">trending_up</span>
+                Initial Ascent FL100
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-secondary">
+                10,000 FT MSL
+              </td>
+<td class="py-3.5 px-4 font-body-sm text-body-sm text-on-surface-variant">
+                Active Noise-Canceling Focus Waveform (Counter-dampening Rolls-Royce Trent 1000 fan hum)
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface">
+                72 dB
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-primary">
+                High-Pass Filter Active
+              </td>
+<td class="py-3.5 px-4 text-right">
+<button class="toggle-switch inline-flex items-center h-6 w-11 rounded-full bg-tertiary p-0.5 cursor-pointer transition-colors" data-state="on">
+<span class="h-5 w-5 rounded-full bg-on-tertiary shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</td>
+</tr>
+<!-- Row 3: FL380-410 Cruise (ACTIVE NOW) -->
+<tr class="bg-surface-container-high/60 hover:bg-surface-container-high transition-colors">
+<td class="py-3.5 px-4 font-headline-sm text-headline-sm text-primary font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">airplanemode_active</span>
+                FL380–410 Cruise
+                <span class="px-1.5 py-0.5 rounded bg-primary-container text-on-primary font-telemetry-sm text-telemetry-sm text-[10px]">CURRENT</span>
+</td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-primary font-bold">
+                FL390 (Active)
+              </td>
+<td class="py-3.5 px-4 font-body-sm text-body-sm text-on-surface font-medium">
+                Algorithmic Circadian Flow (Harmonic binaural waves matching UTC circadian phase)
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-tertiary font-bold">
+                84 dB Nominal
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-secondary">
+                Wide-Cabin 3D Spatial
+              </td>
+<td class="py-3.5 px-4 text-right">
+<button class="toggle-switch inline-flex items-center h-6 w-11 rounded-full bg-primary-container p-0.5 cursor-pointer transition-colors" data-state="on">
+<span class="h-5 w-5 rounded-full bg-on-primary shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Top of Descent (TOD) -->
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3.5 px-4 font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">notifications_active</span>
+                Top of Descent (TOD)
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-secondary">
+                TOD Beacon / -2,200 FPM
+              </td>
+<td class="py-3.5 px-4 font-body-sm text-body-sm text-on-surface-variant">
+                Gradual Awakening Chime &amp; Atmospheric Melodic Ambient to ease ear pressurization
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface">
+                68 dB
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface-variant">
+                Mid-Warmth Boost
+              </td>
+<td class="py-3.5 px-4 text-right">
+<button class="toggle-switch inline-flex items-center h-6 w-11 rounded-full bg-tertiary p-0.5 cursor-pointer transition-colors" data-state="on">
+<span class="h-5 w-5 rounded-full bg-on-tertiary shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Final Approach & Touchdown -->
+<tr class="hover:bg-surface-container-high transition-colors">
+<td class="py-3.5 px-4 font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-base">flight_land</span>
+                Final Approach &amp; Touchdown
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-secondary">
+                3,000 FT ➔ RUNWAY 34R
+              </td>
+<td class="py-3.5 px-4 font-body-sm text-body-sm text-on-surface-variant">
+                Tokyo Destination Soundscape (Subtle organic koto harmonics + urban transit textures)
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface">
+                58 dB Max
+              </td>
+<td class="py-3.5 px-4 font-telemetry-sm text-telemetry-sm text-center text-on-surface-variant">
+                Safety Bypass Auto
+              </td>
+<td class="py-3.5 px-4 text-right">
+<button class="toggle-switch inline-flex items-center h-6 w-11 rounded-full bg-tertiary p-0.5 cursor-pointer transition-colors" data-state="on">
+<span class="h-5 w-5 rounded-full bg-on-tertiary shadow-sm transform translate-x-5 transition-transform"></span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- MODULE 5: Technical Compliance & Safety Remote Architecture Footer Notice -->
+<section class="w-full bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-start gap-space-md">
+<div class="p-2.5 rounded-lg bg-surface-container text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-2xl">shield_locked</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-caps text-label-caps text-on-surface uppercase tracking-wider font-semibold">
+            FAA &amp; EASA Telemetry Remote Audio Architecture
+          </span>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-4xl">
+            SONGA acts strictly as a remote controller and metadata synchronizer via third-party streaming provider APIs (Spotify Web API &amp; Apple Music Kit PKCE tokens). Songa does not store, host, or broadcast copyrighted audio files directly. Real-time decibel regulation enforces international in-flight hearing preservation and priority safety PA chime override policies.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0 font-telemetry-sm text-telemetry-sm text-on-surface-variant">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm">lock</span>
+<span>PKCE ENCRYPTED</span>
+</div>
+<span>•</span>
+<span>AC-120-76D COMPLIANT</span>
+</div>
+</section>
+</div>
+</div>
+<script>
+  // Interactive Controls for Songa Soundtrack Experience
+  document.addEventListener('DOMContentLoaded', () => {
+    // 1. Play/Pause Toggle
+    const playPauseBtn = document.getElementById('play-pause-btn');
+    const playPauseIcon = document.getElementById('play-pause-icon');
+    let isPlaying = true;
+
+    if (playPauseBtn && playPauseIcon) {
+      playPauseBtn.addEventListener('click', () => {
+        isPlaying = !isPlaying;
+        if (isPlaying) {
+          playPauseIcon.textContent = 'pause';
+          playPauseBtn.classList.remove('bg-surface-variant');
+          playPauseBtn.classList.add('bg-primary-container');
+        } else {
+          playPauseIcon.textContent = 'play_arrow';
+          playPauseBtn.classList.remove('bg-primary-container');
+          playPauseBtn.classList.add('bg-surface-variant');
+        }
+      });
+    }
+
+    // 2. Spatial Audio Toggle
+    const spatialToggle = document.getElementById('spatial-toggle');
+    const spatialStatus = document.getElementById('spatial-status');
+    let spatialOn = true;
+
+    if (spatialToggle && spatialStatus) {
+      spatialToggle.addEventListener('click', () => {
+        spatialOn = !spatialOn;
+        if (spatialOn) {
+          spatialStatus.textContent = 'Spatial: Active';
+          spatialToggle.classList.remove('text-on-surface-variant');
+          spatialToggle.classList.add('text-secondary');
+        } else {
+          spatialStatus.textContent = 'Spatial: Off';
+          spatialToggle.classList.remove('text-secondary');
+          spatialToggle.classList.add('text-on-surface-variant');
+        }
+      });
+    }
+
+    // 3. Matrix Automation Switches
+    const toggles = document.querySelectorAll('.toggle-switch');
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const thumb = toggle.querySelector('span');
+        const currentState = toggle.getAttribute('data-state');
+        if (currentState === 'on') {
+          toggle.setAttribute('data-state', 'off');
+          toggle.classList.remove('bg-tertiary', 'bg-primary-container');
+          toggle.classList.add('bg-surface-container-high');
+          thumb.classList.remove('translate-x-5');
+          thumb.classList.add('translate-x-0');
+        } else {
+          toggle.setAttribute('data-state', 'on');
+          toggle.classList.remove('bg-surface-container-high');
+          toggle.classList.add('bg-tertiary');
+          thumb.classList.remove('translate-x-0');
+          thumb.classList.add('translate-x-5');
+        }
+      });
+    });
+
+    // 4. Subtle Audio Spectrum Visualizer Dynamic Fluctuation
+    const spectrumBars = document.querySelectorAll('#spectrum-bars > div');
+    if (spectrumBars.length > 0) {
+      setInterval(() => {
+        if (!isPlaying) return;
+        spectrumBars.forEach(bar => {
+          const currentHeight = parseInt(bar.style.height || bar.className.match(/h-\[(\d+)%\]/)?.[1] || 50);
+          const delta = (Math.random() * 24 - 12);
+          const newHeight = Math.min(100, Math.max(15, currentHeight + delta));
+          bar.style.height = `${newHeight}%`;
+        });
+      }, 250);
+    }
+  });
+</script></main><footer class="w-full bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm py-space-xl shadow-[0_-1px_12px_rgba(0,0,0,0.5)]"><div class="w-full px-margin flex flex-col md:flex-row items-center justify-between gap-space-md"><div class="flex flex-col sm:flex-row items-center gap-space-md"><div class="flex items-center gap-space-xs text-tertiary font-telemetry-sm text-telemetry-sm"><span class="material-symbols-outlined text-sm">verified_user</span><span>256-BIT TLS V1.3 ENCRYPTION CERTIFIED</span></div><span class="hidden sm:inline text-surface-container-highest">|</span><span class="font-telemetry-sm text-telemetry-sm tracking-wide">DISPATCH AUDIT: ICAO DOC 4444 &amp; IATA AHM 560 COMPLIANT</span></div><div class="text-center md:text-right font-telemetry-sm text-telemetry-sm">© 2025 SONGA AEROSPACE INTELLIGENCE COMMAND. ALL FLIGHT VECTORS MONITORED.</div></div></footer></body></html>
