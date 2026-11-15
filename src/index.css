@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -906,3 +906,62 @@ main :focus-visible { outline: 2px solid #ef842f; outline-offset: 3px; }
   .songa2-service-grid { grid-template-columns: 1fr; }
   .songa2-service-card { min-height: 72px; }
 }
+
+
+/* Songa Stitch foundation — applied to the functional React application, not the static mockup host. */
+:root {
+  --songa-bg-canvas: #0d0e11;
+  --songa-bg-surface: #121316;
+  --songa-bg-elevated: #1b1b1f;
+  --songa-bg-high: #24252a;
+  --songa-orange: #ff5e1e;
+  --songa-emerald: #10b981;
+  --songa-amber: #f59e0b;
+  --songa-cyan: #38bdf8;
+  --songa-text: #f7f8fa;
+  --songa-muted: #94a3b8;
+  --songa-mono: 'JetBrains Mono', 'DM Mono', monospace;
+  --songa-heading: 'Space Grotesk', 'Manrope', sans-serif;
+  --songa-body: 'Inter', system-ui, sans-serif;
+}
+body { font-family: var(--songa-body); }
+h1, h2, h3, h4, .brand-copy strong { font-family: var(--songa-heading); }
+.flight-code, .result-count, .alert-count, .section-kicker, .songa2-eyebrow,
+.songa2-art-caption, .songa2-art-label small { font-family: var(--songa-mono); }
+
+.theme-dark {
+  --navy-950: #0d0e11;
+  --navy-900: #121316;
+  --navy-800: #1b1b1f;
+  --navy-700: #24252a;
+  --warm: #f7f8fa;
+  --orange: #ff5e1e;
+  --orange-dark: #ab3500;
+  --muted: #94a3b8;
+  --muted-dark: #64748b;
+  --line: rgba(255,255,255,.08);
+  --surface: rgba(16,20,29,.65);
+  --surface-2: rgba(255,255,255,.06);
+  --green: #10b981;
+  color: #e3e2e6;
+  background: var(--songa-bg-canvas);
+}
+.theme-dark.app-shell,
+.theme-dark .songa2-home,
+.theme-dark main { background: var(--songa-bg-canvas); }
+.theme-dark .demo-ribbon { background: #0d0e11; border-bottom: 1px solid rgba(255,255,255,.06); color: #94a3b8; }
+.theme-dark .site-header { background: rgba(13,14,17,.94); border-bottom: 1px solid rgba(255,255,255,.06); backdrop-filter: blur(20px); }
+.theme-dark .songa2-hero {
+  border-color: rgba(255,255,255,.08);
+  background: radial-gradient(ellipse at 78% 42%, rgba(255,94,30,.12), transparent 34%), linear-gradient(135deg,#121316 0%,#0d0e11 72%);
+  box-shadow: 0 22px 70px rgba(0,0,0,.28);
+}
+.theme-dark .songa2-hero h1 { color: #f7f8fa; font-family: var(--songa-heading); }
+.theme-dark .songa2-eyebrow { color: #ffb59d; }
+.theme-dark .songa2-search { border-color: rgba(255,255,255,.1); background: #1b1b1f; }
+.theme-dark .songa2-search-submit { background: #ff5e1e; color: #fff; }
+.theme-dark .songa2-search-input-wrap input { font-family: var(--songa-mono); }
+.theme-dark .songa2-quick-searches button { border-color: rgba(255,255,255,.1); background: #1b1b1f; }
+.theme-dark .mobile-bottom-nav { background: rgba(18,19,22,.96); border-color: rgba(255,255,255,.08); }
+.theme-dark .mobile-bottom-nav button.active { color: #ff5e1e; background: rgba(255,94,30,.1); }
+.theme-dark .site-footer { border-color: rgba(255,255,255,.08); }
