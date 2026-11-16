@@ -108,3 +108,20 @@
  .v21-action-grid small { font-size:9px; }
 }
 @media(max-width:370px) { .v21-action-grid { grid-template-columns:1fr; }.v21-hero h1 { font-size:44px; } }
+
+/* Truthful empty states for provider-dependent modules */
+.songa2-ai-unavailable { margin:18px 22px 4px; padding:18px; border:1px solid rgba(255,180,120,.2); border-radius:12px; background:rgba(255,255,255,.035); }
+.songa2-ai-unavailable>div { display:flex; align-items:center; gap:9px; color:#ffad83; font-size:13px; }
+.songa2-ai-unavailable p { margin:9px 0 0; color:#b5b6bb; font-size:12px; line-height:1.65; }
+.live-map-empty { overflow:hidden; border:1px solid rgba(255,255,255,.09); border-radius:16px; background:#121316; }
+.live-map-empty .live-map-stage { display:none; }
+.live-map-empty-state { display:flex; min-height:220px; flex-direction:column; align-items:center; justify-content:center; padding:28px 22px; text-align:center; }
+.live-map-empty-icon { display:grid; place-items:center; width:54px; height:54px; margin-bottom:13px; border:1px solid rgba(255,94,30,.25); border-radius:15px; color:#ff936a; background:rgba(255,94,30,.08); }
+.live-map-empty-state h3 { margin:0 0 8px; color:#f2efe8; font-size:21px; }
+.live-map-empty-state p { max-width:450px; margin:0; color:#a1a3aa; font-size:12px; line-height:1.7; }
+.live-map-data-note { margin-top:13px; color:#7f828b; font:500 9px 'DM Mono',monospace; letter-spacing:.04em; }
+.live-map-position-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; padding:12px; }
+.live-map-position-list button { display:flex; flex-wrap:wrap; justify-content:space-between; gap:7px; padding:10px; border:1px solid rgba(255,255,255,.08); border-radius:8px; color:#e8e5df; background:rgba(255,255,255,.025); font-size:10px; }
+.live-map-position-list button strong { color:#ff9b72; font-family:'DM Mono',monospace; }
+.live-map-position-list button span { color:#a1a3aa; }
+@media(max-width:640px) { .songa2-ai-unavailable { margin:12px 12px 4px; padding:14px; }.live-map-position-list { grid-template-columns:1fr; } }
