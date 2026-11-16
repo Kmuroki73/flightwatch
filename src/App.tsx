@@ -332,21 +332,22 @@ function HomeScreen(props: HomeProps) {
       return;
     }
     let active = true;
-    supabase.from('songa_traveller_profiles')
-      .select('display_name,home_airport')
-      .eq('user_id', session.user.id)
-      .maybeSingle()
-      .then(({ data }) => {
+    void (async () => {
+      try {
+        const { data } = await supabase.from('songa_traveller_profiles')
+          .select('display_name,home_airport')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
         if (active && data) {
           setTravellerProfile({
             displayName: typeof data.display_name === 'string' ? data.display_name : '',
             homeAirport: typeof data.home_airport === 'string' ? data.home_airport : '',
           });
         }
-      })
-      .catch(() => {
+      } catch {
         // A missing optional personalisation table must never block public flight search.
-      });
+      }
+    })();
     return () => { active = false; };
   }, [session?.user.id]);
   const [typedLookup, setTypedLookup] = useState<{ key: string; status: 'loading' | 'done' | 'error'; flights: Flight[]; message?: string } | null>(null);
