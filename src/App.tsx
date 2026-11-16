@@ -272,7 +272,7 @@ function App() {
       <main>
         {commerceNotice && <div className="commerce-notice page-width" role="status"><ShieldCheck size={17} /><span>{commerceNotice}</span><button onClick={() => setCommerceNotice('')} aria-label="Dismiss notification"><X size={16} /></button></div>}
         {screen === 'dashboard' && <DashboardScreen session={session} watchedFlights={watchedFlights} recentSearches={recentSearches} onOpenFlight={openFlight} onOpenCommerce={() => goTo('commerce')} onOpenAccount={() => goTo('account')} />}
-        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
+        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} session={session} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
         {screen === 'results' && <ResultsScreen flights={searchResults} onBack={() => goTo('home')} onOpenFlight={openFlight} watchedFlights={watchedFlights} onToggleWatch={toggleWatch} watchError={watchError} />}
         {screen === 'details' && selectedFlight && <DetailsScreen flight={selectedFlight} session={session} onBack={() => goTo('results')} isWatched={watchedFlights.some((flight) => flight.flightNumber === selectedFlight.flightNumber && flight.date === selectedFlight.date)} onToggleWatch={toggleWatch} onOpenAlerts={() => goTo('alerts')} onOpenAccount={() => goTo('account')} onAskAI={() => goTo('companion')} />}
         {screen === 'watch' && <WatchScreen flights={visibleWatchedFlights} filter={watchFilter} setFilter={setWatchFilter} onOpenFlight={openFlight} onGoSearch={() => goTo('home')} onToggleWatch={toggleWatch} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
@@ -306,6 +306,7 @@ type HomeProps = {
   setSearchDate: (value: string) => void;
   searchError: string;
   searchLoading: boolean;
+  session: Session | null;
   watchedFlights: Flight[];
   onOpenFlight: (flight: Flight) => void;
   onOpenWatch: () => void;
@@ -318,11 +319,36 @@ type HomeProps = {
 function HomeScreen(props: HomeProps) {
   const {
     onSearch, onShowLookupResults, searchTerm, setSearchTerm, searchDate, setSearchDate, searchError,
-    searchLoading, watchedFlights, onOpenWatch, onOpenAlerts,
+    searchLoading, session, watchedFlights, onOpenWatch, onOpenAlerts,
     onOpenCompanion, onOpenWhatsApp, onOpenCommerce,
   } = props;
   const quickFlights = ['KQ100', 'EK720', 'BA63', 'QR1341'];
   const savedCount = watchedFlights.length;
+  const [travellerProfile, setTravellerProfile] = useState<{ displayName: string; homeAirport: string }>({ displayName: '', homeAirport: '' });
+
+  useEffect(() => {
+    if (!session || !supabase) {
+      setTravellerProfile({ displayName: '', homeAirport: '' });
+      return;
+    }
+    let active = true;
+    supabase.from('songa_traveller_profiles')
+      .select('display_name,home_airport')
+      .eq('user_id', session.user.id)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (active && data) {
+          setTravellerProfile({
+            displayName: typeof data.display_name === 'string' ? data.display_name : '',
+            homeAirport: typeof data.home_airport === 'string' ? data.home_airport : '',
+          });
+        }
+      })
+      .catch(() => {
+        // A missing optional personalisation table must never block public flight search.
+      });
+    return () => { active = false; };
+  }, [session?.user.id]);
   const [typedLookup, setTypedLookup] = useState<{ key: string; status: 'loading' | 'done' | 'error'; flights: Flight[]; message?: string } | null>(null);
   useEffect(() => {
     const ident = searchTerm.trim().toUpperCase().replace(/\s+/g, '');
@@ -354,6 +380,11 @@ function HomeScreen(props: HomeProps) {
   return <div className="songa2-home">
     <section className="songa2-hero page-width">
       <div className="songa2-hero-copy">
+        {session && <div className="songa2-personal-welcome">
+          <span className="songa2-personal-orbit"><Activity size={13}/></span>
+          <span><strong>{travellerProfile.displayName ? `Welcome back, ${travellerProfile.displayName}` : 'Welcome back to Songa'}</strong>
+          <small>{travellerProfile.homeAirport ? `Your home airport · ${travellerProfile.homeAirport}` : 'Your personal aviation workspace'}</small></span>
+        </div>}
         <div className="songa2-eyebrow"><span className="songa2-live-dot"/> YOUR JOURNEY, WATCHED INTELLIGENTLY</div>
         <h1>What's happening<br className="desktop-break"/> with your <span>flight?</span></h1>
         <p className="songa2-lede">Check your flight, stay ahead of changes and know what to do next. Songa keeps the important details in view.</p>
@@ -383,6 +414,8 @@ function HomeScreen(props: HomeProps) {
       </div>
     </section>
 
+    <TravellerContextPanel />
+
     <section className="songa2-map-section page-width" aria-label="Live flight activity">
       <FlightActivityMap />
     </section>
@@ -401,7 +434,7 @@ function HomeScreen(props: HomeProps) {
     <section className="songa2-airhelp-band page-width">
       <div className="songa2-airhelp-icon"><ShieldAlert size={28}/></div>
       <div><span>WHEN TRAVEL DOESN'T GO TO PLAN</span><h2>Delayed or cancelled flight?</h2><p>Find out whether your disruption may qualify for assistance or compensation.</p></div>
-      <a href="https://www.airhelp.de/?utm_source=tradetracker&utm_medium=Songa%20AI%20Travel&utm_campaign=38376&utm_content=12&data=12%3A%3A512363%3A%3A%3A%3A%3A%3A1794088845" target="_blank" rel="noreferrer">Explore compensation <ArrowUpRight size={18}/></a>
+      <button type="button" onClick={onOpenAlerts}>Review passenger rights <ArrowUpRight size={18}/></button>
     </section>
   </div>;
 }
