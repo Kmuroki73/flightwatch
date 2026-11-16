@@ -2,8 +2,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass, Filter,
-  Eye, EyeOff, Globe2, Heart, Info, Lock, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
+  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, CloudSun, Compass, Filter,
+  Eye, EyeOff, Globe2, Heart, Info, LocateFixed, Lock, MapPin, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
 } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
@@ -17,6 +17,8 @@ import { DashboardScreen } from '@/screens/DashboardScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { addWatchedFlight, loadWatchedFlights, removeWatchedFlight, watchedRowToFlight } from '@/lib/watchlist';
+import { requestTravellerLocation } from '@/lib/travellerLocation';
+import { getTravellerWeather, type SongaWeather } from '@/lib/weather';
 import type { Flight, Screen } from '@/types';
 
 const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
@@ -63,7 +65,7 @@ function App() {
   const [commerceNotice, setCommerceNotice] = useState('');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [watchFilter, setWatchFilter] = useState<WatchFilter>('All flights');
-  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'dark' ? 'dark' : 'light');
+  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'light' ? 'light' : 'dark');
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
@@ -402,6 +404,62 @@ function HomeScreen(props: HomeProps) {
       <a href="https://www.airhelp.de/?utm_source=tradetracker&utm_medium=Songa%20AI%20Travel&utm_campaign=38376&utm_content=12&data=12%3A%3A512363%3A%3A%3A%3A%3A%3A1794088845" target="_blank" rel="noreferrer">Explore compensation <ArrowUpRight size={18}/></a>
     </section>
   </div>;
+}
+
+
+function TravellerContextPanel() {
+  const [weather, setWeather] = useState<SongaWeather | null>(null);
+  const [manualLocation, setManualLocation] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [expanded, setExpanded] = useState(false);
+
+  const loadWeather = async (location: { latitude: number; longitude: number } | { query: string }) => {
+    setBusy(true);
+    setMessage('');
+    try {
+      const result = await getTravellerWeather(location);
+      setWeather(result);
+      setExpanded(false);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Weather is temporarily unavailable.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const useMyLocation = async () => {
+    setBusy(true);
+    setMessage('');
+    try {
+      const location = await requestTravellerLocation();
+      await loadWeather({ latitude: location.latitude, longitude: location.longitude });
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Location is unavailable. Choose a city or airport instead.');
+      setBusy(false);
+      setExpanded(true);
+    }
+  };
+
+  return <section className="songa2-location-panel page-width" aria-label="Local travel context">
+    <div className="songa2-location-copy">
+      <span className="songa2-location-icon"><Globe2 size={17}/></span>
+      <div><strong>{weather ? `${weather.location.name}, ${weather.location.country}` : 'Make Songa local to you'}</strong>
+        <small>{weather ? `Local time ${weather.location.tz_id} · Weather updated ${new Date(weather.fetchedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}` : 'Choose your location to see local weather and travel context.'}</small>
+      </div>
+    </div>
+    {weather && <div className="songa2-location-weather"><img src={`https:${weather.current.condition.icon}`} alt="" /><strong>{Math.round(weather.current.temp_c)}°C</strong><span>{weather.current.condition.text}</span></div>}
+    <div className="songa2-location-actions">
+      {!weather && <button type="button" className="songa2-location-button" onClick={() => void useMyLocation()} disabled={busy}><LocateFixed size={15}/>{busy ? 'Locating…' : 'Use my location'}</button>}
+      <button type="button" className="songa2-location-manual" onClick={() => setExpanded((value) => !value)}>{weather ? 'Change location' : 'Choose city / airport'}</button>
+    </div>
+    {expanded && <form className="songa2-location-manual-form" onSubmit={(event) => { event.preventDefault(); if (manualLocation.trim()) void loadWeather({ query: manualLocation.trim() }); }}>
+      <input value={manualLocation} onChange={(event) => setManualLocation(event.target.value)} placeholder="Enter city, country or airport" aria-label="City, country or airport"/>
+      <button type="submit" disabled={busy || !manualLocation.trim()}>{busy ? 'Loading…' : 'Apply location'}</button>
+    </form>}
+    {message && <p className="songa2-location-message" role="status">{message}</p>}
+    {weather && <small className="songa2-weather-credit">Weather by WeatherAPI.com · Local surface weather, not aircraft cabin or cruise-altitude conditions.</small>}
+  </section>;
 }
 
 function FlightActivityMap() {
