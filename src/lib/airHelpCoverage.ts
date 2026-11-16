@@ -14,12 +14,23 @@ export type JourneyForRights = {
  */
 export function getAirHelpCoverage(
   countryCodes: Array<string | undefined>,
-  configuredSupportedCountries = import.meta.env.VITE_AIRHELP_SUPPORTED_COUNTRIES ?? '',
+  configuredSupportedCountries: string = import.meta.env.VITE_AIRHELP_SUPPORTED_COUNTRIES ?? '',
 ): AirHelpCoverage {
-  const supported = new Set(configuredSupportedCountries.split(',').map((value) => value.trim().toUpperCase()).filter(Boolean));
-  const candidates = countryCodes.map((value) => value?.trim().toUpperCase()).filter((value): value is string => Boolean(value));
-  if (!supported.size || !candidates.length) return 'not-confirmed';
-  return candidates.some((country) => supported.has(country)) ? 'supported' : 'not-confirmed';
+  const supported = new Set<string>();
+  for (const rawCountry of configuredSupportedCountries.split(',')) {
+    const country = rawCountry.trim().toUpperCase();
+    if (country) supported.add(country);
+  }
+
+  const candidates: string[] = [];
+  for (const rawCountry of countryCodes) {
+    if (typeof rawCountry !== 'string') continue;
+    const country = rawCountry.trim().toUpperCase();
+    if (country) candidates.push(country);
+  }
+
+  if (supported.size === 0 || candidates.length === 0) return 'not-confirmed';
+  return candidates.some((country: string) => supported.has(country)) ? 'supported' : 'not-confirmed';
 }
 
 export function airHelpCoverageNote(coverage: AirHelpCoverage): string {
