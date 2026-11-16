@@ -63,7 +63,7 @@ function App() {
   const [commerceNotice, setCommerceNotice] = useState('');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [watchFilter, setWatchFilter] = useState<WatchFilter>('All flights');
-  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'dark' ? 'dark' : 'light');
+  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'light' ? 'light' : 'dark');
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
