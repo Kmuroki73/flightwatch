@@ -511,6 +511,7 @@ function CompanionScreen({ flight, session, onOpenFlight }: { flight: Flight | n
     <div className="songa2-ai-unavailable" role="status">
       <div><ShieldCheck size={18}/><strong>Chat is temporarily unavailable</strong></div>
       <p>You can still search for a flight, save a journey and review the flight information and passenger-rights guidance available in Songa.</p>
+      <button type="button" className="v21-outline-action" onClick={onOpenFlight}>{flight ? 'Review this flight' : 'Search for a flight'} <ArrowRight size={15}/></button>
     </div>
   )}
 
