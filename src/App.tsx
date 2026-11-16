@@ -2,8 +2,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, CloudSun, Compass, Filter,
-  Eye, EyeOff, Globe2, Heart, Info, LocateFixed, Lock, MapPin, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
+  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass, Filter,
+  Eye, EyeOff, Globe2, Heart, Info, LocateFixed, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
 } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
@@ -462,7 +462,7 @@ function TravellerContextPanel() {
     }
   };
 
-  const useMyLocation = async () => {
+  const requestWeatherFromDevice = async () => {
     setBusy(true);
     setMessage('');
     try {
@@ -484,7 +484,7 @@ function TravellerContextPanel() {
     </div>
     {weather && <div className="songa2-location-weather"><img src={`https:${weather.current.condition.icon}`} alt="" /><strong>{Math.round(weather.current.temp_c)}°C</strong><span>{weather.current.condition.text}</span></div>}
     <div className="songa2-location-actions">
-      {!weather && <button type="button" className="songa2-location-button" onClick={() => void useMyLocation()} disabled={busy}><LocateFixed size={15}/>{busy ? 'Locating…' : 'Use my location'}</button>}
+      {!weather && <button type="button" className="songa2-location-button" onClick={() => void requestWeatherFromDevice()} disabled={busy}><LocateFixed size={15}/>{busy ? 'Locating…' : 'Use my location'}</button>}
       <button type="button" className="songa2-location-manual" onClick={() => setExpanded((value) => !value)}>{weather ? 'Change location' : 'Choose city / airport'}</button>
     </div>
     {expanded && <form className="songa2-location-manual-form" onSubmit={(event) => { event.preventDefault(); if (manualLocation.trim()) void loadWeather({ query: manualLocation.trim() }); }}>
