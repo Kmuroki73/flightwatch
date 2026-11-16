@@ -3,7 +3,7 @@ import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import {
   Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass, Filter,
-  Eye, EyeOff, Globe2, Heart, Info, Lock, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
+  Eye, EyeOff, Globe2, Heart, Info, LocateFixed, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
 } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
@@ -17,6 +17,8 @@ import { DashboardScreen } from '@/screens/DashboardScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { addWatchedFlight, loadWatchedFlights, removeWatchedFlight, watchedRowToFlight } from '@/lib/watchlist';
+import { requestTravellerLocation } from '@/lib/travellerLocation';
+import { getTravellerWeather, type SongaWeather } from '@/lib/weather';
 import type { Flight, Screen } from '@/types';
 
 const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
@@ -63,7 +65,7 @@ function App() {
   const [commerceNotice, setCommerceNotice] = useState('');
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const [watchFilter, setWatchFilter] = useState<WatchFilter>('All flights');
-  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'dark' ? 'dark' : 'light');
+  const [theme, setTheme] = useState<Theme>(() => window.localStorage.getItem('songa-theme') === 'light' ? 'light' : 'dark');
 
   useEffect(() => {
     document.documentElement.style.colorScheme = theme;
@@ -270,7 +272,7 @@ function App() {
       <main>
         {commerceNotice && <div className="commerce-notice page-width" role="status"><ShieldCheck size={17} /><span>{commerceNotice}</span><button onClick={() => setCommerceNotice('')} aria-label="Dismiss notification"><X size={16} /></button></div>}
         {screen === 'dashboard' && <DashboardScreen session={session} watchedFlights={watchedFlights} recentSearches={recentSearches} onOpenFlight={openFlight} onOpenCommerce={() => goTo('commerce')} onOpenAccount={() => goTo('account')} />}
-        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
+        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} session={session} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
         {screen === 'results' && <ResultsScreen flights={searchResults} onBack={() => goTo('home')} onOpenFlight={openFlight} watchedFlights={watchedFlights} onToggleWatch={toggleWatch} watchError={watchError} />}
         {screen === 'details' && selectedFlight && <DetailsScreen flight={selectedFlight} session={session} onBack={() => goTo('results')} isWatched={watchedFlights.some((flight) => flight.flightNumber === selectedFlight.flightNumber && flight.date === selectedFlight.date)} onToggleWatch={toggleWatch} onOpenAlerts={() => goTo('alerts')} onOpenAccount={() => goTo('account')} onAskAI={() => goTo('companion')} />}
         {screen === 'watch' && <WatchScreen flights={visibleWatchedFlights} filter={watchFilter} setFilter={setWatchFilter} onOpenFlight={openFlight} onGoSearch={() => goTo('home')} onToggleWatch={toggleWatch} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
@@ -304,6 +306,7 @@ type HomeProps = {
   setSearchDate: (value: string) => void;
   searchError: string;
   searchLoading: boolean;
+  session: Session | null;
   watchedFlights: Flight[];
   onOpenFlight: (flight: Flight) => void;
   onOpenWatch: () => void;
@@ -316,11 +319,37 @@ type HomeProps = {
 function HomeScreen(props: HomeProps) {
   const {
     onSearch, onShowLookupResults, searchTerm, setSearchTerm, searchDate, setSearchDate, searchError,
-    searchLoading, watchedFlights, onOpenWatch, onOpenAlerts,
+    searchLoading, session, watchedFlights, onOpenWatch, onOpenAlerts,
     onOpenCompanion, onOpenWhatsApp, onOpenCommerce,
   } = props;
   const quickFlights = ['KQ100', 'EK720', 'BA63', 'QR1341'];
   const savedCount = watchedFlights.length;
+  const [travellerProfile, setTravellerProfile] = useState<{ displayName: string; homeAirport: string }>({ displayName: '', homeAirport: '' });
+
+  useEffect(() => {
+    if (!session || !supabase) {
+      setTravellerProfile({ displayName: '', homeAirport: '' });
+      return;
+    }
+    let active = true;
+    void (async () => {
+      try {
+        const { data } = await supabase.from('songa_traveller_profiles')
+          .select('display_name,home_airport')
+          .eq('user_id', session.user.id)
+          .maybeSingle();
+        if (active && data) {
+          setTravellerProfile({
+            displayName: typeof data.display_name === 'string' ? data.display_name : '',
+            homeAirport: typeof data.home_airport === 'string' ? data.home_airport : '',
+          });
+        }
+      } catch {
+        // A missing optional personalisation table must never block public flight search.
+      }
+    })();
+    return () => { active = false; };
+  }, [session?.user.id]);
   const [typedLookup, setTypedLookup] = useState<{ key: string; status: 'loading' | 'done' | 'error'; flights: Flight[]; message?: string } | null>(null);
   useEffect(() => {
     const ident = searchTerm.trim().toUpperCase().replace(/\s+/g, '');
@@ -352,6 +381,11 @@ function HomeScreen(props: HomeProps) {
   return <div className="songa2-home">
     <section className="songa2-hero page-width">
       <div className="songa2-hero-copy">
+        {session && <div className="songa2-personal-welcome">
+          <span className="songa2-personal-orbit"><Activity size={13}/></span>
+          <span><strong>{travellerProfile.displayName ? `Welcome back, ${travellerProfile.displayName}` : 'Welcome back to Songa'}</strong>
+          <small>{travellerProfile.homeAirport ? `Your home airport · ${travellerProfile.homeAirport}` : 'Your personal aviation workspace'}</small></span>
+        </div>}
         <div className="songa2-eyebrow"><span className="songa2-live-dot"/> YOUR JOURNEY, WATCHED INTELLIGENTLY</div>
         <h1>What's happening<br className="desktop-break"/> with your <span>flight?</span></h1>
         <p className="songa2-lede">Check your flight, stay ahead of changes and know what to do next. Songa keeps the important details in view.</p>
@@ -381,6 +415,8 @@ function HomeScreen(props: HomeProps) {
       </div>
     </section>
 
+    <TravellerContextPanel />
+
     <section className="songa2-map-section page-width" aria-label="Live flight activity">
       <FlightActivityMap />
     </section>
@@ -399,9 +435,65 @@ function HomeScreen(props: HomeProps) {
     <section className="songa2-airhelp-band page-width">
       <div className="songa2-airhelp-icon"><ShieldAlert size={28}/></div>
       <div><span>WHEN TRAVEL DOESN'T GO TO PLAN</span><h2>Delayed or cancelled flight?</h2><p>Find out whether your disruption may qualify for assistance or compensation.</p></div>
-      <a href="https://www.airhelp.de/?utm_source=tradetracker&utm_medium=Songa%20AI%20Travel&utm_campaign=38376&utm_content=12&data=12%3A%3A512363%3A%3A%3A%3A%3A%3A1794088845" target="_blank" rel="noreferrer">Explore compensation <ArrowUpRight size={18}/></a>
+      <button type="button" onClick={onOpenAlerts}>Review passenger rights <ArrowUpRight size={18}/></button>
     </section>
   </div>;
+}
+
+
+function TravellerContextPanel() {
+  const [weather, setWeather] = useState<SongaWeather | null>(null);
+  const [manualLocation, setManualLocation] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState('');
+  const [expanded, setExpanded] = useState(false);
+
+  const loadWeather = async (location: { latitude: number; longitude: number } | { query: string }) => {
+    setBusy(true);
+    setMessage('');
+    try {
+      const result = await getTravellerWeather(location);
+      setWeather(result);
+      setExpanded(false);
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Weather is temporarily unavailable.');
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const requestWeatherFromDevice = async () => {
+    setBusy(true);
+    setMessage('');
+    try {
+      const location = await requestTravellerLocation();
+      await loadWeather({ latitude: location.latitude, longitude: location.longitude });
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : 'Location is unavailable. Choose a city or airport instead.');
+      setBusy(false);
+      setExpanded(true);
+    }
+  };
+
+  return <section className="songa2-location-panel page-width" aria-label="Local travel context">
+    <div className="songa2-location-copy">
+      <span className="songa2-location-icon"><Globe2 size={17}/></span>
+      <div><strong>{weather ? `${weather.location.name}, ${weather.location.country}` : 'Make Songa local to you'}</strong>
+        <small>{weather ? `Local time ${weather.location.tz_id} · Weather updated ${new Date(weather.fetchedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}` : 'Choose your location to see local weather and travel context.'}</small>
+      </div>
+    </div>
+    {weather && <div className="songa2-location-weather"><img src={`https:${weather.current.condition.icon}`} alt="" /><strong>{Math.round(weather.current.temp_c)}°C</strong><span>{weather.current.condition.text}</span></div>}
+    <div className="songa2-location-actions">
+      {!weather && <button type="button" className="songa2-location-button" onClick={() => void requestWeatherFromDevice()} disabled={busy}><LocateFixed size={15}/>{busy ? 'Locating…' : 'Use my location'}</button>}
+      <button type="button" className="songa2-location-manual" onClick={() => setExpanded((value) => !value)}>{weather ? 'Change location' : 'Choose city / airport'}</button>
+    </div>
+    {expanded && <form className="songa2-location-manual-form" onSubmit={(event) => { event.preventDefault(); if (manualLocation.trim()) void loadWeather({ query: manualLocation.trim() }); }}>
+      <input value={manualLocation} onChange={(event) => setManualLocation(event.target.value)} placeholder="Enter city, country or airport" aria-label="City, country or airport"/>
+      <button type="submit" disabled={busy || !manualLocation.trim()}>{busy ? 'Loading…' : 'Apply location'}</button>
+    </form>}
+    {message && <p className="songa2-location-message" role="status">{message}</p>}
+    {weather && <small className="songa2-weather-credit">Weather by WeatherAPI.com · Local surface weather, not aircraft cabin or cruise-altitude conditions.</small>}
+  </section>;
 }
 
 function FlightActivityMap() {

@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   color: #eef4f5;
   background: #071522;
   font-synthesis: none;
@@ -57,6 +57,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid #ffb14a; outline-
 .eyebrow, .section-kicker { display: flex; align-items: center; gap: 10px; color: #ef9d5b; font: 500 10px/1.4 'DM Mono', monospace; letter-spacing: .17em; text-transform: uppercase; }
 .eyebrow-line { width: 28px; height: 1px; background: var(--orange); }
 h1, h2, h3, h4, p { margin-top: 0; }
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: -.035em; }
 h1 { max-width: 570px; margin: 24px 0 22px; color: var(--warm); font-size: clamp(48px, 6vw, 79px); line-height: .98; letter-spacing: -.075em; font-weight: 700; }
 h1 em, h2 span { color: var(--orange); font-style: normal; }
 .hero-lede { max-width: 430px; margin-bottom: 34px; color: #9cb1b7; font-size: 15px; line-height: 1.8; }
@@ -905,4 +906,67 @@ main :focus-visible { outline: 2px solid #ef842f; outline-offset: 3px; }
 @media (max-width: 380px) {
   .songa2-service-grid { grid-template-columns: 1fr; }
   .songa2-service-card { min-height: 72px; }
+}
+
+
+/* Songa 2.0 responsive navigation: desktop is a full top navigation; phones get a persistent bottom dock. */
+@media (min-width: 901px) {
+  .main-nav { position: static !important; display: flex !important; flex-direction: row; align-items: center; gap: 3px; width: auto; padding: 0; border: 0; box-shadow: none; }
+  .mobile-menu, .mobile-bottom-nav { display: none !important; }
+  .site-header { width: min(1440px, calc(100% - 72px)); }
+}
+@media (min-width: 901px) and (max-width: 1180px) {
+  .main-nav { gap: 1px; }
+  .nav-link { padding: 8px 6px; gap: 5px; font-size: 10px; }
+  .nav-link svg { width: 14px; height: 14px; }
+  .site-header { gap: 12px; }
+}
+@media (max-width: 900px) {
+  .main-nav { position: fixed !important; z-index: 110; top: 76px; left: auto; right: 16px; display: none !important; width: min(340px, calc(100vw - 32px)); max-height: min(72vh, 620px); overflow-y: auto; grid-template-columns: 1fr 1fr; gap: 5px; padding: 12px; border: 1px solid rgba(255,255,255,.15); border-radius: 17px; background: #10232e; box-shadow: 0 20px 55px rgba(0,0,0,.42); }
+  .main-nav.is-open { display: grid !important; }
+  .main-nav .nav-link { justify-content: flex-start; min-height: 42px; padding: 10px; color: #d7e2e3; font-size: 11px; }
+  .mobile-menu { display: grid !important; width: 39px; height: 39px; border: 1px solid rgba(255,255,255,.17); border-radius: 50%; background: #172a34; color: #f4a36b; }
+  .site-header { width: calc(100% - 36px); gap: 12px; }
+}
+@media (max-width: 760px) {
+  .songa2-home { padding-bottom: 106px; }
+  .mobile-bottom-nav { display: grid !important; }
+  .site-footer { padding-bottom: 108px; }
+}
+@media (min-width: 761px) {
+  .mobile-bottom-nav { display: none !important; }
+}
+
+/* Consent-led location and weather strip. */
+.songa2-location-panel { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; width: min(1320px, calc(100% - 56px)); margin: 12px auto 14px; padding: 13px 17px; border: 1px solid rgba(255,255,255,.11); border-radius: 16px; background: linear-gradient(110deg, rgba(19,38,49,.96), rgba(14,28,37,.96)); color: #edf3f3; }
+.songa2-location-copy { display: flex; align-items: center; gap: 10px; min-width: 220px; flex: 1; }
+.songa2-location-icon { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid rgba(255,139,64,.25); border-radius: 11px; color: #ff9a56; background: rgba(255,139,64,.09); }
+.songa2-location-copy strong,.songa2-location-copy small { display: block; }
+.songa2-location-copy strong { font-size: 12px; font-weight: 750; }
+.songa2-location-copy small { margin-top: 3px; color: #91a8ae; font-size: 9px; }
+.songa2-location-weather { display: flex; align-items: center; gap: 6px; color: #dce6e7; }
+.songa2-location-weather img { width: 34px; height: 34px; }
+.songa2-location-weather strong { font-size: 20px; }
+.songa2-location-weather span { color: #9db0b4; font-size: 10px; }
+.songa2-location-actions { display: flex; align-items: center; gap: 8px; }
+.songa2-location-button,.songa2-location-manual,.songa2-location-manual-form button { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 35px; padding: 8px 12px; border: 1px solid rgba(255,147,82,.35); border-radius: 9px; background: rgba(255,130,55,.12); color: #ffb17d; font-size: 10px; font-weight: 750; }
+.songa2-location-manual { border-color: rgba(255,255,255,.13); background: rgba(255,255,255,.04); color: #c2d0d2; }
+.songa2-location-button:disabled,.songa2-location-manual-form button:disabled { opacity: .55; cursor: wait; }
+.songa2-location-manual-form { display: flex; flex: 1 1 100%; gap: 8px; }
+.songa2-location-manual-form input { min-width: 0; flex: 1; padding: 10px 12px; border: 1px solid rgba(255,255,255,.14); border-radius: 9px; background: #0a1922; color: #edf3f3; font: inherit; font-size: 11px; }
+.songa2-location-message { flex: 1 1 100%; margin: 0; color: #f2b38b; font-size: 10px; }
+.songa2-weather-credit { flex: 1 1 100%; color: #718b93; font-size: 8px; }
+.theme-light .songa2-location-panel { border-color: #e9ddd2; background: #fffaf6; color: #272b2f; }
+.theme-light .songa2-location-copy small,.theme-light .songa2-location-weather span { color: #737c81; }
+.theme-light .songa2-location-manual { border-color: #e8ddd3; background: #fff; color: #626a70; }
+.theme-light .songa2-location-manual-form input { border-color: #e8ddd3; background: #fff; color: #222; }
+@media (max-width: 640px) {
+  .songa2-location-panel { width: calc(100% - 20px); margin: 9px auto 10px; padding: 11px; gap: 9px; border-radius: 14px; }
+  .songa2-location-copy { min-width: 0; flex-basis: 100%; }
+  .songa2-location-copy strong { font-size: 11px; }
+  .songa2-location-copy small { font-size: 8px; }
+  .songa2-location-weather { margin-left: 44px; }
+  .songa2-location-actions { margin-left: auto; }
+  .songa2-location-button,.songa2-location-manual { min-height: 32px; padding: 7px 9px; font-size: 9px; }
+  .songa2-location-manual-form { flex-basis: 100%; }
 }
