@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, MapPin, Gauge, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
+  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
 } from 'lucide-react';
 import type { Flight } from '@/types';
 import { StatusBadge } from '@/screens/DisruptionScreens';
-import { flightProvider } from '@/lib/flightProvider';
 import { supabase } from '@/lib/supabase';
 import { deleteTripDocument, documentsToCsv, loadTripDocuments, saveTripDocument, type TripDocument, type TripDocumentKind } from '@/lib/tripVault';
 import { assessCompensation, buildClaimText, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
