@@ -18,8 +18,6 @@ import { FlightHomeScreen } from '@/screens/FlightHomeScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { addWatchedFlight, loadWatchedFlights, removeWatchedFlight, watchedRowToFlight } from '@/lib/watchlist';
-import { requestTravellerLocation } from '@/lib/travellerLocation';
-import { getTravellerWeather, type SongaWeather } from '@/lib/weather';
 import type { Flight, Screen } from '@/types';
 
 const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
@@ -290,121 +288,6 @@ function App() {
       <footer className="site-footer"><span>SONGA AI / TRAVEL COMPANION</span><span>Your flight changes. Songa knows and alerts you in real time.</span><span>{flightProvider.mode === 'live' ? 'Flight data provider connected.' : 'Flight provider not configured.'}</span></footer>
     </div>
   );
-}
-
-function TravellerContextPanel() {
-  const [weather, setWeather] = useState<SongaWeather | null>(null);
-  const [manualLocation, setManualLocation] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [message, setMessage] = useState('');
-  const [expanded, setExpanded] = useState(false);
-
-  const loadWeather = async (location: { latitude: number; longitude: number } | { query: string }) => {
-    setBusy(true);
-    setMessage('');
-    try {
-      const result = await getTravellerWeather(location);
-      setWeather(result);
-      setExpanded(false);
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Weather is temporarily unavailable.');
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  const requestWeatherFromDevice = async () => {
-    setBusy(true);
-    setMessage('');
-    try {
-      const location = await requestTravellerLocation();
-      await loadWeather({ latitude: location.latitude, longitude: location.longitude });
-    } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'Location is unavailable. Choose a city or airport instead.');
-      setBusy(false);
-      setExpanded(true);
-    }
-  };
-
-  return <section className="songa2-location-panel page-width" aria-label="Local travel context">
-    <div className="songa2-location-copy">
-      <span className="songa2-location-icon"><Globe2 size={17}/></span>
-      <div><strong>{weather ? `${weather.location.name}, ${weather.location.country}` : 'Make Songa local to you'}</strong>
-        <small>{weather ? `Local time ${weather.location.tz_id} · Weather updated ${new Date(weather.fetchedAt).toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}` : 'Choose your location to see local weather and travel context.'}</small>
-      </div>
-    </div>
-    {weather && <div className="songa2-location-weather"><img src={`https:${weather.current.condition.icon}`} alt="" /><strong>{Math.round(weather.current.temp_c)}°C</strong><span>{weather.current.condition.text}</span></div>}
-    <div className="songa2-location-actions">
-      {!weather && <button type="button" className="songa2-location-button" onClick={() => void requestWeatherFromDevice()} disabled={busy}><LocateFixed size={15}/>{busy ? 'Locating…' : 'Use my location'}</button>}
-      <button type="button" className="songa2-location-manual" onClick={() => setExpanded((value) => !value)}>{weather ? 'Change location' : 'Choose city / airport'}</button>
-    </div>
-    {expanded && <form className="songa2-location-manual-form" onSubmit={(event) => { event.preventDefault(); if (manualLocation.trim()) void loadWeather({ query: manualLocation.trim() }); }}>
-      <input value={manualLocation} onChange={(event) => setManualLocation(event.target.value)} placeholder="Enter city, country or airport" aria-label="City, country or airport"/>
-      <button type="submit" disabled={busy || !manualLocation.trim()}>{busy ? 'Loading…' : 'Apply location'}</button>
-    </form>}
-    {message && <p className="songa2-location-message" role="status">{message}</p>}
-    {weather && <small className="songa2-weather-credit">Weather by WeatherAPI.com · Local surface weather, not aircraft cabin or cruise-altitude conditions.</small>}
-  </section>;
-}
-
-function FlightActivityMap() {
-  type Position = { id: string; ident: string; origin: string; destination: string; latitude: number; longitude: number; altitudeFt?: number; groundspeedKts?: number; headingDeg?: number; updatedAt: string };
-  const [positions, setPositions] = useState<Position[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState('');
-  const [mapError, setMapError] = useState('');
-
-  const client = supabase;
-  useEffect(() => {
-    if (!client) { setMapError('Connect the Songa flight data service to show live aircraft positions.'); return; }
-    let active = true;
-    let first = true;
-    const load = async () => {
-      if (!active) return;
-      if (first) setLoading(true);
-      try {
-        const { data, error } = await client.functions.invoke('flight-positions');
-        if (error) throw error;
-        const rows = Array.isArray(data?.positions) ? data.positions as Position[] : [];
-        if (!active) return;
-        setPositions(rows.filter((p) => Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).slice(0, 30));
-        setLastUpdated(data?.fetchedAt ? new Date(data.fetchedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'just now');
-        setMapError(rows.length ? '' : 'No current aircraft positions were returned by the provider.');
-      } catch {
-        if (active) setMapError('Live position coverage is not enabled for this provider connection yet. Flight search remains available above.');
-      } finally {
-        if (active) setLoading(false);
-        first = false;
-      }
-    };
-    void load();
-    const interval = window.setInterval(() => void load(), 5 * 60 * 1000);
-    return () => { active = false; window.clearInterval(interval); };
-  }, [client]);
-
-  const xFor = (longitude: number) => 40 + ((longitude + 180) / 360) * 920;
-  const yFor = (latitude: number) => 40 + ((85 - latitude) / 170) * 420;
-  return <div className="songa2-map-card">
-    <div className="songa2-map-header"><div><span>THE WORLD, IN MOTION</span><h2>Flight activity</h2></div><div className="songa2-map-status">{positions.length > 0 ? <><span className="songa2-live-dot"/> LIVE POSITIONS</> : <><span className="map-status-muted"/>{loading ? 'CONNECTING' : 'POSITIONS UNAVAILABLE'}</>}</div></div>
-    <div className="songa2-map-canvas">
-      <svg viewBox="0 0 1000 500" role="img" aria-label={positions.length ? `${positions.length} provider-reported aircraft positions` : 'Illustrated world map; live aircraft positions are not currently available'}>
-        <defs><radialGradient id="mapGlow"><stop offset="0" stopColor="#ff8b37" stopOpacity=".18"/><stop offset="1" stopColor="#ff8b37" stopOpacity="0"/></radialGradient><pattern id="mapGrid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M50 0H0V50" fill="none" stroke="#e9a36b" strokeOpacity=".13" strokeWidth="1"/></pattern></defs>
-        <rect width="1000" height="500" fill="#161b20"/><rect width="1000" height="500" fill="url(#mapGrid)"/>
-        <g fill="#3b4247" stroke="#657079" strokeOpacity=".4" strokeWidth="1.2">
-          <path d="M70 110 110 72 177 65 218 92 270 87 310 120 290 153 245 164 228 203 188 217 165 255 128 242 104 202 80 177Z"/>
-          <path d="M240 260 272 277 295 328 286 375 265 432 240 405 225 350Z"/>
-          <path d="M420 105 458 80 493 88 512 117 491 145 455 147 435 130Z"/>
-          <path d="M435 160 470 147 510 165 530 205 515 253 492 286 470 254 448 223Z"/>
-          <path d="M520 104 565 83 634 75 682 96 718 80 780 103 844 95 909 139 884 173 830 179 797 206 747 194 708 217 674 190 635 198 596 171 560 184 531 151Z"/>
-          <path d="M730 235 778 224 819 248 823 282 793 296 762 275Z"/>
-          <path d="M874 317 914 305 944 329 930 357 892 354Z"/>
-        </g>
-        {positions.map((p) => <g key={p.id} transform={`translate(${xFor(p.longitude)} ${yFor(p.latitude)}) rotate(${p.headingDeg ?? 0})`}><circle r="15" fill="url(#mapGlow)"/><path d="M0 -9 3.8 5 0 2.5 -3.8 5Z" fill="#ff8b37" stroke="#fff2e7" strokeWidth="1.2"/><circle r="2" fill="#fff2e7"/></g>)}
-      </svg>
-      <div className="songa2-map-overlay"><strong>{positions.length ? positions.length.toLocaleString() : '—'}</strong><span>aircraft positions<br/>returned by provider</span></div>
-    </div>
-    <div className="songa2-map-footer"><span>{mapError || (lastUpdated ? `Provider positions refreshed at ${lastUpdated}` : 'Waiting for provider positions')}</span><span>Position data is provider-dependent</span></div>
-  </div>;
 }
 
 function ResultsScreen({ flights, onBack, onOpenFlight, watchedFlights, onToggleWatch, watchError }: { flights: Flight[]; onBack: () => void; onOpenFlight: (flight: Flight) => void; watchedFlights: Flight[]; onToggleWatch: (flight: Flight) => Promise<void>; watchError: string }) {
