@@ -2,8 +2,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useEffect, useMemo, useState } from 'react';
 import {
-  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass,
-  Eye, EyeOff, Globe2, Heart, Info, LocateFixed, MessageCircle, Menu, Moon, Plane, PlaneTakeoff, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
+  ArrowLeft, ArrowRight, ArrowUpRight, BadgeCheck, Bell, Bot, ChevronRight, CircleAlert, Clock3, Compass,
+  Eye, EyeOff, Globe2, Heart, Info, MessageCircle, Menu, Moon, Plane, Radar, Search, ShieldAlert, ShieldCheck, Sparkles, Sun, Ticket, X,
 } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { AirportsScreen as AirportBoardScreen } from '@/screens/AirportBoard';
