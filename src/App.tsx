@@ -14,6 +14,7 @@ import { LiveDeskScreen } from '@/screens/LiveDeskScreen';
 import { WorkspaceScreen } from '@/screens/WorkspaceScreen';
 import { CommerceScreen } from '@/screens/CommerceScreen';
 import { DashboardScreen } from '@/screens/DashboardScreen';
+import { FlightHomeScreen } from '@/screens/FlightHomeScreen';
 import { flightProvider, FlightProviderError } from '@/lib/flightProvider';
 import { isSupabaseConfigured, supabase } from '@/lib/supabase';
 import { addWatchedFlight, loadWatchedFlights, removeWatchedFlight, watchedRowToFlight } from '@/lib/watchlist';
@@ -22,16 +23,11 @@ import { getTravellerWeather, type SongaWeather } from '@/lib/weather';
 import type { Flight, Screen } from '@/types';
 
 const navItems: { id: Screen; label: string; icon: typeof Plane }[] = [
-  { id: 'dashboard', label: 'My Songa', icon: Activity },
-  { id: 'home', label: 'Search', icon: Search },
-  { id: 'watch', label: 'My flights', icon: Radar },
-  { id: 'alerts', label: 'Disruptions', icon: Bell },
-  { id: 'airports', label: 'Airports', icon: Globe2 },
+  { id: 'home', label: 'Flights', icon: Plane },
+  { id: 'watch', label: 'My journeys', icon: Radar },
   { id: 'companion', label: 'Songa AI', icon: Bot },
-  { id: 'whatsapp', label: 'WhatsApp', icon: MessageCircle },
-  { id: 'workspace', label: 'Trip tools', icon: Compass },
-  { id: 'commerce', label: 'Travel services', icon: Ticket },
-  { id: 'live-desk', label: 'Live desk', icon: Activity },
+  { id: 'commerce', label: 'Services', icon: Ticket },
+  { id: 'account', label: 'Profile', icon: Compass },
 ];
 
 type WatchFilter = 'All flights' | 'Needs attention' | 'On time';
@@ -261,7 +257,6 @@ function App() {
 
   return (
     <div className={`app-shell theme-${theme}`}>
-      <div className={`demo-ribbon ${flightProvider.mode === 'live' ? 'live-ribbon' : ''}`}><span className="demo-dot" /> {flightProvider.mode === 'live' ? 'Live provider mode · source and freshness shown on results' : 'Demo mode · sample flight information only'}</div>
       <header className="site-header">
         <button className="brand" onClick={() => goTo('home')} aria-label="Go to Songa Flight Watch home"><span className="brand-mark"><img src="/songa-logo-64.png" alt="" width={40} height={40} /></span><span className="brand-copy"><strong>Songa<span className="brand-spark">.</span></strong><span>AI TRAVEL COMPANION</span></span></button>
         <nav className={`main-nav ${mobileNavOpen ? 'is-open' : ''}`} aria-label="Main navigation">
@@ -272,7 +267,7 @@ function App() {
       <main>
         {commerceNotice && <div className="commerce-notice page-width" role="status"><ShieldCheck size={17} /><span>{commerceNotice}</span><button onClick={() => setCommerceNotice('')} aria-label="Dismiss notification"><X size={16} /></button></div>}
         {screen === 'dashboard' && <DashboardScreen session={session} watchedFlights={watchedFlights} recentSearches={recentSearches} onOpenFlight={openFlight} onOpenCommerce={() => goTo('commerce')} onOpenAccount={() => goTo('account')} />}
-        {screen === 'home' && <HomeScreen onSearch={searchFlights} onShowLookupResults={(flights) => { setSearchResults(flights); setSelectedFlight(flights[0] ?? null); goTo('results'); }} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} session={session} watchedFlights={watchedFlights} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} />}
+        {screen === 'home' && <FlightHomeScreen onSearch={searchFlights} searchTerm={searchTerm} setSearchTerm={setSearchTerm} searchDate={searchDate} setSearchDate={setSearchDate} searchError={searchError} searchLoading={searchLoading} session={session} watchedFlights={watchedFlights} recentSearches={recentSearches} onOpenFlight={openFlight} onOpenWatch={() => goTo('watch')} onOpenAlerts={() => goTo('alerts')} onOpenCompanion={() => goTo('companion')} onOpenWhatsApp={() => goTo('whatsapp')} onOpenCommerce={() => goTo('commerce')} onOpenAccount={() => goTo('account')} />}
         {screen === 'results' && <ResultsScreen flights={searchResults} onBack={() => goTo('home')} onOpenFlight={openFlight} watchedFlights={watchedFlights} onToggleWatch={toggleWatch} watchError={watchError} />}
         {screen === 'details' && selectedFlight && <DetailsScreen flight={selectedFlight} session={session} onBack={() => goTo('results')} isWatched={watchedFlights.some((flight) => flight.flightNumber === selectedFlight.flightNumber && flight.date === selectedFlight.date)} onToggleWatch={toggleWatch} onOpenAlerts={() => goTo('alerts')} onOpenAccount={() => goTo('account')} onAskAI={() => goTo('companion')} />}
         {screen === 'watch' && <WatchScreen flights={visibleWatchedFlights} filter={watchFilter} setFilter={setWatchFilter} onOpenFlight={openFlight} onGoSearch={() => goTo('home')} onToggleWatch={toggleWatch} watchError={watchError} session={session} onOpenAccount={() => goTo('account')} />}
@@ -285,12 +280,12 @@ function App() {
         {screen === 'commerce' && <CommerceScreen session={session} selectedFlight={selectedFlight} onOpenAccount={() => goTo('account')} />}
         {screen === 'account' && <AccountScreen session={session} authReady={authReady} onSessionChange={setSession} onBack={() => goTo('home')} />}
       </main>
-      <nav className="mobile-bottom-nav" aria-label="Quick navigation">
-        <button className={screen === 'home' ? 'active' : ''} onClick={() => goTo('home')}><Search size={19}/><span>Search</span></button>
-        <button className={screen === 'watch' ? 'active' : ''} onClick={() => goTo('watch')}><Radar size={19}/><span>My flights</span></button>
+      <nav className="mobile-bottom-nav" aria-label="Main navigation">
+        <button className={screen === 'home' || screen === 'results' || screen === 'details' ? 'active' : ''} onClick={() => goTo('home')}><Plane size={19}/><span>Flights</span></button>
+        <button className={screen === 'watch' || screen === 'dashboard' || screen === 'live-desk' ? 'active' : ''} onClick={() => goTo('watch')}><Radar size={19}/><span>My journeys</span></button>
         <button className={screen === 'companion' ? 'active' : ''} onClick={() => goTo('companion')}><Bot size={19}/><span>Songa AI</span></button>
-        <button className={screen === 'whatsapp' ? 'active' : ''} onClick={() => goTo('whatsapp')}><MessageCircle size={19}/><span>WhatsApp</span></button>
-        <button onClick={() => setMobileNavOpen((open) => !open)}><Menu size={19}/><span>More</span></button>
+        <button className={screen === 'commerce' ? 'active' : ''} onClick={() => goTo('commerce')}><Ticket size={19}/><span>Services</span></button>
+        <button className={screen === 'account' ? 'active' : ''} onClick={() => goTo('account')}><Compass size={19}/><span>Profile</span></button>
       </nav>
       <footer className="site-footer"><span>SONGA AI / TRAVEL COMPANION</span><span>Your flight changes. Songa knows and alerts you in real time.</span><span>{flightProvider.mode === 'live' ? 'Flight data provider connected.' : 'Flight provider not configured.'}</span></footer>
     </div>
