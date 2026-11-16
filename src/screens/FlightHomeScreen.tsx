@@ -1,4 +1,4 @@
-import { CalendarDays, ArrowRight, ArrowUpRight, Bell, Clock3, Compass, MapPin, MessageCircle, Plane, Radar, Search, ShieldCheck, Sparkles, Ticket } from 'lucide-react';
+import { CalendarDays, ArrowRight, ArrowUpRight, Bell, Clock3, Compass, MessageCircle, Plane, Radar, Search, ShieldCheck, Sparkles, Ticket } from 'lucide-react';
 import type { FormEvent } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import type { Flight } from '@/types';
