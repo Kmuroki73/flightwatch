@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: 'Manrope', system-ui, sans-serif;
+  font-family: 'DM Sans', system-ui, sans-serif;
   color: #eef4f5;
   background: #071522;
   font-synthesis: none;
@@ -57,6 +57,7 @@ button:focus-visible, input:focus-visible { outline: 2px solid #ffb14a; outline-
 .eyebrow, .section-kicker { display: flex; align-items: center; gap: 10px; color: #ef9d5b; font: 500 10px/1.4 'DM Mono', monospace; letter-spacing: .17em; text-transform: uppercase; }
 .eyebrow-line { width: 28px; height: 1px; background: var(--orange); }
 h1, h2, h3, h4, p { margin-top: 0; }
+h1, h2, h3, h4 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; letter-spacing: -.035em; }
 h1 { max-width: 570px; margin: 24px 0 22px; color: var(--warm); font-size: clamp(48px, 6vw, 79px); line-height: .98; letter-spacing: -.075em; font-weight: 700; }
 h1 em, h2 span { color: var(--orange); font-style: normal; }
 .hero-lede { max-width: 430px; margin-bottom: 34px; color: #9cb1b7; font-size: 15px; line-height: 1.8; }
