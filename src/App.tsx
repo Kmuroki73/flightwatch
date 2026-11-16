@@ -635,7 +635,7 @@ function CompanionScreen({ flight, session, onOpenFlight }: { flight: Flight | n
     event.preventDefault();
     const text = draft.trim();
     if (!text || busy) return;
-    if (!supabase) { setError('Songa AI is not configured in this deployment yet. Add the Supabase connection and AI function secrets.'); return; }
+    if (!supabase) { setError('Songa AI is temporarily unavailable. You can still search for a flight and review its available status and travel options.'); return; }
     const next = [...messages, { role: 'user' as const, content: text }];
     setMessages(next); setDraft(''); setError(''); setBusy(true);
     try {
@@ -726,23 +726,19 @@ function CompanionScreen({ flight, session, onOpenFlight }: { flight: Flight | n
     </div>
   )}
 
-  <form className="songa2-ai-composer" onSubmit={send}>
-    <textarea
-      value={draft}
-      onChange={(event) => setDraft(event.target.value)}
-      placeholder="Ask Songa about your journey…"
-      rows={2}
-      maxLength={1200}
-      aria-label="Message Songa AI"
-    />
-    <button
-      type="submit"
-      disabled={busy || !draft.trim()}
-      aria-label="Send message"
-    >
-      {busy ? <span className="songa2-loader" /> : <ArrowUpRight size={21} />}
-    </button>
-  </form>
+  {supabase ? (
+    <form className="songa2-ai-composer" onSubmit={send}>
+      <textarea value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="Ask Songa about your journey…" rows={2} maxLength={1200} aria-label="Message Songa AI" />
+      <button type="submit" disabled={busy || !draft.trim()} aria-label="Send message">
+        {busy ? <span className="songa2-loader" /> : <ArrowUpRight size={21} />}
+      </button>
+    </form>
+  ) : (
+    <div className="songa2-ai-unavailable" role="status">
+      <div><ShieldCheck size={18}/><strong>Chat is temporarily unavailable</strong></div>
+      <p>You can still search for a flight, save a journey and review the flight information and passenger-rights guidance available in Songa.</p>
+    </div>
+  )}
 
   <div className="songa2-ai-footnote">
     <ShieldCheck size={15} />
