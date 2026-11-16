@@ -590,10 +590,45 @@ function PremiumAssistanceCard({ flight, session, onSignIn }: { flight: Flight; 
 function Timeline({ flight }: { flight: Flight }) { return <div className="timeline">{flight.timeline.map((event) => <div className={`timeline-item ${event.state}`} key={event.title}><div className="timeline-marker" /><div className="timeline-content"><span>{event.time}</span><h4>{event.title}</h4><p>{event.description}</p></div></div>)}</div>; }
 
 function WatchScreen({ flights, filter, setFilter, onOpenFlight, onGoSearch, onToggleWatch, watchError, session, onOpenAccount }: { flights: Flight[]; filter: WatchFilter; setFilter: (filter: WatchFilter) => void; onOpenFlight: (flight: Flight) => void; onGoSearch: () => void; onToggleWatch: (flight: Flight) => Promise<void>; watchError: string; session: Session | null; onOpenAccount: () => void }) {
-  return <section className="page-width page-section"><div className="section-heading watch-heading"><div><div className="section-kicker">YOUR FLIGHT WATCH</div><h2>Keep the important<br /><span>moments in view.</span></h2><p className="heading-description">{session ? 'Your saved flights are private to your account and persist across sessions. Background monitoring is not active yet.' : 'Sign in to save flights across sessions and keep them private.'}</p></div><div className="watch-orbit"><Radar size={21} /><span>{flights.length}<small>watching</small></span></div></div>{watchError && <div className="inline-error" role="alert"><CircleAlert size={15} /> {watchError}</div>}{!session ? <EmptyState title="Sign in to start watching" text="A secure account is required before a flight can be saved." action="Open account" onAction={onOpenAccount} /> : <><div className="filter-row"><div className="filter-label"><Filter size={15} /> Filter flights</div>{(['All flights', 'Needs attention', 'On time'] as const).map((item) => <button key={item} className={filter === item ? 'filter-pill active' : 'filter-pill'} onClick={() => setFilter(item)}>{item}</button>)}</div>{flights.length ? <div className="watch-grid">{flights.map((flight) => <WatchCard key={flight.id} flight={flight} onOpen={() => onOpenFlight(flight)} onRemove={() => void onToggleWatch(flight)} />)}</div> : <EmptyState title="Your watch is clear" text="Search for a flight and add it here once you are signed in." action="Search flights" onAction={onGoSearch} />}</>}</section>;
+  const attentionCount = flights.filter((flight) => flight.status === 'Delayed' || flight.status === 'Cancelled' || flight.status === 'Diverted').length;
+  const onTimeCount = flights.filter((flight) => flight.status === 'On time').length;
+  return (
+    <section className="page-width page-section v21-journeys">
+      <div className="v21-page-intro">
+        <span className="v21-eyebrow">MY JOURNEYS</span>
+        <h1>Your flights,<br/><em>all in one place.</em></h1>
+        <p>Save the flights that matter. Open any journey to see its latest available information, source and travel options.</p>
+      </div>
+      {watchError && <div className="inline-error" role="alert"><CircleAlert size={15}/> {watchError}</div>}
+      {!session ? (
+        <div className="v21-empty-card"><div className="v21-action-icon"><Radar size={22}/></div><h2>Sign in to keep your journeys together</h2><p>Your saved flights are private to your account and can be accessed across your devices.</p><button className="primary-button" onClick={onOpenAccount}>Sign in or create an account <ArrowRight size={16}/></button></div>
+      ) : (
+        <>
+          <div className="v21-journey-stats">
+            <div><strong>{flights.length}</strong><span>Saved flights</span></div>
+            <div><strong>{attentionCount}</strong><span>Need attention</span></div>
+            <div><strong>{onTimeCount}</strong><span>On time</span></div>
+          </div>
+          <div className="v21-journey-toolbar">
+            <div><h2>Saved journeys</h2><p>Choose a flight to see its details.</p></div>
+            <button className="v21-outline-action" onClick={onGoSearch}><Search size={15}/> Find a flight</button>
+          </div>
+          <div className="v21-journey-filters">{(['All flights', 'Needs attention', 'On time'] as const).map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div>
+          {flights.length ? <div className="v21-journey-list">{flights.map((flight) => (
+            <article className="v21-journey-card" key={flight.id}>
+              <div className="v21-journey-card-head"><div><span>{flight.flightNumber}</span><small>{flight.airline}</small></div><StatusBadge status={flight.status}/></div>
+              <div className="v21-journey-route"><div><strong>{flight.origin.code}</strong><small>{flight.origin.city}</small><b>{flight.origin.time}</b></div><span><Plane size={18}/></span><div><strong>{flight.destination.code}</strong><small>{flight.destination.city}</small><b>{flight.destination.time}</b></div></div>
+              <p className="v21-journey-detail">{flight.statusDetail}</p>
+              <div className="v21-journey-meta"><span>{flight.date}</span><span>{flight.dataMode === 'live' ? `Source: ${flight.source}` : 'Sample flight data'}</span><span>Updated {flight.lastUpdatedAt}</span></div>
+              <div className="v21-journey-actions"><button className="primary-button" onClick={() => onOpenFlight(flight)}>Open journey <ArrowRight size={15}/></button><button className="v21-remove-action" onClick={() => void onToggleWatch(flight)}><X size={14}/> Remove</button></div>
+            </article>
+          ))}</div> : <div className="v21-empty-card"><div className="v21-action-icon"><Plane size={22}/></div><h2>{filter === 'All flights' ? 'No saved flights yet' : 'No flights match this filter'}</h2><p>{filter === 'All flights' ? 'Search for a flight, open its details and choose “Watch flight” to add it here.' : 'Try another filter or return to all saved flights.'}</p><button className="primary-button" onClick={filter === 'All flights' ? onGoSearch : () => setFilter('All flights')}>{filter === 'All flights' ? 'Search for a flight' : 'Show all flights'} <ArrowRight size={16}/></button></div>}
+          <p className="v21-monitoring-note"><ShieldCheck size={15}/> Saved flights are stored in your account. Automatic background alerts are only available when the monitoring and notification services are configured.</p>
+        </>
+      )}
+    </section>
+  );
 }
-
-function WatchCard({ flight, onOpen, onRemove }: { flight: Flight; onOpen: () => void; onRemove: () => void }) { return <article className="watch-card"><div className="watch-card-head"><span className="flight-code">{flight.flightNumber}</span><StatusBadge status={flight.status} /></div><p className="watch-airline">{flight.airline} · {flight.date}</p><div className="mini-route"><strong>{flight.origin.code}</strong><span /><Plane size={15} /><span /><strong>{flight.destination.code}</strong></div><p className="watch-detail"><Clock3 size={14} /> {flight.statusDetail}</p><div className="watch-card-actions"><button className="text-link" onClick={onOpen}>Open flight <ArrowRight size={15} /></button><button className="icon-text-button" onClick={onRemove}><X size={14} /> Remove</button></div></article>; }
 
 /* The example-alert inbox is superseded by the provider-backed Disruptions screen; kept out of navigation. */
 
