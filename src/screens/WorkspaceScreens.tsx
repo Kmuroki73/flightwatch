@@ -10,60 +10,52 @@ import { deleteTripDocument, documentsToCsv, loadTripDocuments, saveTripDocument
 import { assessCompensation, buildClaimText, buildGateNavigation, buildWhatsAppPreview, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
 
 export function LiveMapPanel({ flights, onSelectFlight }: { flights: Flight[]; onSelectFlight: (flight: Flight) => void }) {
-  const markers = useMemo(() => flights.slice(0, 24).map((flight, index) => {
-    const seed = index * 137.5 + 23;
-    const angle = (seed % 360) * Math.PI / 180;
-    const radius = 90 + (seed % 110);
-    return {
-      flight,
-      x: 260 + Math.cos(angle) * radius * 1.35,
-      y: 200 + Math.sin(angle) * radius * 0.72,
-      heading: (seed * 3) % 360,
-    };
-  }), [flights]);
+  const positions = useMemo(() => flights.filter((flight) => flight.dataMode === 'live' && flight.position && Number.isFinite(flight.position.latitude) && Number.isFinite(flight.position.longitude)), [flights]);
+
+  if (!positions.length) {
+    return (
+      <div className="live-map live-map-empty" role="status">
+        <div className="live-map-toolbar">
+          <span className="live-map-title"><Plane size={15} /> Live aircraft positions</span>
+          <span className="live-map-note">No position reports</span>
+        </div>
+        <div className="live-map-empty-state">
+          <span className="live-map-empty-icon"><Radar size={28}/></span>
+          <h3>No live position available yet</h3>
+          <p>Flight status and saved-journey details can still be available. The map will appear when the flight-data provider returns verified aircraft coordinates.</p>
+          <span className="live-map-data-note">No illustrative aircraft or guessed locations are shown.</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="live-map" role="group" aria-label="Regional aircraft traffic map">
+    <div className="live-map" role="group" aria-label="Provider-reported aircraft positions">
       <div className="live-map-toolbar">
-        <span className="live-map-title"><Plane size={15} /> Live traffic view</span>
-        <span className="live-map-note">{flightProvider.mode === 'live' ? 'Positions from provider' : 'Illustrative layout'}</span>
+        <span className="live-map-title"><Plane size={15} /> Live aircraft positions</span>
+        <span className="live-map-note">{positions.length} verified position{positions.length === 1 ? '' : 's'}</span>
       </div>
       <div className="live-map-stage">
-        <svg viewBox="0 0 520 400" className="live-map-svg" aria-hidden="true">
-          <defs>
-            <radialGradient id="mapBg" cx="50%" cy="42%">
-              <stop offset="0" stopColor="#12324d" />
-              <stop offset="1" stopColor="#081c30" />
-            </radialGradient>
-            <pattern id="mapGrid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M40 0H0V40" fill="none" stroke="#1d3f5e" strokeWidth="0.6" />
-            </pattern>
-          </defs>
-          <rect width="520" height="400" rx="18" fill="url(#mapBg)" />
-          <rect width="520" height="400" rx="18" fill="url(#mapGrid)" />
-          <path d="M0 150 C 120 120, 240 190, 520 140" fill="none" stroke="#2c5578" strokeWidth="1.4" />
-          <path d="M0 260 C 160 300, 300 220, 520 280" fill="none" stroke="#2c5578" strokeWidth="1.4" />
-          <path d="M120 0 C 150 130, 90 260, 160 400" fill="none" stroke="#2c5578" strokeWidth="1.4" />
-          <path d="M360 0 C 340 140, 420 260, 380 400" fill="none" stroke="#2c5578" strokeWidth="1.4" />
-          <text x="36" y="52" fill="#5f89a8" fontSize="13" letterSpacing="2">GREAT LAKES REGION</text>
-          <text x="404" y="376" fill="#5f89a8" fontSize="11" letterSpacing="1.6">N 1°S · E 37°E</text>
+        <svg viewBox="0 0 520 300" className="live-map-svg" role="img" aria-label="Coordinate grid showing provider-reported aircraft positions">
+          <defs><pattern id="songa-position-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#36516a" strokeWidth=".7"/></pattern></defs>
+          <rect width="520" height="300" rx="18" fill="#0c1723"/>
+          <rect width="520" height="300" rx="18" fill="url(#songa-position-grid)"/>
+          <path d="M0 150H520M260 0V300" stroke="#66819a" strokeOpacity=".28" strokeDasharray="4 6"/>
+          <text x="12" y="18" fill="#8197aa" fontSize="9">90°N</text><text x="12" y="292" fill="#8197aa" fontSize="9">90°S</text>
+          <text x="12" y="164" fill="#8197aa" fontSize="9">0°</text><text x="475" y="288" fill="#8197aa" fontSize="9">180°E</text>
         </svg>
-        {markers.map(({ flight, x, y }) => (
-          <button
-            key={flight.id}
-            className="live-plane"
-            style={{ left: `${(x / 520) * 100}%`, top: `${(y / 400) * 100}%` }}
-            onClick={() => onSelectFlight(flight)}
-            aria-label={`Open ${flight.flightNumber} details`}
-            title={flight.flightNumber}
-          >
-            <Plane size={15} />
-          </button>
-        ))}
-        <div className="live-map-hub hub-nbo"><MapPin size={13} /> NBO</div>
-        <div className="live-map-hub hub-lhr"><MapPin size={13} /> LHR</div>
+        {positions.map((flight) => {
+          const latitude = Math.max(-85, Math.min(85, flight.position!.latitude));
+          const longitude = Math.max(-180, Math.min(180, flight.position!.longitude));
+          const left = ((longitude + 180) / 360) * 100;
+          const top = ((90 - latitude) / 180) * 100;
+          return <button key={flight.id} className="live-plane" style={{ left: `${left}%`, top: `${top}%` }} onClick={() => onSelectFlight(flight)} aria-label={`Open live position for ${flight.flightNumber}`} title={flight.flightNumber}><Plane size={15}/></button>;
+        })}
       </div>
-      <p className="live-map-caption"><Gauge size={13} /> Tap an aircraft to open its flight. When live position coverage is connected, markers move with real reports.</p>
+      <div className="live-map-position-list">
+        {positions.map((flight) => <button key={flight.id} onClick={() => onSelectFlight(flight)}><strong>{flight.flightNumber}</strong><span>{flight.position!.latitude.toFixed(2)}°, {flight.position!.longitude.toFixed(2)}°</span><span>{flight.position!.altitudeFt ? `FL${Math.round(flight.position!.altitudeFt / 100)}` : 'Altitude unavailable'}</span></button>)}
+      </div>
+      <p className="live-map-caption"><Gauge size={13}/> Position coordinates supplied by the configured flight-data provider.</p>
     </div>
   );
 }
