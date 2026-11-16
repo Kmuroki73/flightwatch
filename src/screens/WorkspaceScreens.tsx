@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, MapPin, Gauge, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Footprints, Bell, Download, Map,
+  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, MapPin, Gauge, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
 } from 'lucide-react';
 import type { Flight } from '@/types';
 import { StatusBadge } from '@/screens/DisruptionScreens';
 import { flightProvider } from '@/lib/flightProvider';
 import { supabase } from '@/lib/supabase';
 import { deleteTripDocument, documentsToCsv, loadTripDocuments, saveTripDocument, type TripDocument, type TripDocumentKind } from '@/lib/tripVault';
-import { assessCompensation, buildClaimText, buildGateNavigation, buildWhatsAppPreview, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
+import { assessCompensation, buildClaimText, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
 
 export function LiveMapPanel({ flights, onSelectFlight }: { flights: Flight[]; onSelectFlight: (flight: Flight) => void }) {
   const positions = useMemo(() => flights.filter((flight) => flight.dataMode === 'live' && flight.position && Number.isFinite(flight.position.latitude) && Number.isFinite(flight.position.longitude)), [flights]);
@@ -61,27 +61,22 @@ export function LiveMapPanel({ flights, onSelectFlight }: { flights: Flight[]; o
 }
 
 export function GateNavigationModule({ flight }: { flight: Flight | null }) {
-  if (!flight) {
-    return <ModuleShell icon={<Map size={18} />} title="Gate-to-Gate Navigation" kicker="MODULE 01"><p className="module-empty">Open or watch a flight to see arrival navigation.</p></ModuleShell>;
-  }
-  const navigation = buildGateNavigation({ arrivalGate: 'B22', connectingGate: undefined });
-  const preview = buildWhatsAppPreview(
-    { flightNumber: flight.flightNumber, airline: flight.airline, origin: flight.origin, destination: flight.destination, status: flight.status, statusDetail: flight.statusDetail },
-    { arrivalGate: navigation.arrivalGate, target: navigation.target, transitMinutes: navigation.transitMinutes },
-  );
   return (
-    <ModuleShell icon={<Map size={18} />} title="Gate-to-Gate Navigation" kicker="MODULE 01">
-      <p className="module-lede">When a landing or gate-change event arrives, Songa maps your arrival gate to your next stop and estimates the walk.</p>
-      <div className="gate-route">
-        <div className="gate-node current"><strong>{navigation.arrivalGate}</strong><span>Arrival gate</span></div>
-        <div className="gate-walk"><Footprints size={17} /><span>{navigation.transitMinutes} min</span></div>
-        <div className="gate-node target"><strong>{navigation.targetKind === 'connecting gate' ? navigation.target : 'Belt 5'}</strong><span>{navigation.targetKind}</span></div>
-      </div>
-      <ol className="gate-steps">{navigation.steps.map((step) => <li key={step}>{step}</li>)}</ol>
-      <div className="whatsapp-preview mini">
-        <div className="whatsapp-preview-head"><MessageCircle size={14} /> WhatsApp message preview</div>
-        <pre>{preview}</pre>
-      </div>
+    <ModuleShell icon={<Map size={18} />} title="Airport & gate information" kicker="JOURNEY DETAILS">
+      {flight?.gate ? (
+        <>
+          <div className="gate-route">
+            <div className="gate-node current"><strong>{flight.gate}</strong><span>Gate reported by provider</span></div>
+            {flight.terminal && <div className="gate-node target"><strong>{flight.terminal}</strong><span>Terminal</span></div>}
+          </div>
+          <p className="module-lede">Gate information can change. Confirm the latest details on the airport displays and with your airline.</p>
+        </>
+      ) : (
+        <div className="module-empty">
+          <p>Gate and terminal information has not been supplied for this flight yet.</p>
+          <p>Songa will show it here when the airline or flight-data provider returns a verified value. No gate or walking time is guessed.</p>
+        </div>
+      )}
     </ModuleShell>
   );
 }
@@ -243,8 +238,9 @@ export function CompanionChat({ flights }: { flights: Flight[] }) {
       return `${flight.flightNumber} (${flight.origin.code} → ${flight.destination.code}) is currently: ${flight.status}. ${flight.statusDetail} Last updated ${flight.lastUpdatedAt}.`;
     }
     if (/gate|terminal|baggage|walk|connect/.test(q)) {
-      const nav = buildGateNavigation({ arrivalGate: 'B22' });
-      return `On arrival at ${nav.arrivalGate}, follow signs to ${nav.target.toLowerCase()} - roughly ${nav.transitMinutes} minutes on foot. I will push the exact walkthrough to WhatsApp when a landing event arrives.`;
+      return flight.gate
+        ? `The provider currently reports gate ${flight.gate}${flight.terminal ? ` in terminal ${flight.terminal}` : ''}. Gate information can change, so confirm it on the airport displays and with your airline. I do not have a verified connecting gate or walking route.`
+        : 'The flight provider has not supplied a gate or terminal for this flight. Check the airline app and airport displays; I will not guess a gate or walking time.';
     }
     if (/compensat|rights|claim|voucher|refund/.test(q)) {
       const jurisdiction = determineJurisdiction(carrierCountryFromCode(flight.airlineCode), flight.origin.code, flight.destination.code);
