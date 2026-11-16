@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
+  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Radar, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
 } from 'lucide-react';
 import type { Flight } from '@/types';
 import { StatusBadge } from '@/screens/DisruptionScreens';
