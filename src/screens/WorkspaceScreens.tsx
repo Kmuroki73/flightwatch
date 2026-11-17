@@ -3,7 +3,6 @@ import {
   ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Radar, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Wallet, Bell, Download, Map,
 } from 'lucide-react';
 import type { Flight } from '@/types';
-import { StatusBadge } from '@/screens/DisruptionScreens';
 import { supabase } from '@/lib/supabase';
 import { deleteTripDocument, documentsToCsv, getTripDocumentUrl, loadTripDocuments, uploadTripDocumentFile, type TripDocument, type TripDocumentKind } from '@/lib/tripVault';
 import { assessCompensation, buildClaimText, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
