@@ -173,7 +173,8 @@ function mapAeroFlight(f: Record<string, unknown>) {
 
   const operator = f.operator as string | undefined;
   const operatorIata = f.operator_iata as string | undefined;
-  const airlineCode = operatorIata ?? operator?.slice(0, 3) ?? ident.replace(/\d+$/, "");
+  const identAirlineCode = ident.match(/^([A-Z]{2,3})(?=\d)/)?.[1] ?? '';
+  const airlineCode = operatorIata || identAirlineCode || operator?.slice(0, 3) || '';
   const statusRaw = typeof f.status === "string" ? f.status : "";
   const cancelled = f.cancelled === true || statusRaw.toLowerCase().includes("cancelled");
   const diverted = f.diverted === true || statusRaw.toLowerCase().includes("diverted");

@@ -285,7 +285,7 @@ function App() {
         <button className={screen === 'commerce' ? 'active' : ''} onClick={() => goTo('commerce')}><Ticket size={19}/><span>Services</span></button>
         <button className={screen === 'account' ? 'active' : ''} onClick={() => goTo('account')}><Compass size={19}/><span>Profile</span></button>
       </nav>
-      <footer className="site-footer"><span>SONGA AI / TRAVEL COMPANION</span><span>Your flight changes. Songa knows and alerts you in real time.</span><span>{flightProvider.mode === 'live' ? 'Flight data provider connected.' : 'Flight provider not configured.'}</span></footer>
+      <footer className="site-footer"><span>SONGA AI / TRAVEL COMPANION</span><span>Your flight changes. Songa helps you see what changed and what to do next.</span><span>{flightProvider.mode === 'live' ? 'Flight data endpoint configured; provider availability is confirmed per search.' : 'Sample flight data only — live provider setup required.'}</span></footer>
     </div>
   );
 }

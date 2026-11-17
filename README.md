@@ -1,8 +1,12 @@
-# Songa AI 2.0 — Source Release Candidate
+# Songa 2.5.0 — UK-first intelligent travel platform release candidate
 
-Songa AI 2.0 is a mobile-first travel companion built around guest flight search, persistent Flight Watch, flight disruption context, AI-assisted travel guidance and a shared PayPal Sandbox commerce engine.
+Songa 2.5.0 is a mobile-first travel companion built around guest flight search, persistent Flight Watch, flight disruption context, AI-assisted travel guidance and a shared PayPal Sandbox commerce engine.
 
 This archive is the **complete source project** for local development in PowerShell. It intentionally excludes `node_modules/`, local `.env` files and any previous generated `dist/` directory. Run the standard Vite build locally to create a fresh, bundled `dist/` folder.
+
+## Songa 2.5.0 implementation direction
+
+This release branch builds on the 2.1 product-overhaul foundation and retains the supplied Stitch design reference library under `public/stitch/`. It prioritises UK-first passenger rights, keeps the flight search and watch experience provider-backed, and does not present unconfigured integrations as live. See `SONGA_2.5.0_UK_FIRST_RELEASE_HANDOFF.md` for the implementation status and remaining release gates.
 
 ## Main experience
 

@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Radar, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Upload, Wallet, Bell, Download, Map,
+  ArrowRight, CircleAlert, FileText, Landmark, MessageCircle, Plane, Gauge, Radar, Receipt, ShieldCheck, Sparkles, Send, Ticket, Trash2, Wallet, Bell, Download, Map,
 } from 'lucide-react';
 import type { Flight } from '@/types';
 import { StatusBadge } from '@/screens/DisruptionScreens';
 import { supabase } from '@/lib/supabase';
-import { deleteTripDocument, documentsToCsv, loadTripDocuments, saveTripDocument, type TripDocument, type TripDocumentKind } from '@/lib/tripVault';
+import { deleteTripDocument, documentsToCsv, getTripDocumentUrl, loadTripDocuments, uploadTripDocumentFile, type TripDocument, type TripDocumentKind } from '@/lib/tripVault';
 import { assessCompensation, buildClaimText, carrierCountryFromCode, determineJurisdiction } from '@/lib/copilot';
 
 export function LiveMapPanel({ flights, onSelectFlight }: { flights: Flight[]; onSelectFlight: (flight: Flight) => void }) {
@@ -83,6 +83,8 @@ export function GateNavigationModule({ flight }: { flight: Flight | null }) {
 export function VaultModule({ flight, session }: { flight: Flight | null; session: unknown }) {
   const [documents, setDocuments] = useState<TripDocument[]>([]);
   const [loading, setLoading] = useState(true);
+  const [busyKind, setBusyKind] = useState<TripDocumentKind | null>(null);
+  const [openingId, setOpeningId] = useState<string | null>(null);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const signedIn = Boolean(supabase && session);
@@ -92,36 +94,56 @@ export function VaultModule({ flight, session }: { flight: Flight | null; sessio
     let active = true;
     loadTripDocuments()
       .then((docs) => { if (active) setDocuments(docs); })
-      .catch(() => { if (active) setError('Your vault could not be loaded. Please refresh.'); })
+      .catch(() => { if (active) setError('Your private document vault could not be loaded. Check the storage migration and try again.'); })
       .finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, [signedIn]);
 
-  const simulateUpload = async (kind: TripDocumentKind) => {
-    setError(''); setNotice('');
-    if (!signedIn) { setError('Sign in to store documents in your vault.'); return; }
-    if (!flight) { setError('Open or watch a flight first so the document can be linked to a trip.'); return; }
-    const fileName = kind === 'boarding_pass' ? 'boarding-pass.jpg' : 'airport-receipt.pdf';
+  const upload = async (kind: TripDocumentKind, file: File) => {
+    setError('');
+    setNotice('');
+    if (!signedIn) { setError('Sign in to store documents in your private Trip Workspace.'); return; }
+    if (!flight) { setError('Open or watch a flight first so this document can be linked to a journey.'); return; }
+    setBusyKind(kind);
     try {
-      const doc = await saveTripDocument({
+      const document = await uploadTripDocumentFile({
         kind,
-        fileName,
+        file,
         flightNumber: flight.flightNumber,
         travelDate: flight.date.slice(0, 10),
-        ...(kind === 'boarding_pass'
-          ? { seatNumber: '14A', boardingGroup: 'Group 2', cabinClass: 'Economy', merchant: null, totalAmount: null, currency: null, category: null }
-          : { seatNumber: null, boardingGroup: null, cabinClass: null, merchant: 'Airport Bistro', totalAmount: 24.5, currency: 'EUR', category: 'Meal' }),
       });
-      setDocuments((current) => [doc, ...current]);
-      setNotice(kind === 'boarding_pass' ? 'Boarding pass parsed. Your travel card is pinned.' : 'Receipt parsed and logged to trip expenses.');
+      setDocuments((current) => [document, ...current]);
+      setNotice('Your file is stored privately and linked to ' + flight.flightNumber + '. Songa has not extracted or verified the document details yet.');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'The document could not be saved.');
+      setError(err instanceof Error ? err.message : 'The file could not be uploaded.');
+    } finally {
+      setBusyKind(null);
+    }
+  };
+
+  const openDocument = async (document: TripDocument) => {
+    if (!document.storagePath) { setError('This record does not contain an uploaded file.'); return; }
+    setOpeningId(document.id);
+    setError('');
+    try {
+      const url = await getTripDocumentUrl(document.storagePath);
+      window.open(url, '_blank', 'noopener,noreferrer');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'A secure document link could not be created.');
+    } finally {
+      setOpeningId(null);
     }
   };
 
   const removeDocument = async (id: string) => {
-    try { await deleteTripDocument(id); setDocuments((current) => current.filter((doc) => doc.id !== id)); }
-    catch { setError('The document could not be removed.'); }
+    setError('');
+    try {
+      await deleteTripDocument(id);
+      setDocuments((current) => current.filter((doc) => doc.id !== id));
+      setNotice('Document removed from your private vault.');
+    } catch {
+      setError('The document could not be removed. Please try again.');
+    }
   };
 
   const exportCsv = () => {
@@ -130,51 +152,59 @@ export function VaultModule({ flight, session }: { flight: Flight | null; sessio
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement('a');
     anchor.href = url;
-    anchor.download = 'songa-trip-expenses.csv';
+    anchor.download = 'songa-trip-documents.csv';
     anchor.click();
     URL.revokeObjectURL(url);
   };
 
-  const boardingPass = documents.find((doc) => doc.kind === 'boarding_pass');
-  const receipts = documents.filter((doc) => doc.kind === 'receipt');
-
   return (
-    <ModuleShell icon={<Wallet size={18} />} title="Expense & Boarding Pass Vault" kicker="MODULE 02">
-      <p className="module-lede">Forward or upload boarding passes and receipts. Songa extracts the key details and keeps your trip organised.</p>
+    <ModuleShell icon={<Wallet size={18} />} title="Private trip document vault" kicker="TRIP WORKSPACE">
+      <p className="module-lede">Store boarding passes and receipts against a journey. Files are private to your signed-in account. Automatic OCR and detail extraction are not enabled in this release.</p>
       <div className="vault-actions">
-        <button className="secondary-button" onClick={() => void simulateUpload('boarding_pass')}><Ticket size={15} /> Add boarding pass</button>
-        <button className="secondary-button" onClick={() => void simulateUpload('receipt')}><Receipt size={15} /> Add receipt</button>
-        <span className="vault-hint"><Upload size={13} /> Images and PDFs, like documents forwarded on WhatsApp</span>
+        <label className="secondary-button vault-file-label">
+          <Ticket size={15} /> {busyKind === 'boarding_pass' ? 'Uploading…' : 'Upload boarding pass'}
+          <input type="file" accept="application/pdf,image/jpeg,image/png,image/webp" disabled={!signedIn || !flight || busyKind !== null} onChange={(event) => {
+            const input = event.currentTarget;
+            const file = input.files?.[0] ?? null;
+            input.value = '';
+            if (file) void upload('boarding_pass', file);
+          }} />
+        </label>
+        <label className="secondary-button vault-file-label">
+          <Receipt size={15} /> {busyKind === 'receipt' ? 'Uploading…' : 'Upload receipt'}
+          <input type="file" accept="application/pdf,image/jpeg,image/png,image/webp" disabled={!signedIn || !flight || busyKind !== null} onChange={(event) => {
+            const input = event.currentTarget;
+            const file = input.files?.[0] ?? null;
+            input.value = '';
+            if (file) void upload('receipt', file);
+          }} />
+        </label>
+        {documents.length > 0 && <button className="text-link" type="button" onClick={exportCsv}><Download size={14} /> Export document log</button>}
+        <span className="vault-hint"><ShieldCheck size={13} /> Private storage · PDF, JPEG, PNG or WebP · 15 MB maximum</span>
       </div>
       {error && <div className="inline-error" role="alert"><CircleAlert size={14} /> {error}</div>}
       {notice && <div className="auth-message" role="status">{notice}</div>}
-      {!signedIn && <p className="vault-signin">Sign in and your vault syncs privately to your account.</p>}
-      {boardingPass && (
-        <div className="boarding-card">
-          <div className="boarding-top"><Ticket size={17} /><div><strong>Boarding pass</strong><span>{boardingPass.flightNumber} · {boardingPass.travelDate}</span></div><StatusBadge status="Boarding" /></div>
-          <div className="boarding-grid">
-            <div><small>Seat</small><strong>{boardingPass.seatNumber}</strong></div>
-            <div><small>Group</small><strong>{boardingPass.boardingGroup}</strong></div>
-            <div><small>Cabin</small><strong>{boardingPass.cabinClass}</strong></div>
-          </div>
-          <button className="icon-text-button" onClick={() => void removeDocument(boardingPass.id)}><Trash2 size={13} /> Remove</button>
-        </div>
-      )}
-      {receipts.length > 0 && (
-        <div className="expense-list">
-          <div className="expense-head"><span>Trip expenses</span><button className="text-link" onClick={exportCsv}><Download size={14} /> Export expense report</button></div>
-          {receipts.map((doc) => (
-            <div className="expense-row" key={doc.id}>
-              <span className="expense-merchant">{doc.merchant}</span>
-              <span className="expense-category">{doc.category}</span>
-              <strong>{doc.currency} {doc.totalAmount?.toFixed(2)}</strong>
-              <button className="icon-text-button" onClick={() => void removeDocument(doc.id)} aria-label="Remove receipt"><Trash2 size={13} /></button>
-            </div>
+      {!supabase && <p className="vault-signin">Secure storage is not configured in this deployment.</p>}
+      {!session && <p className="vault-signin">Sign in to upload and manage private travel documents.</p>}
+      {!flight && <p className="vault-signin">Select a flight to link uploaded files to the right journey.</p>}
+      {loading && <p className="vault-signin">Checking your private vault…</p>}
+      {!loading && signedIn && documents.length === 0 && <p className="vault-signin">No travel documents have been uploaded for your account yet.</p>}
+      {documents.length > 0 && (
+        <div className="vault-document-list">
+          {documents.map((document) => (
+            <article className="vault-document-row" key={document.id}>
+              <span className="vault-document-icon">{document.kind === 'boarding_pass' ? <Ticket size={17} /> : <Receipt size={17} />}</span>
+              <div className="vault-document-copy">
+                <strong>{document.fileName ?? (document.kind === 'boarding_pass' ? 'Boarding pass' : 'Receipt')}</strong>
+                <small>{document.kind === 'boarding_pass' ? 'Boarding pass' : 'Receipt'} · {document.flightNumber ?? 'Unlinked'} · {document.travelDate ?? 'Date unavailable'}</small>
+                <small>Stored {new Intl.DateTimeFormat('en-GB', { dateStyle: 'medium' }).format(new Date(document.createdAt))}</small>
+              </div>
+              <button className="icon-text-button" type="button" onClick={() => void openDocument(document)} disabled={openingId === document.id}>{openingId === document.id ? 'Opening…' : 'Open file'}</button>
+              <button className="icon-text-button" type="button" onClick={() => void removeDocument(document.id)} aria-label="Remove document"><Trash2 size={13} /></button>
+            </article>
           ))}
         </div>
       )}
-      {loading && <p className="vault-signin">Checking your vault…</p>}
-      {!loading && !boardingPass && receipts.length === 0 && signedIn && <p className="vault-signin">No documents yet. Add a boarding pass or receipt to get started.</p>}
     </ModuleShell>
   );
 }
@@ -224,69 +254,77 @@ type ChatMessage = { id: string; role: 'user' | 'assistant'; text: string };
 
 export function CompanionChat({ flights }: { flights: Flight[] }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { id: 'welcome', role: 'assistant', text: 'Ask me about any flight in view - status, delays, gates or your rights.' },
+    { id: 'welcome', role: 'assistant', text: 'Ask Songa about your flight, a disruption or what to do next.' },
   ]);
   const [draft, setDraft] = useState('');
   const [thinking, setThinking] = useState(false);
+  const [error, setError] = useState('');
 
-  const respond = (question: string): string => {
-    const q = question.toLowerCase();
-    const flight = flights[0] ?? null;
-    if (!flight) return 'I do not have a flight loaded yet. Search for a flight first, then ask me about it here.';
-    if (/status|delay|late|on time/.test(q)) {
-      return `${flight.flightNumber} (${flight.origin.code} → ${flight.destination.code}) is currently: ${flight.status}. ${flight.statusDetail} Last updated ${flight.lastUpdatedAt}.`;
-    }
-    if (/gate|terminal|baggage|walk|connect/.test(q)) {
-      return flight.gate
-        ? `The provider currently reports gate ${flight.gate}${flight.terminal ? ` in terminal ${flight.terminal}` : ''}. Gate information can change, so confirm it on the airport displays and with your airline. I do not have a verified connecting gate or walking route.`
-        : 'The flight provider has not supplied a gate or terminal for this flight. Check the airline app and airport displays; I will not guess a gate or walking time.';
-    }
-    if (/compensat|rights|claim|voucher|refund/.test(q)) {
-      const jurisdiction = determineJurisdiction(carrierCountryFromCode(flight.airlineCode), flight.origin.code, flight.destination.code);
-      const assessment = assessCompensation({ disruption: flight.disruption, phase: flight.phase, arrivalDelayMinutes: flight.arrivalDelayMinutes ?? null, departureDelayMinutes: flight.departureDelayMinutes ?? null, jurisdiction });
-      return `${jurisdiction.title}: ${assessment.reason} ${assessment.qualifiesForCare ? 'Care (meals and refreshments) likely applies now.' : 'Care obligations depend on the final delay duration.'} The dashboard Compensation module has a copy-ready claim.`;
-    }
-    if (/whatsapp|notify|alert/.test(q)) {
-      return 'WhatsApp alerts are in early access. Join the list on the landing page and you will be among the first activated once the sender is verified.';
-    }
-    if (/expense|receipt|boarding|vault/.test(q)) {
-      return 'Your vault turns forwarded boarding passes and receipts into a pinned travel card and a structured expense log. Open the Trip Workspace to add one.';
-    }
-    return `I can help with ${flight.flightNumber}: status, gate navigation, expenses, and your disruption rights. Try "is it delayed?" or "what are my rights?"`;
-  };
-
-  const send = (event: React.FormEvent<HTMLFormElement>) => {
+  const send = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const question = draft.trim();
     if (!question || thinking) return;
-    setThinking(true);
+    if (!supabase) {
+      setError('Songa AI is not configured in this deployment. The assistant has not generated a response.');
+      return;
+    }
+
+    const nextMessages = [...messages, { id: 'u-' + Date.now(), role: 'user' as const, text: question }];
+    setMessages(nextMessages);
     setDraft('');
-    setMessages((current) => [...current, { id: `u-${Date.now()}`, role: 'user', text: question }]);
-    window.setTimeout(() => {
-      setMessages((current) => [...current, { id: `a-${Date.now()}`, role: 'assistant', text: respond(question) }]);
+    setError('');
+    setThinking(true);
+    const flight = flights[0] ?? null;
+
+    try {
+      const { data, error: invokeError } = await supabase.functions.invoke('songa-ai-assistant', {
+        body: {
+          messages: nextMessages.slice(-10).map((message) => ({ role: message.role, content: message.text })),
+          premium: false,
+          flight: flight ? {
+            flightNumber: flight.flightNumber,
+            airline: flight.airline,
+            origin: flight.origin,
+            destination: flight.destination,
+            date: flight.date,
+            dataMode: flight.dataMode,
+            status: flight.status,
+            statusDetail: flight.statusDetail,
+            source: flight.source,
+            lastUpdatedAt: flight.lastUpdatedAt,
+            departureDelayMinutes: flight.departureDelayMinutes,
+            arrivalDelayMinutes: flight.arrivalDelayMinutes,
+            gate: flight.gate,
+            terminal: flight.terminal,
+          } : null,
+        },
+      });
+      if (invokeError) throw invokeError;
+      const reply = typeof data?.reply === 'string' ? data.reply : '';
+      if (!reply) throw new Error('The assistant returned no response.');
+      setMessages((current) => [...current, { id: 'a-' + Date.now(), role: 'assistant', text: reply }]);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Songa AI could not reach its assistant service.');
+    } finally {
       setThinking(false);
-    }, 450);
+    }
   };
 
   return (
     <div className="chat-window live">
-      <div className="chat-top"><span><span className="online-dot" /> Trip assistant</span><span>Answers from your loaded flight data</span></div>
+      <div className="chat-top"><span><span className="online-dot" /> Songa AI</span><span>Uses the configured Songa assistant service</span></div>
       <div className="chat-messages">
         {messages.map((message) => (
-          <div key={message.id} className={`message ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}>
+          <div key={message.id} className={'message ' + (message.role === 'user' ? 'user-message' : 'assistant-message')}>
             {message.role === 'assistant' && <div className="message-avatar"><Sparkles size={14} /></div>}
             <div><p>{message.text}</p></div>
           </div>
         ))}
-        {thinking && <div className="message assistant-message"><div className="message-avatar"><Sparkles size={14} /></div><div><p>Checking the flight data…</p></div></div>}
+        {thinking && <div className="message assistant-message"><div className="message-avatar"><Sparkles size={14} /></div><div><p>Songa is preparing a response…</p></div></div>}
       </div>
+      {error && <p className="inline-error" role="alert"><CircleAlert size={14} /> {error}</p>}
       <form className="chat-input" onSubmit={send}>
-        <input
-          value={draft}
-          onChange={(event) => setDraft(event.target.value)}
-          placeholder="Ask about status, gates, expenses or rights"
-          aria-label="Message the trip assistant"
-        />
+        <input value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="Ask about this flight or your next step" aria-label="Message Songa AI" />
         <button type="submit" disabled={thinking || !draft.trim()} aria-label="Send message"><Send size={17} /></button>
       </form>
     </div>

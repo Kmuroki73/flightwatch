@@ -1,9 +1,10 @@
-name: Songa 2.0 release checks
+name: Songa 2.5.0 release checks
 
 on:
   push:
     branches:
       - songa-2.0-uk-first-global
+      - songa-2.5.0-uk-first
   pull_request:
     branches:
       - main

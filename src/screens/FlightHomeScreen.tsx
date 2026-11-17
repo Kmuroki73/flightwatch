@@ -36,16 +36,16 @@ export function FlightHomeScreen(props: Props) {
     onOpenWatch, onOpenAlerts, onOpenCompanion, onOpenWhatsApp, onOpenCommerce, onOpenAccount,
   } = props;
   const latest = [...watchedFlights].sort((a, b) => (b.fetchedAt ?? b.lastUpdatedAt).localeCompare(a.fetchedAt ?? a.lastUpdatedAt)).slice(0, 2);
-  const examples = ['KQ100', 'EK720', 'BA63', 'QR1341'];
+  const examples = ['BA117', 'VS3', 'U22114', 'KL1008'];
 
   return (
     <div className="songa-home-v21">
       <section className="v21-hero">
         <div className="v21-hero-copy">
-          <div className="v21-kicker"><span className="v21-kicker-dot" /> YOUR JOURNEY, MADE CLEARER</div>
+          <div className="v21-kicker"><span className="v21-kicker-dot" /> UK-FIRST FLIGHT INTELLIGENCE</div>
           <h1>Travel with<br /><em>confidence.</em></h1>
-          <p>Search a flight, keep an eye on changes and know what to do next. Your journey, brought together in one place.</p>
-          <div className="v21-trust-row"><span><ShieldCheck size={15}/> Flight information with source labels</span><span><Bell size={15}/> Journey alerts when available</span></div>
+          <p>Start with a flight number. Follow verified changes, understand UK passenger-rights guidance and see practical next steps. Global routes are supported where provider data and route rules are available.</p>
+          <div className="v21-trust-row"><span><ShieldCheck size={15}/> Flight information with source labels</span><span><Bell size={15}/> UK passenger-rights guidance</span></div>
         </div>
         <div className="v21-hero-art" aria-hidden="true">
           <div className="v21-orbit v21-orbit-one"/><div className="v21-orbit v21-orbit-two"/>
@@ -58,16 +58,16 @@ export function FlightHomeScreen(props: Props) {
       <section className="v21-search-section" aria-labelledby="v21-search-title">
         <div className="v21-section-heading">
           <div><span className="v21-eyebrow">START HERE</span><h2 id="v21-search-title">Where are you flying?</h2></div>
-          <span className={flightProvider.mode === 'live' ? 'v21-data-state is-live' : 'v21-data-state is-demo'}><i/>{flightProvider.mode === 'live' ? 'Live provider connected' : 'Sample data mode'}</span>
+          <span className={flightProvider.mode === 'live' ? 'v21-data-state is-live' : 'v21-data-state is-demo'}><i/>{flightProvider.mode === 'live' ? 'Live data endpoint configured' : 'Sample data mode'}</span>
         </div>
         <form className="v21-search-form" onSubmit={onSearch}>
-          <label className="v21-flight-input"><Search size={21}/><span><small>FLIGHT NUMBER</small><input value={searchTerm} onChange={e => setSearchTerm(e.target.value.toUpperCase())} placeholder="e.g. KQ100" autoComplete="off" required /></span></label>
+          <label className="v21-flight-input"><Search size={21}/><span><small>FLIGHT NUMBER</small><input value={searchTerm} onChange={e => setSearchTerm(e.target.value.toUpperCase())} placeholder="e.g. BA117" autoComplete="off" required /></span></label>
           <label className="v21-date-input"><CalendarDays size={19}/><span><small>TRAVEL DATE</small><input type="date" value={searchDate} onChange={e => setSearchDate(e.target.value)}/></span></label>
           <button className="v21-search-submit" type="submit" disabled={searchLoading}>{searchLoading ? 'Searching…' : 'Search flight'} <ArrowRight size={18}/></button>
         </form>
         {searchError && <p className="v21-error" role="alert">{searchError}</p>}
-        <div className="v21-examples"><span>TRY A FLIGHT</span>{examples.map(code => <button key={code} type="button" onClick={() => setSearchTerm(code)}>{code}</button>)}</div>
-        {flightProvider.mode !== 'live' && <p className="v21-data-note">This deployment is currently showing sample flight information. Live flight status will be labelled with its data provider when the connection is enabled.</p>}
+        <div className="v21-examples"><span>UK-FOCUSED EXAMPLES</span>{examples.map(code => <button key={code} type="button" onClick={() => setSearchTerm(code)}>{code}</button>)}</div>
+        {flightProvider.mode !== 'live' && <p className="v21-data-note">This deployment is using clearly labelled sample flight information. Live status requires the Songa flight-search service and a valid aviation-provider secret.</p>}
       </section>
 
       <section className="v21-journey-strip">
