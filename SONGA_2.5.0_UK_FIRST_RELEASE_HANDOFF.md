@@ -121,7 +121,7 @@ This branch push does not itself deploy the production site. No Vercel project s
 
 **Required:** connect a Vercel preview to this branch, configure the necessary public environment variables, run browser/device acceptance tests, then promote only after all applicable release gates pass.
 
-## Verification status
+## Verification status (18 November 2026)
 
 - Repository source and the supplied design bundle inspected.
 - New branch created from the newer 2.1 product-overhaul branch; \`main\` is not modified.
